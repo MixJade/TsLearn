@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>单人详情</title>
+    <style>
+        /* 基础区域 */
+        #basePage {
+            position: absolute;
+            width: 60%;
+            left: 20%;
+            top: 5%;
+        }
+
+        /* 用户区域 */
+        .rolePa {
+            position: absolute;
+            left: 10%;
+            width: 100%;
+            border: 5px solid #ccc; /*自定义边框样式、颜色等*/
+        }
+
+        /*向上消失动画*/
+        @keyframes byeBye {
+            100% {
+                transform: translateY(-110%);
+                opacity: 0;
+            }
+        }
+
+        /*向下出现动画*/
+        @keyframes hello {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /*左侧导航*/
+        #radio-button-group {
+            position: absolute;
+            left: 10%;
+            top: 10%;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .radio-button {
+            display: none;
+        }
+
+        .radio-label {
+            padding: 8px 15px;
+            border: 1px solid #000;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: transparent;
+            color: #000;
+            transition: all 0.3s;
+        }
+
+        .radio-button:checked + .radio-label {
+            background-color: #5b88ea;
+            color: #fff;
+        }
+
+        .radio-label:not(:last-child):not(.radio-button:checked + .radio-label) {
+            border-bottom: none;
+        }
+    </style>
+</head>
+
+<body>
+<!--左侧导航-->
+<div id="radio-button-group">
+    <input type="radio" class="radio-button" name="vb-radio" id="vb-radio1" onclick="sayHi(0)" checked>
+    <label class="radio-label" for="vb-radio1">用户信息</label>
+    <input type="radio" class="radio-button" name="vb-radio" id="vb-radio2" onclick="sayHi(1)">
+    <label class="radio-label" for="vb-radio2">宠物信息</label>
+    <input type="radio" class="radio-button" name="vb-radio" id="vb-radio3" onclick="sayHi(2)">
+    <label class="radio-label" for="vb-radio3">挂号管理</label>
+</div>
+
+<!--用户信息展示-->
+<div id="basePage">
+    <div class="rolePa">
+        <ul>
+            <li>你好</li>
+            <li>你好</li>
+            <li>你好</li>
+            <li>你好</li>
+            <li>你好</li>
+            <li>你好</li>
+            <li>你好</li>
+        </ul>
+    </div>
+    <!-- 宠物信息 -->
+    <div class="rolePa" style="z-index: 9;display: none;">
+        <ul>
+            <li>不会</li>
+            <li>不会</li>
+            <li>不会</li>
+            <li>不会</li>
+            <li>不会</li>
+        </ul>
+    </div>
+    <!-- 挂号信息 -->
+    <div class="rolePa" style="z-index: 9;display: none;">
+        <ul>
+            <li>发过火</li>
+            <li>发过火</li>
+            <li>发过火</li>
+            <li>发过火</li>
+            <li>发过火</li>
+        </ul>
+    </div>
+</div>
+</body>
+<script>
+    (function () {// 表单允许与禁止访问
+        const rolePa = document.getElementsByClassName("rolePa");
+        let a = 0;
+        window.sayHi = b => {
+            rolePa[a].style.animation = "byeBye 1.2s forwards";
+            rolePa[b].style.display = "";
+            rolePa[b].style.animation = "hello 1.2s forwards";
+            a = b;
+        }
+    }());
+</script>
+
+</html>
