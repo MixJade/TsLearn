@@ -1,0 +1,19 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.web.json",
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "strict": true,   // 开启严格模式
+    "removeComments": true, // 编译去除注释
+    "noEmitOnError": true, // 编译出错时不生成编译文件
+    "target": "ES2021"
+  },
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
+}

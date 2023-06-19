@@ -1,0 +1,18 @@
+{
+  "name": "pageweb",
+  "version": "1.0.0",
+  "description": "my page",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@vuepress/plugin-register-components": "^2.0.0-beta.61",
+    "@vuepress/utils": "^2.0.0-beta.61",
+    "vuepress": "^2.0.0-beta.61"
+  }
+}
