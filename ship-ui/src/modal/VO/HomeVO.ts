@@ -1,4 +1,4 @@
-import {Page} from "@/modal/model/Page";
+import {Page} from "@/modal/DO/Page";
 
 // 主页轮播图
 export interface Lun {
