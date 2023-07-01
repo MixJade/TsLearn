@@ -98,7 +98,7 @@
       <!-- 用户卡片-->
       <h2>用户入口</h2>
       <p>一些与用户相关的功能入口，也可以前往中心查看。
-        <el-link type="primary">点击跳转</el-link>
+        <el-link type="warning">点击跳转</el-link>
       </p>
       <el-row :gutter="12">
         <el-col :xs="24" :lg="8" v-for="card in userCard">
@@ -118,50 +118,29 @@
       <!-- 待领养宠物-->
       <h2>待领养宠物</h2>
       <p>它们等待一个温暖的家。
+        <el-link type="success">查看全部</el-link>
+      </p>
+      <el-row :gutter="12">
+        <el-col
+            v-for="o in petCardTxt.data"
+            :key="o.petId"
+            :xs="24" :sm="12" :lg="6"
+        >
+          <PetCard :pet="o"/>
+        </el-col>
+      </el-row>
+      <!-- 医生卡片-->
+      <h2>医生展示</h2>
+      <p>我们拥有虚拟的医生。
         <el-link type="primary">查看全部</el-link>
       </p>
       <el-row :gutter="12">
-        <!--挂号卡片-->
-        <el-col :span="6">
-          <el-card class="box-card">
-            <template #header>
-              <div class="card-header">
-                <span>挂号信息</span>
-                <el-button type="primary">查看历史挂号</el-button>
-              </div>
-            </template>
-            <div>
-              在此查看自己的历史挂号
-            </div>
-          </el-card>
-        </el-col>
-        <!--宠物卡片-->
-        <el-col :span="8">
-          <el-card class="box-card">
-            <template #header>
-              <div class="card-header">
-                <span>宠物信息</span>
-                <el-button type="success">查看当前宠物</el-button>
-              </div>
-            </template>
-            <div>
-              查看自己的名下宠物
-            </div>
-          </el-card>
-        </el-col>
-        <!--寄养宠物卡片-->
-        <el-col :span="8">
-          <el-card class="box-card">
-            <template #header>
-              <div class="card-header">
-                <span>寄养宠物</span>
-                <el-button type="warning">所有被寄养宠物</el-button>
-              </div>
-            </template>
-            <div>
-              在此查看当前医院所有寄养宠物
-            </div>
-          </el-card>
+        <el-col
+            v-for="o in doctorCardTxt.data"
+            :key="o.doctorId"
+            :xs="24" :sm="12" :lg="6"
+        >
+          <DoctorCard :doctor="o"/>
         </el-col>
       </el-row>
 
@@ -179,7 +158,19 @@
 <script lang="ts" setup>
 import {User, Phone, DataBoard, EditPen, SwitchButton, Tickets, Football} from "@element-plus/icons-vue"
 import {reactive, ref} from "vue";
-import {exampleNotice, Lun, Notice, UserCard} from "@/modal/VO/IndexVO";
+import {
+  DoctorCardType,
+  exampleDoctor,
+  exampleNotice,
+  examplePet,
+  Lun,
+  Notice,
+  PetCardType,
+  UserCard
+} from "@/modal/VO/HomeVO";
+import {Page} from "@/modal/DO/Page";
+import PetCard from "@/components/PetCard.vue";
+import DoctorCard from "@/components/DoctorCard.vue";
 // 导航栏
 const handleSelect = (key: string, keyPath: string[]): void => {
   console.log(key, keyPath)
@@ -233,6 +224,11 @@ const userCard: UserCard[] = [
     "btnText": "所有被寄养宠物"
   },
 ]
+
+// 宠物的卡片信息
+const petCardTxt: Page<PetCardType> = reactive(examplePet())
+// 医生的卡片信息
+const doctorCardTxt: Page<DoctorCardType> = reactive(exampleDoctor())
 </script>
 <style lang="scss" scoped>
 /*将导航栏除Logo以外放在旁边*/

@@ -1,10 +1,17 @@
-// 主页轮播图
 import {Page} from "@/modal/model/Page";
 
+// 主页轮播图
 export interface Lun {
     image: string;
     tit: string;
     text: string;
+}
+
+// 主页的公告
+export interface Notice {
+    noticeId: number;
+    noticeTitle: string;
+    textNotice: string;
 }
 
 // 常量：用户卡片
@@ -15,8 +22,8 @@ export interface UserCard {
     btnText: string;
 }
 
-// 主页的宠物
-export interface Pet {
+// 主页的宠物卡片
+export interface PetCardType {
     petId: number;
     petName: string;
     petVariety: string;
@@ -26,11 +33,19 @@ export interface Pet {
     petPhoto: string;
 }
 
-// 主页的公告
-export interface Notice {
-    noticeId: number;
-    noticeTitle: string;
-    textNotice: string;
+// 主页的医生卡片
+export interface DoctorCardType {
+    doctorId: number;
+    departmentId: number;
+    doctorCode: string;
+    doctorName: string;
+    doctorGender: boolean;
+    doctorAge: string;
+    doctorPhoto: string;
+    doctorTel: string;
+    doctorJob: string;
+    doctorInfo: string;
+    departmentName: string;
 }
 
 // 样例：公告
@@ -55,7 +70,7 @@ export const exampleNotice = (): Notice[] => {
 }
 
 // 样例：宠物卡片
-const examplePet = (): Page<Pet> => {
+export const examplePet = (): Page<PetCardType> => {
     return {
         "data": [
             {
@@ -96,5 +111,66 @@ const examplePet = (): Page<Pet> => {
             }
         ],
         "len": 20
+    }
+}
+
+// 样例：医生卡片
+export const exampleDoctor = (): Page<DoctorCardType> => {
+    return {
+        "data": [
+            {
+                "doctorId": 1,
+                "departmentId": 1,
+                "doctorCode": "32312221",
+                "doctorName": "童德统",
+                "doctorGender": true,
+                "doctorAge": "1990-10-10",
+                "doctorPhoto": "doctor-1.jpg",
+                "doctorTel": "1114185977@qq.com",
+                "doctorJob": "副院长",
+                "doctorInfo": "国内著名医学专家，擅长绝育",
+                "departmentName": "犬猫科"
+            },
+            {
+                "doctorId": 2,
+                "departmentId": 4,
+                "doctorCode": "32301062",
+                "doctorName": "爱丽丝",
+                "doctorGender": false,
+                "doctorAge": "2003-02-01",
+                "doctorPhoto": "doctor-2.jpg",
+                "doctorTel": "mix_pet_doctor@sina.com",
+                "doctorJob": "麻醉科主任",
+                "doctorInfo": "擅长麻醉",
+                "departmentName": "美容室"
+            },
+            {
+                "doctorId": 4,
+                "departmentId": 8,
+                "doctorCode": "32301063",
+                "doctorName": "汤姆",
+                "doctorGender": true,
+                "doctorAge": "2000-01-11",
+                "doctorPhoto": "doctor-3.jpg",
+                "doctorTel": "1114185977@qq.com",
+                "doctorJob": "医生",
+                "doctorInfo": "擅长x光拍片",
+                "departmentName": "中兽科"
+            },
+            {
+                "doctorId": 5,
+                "departmentId": 4,
+                "doctorCode": "32301064",
+                "doctorName": "张大嘴",
+                "doctorGender": false,
+                "doctorAge": "2002-01-05",
+                "doctorPhoto": "doctor-4.jpg",
+                "doctorTel": "mix_pet_doctor@sina.com",
+                "doctorJob": "医生",
+                "doctorInfo": "著名宠物医美专家",
+                "departmentName": "美容室"
+            }
+        ],
+        "len": 7
     }
 }
