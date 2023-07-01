@@ -76,17 +76,17 @@
       <h2>网站公告</h2>
       <p>网站的最新公告</p>
       <el-row :gutter="12">
-        <el-col :xs="24" :lg="8" v-for="notice in notices">
-          <el-card shadow="hover" @click="openDialog(notice)">{{ notice.tit }}</el-card>
+        <el-col :xs="24" :lg="8" v-for="notice in notices" :key="notice.noticeId">
+          <el-card shadow="hover" @click="openDialog(notice)">{{ notice.noticeTitle }}</el-card>
         </el-col>
       </el-row>
       <!--公告的对话框-->
       <el-dialog
           v-model="showDialog"
-          :title="noticeDialog.tit"
+          :title="noticeDialog.noticeTitle"
           width="50%"
       >
-        <span>{{ noticeDialog.content }}</span>
+        <div class="textNotice">{{ noticeDialog.textNotice }}</div>
         <template #footer>
             <span class="dialog-footer">
               <el-button type="primary" @click="showDialog = false">
@@ -168,8 +168,8 @@
       <!-- 折叠筐-->
       <h2>小小知识</h2>
       <el-collapse accordion>
-        <el-collapse-item :title="notice.tit" :name="index" v-for="(notice,index) in notices">
-          <div>{{ notice.content }}</div>
+        <el-collapse-item :title="notice.noticeTitle" :name="index" v-for="(notice,index) in notices">
+          <div>{{ notice.textNotice }}</div>
         </el-collapse-item>
       </el-collapse>
     </el-main>
@@ -179,12 +179,13 @@
 <script lang="ts" setup>
 import {User, Phone, DataBoard, EditPen, SwitchButton, Tickets, Football} from "@element-plus/icons-vue"
 import {reactive, ref} from "vue";
+import {exampleNotice, Lun, Notice, UserCard} from "@/modal/VO/IndexVO";
 // 导航栏
 const handleSelect = (key: string, keyPath: string[]): void => {
   console.log(key, keyPath)
 }
 // 轮播图
-const lun = [
+const lun: Lun[] = [
   {
     image: "/picture/lun-1.jpg",
     tit: "医院宗旨",
@@ -202,46 +203,19 @@ const lun = [
   }
 ]
 
-// 公告接口
-interface noticeType {
-  tit: string;
-  content: string;
-}
-
 // 公告栏
-const notices: noticeType[] = reactive([
-  {
-    tit: "公告一",
-    content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet beatae cumque cupiditate delectus deserunt doloremque hic id illum labore maiores minima modi, necessitatibus obcaecati qui ratione? Distinctio quae totam voluptatem."
-  },
-  {
-    tit: "公告二",
-    content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet beatae cumque cupiditate delectus deserunt doloremque hic id illum labore maiores minima modi, necessitatibus obcaecati qui ratione? Distinctio quae totam voluptatem."
-  },
-  {
-    tit: "公告三",
-    content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet beatae cumque cupiditate delectus deserunt doloremque hic id illum labore maiores minima modi, necessitatibus obcaecati qui ratione? Distinctio quae totam voluptatem."
-  },
-])
+const notices: Notice[] = reactive(exampleNotice())
 // 公告弹出框
 const showDialog = ref(false);
-const noticeDialog = reactive({tit: "标题", content: "文本内容"})
-const openDialog = (notice: noticeType) => {
-  noticeDialog.tit = notice.tit
-  noticeDialog.content = notice.content
+const noticeDialog = reactive({noticeTitle: "标题", textNotice: "文本内容"})
+const openDialog = (notice: Notice) => {
+  noticeDialog.noticeTitle = notice.noticeTitle
+  noticeDialog.textNotice = notice.textNotice
   showDialog.value = true
 }
 
-// 常量：用户卡片
-interface userCardType {
-  tit: string;
-  describe: string;
-  btnType: "primary" | "success" | "warning";
-  btnText: string;
-}
-
 // 用户卡片的配置信息
-const userCard: userCardType[] = [
+const userCard: UserCard[] = [
   {
     "tit": "挂号信息",
     "describe": "在此查看自己的历史挂号",
@@ -298,6 +272,12 @@ const userCard: userCardType[] = [
   :deep(.el-collapse-item__header) {
     font-size: large;
   }
+}
+
+// 公告换行
+.textNotice {
+  white-space: pre-wrap;
+  word-break: break-all;
 }
 
 /* 卡片 */

@@ -106,8 +106,11 @@
     <div class="rolePa">
         <ul>
             <li>VUE：<a href="https://cn.vuejs.org/guide/quick-start.html">【Vue上手】</a>，一切根基</li>
-            <li>组件：<a href="https://element-plus.gitee.io/zh-CN/component/button.html#基础用法">【Element-Plus】</a>，项目组件库</li>
-            <li>图标：<a href="https://element-plus.gitee.io/zh-CN/component/icon.html#icon-collection">【Element的Icon】</a>，美化图标</li>
+            <li>组件：<a href="https://element-plus.gitee.io/zh-CN/component/button.html#基础用法">【Element-Plus】</a>，项目组件库
+            </li>
+            <li>图标：<a
+                    href="https://element-plus.gitee.io/zh-CN/component/icon.html#icon-collection">【Element的Icon】</a>，美化图标
+            </li>
             <li>样式：<a href="https://www.sass.hk/docs/">【Sass官网教程】</a>，但不建议看这个</li>
             <li>样式：<a href="https://www.runoob.com/sass/sass-install.html">【Sass菜鸟教程】</a>，这个写的不错</li>
             <li>请求：<a href="https://www.axios-http.cn/docs/intro">【Axios官网】</a>，前端请求</li>
@@ -116,32 +119,38 @@
     <!-- 补充知识-->
     <div class="rolePa" style="display: none;">
         <ul>
-            <li>样式：<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Using_CSS_custom_properties">【使用 CSS 自定义属性】</a>，方便调配色</li>
+            <li>样式：<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Using_CSS_custom_properties">【使用 CSS
+                自定义属性】</a>，方便调配色
+            </li>
             <li>样式：<a href="https://www.jianshu.com/p/d875f680fc6b">【CSS波浪加号大于号】</a>，一个有用的语法</li>
             <li>样式：<a href="https://zhuanlan.zhihu.com/p/96721026">【前端尺寸vw、vh、rem、em】</a>，了解即可</li>
-            <li>样式：<a href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.2.3/css/bootstrap.css">【bootstrap的css文件】</a>老大哥，直接copy</li>
-            <li>后端：<a href="https://blog.csdn.net/hunt_er/article/details/81427804">【无Java环境下运行jar文件】</a>，感觉不如IDE</li>
-            <li>工具：<a href="https://tooltt.com/json2typescript/">【将json转化为ts接口】</a>，在线网站，JSON的键要加双引号</li>
+            <li>样式：<a
+                    href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.2.3/css/bootstrap.css">【bootstrap的css文件】</a>老大哥，直接copy
+            </li>
+            <li>后端：<a href="https://blog.csdn.net/hunt_er/article/details/81427804">【无Java环境下运行jar文件】</a>，感觉不如IDE
+            </li>
+            <li>前端知识：<a href="https://blog.csdn.net/qq_42231156/article/details/124506627">【计算属性传参】</a>，比较实用
+            </li>
+            <li>工具：<a href="https://tooltt.com/json2typescript/">【将json转化为ts接口】</a>，在线网站，JSON的键要加双引号
+            </li>
         </ul>
     </div>
 </div>
 </body>
 <script>
-    (function () {// 表单允许与禁止访问
-        // 为左侧导航绑定点击事件
+    "use strict";
+    (function () {
         const rb = document.getElementsByClassName("radio-button");
         for (let i = 0; i < rb.length; i++) {
-            rb[i].addEventListener("click", () => sayHi(i))
+            rb[i].addEventListener("click", () => sayHi(i));
         }
-        // 设置展示内容上移与消失
         let a = 0;
         const rolePa = document.getElementsByClassName("rolePa");
-        const sayHi = b => {
-            rolePa[a].style.animation = "byeBye 1.2s forwards";
-            rolePa[b].style.display = "";
-            rolePa[b].style.animation = "hello 1.2s forwards";
+        const sayHi = (b) => {
+            rolePa[a].setAttribute("style", "animation:byeBye 1.2s forwards;");
+            rolePa[b].setAttribute("style", "animation:hello 1.2s forwards;display: block");
             a = b;
-        }
+        };
     }());
 </script>
 </html>
