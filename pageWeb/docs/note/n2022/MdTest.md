@@ -52,9 +52,9 @@ H~2~O 和 12^th^
 <details>
 <summary>表格标题</summary>
 
-|表头一|表头二|
-|:----:|:----:|
-|内容一|内容二|
+| 表头一  |  表头二  |
+|:----:|:-----:|
+| 内容一  |  内容二  |
 
 </details>
 
@@ -88,4 +88,3 @@ H~2~O 和 12^th^
 </details>
 
 ---
-![图片-xhu](http://www.xhu.edu.cn/_upload/article/images/93/7d/7229d5a442e6a3d6133c4fcb79cc/0cdbc8bb-4bae-4a17-889f-bee80cb09759.jpg)
