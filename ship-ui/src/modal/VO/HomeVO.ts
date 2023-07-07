@@ -174,3 +174,183 @@ export const exampleDoctor = (): Page<DoctorCardType> => {
         "len": 7
     }
 }
+
+export const examplePet2 = (): Page<PetCardType> => {
+    return {
+        "data": [
+            {
+                "petId": 7,
+                "petName": "波一斯",
+                "petVariety": "波斯猫",
+                "petSex": false,
+                "petAge": "2016-12-15",
+                "petInfo": "等待有缘人领养",
+                "petPhoto": "boss-cat.jpg",
+            },
+            {
+                "petId": 8,
+                "petName": "波二斯",
+                "petVariety": "波斯猫",
+                "petSex": true,
+                "petAge": "2016-12-17",
+                "petInfo": "等待有缘人领养",
+                "petPhoto": "fd1cdd8a-3411-4b95-a20d-5ad3993c94af.jpg",
+            },
+            {
+                "petId": 9,
+                "petName": "波三斯",
+                "petVariety": "波斯猫",
+                "petSex": false,
+                "petAge": "2013-12-23",
+                "petInfo": "等待有缘人领养",
+                "petPhoto": "a943938f-7d21-49d3-a909-22f2c2dc2c9b.jpg",
+            },
+            {
+                "petId": 11,
+                "petName": "大橘莹",
+                "petVariety": "橘猫",
+                "petSex": false,
+                "petAge": "2007-12-23",
+                "petInfo": "等待有缘人领养",
+                "petPhoto": "ju-cat.jpg",
+            },
+            {
+                "petId": 12,
+                "petName": "波一斯",
+                "petVariety": "波斯猫",
+                "petSex": false,
+                "petAge": "2016-12-15",
+                "petInfo": "等待有缘人领养",
+                "petPhoto": "boss-cat.jpg",
+            },
+            {
+                "petId": 13,
+                "petName": "波二斯",
+                "petVariety": "波斯猫",
+                "petSex": true,
+                "petAge": "2016-12-17",
+                "petInfo": "等待有缘人领养",
+                "petPhoto": "fd1cdd8a-3411-4b95-a20d-5ad3993c94af.jpg",
+            },
+            {
+                "petId": 14,
+                "petName": "波三斯",
+                "petVariety": "波斯猫",
+                "petSex": false,
+                "petAge": "2013-12-23",
+                "petInfo": "等待有缘人领养",
+                "petPhoto": "a943938f-7d21-49d3-a909-22f2c2dc2c9b.jpg",
+            },
+            {
+                "petId": 15,
+                "petName": "大橘莹",
+                "petVariety": "橘猫",
+                "petSex": false,
+                "petAge": "2007-12-23",
+                "petInfo": "等待有缘人领养",
+                "petPhoto": "ju-cat.jpg",
+            }
+        ],
+        "len": 20
+    }
+}
+
+// 样例2：医生全部卡片
+export const exampleDoctor2 = (): Page<DoctorCardType> => {
+    return {
+        "data": [
+            {
+                "doctorId": 1,
+                "departmentId": 1,
+                "doctorCode": "32312221",
+                "doctorName": "童德统",
+                "doctorGender": true,
+                "doctorAge": "1990-10-10",
+                "doctorPhoto": "doctor-1.jpg",
+                "doctorTel": "1114185977@qq.com",
+                "doctorJob": "副院长",
+                "doctorInfo": "国内著名医学专家，擅长绝育",
+                "departmentName": "犬猫科"
+            },
+            {
+                "doctorId": 2,
+                "departmentId": 4,
+                "doctorCode": "32301062",
+                "doctorName": "爱丽丝",
+                "doctorGender": false,
+                "doctorAge": "2003-02-01",
+                "doctorPhoto": "doctor-2.jpg",
+                "doctorTel": "mix_pet_doctor@sina.com",
+                "doctorJob": "麻醉科主任",
+                "doctorInfo": "擅长麻醉",
+                "departmentName": "美容室"
+            },
+            {
+                "doctorId": 4,
+                "departmentId": 8,
+                "doctorCode": "32301063",
+                "doctorName": "汤姆",
+                "doctorGender": true,
+                "doctorAge": "2000-01-11",
+                "doctorPhoto": "doctor-3.jpg",
+                "doctorTel": "1114185977@qq.com",
+                "doctorJob": "医生",
+                "doctorInfo": "擅长x光拍片",
+                "departmentName": "中兽科"
+            },
+            {
+                "doctorId": 7,
+                "departmentId": 1,
+                "doctorCode": "32312221",
+                "doctorName": "童德统",
+                "doctorGender": true,
+                "doctorAge": "1990-10-10",
+                "doctorPhoto": "doctor-1.jpg",
+                "doctorTel": "1114185977@qq.com",
+                "doctorJob": "副院长",
+                "doctorInfo": "国内著名医学专家，擅长绝育",
+                "departmentName": "犬猫科"
+            },
+            {
+                "doctorId": 8,
+                "departmentId": 4,
+                "doctorCode": "32301062",
+                "doctorName": "爱丽丝",
+                "doctorGender": false,
+                "doctorAge": "2003-02-01",
+                "doctorPhoto": "doctor-2.jpg",
+                "doctorTel": "mix_pet_doctor@sina.com",
+                "doctorJob": "麻醉科主任",
+                "doctorInfo": "擅长麻醉",
+                "departmentName": "美容室"
+            },
+            {
+                "doctorId": 9,
+                "departmentId": 8,
+                "doctorCode": "32301063",
+                "doctorName": "汤姆",
+                "doctorGender": true,
+                "doctorAge": "2000-01-11",
+                "doctorPhoto": "doctor-3.jpg",
+                "doctorTel": "1114185977@qq.com",
+                "doctorJob": "医生",
+                "doctorInfo": "擅长x光拍片",
+                "departmentName": "中兽科"
+            },
+            {
+                "doctorId": 5,
+                "departmentId": 4,
+                "doctorCode": "32301064",
+                "doctorName": "张大嘴",
+                "doctorGender": false,
+                "doctorAge": "2002-01-05",
+                "doctorPhoto": "doctor-4.jpg",
+                "doctorTel": "mix_pet_doctor@sina.com",
+                "doctorJob": "医生",
+                "doctorInfo": "著名宠物医美专家",
+                "departmentName": "美容室"
+            }
+        ],
+        "len": 7
+    }
+}

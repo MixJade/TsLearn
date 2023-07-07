@@ -15,7 +15,7 @@
           宠物医院
         </el-menu-item>
         <div class="flex-grow"/>
-        <el-menu-item index="1">
+        <el-menu-item index="1" @click="openDialog(notices[0])">
           <el-icon>
             <DataBoard/>
           </el-icon>
@@ -118,7 +118,7 @@
       <!-- 待领养宠物-->
       <h2>待领养宠物</h2>
       <p>它们等待一个温暖的家。
-        <el-link type="success">查看全部</el-link>
+        <el-link type="success" @click="this.$router.push('/reception/petSee')">查看全部</el-link>
       </p>
       <el-row :gutter="12">
         <el-col
@@ -132,7 +132,7 @@
       <!-- 医生卡片-->
       <h2>医生展示</h2>
       <p>我们拥有虚拟的医生。
-        <el-link type="primary">查看全部</el-link>
+        <el-link type="primary" @click="this.$router.push('/reception/doctorSee')">查看全部</el-link>
       </p>
       <el-row :gutter="12">
         <el-col
