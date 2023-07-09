@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>一个人的表格</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            /*设置定位*/
+            width: 50vw;
+            position: fixed;
+            left: 25vw;
+            top: 10vh;
+        }
+
+        table td {
+            border: 1px solid black;
+            border-left: none;
+            border-right: none;
+            padding: 10px;
+        }
+
+        table tr:first-child td {
+            border-top: none;
+        }
+
+        table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <td class="bold">Column 1</td>
+        <td>Column 2</td>
+    </tr>
+    <tr>
+        <td class="bold">Column 1</td>
+        <td>Column 2</td>
+    </tr>
+    <tr>
+        <td class="bold">Column 1</td>
+        <td>Column 2</td>
+    </tr>
+</table>
+</body>
+</html>
