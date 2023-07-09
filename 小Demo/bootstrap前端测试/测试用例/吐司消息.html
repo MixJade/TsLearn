@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="../assets/bootstrap.min.css" rel="stylesheet">
+    <title>吐司消息</title>
+</head>
+
+<body>
+    <ul class="nav justify-content-end navbar bg-dark">
+        <li class="nav-item"><a class="nav-link active" href="#">用户管理</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">医生管理</a></li>
+        <li class="nav-item"><a class="nav-link disabled">宠物管理</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">挂号管理</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">领养管理</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">寄养管理</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">网站公告</a></li>
+        <li class="nav-item me-2">
+            <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#popLeft" role="button" aria-controls="popLeft">
+                用户
+            </a>
+        </li>
+    </ul>
+    <button type="button" class="btn btn-primary" id="liveToastBtn">显示吐司消息</button>
+    <button type="button" class="btn btn-primary" id="liveToastBtn02">显示吐司消息</button>
+    <!-- 吐司消息 -->
+    <div class="position-fixed top-0 end-50 p-3" style="z-index: 5">
+        <div id="liveToast" class="toast hide text-white bg-danger" data-bs-delay="2000" role="alert"
+            aria-live="assertive" aria-atomic="true">
+            <div class="toast-body">
+                你有一条短消息！
+            </div>
+        </div>
+    </div>
+    <!-- 吐司消息结束 -->
+    <ul class="nav justify-content-end navbar bg-dark">
+        <li class="nav-item"><a class="nav-link active" href="#">用户管理</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">医生管理</a></li>
+        <li class="nav-item"><a class="nav-link disabled">宠物管理</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">挂号管理</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">领养管理</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">寄养管理</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">网站公告</a></li>
+        <li class="nav-item me-2">
+            <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#popLeft" role="button" aria-controls="popLeft">
+                用户
+            </a>
+        </li>
+    </ul>
+    <script src="../assets/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelector("#liveToastBtn").onclick = function () {
+            sucToast("你好")
+        }
+        document.querySelector("#liveToastBtn02").onclick = function () {
+            errToast("你好嘤嘤嘤")
+        }
+        // 吐司消息
+        const toastText = document.querySelector(".toast-body");
+        const toastColor=document.querySelector('.toast');
+        function sucToast(msg) {
+            toastColor.classList.remove("bg-danger")
+            toastColor.classList.add("bg-success")
+            toastText.innerHTML = msg;
+            new bootstrap.Toast(toastColor).show();
+        }
+        function errToast(msg) {
+            toastColor.classList.remove("bg-success")
+            toastColor.classList.add("bg-danger")
+            toastText.innerHTML = msg;
+            new bootstrap.Toast(toastColor).show();
+        }
+    </script>
+</body>
+
+</html>

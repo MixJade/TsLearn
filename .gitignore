@@ -3,4 +3,7 @@ node_modules
 .temp
 .cache
 dist
+# 忽略TS的编译输出文件
 ts01/js
+# 忽略bootstrap的文件
+小Demo/bootstrap前端测试/assets
