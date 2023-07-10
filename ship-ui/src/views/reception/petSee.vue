@@ -5,7 +5,7 @@
       <el-col
           v-for="o in petCardTxt.data"
           :key="o.petId"
-          :xs="24" :sm="12" :lg="6"
+          :xs="24" :sm="12" :md="6"
           style="margin-bottom: 10px"
       >
         <PetCard :pet="o"/>

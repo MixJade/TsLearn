@@ -76,7 +76,7 @@
       <h2>网站公告</h2>
       <p>网站的最新公告</p>
       <el-row :gutter="12">
-        <el-col :xs="24" :lg="8" v-for="notice in notices" :key="notice.noticeId">
+        <el-col :xs="24" :sm="12" :md="8" v-for="notice in notices" :key="notice.noticeId">
           <el-card shadow="hover" @click="openDialog(notice)">{{ notice.noticeTitle }}</el-card>
         </el-col>
       </el-row>
@@ -101,7 +101,7 @@
         <el-link type="warning">点击跳转</el-link>
       </p>
       <el-row :gutter="12">
-        <el-col :xs="24" :lg="8" v-for="card in userCard">
+        <el-col :xs="24" :sm="12" :md="8" v-for="card in userCard">
           <el-card class="box-card">
             <template #header>
               <div class="card-header">
@@ -124,7 +124,7 @@
         <el-col
             v-for="o in petCardTxt.data"
             :key="o.petId"
-            :xs="24" :sm="12" :lg="6"
+            :xs="24" :sm="12" :md="6"
         >
           <PetCard :pet="o"/>
         </el-col>
@@ -138,7 +138,7 @@
         <el-col
             v-for="o in doctorCardTxt.data"
             :key="o.doctorId"
-            :xs="24" :sm="12" :lg="6"
+            :xs="24" :sm="12" :md="6"
         >
           <DoctorCard :doctor="o"/>
         </el-col>

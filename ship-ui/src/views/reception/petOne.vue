@@ -4,15 +4,18 @@
     <el-header>
       <PageHead>宠物详情</PageHead>
     </el-header>
-    <el-container>
-      <!-- 宠物头像-->
-      <el-aside width="200px">
-        <el-avatar src="/picture/pet-ex.jpg"/>
-        <h3>{{ petDetail.petName }}</h3>
-        <span>{{ getAge(petDetail.petAge) }}岁</span>
-      </el-aside>
-      <el-container>
-        <el-main>
+    <el-main>
+      <el-row>
+        <!-- 左边div：宠物头像-->
+        <el-col :xs="24" :sm="10" :md="8">
+          <div class="left-div">
+            <el-avatar src="/picture/pet-ex.jpg"/>
+            <h3>{{ petDetail.petName }}</h3>
+            <span>{{ getAge(petDetail.petAge) }}岁</span>
+          </div>
+        </el-col>
+        <!-- 右边div，宠物信息-->
+        <el-col :xs="24" :sm="14" :md="16" style="text-align: center">
           <table class="myTable">
             <tr>
               <td class="bold">姓名</td>
@@ -39,12 +42,10 @@
               <td>{{ petDetail.petStatus }}</td>
             </tr>
           </table>
-        </el-main>
-        <el-footer>
           <el-button type="primary" style="width: 50%" @click="dialogVisible = true">申请领养</el-button>
-        </el-footer>
-      </el-container>
-    </el-container>
+        </el-col>
+      </el-row>
+    </el-main>
   </el-container>
   <!--弹出框-->
   <el-dialog v-model="dialogVisible" title="申请领养">
@@ -96,12 +97,32 @@ const dialogAsk: PetOne = reactive({
 </script>
 
 <style scoped lang="scss">
+/*响应式*/
+@media (min-width: 768px) {
+  .base-page {
+    width: 50vw;
+    left: 25vw;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .base-page {
+    width: 60vw;
+    left: 20vw;
+  }
+}
+
+@media (max-width: 575px) {
+  .base-page {
+    width: 80vw;
+    left: 10vw;
+  }
+}
+
+
 /*设置大致布局*/
 .base-page {
   position: fixed;
-  width: 50vw;
-  height: 45vh;
-  left: 25vw;
   top: 15vh;
   background-color: whitesmoke;
   box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.5);
@@ -110,7 +131,7 @@ const dialogAsk: PetOne = reactive({
     height: 5vh;
   }
 
-  .el-aside {
+  .left-div {
     text-align: center;
 
     .el-avatar {
@@ -126,6 +147,7 @@ const dialogAsk: PetOne = reactive({
   border-collapse: collapse;
   /*设置定位*/
   width: 100%;
+  margin-bottom: 20px;
 
   td {
     border: 1px solid black;
