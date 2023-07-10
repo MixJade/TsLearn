@@ -12,7 +12,7 @@
       <el-col
           v-for="o in doctorCardTxt.data"
           :key="o.doctorId"
-          :xs="24" :sm="12" :lg="6"
+          :xs="24" :sm="12" :md="6"
           style="margin-bottom: 10px"
       >
         <DoctorCard :doctor="o"/>
