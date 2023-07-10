@@ -1060,7 +1060,9 @@ export default test1_children
 
 ### 向prop传参（三种方式）
 
-**一：只需要加上prop=true，再将路径变为param形式（这只是第一种方式）**
+**一：只需要加上props=true，再将路径变为param形式（这只是第一种方式）**
+
+> 注意：是props不是prop
 
 但有一个问题，这样会将所有的param参数解析，并且会导致无法使用query
 
@@ -1084,6 +1086,7 @@ export default test1_children
 **然后这么用**
 
 ```html
+<!-- 这里可以使用字符串加号，实现动态拼接请求参数-->
 <li>
   <router-link to="/test1/prop/路由传递props">子路由:prop传递</router-link>
 </li>
@@ -1093,13 +1096,15 @@ export default test1_children
 
 ```vue
 <template>
-  <h1>{{ role }}</h1>
+  <h1>{{ props.role }}</h1>
 </template>
 
 <script setup lang="ts">
-defineProps<{
+const props=defineProps<{
   role: string
 }>()
+// 如此获取传参
+console.log(props.role)
 </script>
 ```
 

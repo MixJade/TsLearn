@@ -1,12 +1,5 @@
 <template>
-  <el-page-header @back="this.$router.back()">
-    <template #content>
-      <span class="text-large font-600 mr-3"> 查看所有待领养宠物 </span>
-    </template>
-    <div class="mt-4 text-sm font-bold">
-      <p></p>
-    </div>
-  </el-page-header>
+  <PageHead>查看全部宠物</PageHead>
   <el-space direction="vertical">
     <el-row :gutter="12">
       <el-col
@@ -28,6 +21,7 @@ import {Page} from "@/modal/DO/Page";
 import {examplePet2, PetCardType} from "@/modal/VO/HomeVO";
 import PetCard from "@/components/PetCard.vue";
 import {reactive} from "vue";
+import PageHead from "@/components/PageHead.vue";
 
 const petCardTxt: Page<PetCardType> = reactive(examplePet2())
 </script>
