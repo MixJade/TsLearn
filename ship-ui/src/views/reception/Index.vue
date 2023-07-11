@@ -27,7 +27,7 @@
           </el-icon>
           咨询医生
         </el-menu-item>
-        <el-sub-menu index="/reception">
+        <el-sub-menu index="/reception/clientCenter">
           <template #title>
             <el-icon>
               <User/>
@@ -40,19 +40,19 @@
             </el-icon>
             个人资料
           </el-menu-item>
-          <el-menu-item index="3-2">
+          <el-menu-item index="/clientPet">
             <el-icon>
               <Football/>
             </el-icon>
             宠物信息
           </el-menu-item>
-          <el-menu-item index="3-3">
+          <el-menu-item index="/clientAppoint">
             <el-icon>
               <Tickets/>
             </el-icon>
             挂号信息
           </el-menu-item>
-          <el-menu-item index="3-4" style="color: #F56C6C">
+          <el-menu-item style="color: #F56C6C" index="logout">
             <el-icon>
               <SwitchButton/>
             </el-icon>
@@ -106,7 +106,10 @@
             <template #header>
               <div class="card-header">
                 <span>{{ card.tit }}</span>
-                <el-button :type="card.btnType">{{ card.btnText }}</el-button>
+                <el-button :type="card.btnType" @click="this.$router.push(card.routerPath)">{{
+                    card.btnText
+                  }}
+                </el-button>
               </div>
             </template>
             <div>
@@ -164,6 +167,10 @@ import FosterCard from "@/components/FosterCard.vue";
 import router from "@/router";
 // 导航栏
 const handleSelect = (key: string, keyPath: string[]): void => {
+  if (key === "logout") {
+    logout()
+    return
+  }
   router.push(keyPath.join('').toString())
 }
 // 轮播图
@@ -202,17 +209,20 @@ const userCard: UserCard[] = [
     "tit": "挂号信息",
     "describe": "在此查看自己的历史挂号",
     "btnType": "primary",
-    "btnText": "查看历史挂号"
+    "btnText": "查看历史挂号",
+    "routerPath": "/reception/clientCenter/clientAppoint"
   }, {
     "tit": "宠物信息",
     "describe": "查看自己的名下宠物",
     "btnType": "success",
-    "btnText": "查看当前宠物"
+    "btnText": "查看当前宠物",
+    "routerPath": "/reception/clientCenter/clientPet"
   }, {
     "tit": "咨询医生",
     "describe": "向医生发起咨询",
     "btnType": "info",
-    "btnText": "咨询医生"
+    "btnText": "咨询医生",
+    "routerPath": "/reception/clientCenter/clientPet"
   },
 ]
 
@@ -222,6 +232,12 @@ const petCardTxt: Page<PetCardType> = reactive(examplePet())
 const doctorCardTxt: Page<DoctorCardType> = reactive(exampleDoctor())
 // 寄养宠物的卡片信息
 const fosterCardTxt: Page<FosterCardVO> = reactive(exampleFoster())
+
+// 退出登录
+const logout = (): void => {
+  router.push("/")
+  console.log("退出登录")
+}
 </script>
 <style lang="scss" scoped>
 /*将导航栏除Logo以外放在旁边*/

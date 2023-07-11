@@ -20,6 +20,7 @@ export interface UserCard {
     describe: string;
     btnType: "primary" | "success" | "info";
     btnText: string;
+    routerPath: string;
 }
 
 // 主页的宠物卡片
