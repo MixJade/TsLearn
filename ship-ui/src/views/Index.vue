@@ -134,13 +134,19 @@
       <p>我们拥有虚拟的医生。
         <el-link type="primary" @click="this.$router.push('/reception/doctorSee')">查看全部</el-link>
       </p>
+      <DoctorCard :card-list="doctorCardTxt.data"/>
+      <!-- 寄养卡片-->
+      <h2>寄养宠物展示</h2>
+      <p>我们提供寄养服务。
+        <el-link type="warning" @click="this.$router.push('/reception/fosterSee')">查看全部</el-link>
+      </p>
       <el-row :gutter="12">
         <el-col
-            v-for="o in doctorCardTxt.data"
-            :key="o.doctorId"
-            :xs="24" :sm="12" :md="6"
+            v-for="o in fosterCardTxt.data"
+            :key="o.fosterId"
+            :xs="24" :sm="12" :md="8"
         >
-          <DoctorCard :doctor="o"/>
+          <FosterCard :pet="o"/>
         </el-col>
       </el-row>
 
@@ -160,9 +166,9 @@ import {User, Phone, DataBoard, EditPen, SwitchButton, Tickets, Football} from "
 import {reactive, ref} from "vue";
 import {
   DoctorCardType,
-  exampleDoctor,
+  exampleDoctor, exampleFoster,
   exampleNotice,
-  examplePet,
+  examplePet, FosterCardVO,
   Lun,
   Notice,
   PetCardType,
@@ -171,6 +177,7 @@ import {
 import {Page} from "@/modal/DO/Page";
 import PetCard from "@/components/PetCard.vue";
 import DoctorCard from "@/components/DoctorCard.vue";
+import FosterCard from "@/components/FosterCard.vue";
 // 导航栏
 const handleSelect = (key: string, keyPath: string[]): void => {
   console.log(key, keyPath)
@@ -218,10 +225,10 @@ const userCard: UserCard[] = [
     "btnType": "success",
     "btnText": "查看当前宠物"
   }, {
-    "tit": "寄养宠物",
-    "describe": "在此查看当前医院所有寄养宠物",
-    "btnType": "warning",
-    "btnText": "所有被寄养宠物"
+    "tit": "咨询医生",
+    "describe": "向医生发起咨询",
+    "btnType": "info",
+    "btnText": "咨询医生"
   },
 ]
 
@@ -229,6 +236,8 @@ const userCard: UserCard[] = [
 const petCardTxt: Page<PetCardType> = reactive(examplePet())
 // 医生的卡片信息
 const doctorCardTxt: Page<DoctorCardType> = reactive(exampleDoctor())
+// 寄养宠物的卡片信息
+const fosterCardTxt: Page<FosterCardVO> = reactive(exampleFoster())
 </script>
 <style lang="scss" scoped>
 /*将导航栏除Logo以外放在旁边*/

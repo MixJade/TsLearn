@@ -21,5 +21,9 @@ export const reception = [
         path: "doctorOne/:doctorId",
         props: true,
         component: () => import('@/views/reception/doctorOne.vue')
+    },{
+        // 查看全部寄养宠物
+        path: "fosterSee",
+        component: () => import('@/views/reception/fosterSee.vue')
     },
 ]

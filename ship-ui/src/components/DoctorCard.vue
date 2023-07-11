@@ -1,18 +1,29 @@
 <template>
-  <el-card>
-    <div class="my-pet-card">
-      <img src="/picture/doctor-ex.jpg" alt="医生"/>
-      <div class="my-pet-info">
-        <strong>{{ doctor.doctorName }}</strong>
-        <br>
-        {{ getAge(doctor.doctorAge) }}岁，&nbsp;{{ doctor.doctorGender ? "男" : "女" }}
-        <br>
-        {{ doctor.doctorJob }}
-        <p>{{ doctor.doctorInfo }}</p>
-        <el-button type="primary" @click="this.$router.push('/reception/doctorOne/'+doctor.doctorId)">详情</el-button>
-      </div>
-    </div>
-  </el-card>
+  <el-row :gutter="12">
+    <el-col
+        v-for="doctor in cardList"
+        :key="doctor.doctorId"
+        :xs="24" :sm="12" :md="6"
+        style="margin-bottom: 10px"
+    >
+      <el-card>
+        <div class="my-pet-card">
+          <img src="/picture/doctor-ex.jpg" alt="医生"/>
+          <div class="my-pet-info">
+            <strong>{{ doctor.doctorName }}</strong>
+            <br>
+            {{ getAge(doctor.doctorAge) }}岁，&nbsp;{{ doctor.doctorGender ? "男" : "女" }}
+            <br>
+            {{ doctor.doctorJob }}
+            <p>{{ doctor.doctorInfo }}</p>
+            <el-button type="primary" @click="this.$router.push('/reception/doctorOne/'+doctor.doctorId)">详情
+            </el-button>
+          </div>
+        </div>
+      </el-card>
+    </el-col>
+  </el-row>
+
 </template>
 
 <script setup lang="ts">
@@ -20,7 +31,7 @@ import {DoctorCardType} from "@/modal/VO/HomeVO";
 import {getAge} from "@/utils/TimeUtil";
 // 接收参数：医生卡片
 defineProps<{
-  readonly doctor: DoctorCardType
+  readonly cardList: DoctorCardType[]
 }>()
 </script>
 
