@@ -9,12 +9,12 @@
 <script setup lang="ts">
 // 宠物的卡片信息
 import {Page} from "@/modal/DO/Page";
-import {examplePet2, PetCardType} from "@/modal/VO/HomeVO";
+import {Pet, examplePetSee} from "@/modal/entiy/Pet";
 import PetCard from "@/components/PetCard.vue";
 import {reactive} from "vue";
 import PageHead from "@/components/PageHead.vue";
 
-const petCardTxt: Page<PetCardType> = reactive(examplePet2())
+const petCardTxt: Page<Pet> = reactive(examplePetSee())
 </script>
 
 <style scoped>

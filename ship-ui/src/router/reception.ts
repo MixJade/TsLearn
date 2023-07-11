@@ -16,18 +16,33 @@ export const reception = [
         path: "petOne/:petId",
         props: true,
         component: () => import('@/views/reception/petOne.vue')
-    },{
+    }, {
         // 查看单个医生
         path: "doctorOne/:doctorId",
         props: true,
         component: () => import('@/views/reception/doctorOne.vue')
-    },{
+    }, {
         // 查看全部寄养宠物
         path: "fosterSee",
         component: () => import('@/views/reception/fosterSee.vue')
-    },{
+    }, {
         // 个人中心
-        path: "clientOne",
-        component: () => import('@/views/reception/clientOne.vue')
+        path: "clientCenter",
+        component: () => import('@/views/reception/clientCenter.vue'),
+        children: [
+            {
+                // 个人中心的个人资料
+                path: "clientOne",
+                component: () => import('@/views/reception/clientOne.vue')
+            }, {
+                // 个人中心的宠物信息
+                path: "clientAppoint",
+                component: () => import('@/views/reception/clientAppoint.vue')
+            }, {
+                // 个人中心的挂号信息
+                path: "clientPet",
+                component: () => import('@/views/reception/clientPet.vue')
+            },
+        ],
     },
 ]

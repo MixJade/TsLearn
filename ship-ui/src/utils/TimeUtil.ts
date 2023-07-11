@@ -4,3 +4,6 @@ export const getAge = (birthday: string): number => {
     const birthYear = (birthday.split("-")[0] as unknown) as number
     return nowYear - birthYear
 }
+// 去除时间中的T
+export const moveT = (str: string): string =>
+    str.toString().replaceAll("T", ' ')

@@ -10,8 +10,8 @@
         <el-col :xs="24" :sm="10" :md="8">
           <div class="left-div">
             <el-avatar src="/picture/pet-ex.jpg"/>
-            <h3>{{ petDetail.petName }}</h3>
-            <span>{{ getAge(petDetail.petAge) }}岁</span>
+            <h3>{{ pet.petName }}</h3>
+            <span>{{ getAge(pet.petAge) }}岁</span>
           </div>
         </el-col>
         <!-- 右边div，宠物信息-->
@@ -19,30 +19,32 @@
           <table class="myTable">
             <tr>
               <td class="bold">姓名</td>
-              <td>{{ petDetail.petName }}</td>
+              <td>{{ pet.petName }}</td>
             </tr>
             <tr>
               <td class="bold">品种</td>
-              <td>{{ petDetail.petVariety }}</td>
+              <td>{{ pet.petVariety }}</td>
             </tr>
             <tr>
               <td class="bold">性别</td>
-              <td>{{ petDetail.petSex ? "公" : "母" }}</td>
+              <td>{{ pet.petSex ? "公" : "母" }}</td>
             </tr>
             <tr>
               <td class="bold">出生日期</td>
-              <td>{{ petDetail.petAge }}</td>
+              <td>{{ pet.petAge }}</td>
             </tr>
             <tr>
               <td class="bold">最近状况</td>
-              <td>{{ petDetail.petInfo }}</td>
+              <td>{{ pet.petInfo }}</td>
             </tr>
             <tr>
               <td class="bold">健康状况</td>
-              <td>{{ petDetail.petStatus }}</td>
+              <td>{{ pet.petStatus }}</td>
             </tr>
           </table>
-          <el-button type="primary" style="width: 50%" @click="dialogVisible = true">申请领养</el-button>
+          <el-button v-if="pet.clientId==null" type="primary" style="width: 50%" @click="dialogVisible = true">
+            申请领养
+          </el-button>
         </el-col>
       </el-row>
     </el-main>
@@ -86,7 +88,7 @@ const props = defineProps<{
   petId: Number
 }>()
 // 样例数据
-const petDetail = examplePetDetail(props.petId)
+const pet = examplePetDetail(props.petId)
 
 // 弹出框设置
 const dialogVisible = ref(false)

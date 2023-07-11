@@ -23,11 +23,11 @@
 </template>
 
 <script setup lang="ts">
-import {PetCardType} from "@/modal/VO/HomeVO";
 import {getAge} from "@/utils/TimeUtil";
+import {Pet} from "@/modal/entiy/Pet";
 // 接收参数：宠物卡片
 defineProps<{
-  readonly cardList: PetCardType[]
+  readonly cardList: Pet[]
 }>()
 </script>
 

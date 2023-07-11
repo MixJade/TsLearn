@@ -10,7 +10,7 @@ const routes = [
     {
         path: '/hello2',
         name: "hello2",
-        component: () => import('@/views/Index.vue')
+        component: () => import('@/views/reception/Index.vue')
     }, {
         path: '/demo',
         children: [...demo],
