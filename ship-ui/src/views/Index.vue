@@ -270,7 +270,7 @@ const doctorCardTxt: Page<DoctorCardType> = reactive(exampleDoctor())
   }
 }
 
-// 公告换行
+/*公告换行*/
 .textNotice {
   white-space: pre-wrap;
   word-break: break-all;

@@ -9,7 +9,7 @@
         <br>
         {{ doctor.doctorJob }}
         <p>{{ doctor.doctorInfo }}</p>
-        <el-button type="primary">详情</el-button>
+        <el-button type="primary" @click="this.$router.push('/reception/doctorOne/'+doctor.doctorId)">详情</el-button>
       </div>
     </div>
   </el-card>
