@@ -79,7 +79,7 @@ import PageHead from "@/components/PageHead.vue";
 import {examplePetDetail} from "@/modal/entiy/Pet";
 import {getAge} from "@/utils/TimeUtil";
 import {reactive, ref} from "vue";
-import {PetOne} from "@/modal/VO/PetOne";
+import {PetAskOne} from "@/modal/VO/PetAskOne";
 
 // 如此获取传参
 const props = defineProps<{
@@ -90,7 +90,7 @@ const petDetail = examplePetDetail(props.petId)
 
 // 弹出框设置
 const dialogVisible = ref(false)
-const dialogAsk: PetOne = reactive({
+const dialogAsk: PetAskOne = reactive({
   askText: "",
   askNum: 300
 })

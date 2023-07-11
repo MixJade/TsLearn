@@ -1,7 +1,7 @@
 /**
  * 单个宠物的申请参数
  */
-export interface PetOne {
+export interface PetAskOne {
     askText: string,
     askNum: number
 }

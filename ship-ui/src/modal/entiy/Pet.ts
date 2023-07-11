@@ -1,7 +1,7 @@
 /**
  * 宠物详情
  */
-export interface pet {
+export interface Pet {
     petId: number;
     petName: string;
     petVariety: string;
@@ -19,7 +19,7 @@ export interface pet {
 /**
  * 宠物详情的示例
  */
-export const examplePetDetail = (petId: number): pet => {
+export const examplePetDetail = (petId: number): Pet => {
     console.log("所接收的宠物ID是", petId)
     return {
         "petId": 7,

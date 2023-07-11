@@ -16,5 +16,10 @@ export const reception = [
         path: "petOne/:petId",
         props: true,
         component: () => import('@/views/reception/petOne.vue')
+    },{
+        // 查看单个医生
+        path: "doctorOne/:doctorId",
+        props: true,
+        component: () => import('@/views/reception/doctorOne.vue')
     },
 ]
