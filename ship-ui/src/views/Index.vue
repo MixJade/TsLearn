@@ -120,15 +120,7 @@
       <p>它们等待一个温暖的家。
         <el-link type="success" @click="this.$router.push('/reception/petSee')">查看全部</el-link>
       </p>
-      <el-row :gutter="12">
-        <el-col
-            v-for="o in petCardTxt.data"
-            :key="o.petId"
-            :xs="24" :sm="12" :md="6"
-        >
-          <PetCard :pet="o"/>
-        </el-col>
-      </el-row>
+      <PetCard :card-list="petCardTxt.data"/>
       <!-- 医生卡片-->
       <h2>医生展示</h2>
       <p>我们拥有虚拟的医生。
@@ -140,16 +132,7 @@
       <p>我们提供寄养服务。
         <el-link type="warning" @click="this.$router.push('/reception/fosterSee')">查看全部</el-link>
       </p>
-      <el-row :gutter="12">
-        <el-col
-            v-for="o in fosterCardTxt.data"
-            :key="o.fosterId"
-            :xs="24" :sm="12" :md="8"
-        >
-          <FosterCard :pet="o"/>
-        </el-col>
-      </el-row>
-
+      <FosterCard :card-list="fosterCardTxt.data"/>
       <!-- 折叠筐-->
       <h2>小小知识</h2>
       <el-collapse accordion>

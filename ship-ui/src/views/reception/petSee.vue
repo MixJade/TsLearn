@@ -1,16 +1,7 @@
 <template>
   <PageHead>查看全部宠物</PageHead>
   <el-space direction="vertical">
-    <el-row :gutter="12">
-      <el-col
-          v-for="o in petCardTxt.data"
-          :key="o.petId"
-          :xs="24" :sm="12" :md="6"
-          style="margin-bottom: 10px"
-      >
-        <PetCard :pet="o"/>
-      </el-col>
-    </el-row>
+    <PetCard :card-list="petCardTxt.data"/>
     <el-pagination background layout="prev, pager, next" :page-size="8" :total="20"/>
   </el-space>
 </template>

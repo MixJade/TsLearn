@@ -1,16 +1,8 @@
 <template>
   <PageHead>查看全部寄养订单</PageHead>
   <el-space direction="vertical">
-    <el-row :gutter="12">
-      <el-col
-          v-for="o in fosterCardTxt.data"
-          :key="o.fosterId"
-          :xs="24" :sm="12" :md="8"
-      >
-        <FosterCard :pet="o"/>
-      </el-col>
-    </el-row>
-    <el-pagination background layout="prev, pager, next" :page-size="8" :total="20"/>
+    <FosterCard :card-list="fosterCardTxt.data"/>
+    <el-pagination background layout="prev, pager, next" :page-size="6" :total="20"/>
   </el-space>
 </template>
 
