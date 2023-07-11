@@ -27,14 +27,14 @@
           </el-icon>
           咨询医生
         </el-menu-item>
-        <el-sub-menu index="3">
+        <el-sub-menu index="/reception">
           <template #title>
             <el-icon>
               <User/>
             </el-icon>
             个人中心
           </template>
-          <el-menu-item index="3-1">
+          <el-menu-item index="/clientOne">
             <el-icon>
               <EditPen/>
             </el-icon>
@@ -161,9 +161,10 @@ import {Page} from "@/modal/DO/Page";
 import PetCard from "@/components/PetCard.vue";
 import DoctorCard from "@/components/DoctorCard.vue";
 import FosterCard from "@/components/FosterCard.vue";
+import router from "@/router";
 // 导航栏
 const handleSelect = (key: string, keyPath: string[]): void => {
-  console.log(key, keyPath)
+  router.push(keyPath.join('').toString())
 }
 // 轮播图
 const lun: Lun[] = [

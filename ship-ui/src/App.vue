@@ -25,15 +25,7 @@
       <el-menu-item index="/demo/testScss">Scss初探</el-menu-item>
       <el-menu-item index="/demo/hello">Element按钮</el-menu-item>
       <el-menu-item index="/demo/lifeTerm">生命周期</el-menu-item>
-      <el-sub-menu index="2-4">
-        <template #title>小Demo</template>
-        <el-menu-item index="2-4-1">item one</el-menu-item>
-        <el-menu-item index="2-4-2">item two</el-menu-item>
-        <el-menu-item index="2-4-3">item three</el-menu-item>
-      </el-sub-menu>
     </el-sub-menu>
-    <el-menu-item index="3" disabled>不可点击</el-menu-item>
-    <el-menu-item index="4">Orders</el-menu-item>
   </el-menu>
   <router-view></router-view>
 </template>

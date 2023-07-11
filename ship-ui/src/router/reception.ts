@@ -25,5 +25,9 @@ export const reception = [
         // 查看全部寄养宠物
         path: "fosterSee",
         component: () => import('@/views/reception/fosterSee.vue')
+    },{
+        // 个人中心
+        path: "clientOne",
+        component: () => import('@/views/reception/clientOne.vue')
     },
 ]
