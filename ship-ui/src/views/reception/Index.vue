@@ -11,7 +11,7 @@
           active-text-color="#ffd04b"
           @select="handleSelect"
       >
-        <el-menu-item index="0"><img src="/mia.svg" alt="商标" width="30" height="30">
+        <el-menu-item index="reception/clientCenter/clientOne"><img src="/mia.svg" alt="商标" width="30" height="30">
           宠物医院
         </el-menu-item>
         <div class="flex-grow"/>

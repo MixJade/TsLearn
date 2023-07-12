@@ -55,8 +55,9 @@
 
 <script setup lang="ts">
 import PageHead from "@/components/PageHead.vue";
-import {getAge} from "@/utils/TimeUtil";
-import {exampleDoctorDetail, exampleDoctorAppoint} from "@/modal/VO/DoctorOne";
+import {getAge, moveT} from "@/utils/TimeUtil";
+import {exampleDoctorDetail} from "@/modal/VO/DoctorOne";
+import {exampleDoctorAppoint} from "@/modal/entiy/Appoint";
 
 // 如此获取传参
 const props = defineProps<{
@@ -66,7 +67,7 @@ const props = defineProps<{
 const doctorDetail = exampleDoctorDetail(props.doctorId);
 const appointDetail = exampleDoctorAppoint(props.doctorId);
 for (let i = 0; i < appointDetail.length; i++) {
-  appointDetail[i].appointmentDate = appointDetail[i].appointmentDate.toString().replaceAll("T", ' ')
+  appointDetail[i].appointmentDate = moveT(appointDetail[i].appointmentDate)
 }
 </script>
 
