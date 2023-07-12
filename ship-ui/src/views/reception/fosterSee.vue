@@ -1,9 +1,11 @@
 <template>
-  <PageHead>查看全部寄养订单</PageHead>
-  <el-space direction="vertical">
-    <FosterCard :card-list="fosterCardTxt.data"/>
-    <el-pagination background layout="prev, pager, next" :page-size="6" :total="20"/>
-  </el-space>
+  <div>
+    <PageHead>查看全部寄养订单</PageHead>
+    <el-space direction="vertical">
+      <FosterCard :card-list="fosterCardTxt.data"/>
+      <el-pagination background layout="prev, pager, next" :page-size="6" :total="20"/>
+    </el-space>
+  </div>
 </template>
 
 <script setup lang="ts">

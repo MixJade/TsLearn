@@ -1,9 +1,11 @@
 <template>
-  <PageHead>查看全部宠物</PageHead>
-  <el-space direction="vertical">
-    <PetCard :card-list="petCardTxt.data"/>
-    <el-pagination background layout="prev, pager, next" :page-size="8" :total="20"/>
-  </el-space>
+  <div>
+    <PageHead>查看全部宠物</PageHead>
+    <el-space direction="vertical">
+      <PetCard :card-list="petCardTxt.data"/>
+      <el-pagination background layout="prev, pager, next" :page-size="8" :total="20"/>
+    </el-space>
+  </div>
 </template>
 
 <script setup lang="ts">

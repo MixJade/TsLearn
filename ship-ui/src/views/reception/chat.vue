@@ -24,7 +24,7 @@ import PageHead from "@/components/PageHead.vue";
   height: 88vh;
 
   .el-header {
-    height: 38px;
+    height: 40px;
     background-color: #67C23A;
   }
 
@@ -43,7 +43,7 @@ import PageHead from "@/components/PageHead.vue";
       }
 
       .el-footer {
-        height: 48px;
+        height: 50px;
         background-color: #F56C6C;
       }
     }

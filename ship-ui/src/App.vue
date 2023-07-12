@@ -29,9 +29,11 @@
       <el-menu-item index="/demo/lifeTerm">生命周期</el-menu-item>
     </el-sub-menu>
   </el-menu>
-  <transition name="flip">
-    <router-view></router-view>
-  </transition>
+  <router-view v-slot="{ Component }">
+    <transition name="flip">
+      <component :is="Component"/>
+    </transition>
+  </router-view>
 </template>
 <script setup lang="ts">
 import {useRouter} from "vue-router";
