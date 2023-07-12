@@ -1,9 +1,8 @@
 <template>
-  <h4>用户：个人中心</h4>
   <el-radio-group v-model="radio1" @change="getChange">
     <ul>
       <li>
-        <el-radio label="/hello2" size="large" border>返回主页</el-radio>
+        <el-radio label="/hello2" size="large" border style="color: #dc3545">返回主页</el-radio>
       </li>
       <li>
         <el-radio label="/reception/clientCenter/clientOne" size="large" border>个人中心</el-radio>

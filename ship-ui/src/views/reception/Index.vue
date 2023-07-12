@@ -15,7 +15,7 @@
           宠物医院
         </el-menu-item>
         <div class="flex-grow"/>
-        <el-menu-item index="1" @click="openDialog(notices[0])">
+        <el-menu-item index="notice">
           <el-icon>
             <DataBoard/>
           </el-icon>
@@ -154,12 +154,12 @@ import {
   DoctorCardType,
   exampleDoctor, exampleFoster,
   exampleNotice,
-  examplePet, FosterCardVO,
+  FosterCardVO,
   Lun,
   Notice,
-  PetCardType,
   UserCard
 } from "@/modal/VO/HomeVO";
+import {Pet, examplePetFour} from "@/modal/entiy/Pet";
 import {Page} from "@/modal/DO/Page";
 import PetCard from "@/components/PetCard.vue";
 import DoctorCard from "@/components/DoctorCard.vue";
@@ -170,6 +170,9 @@ const handleSelect = (key: string, keyPath: string[]): void => {
   if (key === "logout") {
     logout()
     return
+  } else if (key === "notice") {
+    openDialog(notices[0])
+    return;
   }
   router.push(keyPath.join('').toString())
 }
@@ -227,7 +230,7 @@ const userCard: UserCard[] = [
 ]
 
 // 宠物的卡片信息
-const petCardTxt: Page<PetCardType> = reactive(examplePet())
+const petCardTxt: Page<Pet> = reactive(examplePetFour())
 // 医生的卡片信息
 const doctorCardTxt: Page<DoctorCardType> = reactive(exampleDoctor())
 // 寄养宠物的卡片信息

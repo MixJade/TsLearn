@@ -23,17 +23,6 @@ export interface UserCard {
     routerPath: string;
 }
 
-// 主页的宠物卡片
-export interface PetCardType {
-    petId: number;
-    petName: string;
-    petVariety: string;
-    petSex: boolean;
-    petAge: string;
-    petInfo: string;
-    petPhoto: string;
-}
-
 // 主页的医生卡片
 export interface DoctorCardType {
     doctorId: number;
@@ -153,51 +142,6 @@ export const exampleNotice = (): Notice[] => {
     ]
 }
 
-// 样例：宠物卡片
-export const examplePet = (): Page<PetCardType> => {
-    return {
-        "data": [
-            {
-                "petId": 7,
-                "petName": "波一斯",
-                "petVariety": "波斯猫",
-                "petSex": false,
-                "petAge": "2016-12-15",
-                "petInfo": "等待有缘人领养",
-                "petPhoto": "boss-cat.jpg",
-            },
-            {
-                "petId": 8,
-                "petName": "波二斯",
-                "petVariety": "波斯猫",
-                "petSex": true,
-                "petAge": "2016-12-17",
-                "petInfo": "等待有缘人领养",
-                "petPhoto": "fd1cdd8a-3411-4b95-a20d-5ad3993c94af.jpg",
-            },
-            {
-                "petId": 9,
-                "petName": "波三斯",
-                "petVariety": "波斯猫",
-                "petSex": false,
-                "petAge": "2013-12-23",
-                "petInfo": "等待有缘人领养",
-                "petPhoto": "a943938f-7d21-49d3-a909-22f2c2dc2c9b.jpg",
-            },
-            {
-                "petId": 11,
-                "petName": "大橘莹",
-                "petVariety": "橘猫",
-                "petSex": false,
-                "petAge": "2007-12-23",
-                "petInfo": "等待有缘人领养",
-                "petPhoto": "ju-cat.jpg",
-            }
-        ],
-        "len": 20
-    }
-}
-
 // 样例：医生卡片
 export const exampleDoctor = (): Page<DoctorCardType> => {
     return {
@@ -256,86 +200,6 @@ export const exampleDoctor = (): Page<DoctorCardType> => {
             }
         ],
         "len": 7
-    }
-}
-
-export const examplePet2 = (): Page<PetCardType> => {
-    return {
-        "data": [
-            {
-                "petId": 7,
-                "petName": "波一斯",
-                "petVariety": "波斯猫",
-                "petSex": false,
-                "petAge": "2016-12-15",
-                "petInfo": "等待有缘人领养",
-                "petPhoto": "boss-cat.jpg",
-            },
-            {
-                "petId": 8,
-                "petName": "波二斯",
-                "petVariety": "波斯猫",
-                "petSex": true,
-                "petAge": "2016-12-17",
-                "petInfo": "等待有缘人领养",
-                "petPhoto": "fd1cdd8a-3411-4b95-a20d-5ad3993c94af.jpg",
-            },
-            {
-                "petId": 9,
-                "petName": "波三斯",
-                "petVariety": "波斯猫",
-                "petSex": false,
-                "petAge": "2013-12-23",
-                "petInfo": "等待有缘人领养",
-                "petPhoto": "a943938f-7d21-49d3-a909-22f2c2dc2c9b.jpg",
-            },
-            {
-                "petId": 11,
-                "petName": "大橘莹",
-                "petVariety": "橘猫",
-                "petSex": false,
-                "petAge": "2007-12-23",
-                "petInfo": "等待有缘人领养",
-                "petPhoto": "ju-cat.jpg",
-            },
-            {
-                "petId": 12,
-                "petName": "波一斯",
-                "petVariety": "波斯猫",
-                "petSex": false,
-                "petAge": "2016-12-15",
-                "petInfo": "等待有缘人领养",
-                "petPhoto": "boss-cat.jpg",
-            },
-            {
-                "petId": 13,
-                "petName": "波二斯",
-                "petVariety": "波斯猫",
-                "petSex": true,
-                "petAge": "2016-12-17",
-                "petInfo": "等待有缘人领养",
-                "petPhoto": "fd1cdd8a-3411-4b95-a20d-5ad3993c94af.jpg",
-            },
-            {
-                "petId": 14,
-                "petName": "波三斯",
-                "petVariety": "波斯猫",
-                "petSex": false,
-                "petAge": "2013-12-23",
-                "petInfo": "等待有缘人领养",
-                "petPhoto": "a943938f-7d21-49d3-a909-22f2c2dc2c9b.jpg",
-            },
-            {
-                "petId": 15,
-                "petName": "大橘莹",
-                "petVariety": "橘猫",
-                "petSex": false,
-                "petAge": "2007-12-23",
-                "petInfo": "等待有缘人领养",
-                "petPhoto": "ju-cat.jpg",
-            }
-        ],
-        "len": 20
     }
 }
 
