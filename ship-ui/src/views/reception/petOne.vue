@@ -1,79 +1,81 @@
 <template>
-  <el-container class="base-page">
-    <!-- 导航栏-->
-    <el-header>
-      <PageHead>宠物详情</PageHead>
-    </el-header>
-    <el-main>
-      <el-row>
-        <!-- 左边div：宠物头像-->
-        <el-col :xs="24" :sm="10" :md="8">
-          <div class="left-div">
-            <el-avatar src="/picture/pet-ex.jpg"/>
-            <h3>{{ pet.petName }}</h3>
-            <span>{{ getAge(pet.petAge) }}岁</span>
-          </div>
-        </el-col>
-        <!-- 右边div，宠物信息-->
-        <el-col :xs="24" :sm="14" :md="16" style="text-align: center">
-          <table class="myTable">
-            <tr>
-              <td class="bold">姓名</td>
-              <td>{{ pet.petName }}</td>
-            </tr>
-            <tr>
-              <td class="bold">品种</td>
-              <td>{{ pet.petVariety }}</td>
-            </tr>
-            <tr>
-              <td class="bold">性别</td>
-              <td>{{ pet.petSex ? "公" : "母" }}</td>
-            </tr>
-            <tr>
-              <td class="bold">出生日期</td>
-              <td>{{ pet.petAge }}</td>
-            </tr>
-            <tr>
-              <td class="bold">最近状况</td>
-              <td>{{ pet.petInfo }}</td>
-            </tr>
-            <tr>
-              <td class="bold">健康状况</td>
-              <td>{{ pet.petStatus }}</td>
-            </tr>
-          </table>
-          <el-button v-if="pet.clientId==null" type="primary" style="width: 50%" @click="dialogVisible = true">
-            申请领养
-          </el-button>
-        </el-col>
-      </el-row>
-    </el-main>
-  </el-container>
-  <!--弹出框-->
-  <el-dialog v-model="dialogVisible" title="申请领养">
-    <el-form :model="dialogAsk">
-      <el-form-item label="申请理由" label-width="140px">
-        <el-input v-model="dialogAsk.askText" autocomplete="off"/>
-      </el-form-item>
-      <el-form-item label="预付押金" label-width="140px">
-        <el-input-number
-            v-model="dialogAsk.askNum"
-            :min="100"
-            :max="5000"
-            :step="100"
-            controls-position="right"
-        />
-      </el-form-item>
-    </el-form>
-    <template #footer>
+  <div>
+    <el-container class="base-page">
+      <!-- 导航栏-->
+      <el-header>
+        <PageHead>宠物详情</PageHead>
+      </el-header>
+      <el-main>
+        <el-row>
+          <!-- 左边div：宠物头像-->
+          <el-col :xs="24" :sm="10" :md="8">
+            <div class="left-div">
+              <el-avatar src="/picture/pet-ex.jpg"/>
+              <h3>{{ pet.petName }}</h3>
+              <span>{{ getAge(pet.petAge) }}岁</span>
+            </div>
+          </el-col>
+          <!-- 右边div，宠物信息-->
+          <el-col :xs="24" :sm="14" :md="16" style="text-align: center">
+            <table class="myTable">
+              <tr>
+                <td class="bold">姓名</td>
+                <td>{{ pet.petName }}</td>
+              </tr>
+              <tr>
+                <td class="bold">品种</td>
+                <td>{{ pet.petVariety }}</td>
+              </tr>
+              <tr>
+                <td class="bold">性别</td>
+                <td>{{ pet.petSex ? "公" : "母" }}</td>
+              </tr>
+              <tr>
+                <td class="bold">出生日期</td>
+                <td>{{ pet.petAge }}</td>
+              </tr>
+              <tr>
+                <td class="bold">最近状况</td>
+                <td>{{ pet.petInfo }}</td>
+              </tr>
+              <tr>
+                <td class="bold">健康状况</td>
+                <td>{{ pet.petStatus }}</td>
+              </tr>
+            </table>
+            <el-button v-if="pet.clientId==null" type="primary" style="width: 50%" @click="dialogVisible = true">
+              申请领养
+            </el-button>
+          </el-col>
+        </el-row>
+      </el-main>
+    </el-container>
+    <!--弹出框-->
+    <el-dialog v-model="dialogVisible" title="申请领养">
+      <el-form :model="dialogAsk">
+        <el-form-item label="申请理由" label-width="140px">
+          <el-input v-model="dialogAsk.askText" autocomplete="off"/>
+        </el-form-item>
+        <el-form-item label="预付押金" label-width="140px">
+          <el-input-number
+              v-model="dialogAsk.askNum"
+              :min="100"
+              :max="5000"
+              :step="100"
+              controls-position="right"
+          />
+        </el-form-item>
+      </el-form>
+      <template #footer>
       <span class="dialog-footer">
         <el-button @click="dialogVisible = false">取消</el-button>
         <el-button type="primary" @click="dialogVisible = false">
           确认
         </el-button>
       </span>
-    </template>
-  </el-dialog>
+      </template>
+    </el-dialog>
+  </div>
 </template>
 
 <script setup lang="ts">

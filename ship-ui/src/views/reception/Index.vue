@@ -98,7 +98,7 @@
       <!-- 用户卡片-->
       <h2>用户入口</h2>
       <p>一些与用户相关的功能入口，也可以前往中心查看。
-        <el-link type="warning">点击跳转</el-link>
+        <el-link type="warning" @click="this.$router.push('reception/clientCenter/clientOne')">点击跳转</el-link>
       </p>
       <el-row :gutter="12">
         <el-col :xs="24" :sm="12" :md="8" v-for="card in userCard">
