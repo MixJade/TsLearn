@@ -105,7 +105,7 @@ for (let i = 0; i < appointDetail.length; i++) {
 
 /*设置大致布局*/
 .base-page {
-  position: fixed;
+  position: absolute;
   top: 15vh;
   background-color: whitesmoke;
   box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.5);

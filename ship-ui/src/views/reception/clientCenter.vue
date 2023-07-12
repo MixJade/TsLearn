@@ -15,7 +15,9 @@
       </li>
     </ul>
   </el-radio-group>
-  <router-view></router-view>
+  <div class="basePage">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -29,5 +31,12 @@ const getChange = (): void => {
 </script>
 
 <style scoped>
-
+.basePage {
+  position: absolute;
+  width: 50vw;
+  left: 25vw;
+  top: 15vh;
+  background-color: whitesmoke;
+  box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.5);
+}
 </style>
