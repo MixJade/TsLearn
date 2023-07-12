@@ -99,35 +99,22 @@ const dialogAsk: PetAskOne = reactive({
 </script>
 
 <style scoped lang="scss">
-/*响应式*/
-@media (min-width: 768px) {
-  .base-page {
-    width: 50vw;
-    left: 25vw;
-  }
-}
-
-@media (min-width: 576px) and (max-width: 768px) {
-  .base-page {
-    width: 60vw;
-    left: 20vw;
-  }
-}
-
-@media (max-width: 575px) {
-  .base-page {
-    width: 80vw;
-    left: 10vw;
-  }
-}
-
-
 /*设置大致布局*/
 .base-page {
   position: absolute;
   top: 15vh;
   background-color: whitesmoke;
   box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.5);
+  width: 50vw;
+  left: 25vw;
+  @media (min-width: 576px) and (max-width: 768px) {
+    width: 60vw;
+    left: 20vw;
+  }
+  @media (max-width: 575px) {
+    width: 80vw;
+    left: 10vw;
+  }
 
   .el-header {
     height: 5vh;

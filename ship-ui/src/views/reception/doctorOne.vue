@@ -33,13 +33,13 @@
               </tr>
               <tr>
                 <td colspan="2">
-                  <el-button type="primary">咨询</el-button>
+                  <el-button type="primary" @click="this.$router.push('/reception/chat')">咨询</el-button>
                 </td>
               </tr>
             </table>
           </div>
         </el-col>
-        <!-- 右边div，宠物信息-->
+        <!-- 右边div，挂号信息-->
         <el-col :xs="24" :sm="14" :md="16" style="text-align: center">
           <el-table :data="appointDetail" height="300px" stripe style="width: 100%">
             <el-table-column prop="clientName" label="挂号人"/>

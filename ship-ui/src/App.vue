@@ -1,4 +1,5 @@
 <template>
+  <el-button type="success" @click="isShow=!isShow" style="position: fixed;z-index: 100;right: 0">显现</el-button>
   <el-menu
       :default-active="activeIndex"
       class="el-menu-demo"
@@ -7,6 +8,7 @@
       text-color="#fff"
       active-text-color="#ffd04b"
       @select="handleSelect"
+      v-show="isShow"
   >
     <el-menu-item index="/">
       <el-icon>
@@ -27,7 +29,6 @@
       <el-menu-item index="/demo/lifeTerm">生命周期</el-menu-item>
     </el-sub-menu>
   </el-menu>
-
   <transition name="flip">
     <router-view></router-view>
   </transition>
@@ -46,6 +47,8 @@ const handleSelect = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
   router.push(key)
 }
+// 设置显示与隐藏
+const isShow = ref(true)
 </script>
 <style scoped lang="scss">
 .flip-enter-active {

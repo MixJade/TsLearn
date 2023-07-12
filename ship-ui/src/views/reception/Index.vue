@@ -21,7 +21,7 @@
           </el-icon>
           网站公告
         </el-menu-item>
-        <el-menu-item index="2">
+        <el-menu-item index="/reception/chat">
           <el-icon>
             <Phone/>
           </el-icon>
@@ -225,7 +225,7 @@ const userCard: UserCard[] = [
     "describe": "向医生发起咨询",
     "btnType": "info",
     "btnText": "咨询医生",
-    "routerPath": "/reception/clientCenter/clientPet"
+    "routerPath": "/reception/chat"
   },
 ]
 
@@ -243,55 +243,55 @@ const logout = (): void => {
 }
 </script>
 <style lang="scss" scoped>
-/*将导航栏除Logo以外放在旁边*/
-.flex-grow {
-  flex-grow: 1;
-}
-
-/*将标题居中而不影响其它*/
-.el-main {
-  h2, p {
-    text-align: center;
-  }
-}
-
 .el-container {
   background-color: #e9e9f5;
-}
-
-/*轮播图的文本*/
-.carousel-caption {
-  background-color: black;
-  opacity: 0.5;
-  position: absolute;
-  right: 15%;
-  bottom: 1.25rem;
-  left: 15%;
-  color: #fff;
-  text-align: center;
-}
-
-/* 公告栏 */
-.el-collapse {
-  border: 5px solid #ccc;
-  width: 80%;
-  margin-left: 10%;;
-  /* 公告栏标题 */
-  :deep(.el-collapse-item__header) {
-    font-size: large;
+  /*将导航栏除Logo以外放在旁边*/
+  .flex-grow {
+    flex-grow: 1;
   }
-}
 
-/*公告换行*/
-.textNotice {
-  white-space: pre-wrap;
-  word-break: break-all;
-}
+  /*主要内容*/
+  .el-main {
+    /*轮播图的文本*/
+    .carousel-caption {
+      background-color: black;
+      opacity: 0.5;
+      position: absolute;
+      right: 15%;
+      bottom: 1.25rem;
+      left: 15%;
+      color: #fff;
+      text-align: center;
+    }
 
-/* 卡片 */
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    /*小标题与介绍文字*/
+    h2, p {
+      text-align: center;
+    }
+
+    /*公告换行*/
+    .textNotice {
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    /* 卡片 */
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* 折叠框 */
+    .el-collapse {
+      border: 5px solid #ccc;
+      width: 80%;
+      margin-left: 10%;;
+      /* 公告栏标题 */
+      :deep(.el-collapse-item__header) {
+        font-size: large;
+      }
+    }
+  }
 }
 </style>
