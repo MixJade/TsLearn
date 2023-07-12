@@ -5,7 +5,7 @@
       <span style="color: #5b88ea">返回</span>
     </template>
     <template #content>
-      <span style="cursor: default"><slot></slot></span>
+      <span style="cursor: default;font-size: smaller"><slot></slot></span>
     </template>
   </el-page-header>
 </template>

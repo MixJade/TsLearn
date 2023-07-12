@@ -44,5 +44,9 @@ export const reception = [
                 component: () => import('@/views/reception/clientPet.vue')
             },
         ],
+    },{
+        // 查看全部寄养宠物
+        path: "chat",
+        component: () => import('@/views/reception/chat.vue')
     },
 ]
