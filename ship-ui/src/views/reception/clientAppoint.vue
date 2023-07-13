@@ -5,13 +5,26 @@
         <span>单号：{{ a.appointmentId }}</span>
       </div>
     </template>
-    <ul style="list-style: none">
-      <li><span>就诊时间：</span>{{ moveT(a.appointmentDate) }}</li>
-      <li><span>就诊宠物：</span>{{ a.petName }}</li>
-      <li><span>科室：</span>{{ a.departmentName }}&nbsp;<span>医生：</span>{{ a.doctorName }}</li>
-      <li><span>描述：</span>{{ a.appointmentInfo }}</li>
-      <li><span>挂号时间:{{ moveT(a.createTime) }}</span></li>
-    </ul>
+    <el-descriptions :title="'就诊时间：'+ moveT(a.appointmentDate)" :column="3" border>
+      <el-descriptions-item
+          label="宠物"
+          label-align="right"
+          align="center">
+        {{ a.petName }}
+      </el-descriptions-item>
+      <el-descriptions-item label="科室" label-align="right" align="center">
+        <el-tag>{{ a.departmentName }}</el-tag>
+      </el-descriptions-item>
+      <el-descriptions-item label="医生" label-align="right" align="center">
+        {{ a.doctorName }}
+      </el-descriptions-item>
+      <el-descriptions-item label="描述" label-align="right" align="center">
+        {{ a.appointmentInfo }}
+      </el-descriptions-item>
+      <el-descriptions-item label="挂号时间" label-align="right" align="center">
+        {{ moveT(a.createTime) }}
+      </el-descriptions-item>
+    </el-descriptions>
   </el-card>
 </template>
 
@@ -24,10 +37,11 @@ const appointList = exampleClientAppoint()
 
 <style scoped lang="scss">
 .el-card {
-  margin-left: 5px;
+  overflow-x: auto;
+}
 
-  span {
-    font-size: small;
-  }
+/* 对除了第一个class以外的所有class执行的样式 */
+.el-card:not(:first-child) {
+  margin-top: 9px;
 }
 </style>
