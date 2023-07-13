@@ -9,10 +9,10 @@
           <el-radio label="/reception/clientCenter/clientOne" size="large" border>个人中心</el-radio>
         </li>
         <li>
-          <el-radio label="/reception/clientCenter/clientPet" size="large" border>个人宠物</el-radio>
+          <el-radio label="/reception/clientCenter/clientPet" size="large" border>宠物列表</el-radio>
         </li>
         <li>
-          <el-radio label="/reception/clientCenter/clientAppoint" size="large" border>个人挂号</el-radio>
+          <el-radio label="/reception/clientCenter/clientAppoint" size="large" border>挂号查看</el-radio>
         </li>
       </ul>
     </el-radio-group>

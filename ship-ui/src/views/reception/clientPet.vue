@@ -1,24 +1,34 @@
 <template>
   <el-card v-for="pet in petList" :key="pet.petId">
-    <el-row :gutter="12" class="my-pet-card">
+    <el-row :gutter="20" class="my-pet-card">
       <el-col
-          :xs="24" :sm="7" :md="5"
+          :xs="24" :sm="8" :md="6"
       ><img src="/picture/pet-ex.jpg" alt="宠物"/>
       </el-col>
       <el-col
-          :xs="24" :sm="12" :md="12"
+          :xs="24" :sm="14" :md="18"
       >
-        <ul>
-          <li><span style="font-weight: bolder">{{ pet.petName }}</span></li>
-          <li>品种：{{ pet.petVariety }}</li>
-          <li>健康状况：{{ pet.petStatus }}</li>
-          <li>{{ getAge(pet.petAge) }}岁&nbsp;{{ pet.petSex ? "公" : "母" }}</li>
-          <li>简介：&nbsp;{{ pet.petInfo }}</li>
-          <li>
+        <el-descriptions :title="pet.petName" :column="3" border>
+          <el-descriptions-item
+              label="品种"
+              label-align="right"
+              align="center">
+            <el-tag>{{ pet.petVariety }}</el-tag>
+          </el-descriptions-item>
+          <el-descriptions-item label="健康状况" label-align="right" align="center">
+            <el-tag>{{ pet.petStatus }}</el-tag>
+          </el-descriptions-item>
+          <el-descriptions-item label="年龄" label-align="right" align="center">
+            {{ getAge(pet.petAge) }}岁
+          </el-descriptions-item>
+          <el-descriptions-item label="性别" label-align="right" align="center">
+            {{ pet.petSex ? "公" : "母" }}
+          </el-descriptions-item>
+          <el-descriptions-item label="操作" label-align="right" align="center">
             <el-button type="success" @click="this.$router.push('/reception/petOne/'+pet.petId)">详情
             </el-button>
-          </li>
-        </ul>
+          </el-descriptions-item>
+        </el-descriptions>
       </el-col>
     </el-row>
   </el-card>
@@ -33,22 +43,10 @@ const petList = exampleClientPet()
 
 <style scoped lang="scss">
 .el-card {
-  margin-bottom: 8px;
-
-  .my-pet-card {
-    img {
-      width: 128px;
-      height: 128px;
-    }
-
-    ul {
-      list-style: none;
-      text-align: center;
-
-      li {
-        font-size: small;
-      }
-    }
-  }
+  overflow-x: auto;
+}
+/* 对除了第一个class以外的所有class执行的样式 */
+.el-card:not(:first-child) {
+  margin-top: 9px;
 }
 </style>
