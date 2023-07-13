@@ -41,12 +41,5 @@ import {getAge} from "@/utils/TimeUtil";
 const petList = exampleClientPet()
 </script>
 
-<style scoped lang="scss">
-.el-card {
-  overflow-x: auto;
-}
-/* 对除了第一个class以外的所有class执行的样式 */
-.el-card:not(:first-child) {
-  margin-top: 9px;
-}
+<style scoped>
 </style>
