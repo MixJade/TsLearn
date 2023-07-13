@@ -174,6 +174,7 @@ const handleSelect = (key: string, keyPath: string[]): void => {
     openDialog(notices[0])
     return;
   }
+  // 将数组的分割逗号换成空白之后,转为路径跳转
   router.push(keyPath.join('').toString())
 }
 // 轮播图
