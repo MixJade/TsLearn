@@ -44,9 +44,14 @@ export const reception = [
                 component: () => import('@/views/reception/clientPet.vue')
             },
         ],
-    },{
-        // 查看全部寄养宠物
+    }, {
+        // 聊天页面：直接跳转
         path: "chat",
+        component: () => import('@/views/reception/chat.vue')
+    }, {
+        // 聊天页面：自医生处跳转
+        path: "chat/:doctorId",
+        props: true,
         component: () => import('@/views/reception/chat.vue')
     },
 ]

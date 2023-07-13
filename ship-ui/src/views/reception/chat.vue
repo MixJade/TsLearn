@@ -1,46 +1,22 @@
 <template>
   <el-container>
     <el-header>
-      <PageHead>与某医生的聊天</PageHead>
+      <PageHead>与{{ groupList[0].doctorName }}医生的聊天</PageHead>
     </el-header>
     <el-container>
       <el-aside>
         <h4>当前聊天</h4>
         <ul>
-          <li>王大夫</li>
+          <li>{{ groupList[0].doctorName }}</li>
         </ul>
-        <h4>历史聊天</h4>
-        <ul>
-          <li>易大夫</li>
-          <li>易大夫</li>
-          <li>易大夫</li>
-          <li>易大夫</li>
+        <h4 v-if="groupList.length>1">其它医生</h4>
+        <ul v-if="groupList.length>1">
+          <li v-for="gItem in groupList.slice(1)" :key="gItem.doctorId">{{ gItem.doctorName }}</li>
         </ul>
       </el-aside>
       <el-container>
         <el-main>
-          <!--用户信息-->
-          <div class="msg-card right-align">
-            <div class="msg">
-              <span>时间</span>
-              <div class="msgText bg-success">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus
-                autem consectetur doloremque, excepturi, harum iure minus modi nostrum obcaecati officia repellendus
-                saepe? Animi corporis dicta mollitia nam odit quae totam!
-              </div>
-            </div>
-            <el-avatar src="/picture/lei-jun.jpg"/>
-          </div>
-          <!--医生信息-->
-          <div class="msg-card">
-            <el-avatar src="/picture/lei-jun.jpg"/>
-            <div class="msg">
-              <span>时间</span>
-              <div class="msgText bg-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A animi culpa
-                dolor dolorem eum expedita iusto maiores nihil officiis placeat provident qui rem repellat
-                reprehenderit, sapiente suscipit temporibus velit veniam.
-              </div>
-            </div>
-          </div>
+          <ChatCard :msg-list="msgList"/>
         </el-main>
         <el-footer>
           <el-icon size="36">
@@ -63,9 +39,28 @@
 import {PictureRounded, Position} from "@element-plus/icons-vue"
 import PageHead from "@/components/PageHead.vue";
 import {ref} from "vue";
+import {exampleClientChat} from "@/modal/VO/ClientChatGroup";
+import {exampleMsg} from "@/modal/entiy/Msg";
+import ChatCard from "@/components/ChatCard.vue";
+
+const props = defineProps<{
+  doctorId?: Number
+}>()
 
 // 待发送的消息
 const textarea1 = ref("")
+
+// 当前医生的ID
+let doctorId;
+if (props.doctorId == undefined) {
+  // 没有收到ID，执行ID的初始化逻辑
+  doctorId = 1;
+} else {
+  doctorId = props.doctorId
+}
+// 得到分组与聊天记录
+const groupList = exampleClientChat(doctorId);
+const msgList = exampleMsg(doctorId);
 </script>
 
 <style scoped lang="scss">
@@ -103,45 +98,6 @@ const textarea1 = ref("")
       /*信息展示区域*/
       .el-main {
         background-color: whitesmoke;
-        /*信息外壳*/
-        .msg-card {
-          display: flex;
-          padding-bottom: 5px;
-          /*消息卡片*/
-          .msg {
-            width: 50%;
-            /*用户名与时间*/
-            span {
-              margin-left: 10px;
-              margin-right: 10px;
-              font-size: small;
-            }
-
-            /*消息框*/
-            .msgText {
-              padding: 5px;
-              margin: 5px;
-              border-radius: 8px;
-              text-align: left;
-            }
-          }
-        }
-
-        /*用户信息靠右*/
-        .right-align {
-          justify-content: flex-end;
-          text-align: right;
-        }
-
-        /*用户信息背景*/
-        .bg-success {
-          background-color: #67C23A;
-        }
-
-        /*医生信息背景*/
-        .bg-light {
-          background-color: #cccccc;
-        }
       }
 
       /*输入区域*/

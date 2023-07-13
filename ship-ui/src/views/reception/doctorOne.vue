@@ -33,7 +33,8 @@
               </tr>
               <tr>
                 <td colspan="2">
-                  <el-button type="primary" @click="this.$router.push('/reception/chat')">咨询</el-button>
+                  <el-button type="primary" @click="this.$router.push('/reception/chat/'+doctorDetail.doctorId)">咨询
+                  </el-button>
                 </td>
               </tr>
             </table>

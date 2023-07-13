@@ -1,5 +1,7 @@
 <template>
-  <el-button type="success" @click="isShow=!isShow" style="position: fixed;z-index: 100;right: 0">显现</el-button>
+  <el-button type="success" @click="isShow=!isShow" style="position: fixed;z-index: 100;right: 0">
+    {{ isShow ? "隐藏导航栏" : "凤凰显形" }}
+  </el-button>
   <el-menu
       :default-active="activeIndex"
       class="el-menu-demo"
