@@ -7,8 +7,8 @@ import 'element-plus/dist/index.css'
 // 路由
 import router from './router'
 
-window.router=router
-const app = createApp(App)
+window[router] = router
+const app:App = createApp(App)
 app.use(router)
 app.use(ElementPlus)
 app.mount('#app')

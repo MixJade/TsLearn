@@ -1,9 +1,15 @@
+import {RouteRecordRaw} from "vue-router";
+
 /**
  * 用户页面的路由
  * 父路径：/reception
  */
-export const reception = [
+export const reception: RouteRecordRaw[] = [
     {
+        // 网站主页
+        path: "",
+        component: () => import('@/views/reception/Index.vue'),
+    }, {
         // 查看所有待领养宠物
         path: "petSee",
         component: () => import('@/views/reception/petSee.vue')
@@ -32,7 +38,7 @@ export const reception = [
         children: [
             {
                 // 个人中心的个人资料
-                path: "clientOne",
+                path: "",
                 component: () => import('@/views/reception/clientOne.vue')
             }, {
                 // 个人中心的宠物信息
@@ -45,12 +51,8 @@ export const reception = [
             },
         ],
     }, {
-        // 聊天页面：直接跳转
-        path: "chat",
-        component: () => import('@/views/reception/chat.vue')
-    }, {
         // 聊天页面：自医生处跳转
-        path: "chat/:doctorId",
+        path: "chat/:doctorId?",
         props: true,
         component: () => import('@/views/reception/chat.vue')
     },

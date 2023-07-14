@@ -1,8 +1,10 @@
+import {RouteRecordRaw} from "vue-router";
+
 /**
  * 路由一的子路由
  * 父路径：/demo
  */
-const demo = [
+const demo: RouteRecordRaw[] = [
     {
         path: "testScss",
         component: () => import('@/views/demo/TestScss.vue')
