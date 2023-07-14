@@ -59,7 +59,7 @@ const toLogin = () => {
 <style scoped>
 /*登录的小卡片*/
 .login-card {
-  background-color: #e9e9f5;
+  background-color: #cccccc;
   max-width: 460px;
   text-align: center;
 }
