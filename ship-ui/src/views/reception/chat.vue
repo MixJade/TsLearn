@@ -52,7 +52,7 @@ const textarea1 = ref("")
 
 // 当前医生的ID
 let doctorId;
-if (props.doctorId == undefined) {
+if (props.doctorId == null || props.doctorId == '') {
   // 没有收到ID，执行ID的初始化逻辑
   doctorId = 1;
 } else {

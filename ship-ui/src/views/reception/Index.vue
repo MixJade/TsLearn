@@ -3,7 +3,6 @@
     <el-header>
       <!-- 导航栏-->
       <el-menu
-          class="el-menu-demo"
           mode="horizontal"
           :ellipsis="false"
           background-color="#545c64"
@@ -11,7 +10,7 @@
           active-text-color="#ffd04b"
           @select="handleSelect"
       >
-        <el-menu-item index="reception/clientCenter/clientOne"><img src="/mia.svg" alt="商标" width="30" height="30">
+        <el-menu-item index="reception/clientCenter"><img src="/mia.svg" alt="商标" width="30" height="30">
           宠物医院
         </el-menu-item>
         <div class="flex-grow"/>
@@ -34,7 +33,7 @@
             </el-icon>
             个人中心
           </template>
-          <el-menu-item index="/clientOne">
+          <el-menu-item index="">
             <el-icon>
               <EditPen/>
             </el-icon>
@@ -98,7 +97,7 @@
       <!-- 用户卡片-->
       <h2>用户入口</h2>
       <p>一些与用户相关的功能入口，也可以前往中心查看。
-        <el-link type="warning" @click="this.$router.push('reception/clientCenter/clientOne')">点击跳转</el-link>
+        <el-link type="warning" @click="this.$router.push('reception/clientCenter')">点击跳转</el-link>
       </p>
       <el-row :gutter="12">
         <el-col :xs="24" :sm="12" :md="8" v-for="card in userCard">

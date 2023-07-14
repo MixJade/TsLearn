@@ -1,22 +1,22 @@
-import {createRouter, createWebHashHistory} from "vue-router"
+import {createRouter, createWebHashHistory, RouteRecordRaw} from "vue-router"
 import demo from "@/router/demo"
 import {reception} from "@/router/reception";
+import {backstage} from "@/router/backstage";
 
-const routes = [
+const routes: RouteRecordRaw[] = [
     {
         path: '/',
         component: () => import('@/views/Login.vue')
-    },
-    {
-        path: '/hello2',
-        name: "hello2",
-        component: () => import('@/views/reception/Index.vue')
     }, {
         path: '/demo',
         children: [...demo],
     }, {
         path: '/reception',
         children: [...reception],
+    }, {
+        path: '/backstage',
+        component: () => import('@/views/backstage/index.vue'),
+        children: [...backstage],
     }
 ]
 export const router = createRouter({

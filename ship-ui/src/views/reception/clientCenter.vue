@@ -3,10 +3,10 @@
     <el-radio-group v-model="radio1" @change="getChange">
       <ul>
         <li>
-          <el-radio label="/hello2" size="large" border style="color: #F56C6C">返回主页</el-radio>
+          <el-radio label="/reception" size="large" border style="color: #F56C6C">返回主页</el-radio>
         </li>
         <li>
-          <el-radio label="/reception/clientCenter/clientOne" size="large" border>个人中心</el-radio>
+          <el-radio label="/reception/clientCenter" size="large" border>个人中心</el-radio>
         </li>
         <li>
           <el-radio label="/reception/clientCenter/clientPet" size="large" border>宠物列表</el-radio>
