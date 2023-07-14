@@ -105,7 +105,7 @@ import {
   }
 
   .el-main {
-    background-color: whitesmoke;
+    background-color: #F0EAD6;
   }
 }
 </style>
