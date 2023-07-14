@@ -4,7 +4,7 @@
     <div class="msg-card" :class="{'right-align':m.isClient}" v-for="m in msgList" :key="m.msgId">
       <el-avatar src="/picture/lei-jun.jpg"/>
       <div class="msg">
-        <span>{{ m.isClient ? m.clientName : m.doctorName }}&nbsp;{{ m.createTime }}</span>
+        <span>{{ m.isClient ? m.clientName : m.doctorName }}&nbsp;{{ getDisplayTime(m.createTime) }}</span>
         <div class="msgText" :class="m.isClient?'bg-success':'bg-light'">
           <el-image v-if="m.isImg" src="/picture/lun-3.jpg" fit="cover"/>
           <div style="font-family: serif;" v-else>
@@ -19,13 +19,14 @@
 <script setup lang="ts">
 import {Msg} from "@/modal/entiy/Msg";
 import {onMounted, ref} from "vue";
+import {getDisplayTime} from "@/utils/TimeUtil";
 
 defineProps<{
   msgList: Msg[]
 }>()
 
 // 滚动条到底
-const innerRef = ref<HTMLElement>()
+const innerRef = ref<HTMLDivElement>()
 const rollBottom = () => {
   setTimeout(() => {
     innerRef.value!.scrollTop = innerRef.value!.scrollHeight

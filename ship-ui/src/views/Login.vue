@@ -8,6 +8,11 @@
         <el-tabs class="login-tabs" type="border-card">
           <el-tab-pane label="用户">
             <LoginForm role="USER"/>
+            <el-col>
+              <el-button type="warning" round>账号注册</el-button>
+              <el-button type="danger" round>找回密码</el-button>
+              <el-button type="success" round @click="this.$router.push('/hello2')">游客登录</el-button>
+            </el-col>
           </el-tab-pane>
           <el-tab-pane label="管理员">
             <LoginForm role="ADMIN"/>
@@ -38,9 +43,19 @@ import LoginForm from "@/components/LoginForm.vue";
   height: 90vh;
   position: fixed;
 }
+
 /*登录的标签栏*/
-.login-tabs{
+.login-tabs {
   position: absolute;
   margin-top: 5%;
+
+  .el-tab-pane {
+    background-color: #cccccc;
+  }
+}
+
+.el-col {
+  padding-top: 10px;
+  text-align: center;
 }
 </style>
