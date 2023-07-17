@@ -122,19 +122,19 @@
       <p>它们等待一个温暖的家。
         <el-link type="success" @click="this.$router.push('/reception/petSee')">查看全部</el-link>
       </p>
-      <PetCard :card-list="petCardTxt.data"/>
+      <PetCard :card-list="petCardTxt.records"/>
       <!-- 医生卡片-->
       <h2>医生展示</h2>
       <p>我们拥有虚拟的医生。
         <el-link type="primary" @click="this.$router.push('/reception/doctorSee')">查看全部</el-link>
       </p>
-      <DoctorCard :card-list="doctorCardTxt.data"/>
+      <DoctorCard :card-list="doctorCardTxt.records"/>
       <!-- 寄养卡片-->
       <h2>寄养宠物展示</h2>
       <p>我们提供寄养服务。
         <el-link type="warning" @click="this.$router.push('/reception/fosterSee')">查看全部</el-link>
       </p>
-      <FosterCard :card-list="fosterCardTxt.data"/>
+      <FosterCard :card-list="fosterCardTxt.records"/>
       <!-- 折叠筐-->
       <h2>小小知识</h2>
       <el-collapse accordion>

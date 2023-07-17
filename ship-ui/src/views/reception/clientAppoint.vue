@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import {exampleClientAppoint} from "@/modal/entiy/Appoint";
+import {exampleClientAppoint} from "@/modal/DO/AppointDto";
 import {moveT} from "@/utils/TimeUtil";
 
 const appointList = exampleClientAppoint()

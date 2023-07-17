@@ -2,7 +2,7 @@
   <div>
     <PageHead>查看全部医生</PageHead>
     <el-space direction="vertical">
-      <DoctorCard :card-list="doctorCardTxt.data"/>
+      <DoctorCard :card-list="doctorCardTxt.records"/>
       <el-pagination background layout="prev, pager, next" :page-size="8" :total="7"/>
     </el-space>
   </div>
