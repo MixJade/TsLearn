@@ -10,9 +10,9 @@
             stripe
             row-key="petId"
             style="width: 100%"
-            height="430"
+            max-height="430"
             @selection-change="handleSelectionChange">
-    <el-table-column type="selection" width="55"/>
+    <el-table-column type="selection" width="30"/>
     <el-table-column label="图像">
       <el-avatar src="/picture/pet-ex.jpg"/>
     </el-table-column>
@@ -35,7 +35,7 @@
     </el-table-column>
     <el-table-column prop="petInfo" label="近况"/>
     <el-table-column prop="clientName" label="主人"/>
-    <el-table-column label="操作">
+    <el-table-column fixed="right" label="操作">
       <el-button-group>
         <el-button type="warning" :icon="Edit" @click="showDialog" circle/>
         <el-button type="danger" :icon="Delete" circle/>
