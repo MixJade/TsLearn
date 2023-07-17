@@ -79,7 +79,7 @@ export const exampleClientPet = (): Pet[] => {
 // 主页样例：宠物卡片
 export const examplePetFour = (): Page<Pet> => {
     return {
-        "data": [
+        "records": [
             {
                 "petId": 7,
                 "petName": "波一斯",
@@ -137,14 +137,14 @@ export const examplePetFour = (): Page<Pet> => {
                 "isDel": null
             }
         ],
-        "len": 20
+        "total": 20
     }
 }
 
 // 查看所有领养宠物
 export const examplePetSee = (): Page<Pet> => {
     return {
-        "data": [
+        "records": [
             {
                 "petId": 7,
                 "petName": "波一斯",
@@ -258,6 +258,6 @@ export const examplePetSee = (): Page<Pet> => {
                 "isDel": null
             }
         ],
-        "len": 20
+        "total": 20
     }
 }

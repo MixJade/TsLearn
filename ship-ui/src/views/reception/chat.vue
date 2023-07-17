@@ -41,7 +41,7 @@ import PageHead from "@/components/PageHead.vue";
 import {ref} from "vue";
 import {exampleClientChat} from "@/modal/VO/ClientChatGroup";
 import {exampleMsg} from "@/modal/entiy/Msg";
-import ChatCard from "@/components/ChatCard.vue";
+import ChatCard from "@/components/ChatMain.vue";
 
 const props = defineProps<{
   doctorId?: Number

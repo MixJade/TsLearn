@@ -64,7 +64,7 @@ export interface FosterCardVO {
  */
 export const exampleFoster = (): Page<FosterCardVO> => {
     return {
-        "data": [
+        "records": [
             {
                 "fosterId": 3,
                 "fosterCode": "12301123",
@@ -117,7 +117,7 @@ export const exampleFoster = (): Page<FosterCardVO> => {
                 "petPhoto": "3b5d2e67-8af1-4a58-9bed-91d5876a1d97.png"
             }
         ],
-        "len": 20
+        "total": 20
     }
 }
 
@@ -145,7 +145,7 @@ export const exampleNotice = (): Notice[] => {
 // 样例：医生卡片
 export const exampleDoctor = (): Page<DoctorCardType> => {
     return {
-        "data": [
+        "records": [
             {
                 "doctorId": 1,
                 "departmentId": 1,
@@ -199,14 +199,14 @@ export const exampleDoctor = (): Page<DoctorCardType> => {
                 "departmentName": "美容室"
             }
         ],
-        "len": 7
+        "total": 7
     }
 }
 
 // 样例2：医生全部卡片
 export const exampleDoctor2 = (): Page<DoctorCardType> => {
     return {
-        "data": [
+        "records": [
             {
                 "doctorId": 1,
                 "departmentId": 1,
@@ -299,6 +299,6 @@ export const exampleDoctor2 = (): Page<DoctorCardType> => {
                 "departmentName": "美容室"
             }
         ],
-        "len": 7
+        "total": 7
     }
 }

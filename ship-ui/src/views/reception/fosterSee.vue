@@ -2,7 +2,7 @@
   <div>
     <PageHead>查看全部寄养订单</PageHead>
     <el-space direction="vertical">
-      <FosterCard :card-list="fosterCardTxt.data"/>
+      <FosterCard :card-list="fosterCardTxt.records"/>
       <el-pagination background layout="prev, pager, next" :page-size="6" :total="20"/>
     </el-space>
   </div>

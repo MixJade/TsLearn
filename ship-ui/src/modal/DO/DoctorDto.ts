@@ -1,28 +1,16 @@
 /**
  * 单个医生
  */
-export interface DoctorOne {
-    doctorId: number;
-    departmentId?: number | null;
-    doctorCode: string;
-    doctorName: string;
-    doctorGender: boolean;
-    doctorAge: string;
-    doctorPhoto: string;
-    doctorTel: string;
-    doctorJob: string;
-    doctorInfo: string;
-    doctorPassword?: any;
-    createTime?: any;
-    updateTime?: any;
-    isDel?: any;
+import {Doctor} from "@/modal/entiy/Doctor";
+
+export interface DoctorDto extends Doctor {
     departmentName: string;
 }
 
 /**
  * 医生详情的示例
  */
-export const exampleDoctorDetail = (doctorId: number): DoctorOne => {
+export const exampleDoctorDetail = (doctorId: number): DoctorDto => {
     console.log("所接收的医生ID是", doctorId)
     return {
         "doctorId": 1,

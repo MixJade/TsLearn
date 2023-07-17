@@ -57,8 +57,8 @@
 <script setup lang="ts">
 import PageHead from "@/components/PageHead.vue";
 import {getAge, moveT} from "@/utils/TimeUtil";
-import {exampleDoctorDetail} from "@/modal/VO/DoctorOne";
-import {exampleDoctorAppoint} from "@/modal/entiy/Appoint";
+import {exampleDoctorDetail} from "@/modal/DO/DoctorDto";
+import {exampleDoctorAppoint} from "@/modal/DO/AppointDto";
 
 // 如此获取传参
 const props = defineProps<{
