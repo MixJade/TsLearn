@@ -32,3 +32,14 @@ export interface XEmployeeList extends PageQuery {
 export interface XDepartmentList extends PageQuery {
     departmentName: string
 }
+
+// 领养表查询参数
+export interface YAdoptList extends PageQuery {
+    petName: string
+    clientName: string
+}
+// 寄养表
+export interface YFosterList extends PageQuery {
+    petName: string
+    clientName: string
+}
