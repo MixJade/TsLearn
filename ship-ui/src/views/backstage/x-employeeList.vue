@@ -17,8 +17,8 @@
     </el-table-column>
     <el-table-column prop="employeeUsername" label="账号"/>
     <el-table-column prop="employeeName" label="姓名"/>
-    <el-table-column label="工龄">
-      <template #default="scope">{{ getDaysFromToday(scope.row.createTime) }}天</template>
+    <el-table-column prop="createTime" label="工龄" sortable>
+      <template #default="scope">{{ getDaysFromToday(scope.row.createTime) }}</template>
     </el-table-column>
     <el-table-column prop="employeeTel" label="联系方式"/>
     <el-table-column label="职位">

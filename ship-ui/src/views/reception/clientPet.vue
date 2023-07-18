@@ -22,7 +22,7 @@
             {{ getAge(pet.petAge) }}岁
           </el-descriptions-item>
           <el-descriptions-item label="性别" label-align="right" align="center">
-            {{ pet.petSex ? "公" : "母" }}
+            <TagSex :sex="pet.petSex"/>
           </el-descriptions-item>
           <el-descriptions-item label="操作" label-align="right" align="center">
             <el-button type="success" @click="this.$router.push('/reception/petOne/'+pet.petId)">详情
@@ -37,6 +37,7 @@
 <script setup lang="ts">
 import {exampleClientPet} from "@/modal/entiy/Pet";
 import {getAge} from "@/utils/TimeUtil";
+import TagSex from "@/components/TagSex.vue";
 
 const petList = exampleClientPet()
 </script>

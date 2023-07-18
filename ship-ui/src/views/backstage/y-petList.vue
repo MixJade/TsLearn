@@ -23,9 +23,11 @@
       </template>
     </el-table-column>
     <el-table-column label="性别">
-      <template #default="scope">{{ scope.row.petSex ? "公" : "母" }}</template>
+      <template #default="scope">
+        <TagSex :sex="scope.row.petSex"/>
+      </template>
     </el-table-column>
-    <el-table-column label="年龄">
+    <el-table-column prop="petAge" label="年龄" sortable>
       <template #default="scope">{{ getAge(scope.row.petAge) }}岁</template>
     </el-table-column>
     <el-table-column label="健康状态">
@@ -77,6 +79,7 @@ import {YPetList} from "@/modal/VO/BackQuery";
 import {examplePetBack} from "@/modal/DO/PetDto";
 import {getAge} from "@/utils/TimeUtil";
 import {Pet} from "@/modal/entiy/Pet";
+import TagSex from "@/components/TagSex.vue";
 
 // 查询的参数
 const qp: YPetList = reactive({

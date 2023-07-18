@@ -19,9 +19,11 @@
     <el-table-column prop="doctorName" label="医生名"/>
     <el-table-column prop="doctorCode" label="工号"/>
     <el-table-column label="性别">
-      <template #default="scope">{{ scope.row.doctorGender ? "男" : "女" }}</template>
+      <template #default="scope">
+        <TagSex :sex="scope.row.doctorGender"/>
+      </template>
     </el-table-column>
-    <el-table-column label="年龄">
+    <el-table-column prop="doctorAge" label="年龄" sortable>
       <template #default="scope">{{ getAge(scope.row.doctorAge) }}岁</template>
     </el-table-column>
     <el-table-column prop="doctorTel" label="联系方式"/>
@@ -78,6 +80,7 @@ import {YDoctorList} from "@/modal/VO/BackQuery";
 import {getAge} from "@/utils/TimeUtil";
 import {Doctor} from "@/modal/entiy/Doctor";
 import {exampleDoctorBack} from "@/modal/DO/DoctorDto";
+import TagSex from "@/components/TagSex.vue";
 
 // 查询的参数
 const qp: YDoctorList = reactive({

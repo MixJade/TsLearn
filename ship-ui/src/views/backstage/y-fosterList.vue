@@ -14,12 +14,17 @@
             @selection-change="handleSelectionChange">
     <el-table-column type="selection" width="30"/>
     <el-table-column prop="fosterCode" label="订单号"/>
-    <el-table-column prop="fosterTerm" label="到期时间"/>
+    <el-table-column prop="fosterTerm" label="到期时间" sortable/>
     <el-table-column prop="fosterMoney" label="定金" sortable/>
     <el-table-column prop="fosterInfo" label="订单备注"/>
     <el-table-column prop="petName" label="宠物名"/>
     <el-table-column prop="clientName" label="寄养人"/>
-    <el-table-column prop="fosterTerm" label="是否过期" :formatter="calculateDays"/>
+    <el-table-column prop="fosterTerm" label="是否过期" sortable>
+      <template #default="scope">
+        <el-tag v-if="calculateDays(scope.row.fosterTerm)==='已过期'" type="danger">已过期</el-tag>
+        <span v-else>{{ calculateDays(scope.row.fosterTerm) }}</span>
+      </template>
+    </el-table-column>
     <el-table-column fixed="right" label="操作">
       <el-button-group>
         <el-button type="warning" :icon="Edit" @click="showDialog" circle/>
@@ -111,8 +116,7 @@ const showDialog = () => {
   modalTit.value = "修改寄养"
 }
 // 数据格式化
-const calculateDays = (row: Foster): string => {
-  const inputDate = row.fosterTerm
+const calculateDays = (inputDate: string): string => {
   const today = new Date();
   const date = new Date(inputDate);
   // 确保输入的是有效的日期

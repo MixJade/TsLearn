@@ -16,9 +16,16 @@
     <el-table-column prop="adoptCode" label="订单号"/>
     <el-table-column prop="adoptInfo" label="简介"/>
     <el-table-column prop="adoptMoney" label="定金" sortable/>
-    <el-table-column prop="createTime" label="创建时间" :formatter="removeT"/>
+    <el-table-column prop="createTime" label="创建时间" :formatter="removeT" sortable/>
     <el-table-column prop="petName" label="宠物名"/>
     <el-table-column prop="clientName" label="申请人"/>
+    <el-table-column prop="inAdopt" label="是否通过" sortable>
+      <template #default="scope">
+        <el-tag v-if="scope.row.inAdopt===0">待审核</el-tag>
+        <el-tag v-else-if="scope.row.inAdopt===1" type="success">已通过</el-tag>
+        <el-tag v-else type="danger">已拒绝</el-tag>
+      </template>
+    </el-table-column>
     <el-table-column fixed="right" label="操作">
       <el-button-group>
         <el-button type="warning" :icon="Edit" @click="showDialog" circle/>

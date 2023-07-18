@@ -18,9 +18,11 @@
     <el-table-column prop="clientName" label="用户名"/>
     <el-table-column prop="clientUsername" label="账号"/>
     <el-table-column label="性别">
-      <template #default="scope">{{ scope.row.clientGender ? "男" : "女" }}</template>
+      <template #default="scope">
+        <TagSex :sex="scope.row.clientGender"/>
+      </template>
     </el-table-column>
-    <el-table-column label="年龄">
+    <el-table-column prop="clientAge" label="年龄" sortable>
       <template #default="scope">{{ getAge(scope.row.clientAge) }}岁</template>
     </el-table-column>
     <el-table-column prop="clientTel" label="联系方式"/>
@@ -67,6 +69,7 @@ import {YClientList} from "@/modal/VO/BackQuery";
 import {getAge} from "@/utils/TimeUtil";
 import {Client} from "@/modal/entiy/Client";
 import {exampleClientBack} from "@/modal/entiy/Client";
+import TagSex from "@/components/TagSex.vue";
 
 // 查询的参数
 const qp: YClientList = reactive({
