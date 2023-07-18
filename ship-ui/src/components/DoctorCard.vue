@@ -27,11 +27,11 @@
 </template>
 
 <script setup lang="ts">
-import {DoctorCardType} from "@/modal/VO/HomeVO";
 import {getAge} from "@/utils/TimeUtil";
+import {DoctorDto} from "@/modal/DO/DoctorDto";
 // 接收参数：医生卡片
 defineProps<{
-  readonly cardList: DoctorCardType[]
+  readonly cardList: DoctorDto[]
 }>()
 </script>
 
