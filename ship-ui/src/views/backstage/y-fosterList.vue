@@ -1,8 +1,8 @@
 <template>
   <!--操作框-->
   <BackOpCol role="寄养" @query="queryB" @addRole="addRoleB" @delBatch="delBatchB">
-    <el-input v-model="qp.petName" placeholder="申请人" size="large" clearable/>
-    <el-input v-model="qp.clientName" placeholder="宠物名" size="large" clearable/>
+    <el-input v-model="qp.petName" placeholder="申请人" size="large"/>
+    <el-input v-model="qp.clientName" placeholder="宠物名" size="large"/>
   </BackOpCol>
   <p></p>
   <!--列表展示-->

@@ -38,8 +38,15 @@ export interface YAdoptList extends PageQuery {
     petName: string
     clientName: string
 }
+
 // 寄养表
 export interface YFosterList extends PageQuery {
     petName: string
     clientName: string
+}
+
+// 寄养表
+export interface YAppointList extends PageQuery {
+    seaName: string
+    seaType: number
 }

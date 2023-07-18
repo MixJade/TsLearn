@@ -1,7 +1,7 @@
 <template>
   <!--操作框-->
   <BackOpCol role="医生" @query="queryB" @addRole="addRoleB" @delBatch="delBatchB">
-    <el-input v-model="qp.doctorName" placeholder="医生姓名" size="large" clearable/>
+    <el-input v-model="qp.doctorName" placeholder="医生姓名" size="large"/>
     <el-input v-model="qp.departmentName" placeholder="科室名" size="large"/>
   </BackOpCol>
   <p></p>
