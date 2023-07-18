@@ -18,14 +18,17 @@
             max-height="430"
             @selection-change="handleSelectionChange">
     <el-table-column type="selection" width="30"/>
-    <el-table-column prop="appointmentDate" label="就诊时间"/>
+    <el-table-column prop="appointmentDate" label="就诊时间" sortable/>
     <el-table-column prop="appointmentInfo" label="简介"/>
-    <el-table-column prop="appointMoney" label="定金" sortable/>
-    <el-table-column prop="createTime" label="创建时间"/>
+    <el-table-column prop="createTime" label="创建时间" sortable/>
     <el-table-column prop="petName" label="宠物名"/>
     <el-table-column prop="clientName" label="挂号人"/>
     <el-table-column prop="doctorName" label="医生"/>
-    <el-table-column prop="departmentName" label="科室"/>
+    <el-table-column label="科室">
+      <template #default="scope">
+        <el-tag>{{ scope.row.departmentName }}</el-tag>
+      </template>
+    </el-table-column>
     <el-table-column fixed="right" label="操作">
       <el-button-group>
         <el-button type="warning" :icon="Edit" @click="showDialog" circle/>
