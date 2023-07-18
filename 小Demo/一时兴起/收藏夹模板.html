@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>单人详情</title>
+    <title>收藏夹模板</title>
     <style>
         /* 基础区域 */
         #basePage {
@@ -19,6 +19,13 @@
             left: 10%;
             width: 100%;
             border: 5px solid #ccc; /*自定义边框样式、颜色等*/
+        }
+
+        .rolePa ul {
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
         }
 
         /*向上消失动画*/
@@ -80,9 +87,9 @@
 <!--左侧导航-->
 <div id="radio-button-group">
     <input type="radio" class="radio-button" name="vb-radio" id="vb-radio1" onclick="sayHi(0)" checked>
-    <label class="radio-label" for="vb-radio1">用户信息</label>
+    <label class="radio-label" for="vb-radio1">群贤毕至</label>
     <input type="radio" class="radio-button" name="vb-radio" id="vb-radio2" onclick="sayHi(1)">
-    <label class="radio-label" for="vb-radio2">宠物信息</label>
+    <label class="radio-label" for="vb-radio2">狗头军师</label>
     <input type="radio" class="radio-button" name="vb-radio" id="vb-radio3" onclick="sayHi(2)">
     <label class="radio-label" for="vb-radio3">挂号管理</label>
 </div>
@@ -91,10 +98,10 @@
 <div id="basePage">
     <div class="rolePa">
         <ul>
-            <li>你好</li>
-            <li>你好</li>
-            <li>你好</li>
-            <li>你好</li>
+            <li><a href="https://blog.csdn.net/weixin_42905141/article/details/124071137">「安装Typora」</a></li>
+            <li><a href="https://www.bilibili.com/read/cv18230089/">「Navicat安装」</a></li>
+            <li><a href="https://www.linuxcapable.com/how-to-install-oracle-java-17-on-linux-mint/">「Java17安装」</a></li>
+            <li><a href="https://blog.csdn.net/qq_51246603/article/details/127474314">「安装IDEA」</a></li>
             <li>你好</li>
             <li>你好</li>
             <li>你好</li>
@@ -103,9 +110,9 @@
     <!-- 宠物信息 -->
     <div class="rolePa" style="z-index: 9;display: none;">
         <ul>
-            <li>不会</li>
-            <li>不会</li>
-            <li>不会</li>
+            <li><a href="https://blog.csdn.net/qq_42843894/article/details/112639174">「使用SSH连接Github」</a></li>
+            <li><a href="https://blog.csdn.net/wangye8312166/article/details/86573832">「彻底卸载MySQL」</a></li>
+            <li><a href="https://blog.csdn.net/hai1124948893/article/details/107297582">「MySQL初始化root用户」</a></li>
             <li>不会</li>
             <li>不会</li>
         </ul>
