@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>单人详情</title>
+    <title>收藏夹模板</title>
     <style>
         /* 基础区域 */
         #basePage {
@@ -19,6 +19,14 @@
             left: 10%;
             width: 100%;
             border: 5px solid #ccc; /*自定义边框样式、颜色等*/
+        }
+
+        .rolePa ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
         }
 
         /*向上消失动画*/
@@ -80,42 +88,42 @@
 <!--左侧导航-->
 <div id="radio-button-group">
     <input type="radio" class="radio-button" name="vb-radio" id="vb-radio1" onclick="sayHi(0)" checked>
-    <label class="radio-label" for="vb-radio1">用户信息</label>
+    <label class="radio-label" for="vb-radio1">群贤毕至</label>
     <input type="radio" class="radio-button" name="vb-radio" id="vb-radio2" onclick="sayHi(1)">
-    <label class="radio-label" for="vb-radio2">宠物信息</label>
+    <label class="radio-label" for="vb-radio2">狗头军师</label>
     <input type="radio" class="radio-button" name="vb-radio" id="vb-radio3" onclick="sayHi(2)">
-    <label class="radio-label" for="vb-radio3">挂号管理</label>
+    <label class="radio-label" for="vb-radio3">其他补充</label>
 </div>
 
-<!--用户信息展示-->
+<!--面板一-->
 <div id="basePage">
     <div class="rolePa">
         <ul>
-            <li>你好</li>
-            <li>你好</li>
-            <li>你好</li>
-            <li>你好</li>
-            <li>你好</li>
-            <li>你好</li>
+            <li><a href="https://blog.csdn.net/weixin_42905141/article/details/124071137">「安装Typora」</a></li>
+            <li><a href="https://www.bilibili.com/read/cv18230089/">「Navicat安装」</a></li>
+            <li><a href="https://www.linuxcapable.com/how-to-install-oracle-java-17-on-linux-mint/">「Java17安装」</a>
+            </li>
+            <li><a href="https://blog.csdn.net/qq_51246603/article/details/127474314">「安装IDEA」</a></li>
+            <li><a href="https://zhuanlan.zhihu.com/p/144885938">「安装Node.js」</a>记得将14.x改成18.x</li>
+            <li><a href="https://www.microsoft.com/zh-cn/edge?form=MA13FJ#evergreen">「Edge下载」</a></li>
             <li>你好</li>
         </ul>
     </div>
-    <!-- 宠物信息 -->
+    <!-- 面板二 -->
     <div class="rolePa" style="z-index: 9;display: none;">
         <ul>
-            <li>不会</li>
-            <li>不会</li>
-            <li>不会</li>
-            <li>不会</li>
-            <li>不会</li>
+            <li><a href="https://blog.csdn.net/qq_42843894/article/details/112639174">「使用SSH连接Github」</a></li>
+            <li><a href="https://blog.csdn.net/wangye8312166/article/details/86573832">「彻底卸载MySQL」</a></li>
+            <li><a href="https://blog.csdn.net/hai1124948893/article/details/107297582">「MySQL初始化root用户」</a></li>
+            <li><a href="https://www.likecs.com/show-205296529.html">「Linux寻找JAVA路径」</a>可举一反三</li>
+            <li>「sudo kill -s 9 进程号」  ==》用这个杀死进程</li>
+            <li><a href="https://wenku.csdn.net/answer/d8644b5d773c0baf5c6c4ec5e40012ab">「Linux Mint调节亮度」</a></li>
         </ul>
     </div>
-    <!-- 挂号信息 -->
+    <!-- 面板三 -->
     <div class="rolePa" style="z-index: 9;display: none;">
         <ul>
-            <li>发过火</li>
-            <li>发过火</li>
-            <li>发过火</li>
+            <li><a href="https://blog.csdn.net/weixin_45732391/article/details/118719802">「IDEA默认设置」</a>不用每次都设置Maven</li>
             <li>发过火</li>
             <li>发过火</li>
         </ul>
@@ -123,16 +131,14 @@
 </div>
 </body>
 <script>
-    (function () {// 表单允许与禁止访问
-        const rolePa = document.getElementsByClassName("rolePa");
-        let a = 0;
-        window.sayHi = b => {
-            rolePa[a].style.animation = "byeBye 1.2s forwards";
-            rolePa[b].style.display = "";
-            rolePa[b].style.animation = "hello 1.2s forwards";
-            a = b;
-        }
-    }());
+    const rolePa = document.getElementsByClassName("rolePa");
+    let a = 0;
+    const sayHi = b => {
+        rolePa[a].style.animation = "byeBye 1.2s forwards";
+        rolePa[b].style.display = "";
+        rolePa[b].style.animation = "hello 1.2s forwards";
+        a = b;
+    }
 </script>
 
 </html>

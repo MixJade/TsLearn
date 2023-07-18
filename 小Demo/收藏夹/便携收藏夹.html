@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <title>便携收藏夹</title>
+    <link rel="icon" type="image/svg+xml"
+          href='data:image/svg+xml;utf8,<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="16" height="16" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3-12.3 12.7-12.1 32.9 0.6 45.3l183.7 179.1-43.4 252.9c-1.2 6.9-0.1 14.1 3.2 20.3 8.2 15.6 27.6 21.7 43.2 13.4L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z" fill="orange"></path></svg>'/>
+    <style>
+        /*大类下的分类*/
+        .hide {
+            display: none;
+            text-align: left;
+            list-style: none;
+            text-indent: 10%;
+        }
+
+        /*悬浮标题以清除隐藏*/
+        .hide-pa:hover .hide {
+            display: block;
+            background-color: #51ab8f;
+        }
+
+        /*作为标题的a标签*/
+        .a-tit {
+            font-size: large;
+            color: #000;
+        }
+
+        /*作为标题的文本*/
+        .large {
+            font-size: large;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            width: 80%;
+            background-color: #1c3c31;
+        }
+
+        /*轻微的豁口*/
+        .knock {
+            color: #37836b;
+            user-select: none;
+            margin-left: 30px;
+        }
+
+        /*大类标签：编程相关、杂余诸事*/
+        .MyStrong {
+            font-size: 18px;
+            cursor: pointer;
+            color: rgb(17, 67, 161);
+        }
+
+        /*第一个大类标签*/
+        .MyStrong:first-child {
+            color: #1c3c31;
+        }
+
+        /*调用弹出框的按钮*/
+        .myButton {
+            background-color: #98c0c9;
+            border-radius: 5px;
+        }
+
+        /*大类内容：编程相关、杂余诸事*/
+        .MyNoneDiv {
+            text-align: center;
+        }
+
+        /*警告框*/
+        #alertBox {
+            display: none;
+            position: absolute;
+            width: 380px;
+            background: #98c0c9;
+            border: 3px solid #1c3c31;
+            border-radius: 12px;
+            left: 50%;
+            top: 30%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 100;
+        }
+
+        /*警告框内容*/
+        #content {
+            margin: 20px;
+            font-size: 12px;
+        }
+
+        /*警告框按钮*/
+        #alert-btn {
+            width: 60px;
+            height: 30px;
+            background: #437371;
+            border: 1px solid;
+            border-radius: 12px;
+            cursor: pointer;
+            color: #98c0c9;
+        }
+    </style>
+</head>
+
+<body style="background-color:#73bea0;">
+<h1 style="text-align: center;">
+    <a href="javascript:myFunction()" style="color: #1c3c31;">【你好啊!&#128516】</a>
+</h1>
+<!--弹出框-->
+<div id="alertBox">
+    <h3 style="color:#1c3c31;">彩笺</h3>
+    <div id="content">HELLO_WORLD</div>
+    <button id="alert-btn" type="button" onclick="noAlert()">阅</button>
+</div>
+<!--大类标签-->
+<div id="frequently" style="text-align: center">
+    <strong class="MyStrong">后端</strong>
+    <strong class="MyStrong">前端</strong>
+    <strong class="MyStrong">杂事</strong>
+    <strong class="MyStrong">杯宴</strong>
+</div>
+<br>
+<!--第一分类-->
+<div class="MyNoneDiv">
+    <div class="hide-pa"><a href="https://github.com/" class="a-tit">【相关网站】</a>
+        <ul class="hide">
+            <li>这是: <a href="https://www.runoob.com/html/html-quicklist.html">【菜鸟编程教程】,</a>关于编程的基础操作
+            </li>
+            <li>一位B站Up的总结: <a href="https://www.r2coding.com/#/">【编程自学之路】</a></li>
+            <li>这是:<a href="https://leetcode.cn/">【力扣】</a>和:<a
+                    href="https://www.bookstack.cn/read/wind-liang-eetcode/d9ade5c488c2e0e9.md">【力扣算法题解析】</a>
+            </li>
+            <li>这是:<a href="https://www.bookstack.cn/">【书栈网】</a></li>
+            <li>这是:<a href="https://github.com/">【GitHub】</a>账号:混乱翡翠</li>
+            <li>这是:<a href="https://www.githubs.cn/trending">【Github中文社区】</a></li>
+            <li>这是:<a href="https://gitee.com/">【码云】</a>
+                <button class="myButton" onclick="getCopy(this)" data-text="AYI-ZJuh-qOIof8wh1">复制密码
+                </button>
+            </li>
+            <li>这是:<a href="https://quickref.cn/">【编程语言速查】</a>挺不错的</li>
+        </ul>
+    </div>
+    <br>
+    <div class="hide-pa"><span class="large">【爪哇相关】</span>
+        <ul class="hide">
+            <li>发行JDK的官网: <a href="https://www.oracle.com/">【ORACLE网站】</a></li>
+            <li>JAVA文档: <a
+                    href="https://www.oracle.com/java/technologies/javase-jdk18-doc-downloads.html">【ORACLE网站JAVA文档】</a>QaQ_4325
+            </li>
+            <li>JAVA文档: <a href="https://www.wdbyte.com/java/java-17/">【JAVA各版本特性】</a>特别好玩</li>
+            <li>Spring官网: <a href="https://spring.io/">【Spring官网】</a>一个主流框架家族，可以在官网搭建SpringBoot项目
+            </li>
+            <li>
+                <hr>
+            </li>
+            <li>汤姆猫: <a href="https://tomcat.apache.org/">【Apache tomcat】</a>web服务器，注意10.0版本之后依赖不同
+                <button class="myButton" onclick="tomcatIntroduce()">部分配置说明
+                </button>
+            </li>
+            <li>Maven私服搭建: <a
+                    href="https://help.sonatype.com/repomanager3/product-information/downloadi">【Nexus】</a>搭建maven私服，不过我用git
+            </li>
+            <li>第三方库管理: <a href="https://maven.apache.org/download.cgi">【Maven-bin】</a>Maven的下载，记得配置阿里云仓库
+            </li>
+            <li>JAVA框架说明: <a href="https://mybatis.org/mybatis-3/zh/index.html">【Mybatis官网】</a>数据库连接框架
+            </li>
+            <li>JAVA框架说明: <a href="https://baomidou.com/">【Mybatis-plus官网】</a>更方便的数据库框架，可以看指南里的说明
+            </li>
+            <li>JAVA框架说明: <a href="https://www.rabbitmq.com/">【rabbitmq官网】</a>AMQP消息队列
+            </li>
+            <li>
+                <hr>
+            </li>
+            <li>阿里云仓库: <a href="https://developer.aliyun.com/mvn/guide">【阿里云仓库】</a>主要看它最新的配置教程，
+                <button class="myButton" onclick="aliMaven()">注意事项
+                </button>
+            </li>
+            <li>Maven仓库: <a href="https://search.maven.org/">【Maven仓库(利搜索)】</a>想要什么自己搜</li>
+            <li>Maven仓库: <a href="https://mvnrepository.com/">【Maven仓库(镜像仓库)】</a>听说是一个镜像</li>
+            <li>Maven仓库: <a href="https://repo.maven.apache.org/maven2/">【Maven默认下载仓库】</a>就是从这里下载的
+            </li>
+            <li>JAVA类库: <a href="https://dev.mysql.com/downloads/connector/j/">【java的mysql连接器】</a>链接mysql数据库，以及<a
+                    href="https://nowjava.com/jar/detail/m00170223/druid-1.1.12.jar.html">【德鲁伊】</a>：数据库连接池
+            </li>
+            <li>JAVA类库: <a href="https://dom4j.github.io/">【JAVA的dom4j下载地址】</a>解析xml文档的第三方库<a
+                    href="https://www.java2s.com/Code/Jar/j/Downloadjaxen112jar.htm">【XPath之jaxen下载】</a></li>
+            <li>JAVA类库: <a href="https://repo1.maven.org/maven2/ch/qos/logback/">【Logback日志框架(classic、core)】</a><a
+                    href="https://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.9/">【slf4j-api】</a>
+                还有说明书:<a href="https://blog.csdn.net/weixin_41579606/article/details/121838657">【xml配置】</a>
+            </li>
+            <li>
+                <hr>
+            </li>
+            <li>说明: <a href="https://blog.csdn.net/grd_java/article/details/107614274">【Maven强制更新】</a>较为实用
+            </li>
+            <li>说明: <a href="https://blog.csdn.net/m0_53067943/article/details/123926050">【SpringMVC执行流程】</a>可以看看
+            </li>
+            <li>说明: <a href="https://www.iteye.com/blog/wanxw2001-1570339">【JAVA字符编码说明】</a>可以看看</li>
+            <li>说明: <a href="https://blog.csdn.net/qq_45404035/article/details/107411688">【三层架构】</a>可以看看
+            </li>
+            <li>说明: <a href="https://zhuanlan.zhihu.com/p/446588282">【领域模型命名规范】</a>可以看看</li>
+            <li>说明: <a
+                    href="https://blog.csdn.net/qq_42549792/article/details/100128293">【MyBatis使用MBG逆向生成代码】</a>可以看看
+            </li>
+            <li>说明: <a
+                    href="https://blog.csdn.net/weixin_57117457/article/details/119918517">【IDEA逆向生成代码】</a>数据库驱动可以从阿里云仓库下载
+            </li>
+            <li>说明: <a
+                    href="https://blog.csdn.net/qlzw1990/article/details/116996422">【MP使用LambdaQueryWrapper】</a>了解
+            </li>
+        </ul>
+    </div>
+    <br>
+    <div class="hide-pa"><span class="large">【派森相关】</span>
+        <ul class="hide">
+            <li>软件说: <a href="https://zhuanlan.zhihu.com/p/33105153">【Jupyter使用说明】,</a>很详细，以及<a
+                    href="https://blog.csdn.net/fengyeer20120/article/details/109483362">更改默认文件夹</a></li>
+            <li>软件说: <a
+                    href="https://blog.csdn.net/CSDN_Lang/article/details/105599117">【代码自动补全插件】</a>(在jupyter的new终端下载)
+            </li>
+            <li>软件说: <a
+                    href="https://blog.csdn.net/m0_52304861/article/details/123561307">【Anaconda在pycharm中使用】</a>还有<a
+                    href="https://blog.csdn.net/huangjiaaaaa/article/details/115704241">【正确的删除conda虚拟环境】</a>
+            </li>
+            <li>软件说: <a href="https://blog.csdn.net/weixin_36411839/article/details/82284527">【pycharm】中文教程</a>
+            <li>说明: <a href="https://www.cnblogs.com/LXP-Never/p/11361393.html">【python爬虫参数模块教程】</a></li>
+            <li>深度学习的框架: <a href="https://tensorflow.google.cn/learn">【tensorflow的官网】</a></li>
+            <li>
+                <hr>
+            </li>
+            <li>py相关资源: <a
+                    href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/?C=M&O=A">【Anaconda清华镜像】</a>没有用，后面是教程<a
+                    href="https://blog.csdn.net/jialong_chen/article/details/121485308">【Anaconda下载教程】,</a>
+            </li>
+            <li>py相关资源: <a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/">【python镜像站】,</a>比较靠谱</li>
+            <li>py相关资源: <a
+                    href="https://pypi.tuna.tsinghua.edu.cn/simple/">【python清华镜像站】,</a>跟上面那个Anaconda出于同源，也许会有兼容
+            </li>
+            <li>py相关资源: <a href="https://www.csie.ntu.edu.tw/~cjlin/libsvm/">【lib_svm】</a>各个编程语言都有
+            </li>
+        </ul>
+    </div>
+    <br>
+    <div class="hide-pa"><span class="large">【办公软件】</span>
+        <ul class="hide">
+            <li>说明: <a href="https://markdown.com.cn/basic-syntax/emphasis.html">【markdown官方基本语法】</a>还有更加丰富的<a
+                    href="https://shd101wyy.github.io/markdown-preview-enhanced/#/zh-cn/markdown-basics?id=%e7%bc%a9%e7%95%a5">【写文小助手】</a>
+            </li>
+            <li>说明: <a href="https://zhuanlan.zhihu.com/p/353912445">【IDEA快捷键大全】</a>
+            <li>版本控制: <a href="https://git-scm.com/">【Git官网】,</a>版本控制系统，及<a
+                    href="https://registry.npmmirror.com/binary.html?path=git-for-windows/">其镜像</a> 还有<a
+                    href="https://www.runoob.com/manual/git-guide/">说明书</a></li>
+            <li>IDE破解: <a href="https://www.jb51.net/article/197138.htm">【IntelliJ IDEA破解教程】</a>这个仅做参考，主要是<a
+                    href="https://jetbra.in/5d84466e31722979266057664941a71893322460">这个破解包的官网</a>
+            </li>
+            <li>
+                <hr>
+            </li>
+            <li>笔记所用: <a href="https://yxmiaoyu.lanzouo.com/il403xa5dpg">【Typ-ora】</a>，编辑markdown,密码windows</li>
+            <li>测试工具: <a href="https://www.postman.com/downloads/">【postMan下载】</a>一个模拟前端发送请求的软件</li>
+            <li>IDE: <a href="https://www.jetbrains.com/idea/download/other.html">【idea下载】</a>编辑爪哇所需</li>
+            <li>IDE: <a href="https://www.jetbrains.com/webstorm/download/other.html">【webstorm下载】</a>编辑前端所用
+            </li>
+            <li>文本查看: <a href="https://www.sublimetext.com/">【sublime下载】,</a>查看各种文件所用，以及配置教程<a
+                    href="https://www.cnblogs.com/Janspiry/p/10809443.html">【sublime配置java启动】</a>第二种方法
+            </li>
+        </ul>
+    </div>
+    <br>
+    <div class="hide-pa"><span class="large">【其它软件】</span>
+        <ul class="hide">
+            <li>任务管理器快捷键: Shift+Ctrl+Esc</li>
+            <li>说明: <a href="https://blog.csdn.net/layonly/article/details/119873817">【mysql常用命令】</a>
+                <button class="myButton" onclick="mysqlCommon()">补充命令
+                </button>
+            </li>
+            <li>说明: <a href="https://www.webyang.net/Html/web/article_378.html">【Navicat破解说明】</a>也许会用上
+            </li>
+            <li>说明: <a href="https://t.zoukankan.com/SunShineYPH-p-2285570.html">【BAT命令说明书】</a>用来做脚本
+            </li>
+            <li>软件说: <a href="https://blog.csdn.net/weixin_44893902/article/details/123087435">【Redis安装说明】</a>
+            </li>
+            <li>软件说: <a href="https://www.redis.net.cn/">【redis中文网】</a>，里面有<a
+                    href="https://www.redis.net.cn/tutorial/3508.html">中文教程</a></li>
+            <li>
+                <hr>
+            </li>
+            <li>数据库:<a href="https://redis.io/">【redis官网】</a>，以及<a
+                    href="https://github.com/tporadowski/redis/releases">下载地址</a></li>
+            <li>软件: <a href="https://natapp.cn/">【nat-app】</a>内网穿透</li>
+            <li>软件: <a href="https://www.apipost.cn/">【apiPost下载】</a>更强的postMan</li>
+            <li>软件: <a href="https://www.graalvm.org/">【graalvm下载】</a>据说可以运行主流语言，并变成机器码</li>
+        </ul>
+    </div>
+</div>
+<!--第二分类-->
+<div class="MyNoneDiv" style="display: none">
+    <div class="hide-pa"><span class="large">【Vue参考】</span>
+        <ul class="hide">
+            <li>前端: <a href="https://cn.vuejs.org/">【Vue官网】</a>前端简化dom的框架</li>
+            <li>这是: <a href="https://router.vuejs.org/zh/">【Vue路由】</a></li>
+            <li>前端: <a href="https://nodejs.org/zh-cn/">【Node.js官网】</a>服务端js运行环境</li>
+            <li>组件库: <a href="https://element.eleme.cn/#/zh-CN">【Element官网】</a>极快的搭建网站ui,基于vue2</li>
+            <li>组件库: <a href="https://element-plus.gitee.io/zh-CN/">【ElementPlus官网】</a>UI组件库,基于vue3</li>
+            <li>组件库: <a href="https://www.iviewui.com/">【iView】</a>基于vue，类似Element</li>
+            <li>组件库: <a href="https://qiankun.umijs.org/zh/guide/tutorial#vue">【qian-kun组件库】</a>微前端框架</li>
+            <li>组件库: <a href="https://antdv.com/docs/vue/introduce-cn/">【Ant组件库】</a>Vue版</li>
+            <li>这是: <a href="https://v2.vuepress.vuejs.org/zh/guide/getting-started.html">【VuePress】</a>定制博客</li>
+            <li>这是: <a href="https://v2.vuepress.vuejs.org/zh/reference/config.html">【VuePress的配置参考】</a></li>
+            <li>这是: <a href="https://juejin.cn/post/7139524058713964581#heading-12">【博客搭建教程】</a></li>
+        </ul>
+    </div>
+    <br>
+    <div class="hide-pa"><span class="large">【前端知识】</span>
+        <ul class="hide">
+            <li>资源: <a href="https://pan.baidu.com/s/1BM_OKMXXAGxMNqaBN_7tRg">【尚硅谷前端资源】</a>，提取码：af-yt</li>
+            <li>说明: <a href="https://tools.jb51.net/table/http_status_code">【网页状态码大全】</a></li>
+            <li>说明: <a href="https://blog.csdn.net/qq_41153943/article/details/104734054">【本地端口被占用解决方法】</a>
+            </li>
+            <li>说明: <a href="https://www.ujiuye.com/wenda/2021/70924.html">【VsCode快捷键】</a></li>
+            <li>
+                <hr>
+            </li>
+            <li>学习: <a href="https://www.w3school.com.cn/js/index.asp">【JS学习手册】</a>还有其它前端技术</li>
+            <li>学习: <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS">【MDN】</a>前端学习网站</li>
+            <li>补充: <a href="https://blog.csdn.net/qq_39643110/article/details/88682116">【JS简写方式】</a>可以加快入门
+            </li>
+            <li>补充: <a href="https://segmentfault.com/a/1190000039272641">【ES新特性】</a>熟悉ES2021即可</li>
+            <li>补充: <a href="https://www.w3school.com.cn/js/js_ajax_intro.asp">【AjAx】来自w3school</a>异步web技术
+            </li>
+            <li><strong class="knock" onclick="crossOrigin()">浏览器跨域之法</strong></li>
+            <li>学习: <a href="https://24kcs.github.io/vue3_study/">【Vue3+TS上手】</a>快速入门</li>
+            <li>学习: <a href="https://ts.yayujs.com/reference/UtilityTypes.html">【别人的TS教程】</a>新的知识</li>
+            <li>参考: <a href="https://webpack.docschina.org/configuration/output/">【webpack中文】</a>参考所用</li>
+            <li>参考: <a href="https://webpack.js.org/configuration/mode/">【webpack英文】</a>留用参考</li>
+        </ul>
+    </div>
+    <br>
+    <div class="hide-pa"><span class="large">【传统前端】</span>
+        <ul class="hide">
+            <li>前端: <a href="https://www.axios-http.cn/docs/intro">【Axios官网】</a>AjAx升级版，<a
+                    href="https://github.com/axios/axios/blob/v1.x/dist/axios.min.js">在github下载</a></li>
+            <li>传统前端: <a href="https://jquery.com/">【JQuery官网】</a>据说简化了js的document操作</li>
+            <li>传统前端: <a href="https://www.bootcss.com/">【Bootstrap官网】</a>响应式的<a
+                    href="https://www.bootstrap.cn/doc/read/144.html">前端组件库</a>，以及<a
+                    href="https://www.bootstrap.cn/doc/read/194.html">入门说明书</a></li>
+            <li>模板: <a href="http://www.bootstrapmb.com/">【Bootstrap模板】</a>里面有各种网页模板</li>
+            <li>玩具: <a href="https://www.bootcss.com/p/layoutit/">【Bootstrap可视化布局】</a>玩具罢了</li>
+        </ul>
+    </div>
+    <br>
+    <div class="hide-pa"><span class="large">【小程序】</span>
+        <ul class="hide">
+            <li>小程序申请: <a href="https://mp.weixin.qq.com">【小程序开发】</a>appid亦在之中</li>
+            <li>小程序说明: <a href="https://developers.weixin.qq.com/miniprogram/dev/reference/">【小程序文档】</a>参考之用
+            </li>
+            <li>开发工具: <a
+                    href="https://developers.weixin.qq.com/miniprogram/dev/devtools/stable.html">【微信开发工具】</a>
+            </li>
+            <li>开发工具: <a href="https://www.dcloud.io/hbuilderx.html">【HBuilderX】</a>开发工具，优先markdown，vue</li>
+            <li>小程序: <a href="https://vant-contrib.gitee.io/vant-weapp/0.x/#/intro">【van-t】</a>小程序组件库</li>
+            <li>小程序: <a href="https://uniapp.dcloud.net.cn/">【uni-app】</a>基于vue的小程序</li>
+            <li>
+                <hr>
+            </li>
+            <li>玩具: <a href="https://cloud.tencent.com/product/weda">【微搭】</a>小程序低代码</li>
+            <li>玩具: <a href="https://www.functorz.com/">【zion】</a>小程序/网页低代码</li>
+        </ul>
+    </div>
+</div>
+<!--第三分类-->
+<div class="MyNoneDiv" style="display: none">
+    <div class="hide-pa"><span class="large">【设计资源】</span>
+        <ul class="hide">
+            <li>这是: <a href="https://icons.bootcss.com/">【Bootstrap图标库】</a>svg代码优于阿里，但每次翻半天</li>
+            <li>这是: <a href="https://www.iconfont.cn/">【阿里图标大全】</a>
+                <button class="myButton" onclick="getCopy(this)" data-text="K54IFfx-gN9Na8A==">复制账号</button>
+            </li>
+            <li>这是: <a href="https://mycolor.space/">【色彩搭配】</a>输入一种颜色，生成相关的搭配颜色</li>
+            <li>这是: <a href="https://getwaves.io/">【造浪】</a>制作一个波浪的svg图</li>
+            <li>这是: <a href="https://www.400ys.com/yinxiao/youxi/">【400有声】</a>找游戏音效非常方便</li>
+        </ul>
+    </div>
+    <br>
+    <div class="hide-pa"><span class="large">【云宫传讯】</span>
+        <ul class="hide">
+            <li>邮箱: <a href="https://mail.qq.com/">【登录QQ邮箱】</a></li>
+            <li>邮箱: <a href="https://mail.163.com/">【网易邮箱】</a>
+                <button class="myButton" onclick="getCopy(this)" data-text="FZYeJug0YNNb">复制账号</button>
+                密码游戏AZ
+            </li>
+            <li>邮箱: <a href="https://mail.sina.com.cn/">【新浪邮箱】</a>
+                <button class="myButton" onclick="getCopy(this)"
+                        data-text="jkPWuhKzP4oSnk-ghAVlGTnc9VYuVl-bi5xf/VJD1uRnJvCfk3TlWOp76i6vSwf/4=">账号密码
+                </button>
+            </li>
+            <li><strong class="knock" onclick="passwordHide()">轻微的破绽</strong></li>
+            <li>浏览器: <a
+                    href="https://astian.org/midori-browser-desktop/download-midori-browser-desktop/">【midori浏览器】</a>占用运行内存较少
+            </li>
+            <li>浏览器: <a href="https://www.opera.com/zh-cn">【opera浏览器】</a>据说自带VPN</li>
+            <li>VPN: <a href="https://ikuuu.eu/">【iKu-uu】</a>VPN，要会员，据说很好用</li>
+            <li>翻墙: <a href="https://ip.tool.chinaz.com/github.global.ssl.fastly.net">【IP查询】</a>用于修改HOST文件
+            </li>
+        </ul>
+    </div>
+    <br>
+    <div class="hide-pa"><span class="large">【毕业论文】</span>
+        <ul class="hide">
+            <li>画图: <a href="https://www.processon.com">【ProcessOn】</a>方便的画图网站</li>
+            <li>学校: <a href="https://co2.cnki.net/Login.html?dp=xhu">【西华知网】</a>毕业设计,
+                <button class="myButton" onclick="getCopy(this)" data-text="Hp4YKvw3Y9Fa8AE=">复制密码</button>
+            </li>
+            <li>PPT: <a href="https://s.gd-share.cn/4eXM">【稿定设计】</a>要登录，要会员</li>
+            <li>查重: <a href="https://www.paperyy.com/">【PaperYy】</a>免费查查</li>
+            <li><strong class="knock">轻微的破绽</strong></li>
+            <li>文献: <a href="https://xueshu.baidu.com/">【百度学术】</a>查找参考文献，但要去查询的来源引用</li>
+            <li>文献: <a href="https://www.cnki.net/">【中国知网】</a>
+                <button class="myButton" onclick="getCopy(this)" data-text="VMV-DPPNvO6oZik0q">复制密码</button>
+            </li>
+            <li>文献: <a href="http://www.ucdrs.superlib.net/">【全国图书馆】</a>免费下论文，账号与密码
+                <button class="myButton" onclick="getCopy(this)" data-text="CpYePPh2DZcd-rg==">点击复制</button>
+            </li>
+            <li>文献: <a href="https://www.researchgate.net/publication">【外文文献搜索】</a>所幸是免费下载</li>
+            <li>参考: <a href="https://max.book118.com/html/2021/0427/7001061000003121.shtm">【宠物医院管理系统】</a>参考的论文
+            </li>
+            <li><strong class="knock">轻微的破绽</strong></li>
+            <li>内容: <a href="https://blog.csdn.net/songyanfei1205/article/details/117509636">【MySQL查询表设计】</a>论文表设计部分，以及<a
+                    href="https://www.cnblogs.com/jsfh/p/13879822.html">【补充】</a></li>
+            <li>课题: <a href="http://www.tablego.cn/">【tableGo】</a>其它人的课题，代码生成器</li>
+            <li>引用: <a href="https://www.zhihu.com/question/457765989">【网站的引用方式】</a>修改日期请百度引用的网站
+            </li>
+            <li>引用: <a href="https://zhuanlan.zhihu.com/p/370101285">【文献的引用方式】</a>非常全面</li>
+        </ul>
+    </div>
+    <br>
+    <div class="hide-pa"><span class="large">【瓜皮学校】</span>
+        <ul class="hide">
+            <li>学信网: <a href="https://my.chsi.com.cn/archive/index.jsp">【学信网档案】</a>密码：特殊字符与大写字母</li>
+            <li>学校: <a href="https://jy.xhu.edu.cn">【西华就业】</a>001</li>
+            <li>学校: <a href="https://xhjwc.xhu.edu.cn/">【教务处】</a>卡的批爆</li>
+            <li>学校: <a href="https://www.scxszz.cn/pros/identity/indexgx.action">【资助系统登录】</a>@</li>
+            <li>学校路由器: <a href="http://192.168.0.1/index.html">【路由器设置】</a>和<a
+                    href="http://202.115.144.52:8080/selfservice/">【校园网自助系统】</a>和<a
+                    href="http://202.115.144.51/">【校园上网认证】</a></li>
+            <li>
+                <hr>
+            </li>
+            <li>这是: <a
+                    href="https://passport2.chaoxing.com/login?fid=&newversion=true&refer=http%3A%2F%2Fi.chaoxing.com">【学习堵】</a>01
+            </li>
+            <li>这是: <a href="https://cet.neea.edu.cn/html1/folder/16113/1586-1.htm">【四级笔试报名】,
+            </a>还有它的官网<a href="https://cet-bm.neea.edu.cn/#">【四六级报名官网】</a></li>
+            <li>二级: <a
+                    href="https://passport.neea.edu.cn/NCRELogin?ReturnUrl=https://ncre-bm.neea.edu.cn/Home/VerifyPassport/?LoginType=0|51&Safe=1">【计算机二级报名】</a>
+                每年有两次
+            </li>
+            <li>这是: <a href="https://www.dotcpp.com/course/50">【C++入门教程】,</a>二级考试时用过</li>
+            <li>二级: <a
+                    href="https://www.dotcpp.com/exam/?tag=%E4%BA%8C%E7%BA%A7C%E8%AF%AD%E8%A8%80">【C语言考试卷子】,</a>账号
+                <button class="myButton" onclick="getCopy(this)" data-text="FZYeO/ltIJc=">点击复制</button>
+            </li>
+            <li>二级: <a href="https://www.eduexam.cn/ncre/">【未来教育下载】</a>要激活码</li>
+        </ul>
+    </div>
+    <br>
+    <div class="hide-pa"><span class="large">【学校课程】</span>
+        <ul class="hide">
+            <li>软件说: <a href="https://blog.csdn.net/qq_42756195/article/details/111300834">【RStudio文件设置】</a>
+            </li>
+            <li>课程: <a href="https://www.r-project.org/">【R语言下载地址】</a></li>
+            <li>课程: <a href="https://www.tup.com.cn/upload/books/kj/054687-01.rar ">【数据结构与算法（C++版）】</a>解压密码：101410
+            </li>
+            <li>课程: <a href="https://www.qingline.net/login?redirect=%2Fstudent%2Fhomework">【清览题库】</a>JAVA课平时任务
+            </li>
+            <li>课程: <a href="https://pan.baidu.com/s/11zg3AF_AjFph5xdC8W3PFA">【机器学习-周志华PPT】</a>百度云盘提取码：fw-zs
+            </li>
+            <li>课程: <a href="https://book.tipdm.org/jc/213">【大数据分析课程(第一版)】</a>
+                <button class="myButton" onclick="getCopy(this)" data-text="Fo4EN/JqYtNb">复制密码</button>
+            </li>
+            <li>课程: <a href="https://www.broadview.com.cn/book/5262">【深度学习之美】</a>要登录</li>
+        </ul>
+    </div>
+</div>
+<!--第四分类-->
+<div class="MyNoneDiv" style="display: none">
+    <div class="hide-pa"><a href="https://fanyi.baidu.com/translate"
+                            class="a-tit">【在线工具】</a>
+        <ul class="hide">
+            <li>这是: <a href="https://fanyi.baidu.com/translate">【百度翻译】</a>翻译所用</li>
+            <li>这是: <a href="https://tool.browser.qq.com/">【帮小忙】</a>QQ浏览器在线工具</li>
+            <li>这是: <a href="https://c.runoob.com/front-end/59/">【图片转base64】</a>菜鸟工具
+            </li>
+            <li>这是: <a href="https://tool.geekapp.cn/url.php">【URL在线转编码】</a>用于svg转码</li>
+            <li>这是: <a href="https://www.aconvert.com/cn/image/">【图片在线转换】</a>用于转换ico</li>
+            <li>这是: <a href="https://www.html22.com/zh/">【百度文库转化器】,</a>用来白嫖</li>
+            <li>这是: <a href="https://link.hhtjim.com/">【音乐外链转换器】,</a>用来白嫖</li>
+            <li>这是: <a href="https://www.atoolbox.net/Tool.php?Id=912">【playfair密码】,</a>一个简单的加密</li>
+            <li>这是: <a href="https://toolwa.com/github/">【github加速下载】,</a>大文件加速下载</li>
+        </ul>
+    </div>
+    <br>
+    <div class="hide-pa"><a href="https://music.163.com/#/playlist?id=916951800"
+                            class="a-tit">【影音娱乐】</a>
+        <ul class="hide">
+            <li>这是: <a href="https://www.549.tv/#term-28">【影视森林】</a>白嫖电影</li>
+            <li>这是: <a href="https://www.yhdm1.net/vodplay/119776-3-1.html">【樱花动漫】</a>看动漫吧</li>
+            <li>这是: <a href="https://www.fcdm123.com/dm/2959.html">【风车动漫-HelloWorld】</a>www</li>
+            <li>这是: <a href="https://www.bilibili.com/">【B站】</a>不能用来看动漫，因为删减的太过分了</li>
+            <li>这是: <a href="https://music.163.com/">【网易云音乐】,</a>爬虫练习用</li>
+            <li>这是: <a href="https://tonzhon.com/">【铜钟】</a>一个找音乐的网站，集合了好多平台的资源</li>
+            <li>推歌: <a href="https://www.musicenc.com/article/785945.html">【冬天的游击队员】</a>我最喜欢的歌，强烈推荐！
+            </li>
+        </ul>
+    </div>
+    <br>
+    <div class="hide-pa"><span class="large">【有趣网站】</span>
+        <ul class="hide">
+            <li>这是: <a href="https://mixjade.github.io">【本人博客】</a>我亲手搭建</li>
+            <li>这是: <a href="https://ywyj.cn/">【一网一匠】</a>某人所收集的各种网站</li>
+            <li>这是: <a href="https://dimtown.com/">【次元小镇】</a>哎嘿嘿嘿</li>
+            <li>这是: <a href="https://pic.netbian.com/">【一个下载壁纸的网站】</a></li>
+            <li>这是: <a href="https://aliceincradle.org/zh-hans/game/">【爱丽丝的摇篮】</a>÷↑</li>
+            <li><strong class="knock">轻微的破绽</strong></li>
+            <li>游戏: <a href="https://cultist.huijiwiki.com/wiki">【密教模拟器wiki】</a>游戏攻略</li>
+            <li>游戏: <a href="https://noita.wiki.gg/zh/wiki/免疫#无敌效果">【免疫 - Noita Wiki】</a>Noita的Wiki</li>
+            <li>游戏: <a href="https://bbs.3dmgame.com/forum.php">【3DM】</a>账号
+                <button class="myButton" onclick="getCopy(this)" data-text="VZMdAKwzYNJb9w9w">点击复制</button>
+            </li>
+            <li>游戏: <a href="https://store.steampowered.com/about/">【Steam】</a>，账号
+                <button class="myButton" onclick="getCopy(this)" data-text="UsZIa688Y9pc">点击复制</button>
+                ，qq密码去后四
+            </li>
+            <li>游戏: <a href="https://uu.163.com/">【UU加速器】</a></li>
+        </ul>
+    </div>
+    <br>
+    <div class="hide-pa"><span class="large">【无用芝士】</span>
+        <ul class="hide">
+            <li>系统: <a
+                    href="https://www.initroot.com/tutorial/linux/install/linuxinstallmint.html">【Linux安装教程】</a>阿门
+            </li>
+            <li>系统: <a
+                    href="https://www.dell.com/support/manuals/zh-cn/inspiron-14-5498-laptop/inspiron-5498-service-manual/%E5%8D%B8%E4%B8%8B%E7%94%B5%E6%B1%A0?guid=guid-98de88f9-b9a1-46de-a72a-48b4da118610&lang=zh-cn">【DELL拆卸教程】</a>认真看，特别是电池部分
+            </li>
+            <li>这是: <a href="https://guanjia.qq.com/web_clinic/s5/366.html">【F1到F12的用法】</a>没啥用</li>
+            <li>这是: <a href="https://www.reneelab.com.cn/cannot-delete-folder-in-use.html">【取消文件夹占用】</a>意义重大
+            </li>
+            <li>附: 调整Word文档周围的空白可以去页面布局里面设置</li>
+            <li>这是:<a href="https://blog.csdn.net/m0_62819329?type=edu">【CS-DN主页】</a></li>
+            <li>这是: <a href="https://cn.bing.com/?FORM=Z9FD1">【必应】</a></li>
+            <li>这是: <a href="https://www.gsxt.gov.cn/">【国家企业信用公示系统】</a></li>
+            <li>这是: <a href="https://8abox.art/334242">【ChatGPT】</a>一个镜像</li>
+        </ul>
+    </div>
+</div>
+</body>
+<script>
+    "use strict";
+    (() => {
+        const body = document.getElementsByTagName('body')[0];// 卡哇伊的弹出文字
+        const textArr = ["乐观", "❤", "积极", "向上", "自由", "正能量", "(*^▽^*)", "元气满满", "开心", "快乐", "善良", "可爱", "|ू･ω･` )", "卡哇伊", "(ﾟ▽ﾟ*) ", "ヽ(￣▽￣)ﾉ"];
+        document.addEventListener('click', (ev) => {
+            const baseX = ev.pageX;
+            const baseY = ev.pageY;
+            const new_span = document.createElement('span');
+            new_span.innerText = textArr[~~(Math.random() * textArr.length)]
+            new_span.style.position = 'fixed';
+            new_span.style.left = baseX - 10 + 'px';
+            new_span.style.top = baseY + 'px';
+            new_span.style.color = 'RGB(255,0,0)';
+            new_span.style.userSelect = 'none';
+            body.appendChild(new_span);
+            const timer = window.setInterval(() => {
+                new_span.style.top = parseInt(window.getComputedStyle(new_span, null)['top']) - 2 + 'px';
+                new_span.style.opacity = String(window.getComputedStyle(new_span, null)['opacity'] - 0.02);
+            }, 30);
+            window.setTimeout(() => {
+                window.clearInterval(timer);
+                body.removeChild(new_span);
+            }, 1000);
+        }, false);
+    })();
+    // 重写警告框
+    window.alert = (str) => {
+        document.getElementById("content").innerText = str;
+        document.getElementById("alertBox").style.display = "block";
+    };//隐藏警告框
+    function noAlert() {
+        document.getElementById("alertBox").style.display = "none";
+    }
+
+    (() => {
+        let now_index = 0;//切换显示
+        const noneDiv = document.getElementsByClassName("MyNoneDiv");
+        const myUU = document.getElementById("frequently").children
+        for (let i = 0; i < myUU.length; i++) {
+            myUU.item(i).onclick = () => {
+                // 隐藏现在的区域与变化按钮
+                noneDiv[now_index].style.display = 'none';
+                myUU.item(now_index).style.color = 'rgb(17, 67, 161)';
+                // 展示另外一个
+                noneDiv[i].style.display = 'block';
+                myUU.item(i).style.color = '#1c3c31';
+                now_index = i;
+            }
+        }
+    })();
+
+    function myFunction() {
+        alert("这是一个单纯的收藏夹，\n找到有意思的网站记得添加啊");
+    }//汤姆猫介绍
+    function tomcatIntroduce() {
+        alert("本地端口为:\nhttp://localhost:8080/\n中文乱码解决方案：\n打开conf/logging.properties文件\n修改java.util.logging.ConsoleHandler.encoding = GBK");
+    }// mysql介绍
+    function mysqlCommon() {
+        alert("【用正则表达式删注释: 查找内容: [ \\t]*//[^\\n]*\\n 替换内容:\\n】\n【Mysql命令笔记】\nmysql -h localhost -u root -p root \n删除mysql中重复数据:\n 【delete a from students a,students b where a.学号 = b.学号 and a.id > b.id;】");
+    }// 浏览器跨域之法
+    function crossOrigin() {
+        alert("新建一个浏览器的快捷方式，\n在目标栏的后面加上:\n`--disable-web-security --user-data-dir=C:\\kua-yu`\n记得在前面空一格")
+    }// 浏览器跨域之法
+    function aliMaven() {
+        alert("粘贴完阿里云的mirror配置之后，\n在setting.xml文件中，\n除了阿里云的mirror其它全部注释掉")
+    }// 隐藏的密码
+    function passwordHide() {
+        alert("563134颠倒之舞")
+    }
+
+    // 点击复制
+    function getCopy(e) {
+        const text = e.getAttribute("data-text")
+        navigator.clipboard.writeText(text)
+    }
+</script>
+
+</html>
