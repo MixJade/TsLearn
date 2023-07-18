@@ -27,10 +27,10 @@
 
 <script setup lang="ts">
 import {getAge} from "@/utils/TimeUtil";
-import {FosterCardVO} from "@/modal/VO/HomeVO";
+import {FosterCardDto} from "@/modal/DO/FosterCardDto";
 // 接收参数：宠物卡片
 defineProps<{
-  readonly cardList: FosterCardVO[]
+  readonly cardList: FosterCardDto[]
 }>()
 </script>
 

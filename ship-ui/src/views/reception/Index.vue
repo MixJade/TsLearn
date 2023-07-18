@@ -149,21 +149,15 @@
 <script lang="ts" setup>
 import {User, Phone, DataBoard, EditPen, SwitchButton, Tickets, Football} from "@element-plus/icons-vue"
 import {reactive, ref} from "vue";
-import {
-  DoctorCardType,
-  exampleDoctor, exampleFoster,
-  exampleNotice,
-  FosterCardVO,
-  Lun,
-  Notice,
-  UserCard
-} from "@/modal/VO/HomeVO";
 import {Pet, examplePetFour} from "@/modal/entiy/Pet";
 import {Page} from "@/modal/DO/Page";
 import PetCard from "@/components/PetCard.vue";
 import DoctorCard from "@/components/DoctorCard.vue";
 import FosterCard from "@/components/FosterCard.vue";
 import router from "@/router";
+import {DoctorDto, exampleDoctor} from "@/modal/DO/DoctorDto";
+import {FosterCardDto, exampleFoster} from "@/modal/DO/FosterCardDto";
+import {NoticeDto, exampleNotice} from "@/modal/DO/NoticeDto";
 // 导航栏
 const handleSelect = (key: string, keyPath: string[]): void => {
   if (key === "logout") {
@@ -176,7 +170,13 @@ const handleSelect = (key: string, keyPath: string[]): void => {
   // 将数组的分割逗号换成空白之后,转为路径跳转
   router.push(keyPath.join('').toString())
 }
-// 轮播图
+
+// 主页轮播图
+interface Lun {
+  image: string;
+  tit: string;
+  text: string;
+}// 轮播图
 const lun: Lun[] = [
   {
     image: "/picture/lun-1.jpg",
@@ -196,17 +196,24 @@ const lun: Lun[] = [
 ]
 
 // 公告栏
-const notices: Notice[] = reactive(exampleNotice())
+const notices: NoticeDto[] = reactive(exampleNotice())
 // 公告弹出框
 const showDialog = ref(false);
 const noticeDialog = reactive({noticeTitle: "标题", textNotice: "文本内容"})
-const openDialog = (notice: Notice) => {
+const openDialog = (notice: NoticeDto) => {
   noticeDialog.noticeTitle = notice.noticeTitle
   noticeDialog.textNotice = notice.textNotice
   showDialog.value = true
 }
 
-// 用户卡片的配置信息
+// 常量：用户卡片
+interface UserCard {
+  tit: string;
+  describe: string;
+  btnType: "primary" | "success" | "info";
+  btnText: string;
+  routerPath: string;
+}// 用户卡片的配置信息
 const userCard: UserCard[] = [
   {
     "tit": "挂号信息",
@@ -232,9 +239,9 @@ const userCard: UserCard[] = [
 // 宠物的卡片信息
 const petCardTxt: Page<Pet> = reactive(examplePetFour())
 // 医生的卡片信息
-const doctorCardTxt: Page<DoctorCardType> = reactive(exampleDoctor())
+const doctorCardTxt: Page<DoctorDto> = reactive(exampleDoctor())
 // 寄养宠物的卡片信息
-const fosterCardTxt: Page<FosterCardVO> = reactive(exampleFoster())
+const fosterCardTxt: Page<FosterCardDto> = reactive(exampleFoster())
 
 // 退出登录
 const logout = (): void => {

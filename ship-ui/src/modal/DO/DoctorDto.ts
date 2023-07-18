@@ -161,3 +161,164 @@ export const exampleDoctorBack = (): Page<DoctorDto> => {
         "total": 7
     }
 }
+
+// 样例：医生卡片
+export const exampleDoctor = (): Page<DoctorDto> => {
+    return {
+        "records": [
+            {
+                "doctorId": 1,
+                "departmentId": 1,
+                "doctorCode": "32312221",
+                "doctorName": "童德统",
+                "doctorGender": true,
+                "doctorAge": "1990-10-10",
+                "doctorPhoto": "doctor-1.jpg",
+                "doctorTel": "1114185977@qq.com",
+                "doctorJob": "副院长",
+                "doctorInfo": "国内著名医学专家，擅长绝育",
+                "departmentName": "犬猫科"
+            },
+            {
+                "doctorId": 2,
+                "departmentId": 4,
+                "doctorCode": "32301062",
+                "doctorName": "爱丽丝",
+                "doctorGender": false,
+                "doctorAge": "2003-02-01",
+                "doctorPhoto": "doctor-2.jpg",
+                "doctorTel": "mix_pet_doctor@sina.com",
+                "doctorJob": "麻醉科主任",
+                "doctorInfo": "擅长麻醉",
+                "departmentName": "美容室"
+            },
+            {
+                "doctorId": 4,
+                "departmentId": 8,
+                "doctorCode": "32301063",
+                "doctorName": "汤姆",
+                "doctorGender": true,
+                "doctorAge": "2000-01-11",
+                "doctorPhoto": "doctor-3.jpg",
+                "doctorTel": "1114185977@qq.com",
+                "doctorJob": "医生",
+                "doctorInfo": "擅长x光拍片",
+                "departmentName": "中兽科"
+            },
+            {
+                "doctorId": 5,
+                "departmentId": 4,
+                "doctorCode": "32301064",
+                "doctorName": "张大嘴",
+                "doctorGender": false,
+                "doctorAge": "2002-01-05",
+                "doctorPhoto": "doctor-4.jpg",
+                "doctorTel": "mix_pet_doctor@sina.com",
+                "doctorJob": "医生",
+                "doctorInfo": "著名宠物医美专家",
+                "departmentName": "美容室"
+            }
+        ],
+        "total": 7
+    }
+}
+
+// 样例2：医生全部卡片
+export const exampleDoctorSee = (): Page<DoctorDto> => {
+    return {
+        "records": [
+            {
+                "doctorId": 1,
+                "departmentId": 1,
+                "doctorCode": "32312221",
+                "doctorName": "童德统",
+                "doctorGender": true,
+                "doctorAge": "1990-10-10",
+                "doctorPhoto": "doctor-1.jpg",
+                "doctorTel": "1114185977@qq.com",
+                "doctorJob": "副院长",
+                "doctorInfo": "国内著名医学专家，擅长绝育",
+                "departmentName": "犬猫科"
+            },
+            {
+                "doctorId": 2,
+                "departmentId": 4,
+                "doctorCode": "32301062",
+                "doctorName": "爱丽丝",
+                "doctorGender": false,
+                "doctorAge": "2003-02-01",
+                "doctorPhoto": "doctor-2.jpg",
+                "doctorTel": "mix_pet_doctor@sina.com",
+                "doctorJob": "麻醉科主任",
+                "doctorInfo": "擅长麻醉",
+                "departmentName": "美容室"
+            },
+            {
+                "doctorId": 4,
+                "departmentId": 8,
+                "doctorCode": "32301063",
+                "doctorName": "汤姆",
+                "doctorGender": true,
+                "doctorAge": "2000-01-11",
+                "doctorPhoto": "doctor-3.jpg",
+                "doctorTel": "1114185977@qq.com",
+                "doctorJob": "医生",
+                "doctorInfo": "擅长x光拍片",
+                "departmentName": "中兽科"
+            },
+            {
+                "doctorId": 7,
+                "departmentId": 1,
+                "doctorCode": "32312221",
+                "doctorName": "童德统",
+                "doctorGender": true,
+                "doctorAge": "1990-10-10",
+                "doctorPhoto": "doctor-1.jpg",
+                "doctorTel": "1114185977@qq.com",
+                "doctorJob": "副院长",
+                "doctorInfo": "国内著名医学专家，擅长绝育",
+                "departmentName": "犬猫科"
+            },
+            {
+                "doctorId": 8,
+                "departmentId": 4,
+                "doctorCode": "32301062",
+                "doctorName": "爱丽丝",
+                "doctorGender": false,
+                "doctorAge": "2003-02-01",
+                "doctorPhoto": "doctor-2.jpg",
+                "doctorTel": "mix_pet_doctor@sina.com",
+                "doctorJob": "麻醉科主任",
+                "doctorInfo": "擅长麻醉",
+                "departmentName": "美容室"
+            },
+            {
+                "doctorId": 9,
+                "departmentId": 8,
+                "doctorCode": "32301063",
+                "doctorName": "汤姆",
+                "doctorGender": true,
+                "doctorAge": "2000-01-11",
+                "doctorPhoto": "doctor-3.jpg",
+                "doctorTel": "1114185977@qq.com",
+                "doctorJob": "医生",
+                "doctorInfo": "擅长x光拍片",
+                "departmentName": "中兽科"
+            },
+            {
+                "doctorId": 5,
+                "departmentId": 4,
+                "doctorCode": "32301064",
+                "doctorName": "张大嘴",
+                "doctorGender": false,
+                "doctorAge": "2002-01-05",
+                "doctorPhoto": "doctor-4.jpg",
+                "doctorTel": "mix_pet_doctor@sina.com",
+                "doctorJob": "医生",
+                "doctorInfo": "著名宠物医美专家",
+                "departmentName": "美容室"
+            }
+        ],
+        "total": 7
+    }
+}
