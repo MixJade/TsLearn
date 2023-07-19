@@ -4,6 +4,6 @@ import './assets/main.css'
 // 路由
 import router from './router'
 
-const app = createApp(App)
+const app: App = createApp(App)
 app.use(router)
 app.mount('#app')

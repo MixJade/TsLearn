@@ -1,9 +1,11 @@
+import type {RouteRecordRaw} from "vue-router";
+
 /**
  * 路由一的子路由
  * 父路径：/
  * 父文件：HELLO_01.vue
  */
-const test0_children = [
+const test0_children: RouteRecordRaw[] = [
     {
         path: "timer",
         component: () => import('@/views/hello1/TimerTest.vue')
