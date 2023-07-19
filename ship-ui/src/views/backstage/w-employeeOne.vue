@@ -1,5 +1,5 @@
 <template>
-  <div class="basePage">
+  <div class="one-basePage">
     <DetailTable
         role-photo="/picture/lei-jun.jpg"
         :tab-con="em"
@@ -34,12 +34,4 @@ const updatePwd = () => {
 </script>
 
 <style scoped>
-.basePage {
-  position: absolute;
-  width: 50vw;
-  left: 25vw;
-  top: 15vh;
-  background-color: whitesmoke;
-  box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.5);
-}
 </style>
