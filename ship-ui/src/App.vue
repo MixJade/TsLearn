@@ -30,6 +30,12 @@
       </el-icon>
       后台
     </el-menu-item>
+    <el-menu-item index="/doctorPage">
+      <el-icon>
+        <Avatar/>
+      </el-icon>
+      医生
+    </el-menu-item>
     <el-sub-menu index="/demo">
       <template #title>小Demo</template>
       <el-menu-item index="/demo/testScss">Scss初探</el-menu-item>
@@ -46,7 +52,7 @@
 <script setup lang="ts">
 import {useRouter} from "vue-router";
 import {ref} from "vue";
-import {UserFilled, House, Setting} from "@element-plus/icons-vue"
+import {UserFilled, House, Setting, Avatar} from "@element-plus/icons-vue"
 
 console.log(import.meta.env.VITE_BACK_URL)
 // 页面路由
