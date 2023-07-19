@@ -1,5 +1,6 @@
 <template>
   <div class="one-basePage">
+    <el-button type="primary" style="position: absolute" @click="this.$router.back()">返回</el-button>
     <DetailTable
         role-photo="/picture/doctor-ex.jpg"
         :tab-con="dc"

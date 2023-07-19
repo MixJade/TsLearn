@@ -1,48 +1,57 @@
 <template>
-  <h3>医生主页</h3>
-  <ul>
-    <li>
-      <router-link to="/doctorPage/d-appoint">挂号</router-link>
-    </li>
-    <li>
-      <router-link to="/doctorPage/d-chat">聊天</router-link>
-    </li>
-    <li>
-      <router-link to="/doctorPage/doctorOne">个人资料</router-link>
-    </li>
-  </ul>
-  <div class="circle">
-    <div class="part one">
-      <div class="con">
-        <el-button type="primary" plain round size="large" @click="this.$router.push('/doctorPage/d-chat')">
-          在线咨询
-        </el-button>
+  <el-container>
+    <el-header>
+      <el-menu
+          mode="horizontal"
+          background-color="#545c64"
+          text-color="#fff"
+          active-text-color="#ffd04b"
+          router
+      >
+        <el-menu-item index="/doctorPage/d-appoint">挂号处理</el-menu-item>
+        <el-menu-item index="/doctorPage/d-chat">在线咨询</el-menu-item>
+        <el-menu-item index="/doctorPage/doctorOne">个人资料</el-menu-item>
+      </el-menu>
+    </el-header>
+    <el-main>
+      <div class="circle">
+        <div class="part one">
+          <div class="con">
+            <el-button type="primary" plain round size="large" @click="this.$router.push('/doctorPage/d-chat')">
+              在线咨询
+            </el-button>
+          </div>
+        </div>
+        <div class="part two">
+          <div class="con">
+            <el-button type="warning" plain round size="large" @click="this.$router.push('/doctorPage/d-appoint')">
+              挂号处理
+            </el-button>
+          </div>
+        </div>
+        <div class="part three">
+          <div class="con">
+            <el-button type="danger" plain round size="large" @click="this.$router.push('/')">
+              退出登录
+            </el-button>
+          </div>
+        </div>
+        <div class="happy hover-effect">
+          <el-avatar src="/picture/doctor-ex.jpg" @click="this.$router.push('/doctorPage/doctorOne')"/>
+        </div>
       </div>
-    </div>
-    <div class="part two">
-      <div class="con">
-        <el-button type="warning" plain round size="large" @click="this.$router.push('/doctorPage/d-appoint')">
-          挂号信息
-        </el-button>
-      </div>
-    </div>
-    <div class="part three">
-      <div class="con">
-        <el-button type="danger" plain round size="large" @click="this.$router.push('/')">
-          退出登录
-        </el-button>
-      </div>
-    </div>
-    <div class="happy hover-effect">
-      <el-avatar src="/picture/doctor-ex.jpg" @click="this.$router.push('/doctorPage/doctorOne')"/>
-    </div>
-  </div>
+    </el-main>
+  </el-container>
+
 </template>
 
 <script setup lang="ts">
 </script>
 
 <style scoped lang="scss">
+.el-menu{
+  justify-content: center;
+}
 .circle {
   position: absolute;
   top: 50%;
@@ -105,6 +114,10 @@
   .three {
     background-color: #fab6b6;
     transform: rotate(180deg);
+    /*把颠倒的文字正过来*/
+    .el-button {
+      transform: rotate(180deg);
+    }
   }
 }
 </style>
