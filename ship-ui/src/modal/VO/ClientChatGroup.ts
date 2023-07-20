@@ -27,3 +27,21 @@ export const exampleClientChat = (doctorID: number): ClientChatGroup[] => {
         }
     ]
 }
+
+/**
+ * 医生信息分组
+ */
+export interface DoctorChatGroup {
+    flag: number;
+    clientId: number;
+    clientName: string;
+}
+
+export const exampleDChatGroup = (clientId: number): DoctorChatGroup[] => {
+    console.log("收到的用户ID：" + clientId)
+    return [
+        {"flag": 0, "clientId": 1, "clientName": "莹"},
+        {"flag": 1, "clientId": 2, "clientName": "撒"},
+        {"flag": 1, "clientId": 3, "clientName": "撒啊"},
+    ]
+}

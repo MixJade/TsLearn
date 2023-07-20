@@ -40,7 +40,7 @@ import {PictureRounded, Position} from "@element-plus/icons-vue"
 import PageHead from "@/components/PageHead.vue";
 import {ref} from "vue";
 import {exampleClientChat} from "@/modal/VO/ClientChatGroup";
-import {exampleMsg} from "@/modal/entiy/Msg";
+import {exampleMsg} from "@/modal/VO/MsgVo";
 import ChatCard from "@/components/ChatMain.vue";
 
 const props = defineProps<{
