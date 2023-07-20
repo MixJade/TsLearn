@@ -1,11 +1,12 @@
 <template>
   <div ref="innerRef" style="overflow: auto;height: 100%" @click="rollBottom">
     <!--信息主体-->
-    <div class="msg-card" :class="{'right-align':m.isClient}" v-for="m in msgList" :key="m.msgId">
-      <el-avatar src="/picture/lei-jun.jpg"/>
+    <div class="msg-card" :class="{'right-align':m.isMine}" v-for="m in msgList" :key="m.msgId">
+      <el-avatar v-if="m.isMine" :src="'/picture/'+m.minePhoto"/>
+      <el-avatar v-else :src="'/picture/'+m.youPhoto"/>
       <div class="msg">
-        <span>{{ m.isClient ? m.clientName : m.doctorName }}&nbsp;{{ getDisplayTime(m.createTime) }}</span>
-        <div class="msgText" :class="m.isClient?'bg-success':'bg-light'">
+        <span>{{ m.isMine ? m.mineName : m.youName }}&nbsp;{{ getDisplayTime(m.createTime) }}</span>
+        <div class="msgText" :class="m.isMine?'bg-success':'bg-light'">
           <el-image v-if="m.isImg" src="/picture/lun-3.jpg" fit="cover"/>
           <div style="font-family: serif;" v-else>
             {{ m.msgContent }}
@@ -17,12 +18,12 @@
 </template>
 
 <script setup lang="ts">
-import {Msg} from "@/modal/entiy/Msg";
+import {MsgVo} from "@/modal/VO/MsgVo";
 import {onMounted, ref} from "vue";
 import {getDisplayTime} from "@/utils/TimeUtil";
 
 defineProps<{
-  msgList: Msg[]
+  msgList: MsgVo[]
 }>()
 
 // 滚动条到底
