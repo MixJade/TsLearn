@@ -2,10 +2,9 @@
   <div ref="innerRef" style="overflow: auto;height: 100%" @click="rollBottom">
     <!--信息主体-->
     <div class="msg-card" :class="{'right-align':m.isMine}" v-for="m in msgList" :key="m.msgId">
-      <el-avatar v-if="m.isMine" :src="'/picture/'+m.minePhoto"/>
-      <el-avatar v-else :src="'/picture/'+m.youPhoto"/>
+      <el-avatar :src="'/picture/'+m.rolePhoto"/>
       <div class="msg">
-        <span>{{ m.isMine ? m.mineName : m.youName }}&nbsp;{{ getDisplayTime(m.createTime) }}</span>
+        <span>{{ m.roleName }}&nbsp;{{ getDisplayTime(m.createTime) }}</span>
         <div class="msgText" :class="m.isMine?'bg-success':'bg-light'">
           <el-image v-if="m.isImg" src="/picture/lun-3.jpg" fit="cover"/>
           <div style="font-family: serif;" v-else>
