@@ -14,6 +14,9 @@ const demo: RouteRecordRaw[] = [
     }, {
         path: "lifeTerm",
         component: () => import('@/views/demo/LifeTerm.vue')
+    },{
+        path: "strataCard",
+        component: () => import('@/views/demo/StrataCard.vue')
     },
 ]
 
