@@ -82,7 +82,7 @@ const myCardDemo: CardInfo[] = [
 /*卡片主体*/
 .strata-card {
   width: 340px;
-  height: 180px;
+  min-height: 180px;
   border: 2px solid #17a2b8;
   border-radius: 10px;
   padding-left: 5%;
