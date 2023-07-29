@@ -17,6 +17,9 @@ const demo: RouteRecordRaw[] = [
     }, {
         path: "strataCard",
         component: () => import('@/views/demo/StrataCard.vue')
+    },{
+        path: "testForm",
+        component: () => import('@/views/demo/TestForm.vue')
     },
 ]
 
