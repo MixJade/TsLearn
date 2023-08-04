@@ -43,6 +43,7 @@
       <el-menu-item index="/demo/lifeTerm">生命周期</el-menu-item>
       <el-menu-item index="/demo/strataCard">卡片布局</el-menu-item>
       <el-menu-item index="/demo/testForm">表单测试</el-menu-item>
+      <el-menu-item index="/demo/game">游戏DEMO</el-menu-item>
     </el-sub-menu>
   </el-menu>
   <router-view v-slot="{ Component }">
