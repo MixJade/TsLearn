@@ -12,6 +12,10 @@ const routes: RouteRecordRaw[] = [
         path: '/demo',
         children: [...demo],
     }, {
+        path: '/:pathMatch(.*)', // 404路由
+        name: 'not-found',
+        component: () => import('@/views/demo/Game.vue')
+    }, {
         path: '/reception',
         children: [...reception],
     }, {
