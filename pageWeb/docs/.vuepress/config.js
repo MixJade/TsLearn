@@ -37,7 +37,6 @@ export default ({
                 children: [
                     '/note/n2023/TS学习笔记.md',
                     '/note/n2023/VUE学习笔记.md',
-                    '/note/n2023/模糊查询，笔记.md',
                     '/note/n2023/公司代码学习笔记.md',
                 ]
             },],
