@@ -1,5 +1,5 @@
 <template>
-  <button>
+  <button type="button">
     <slot></slot>
   </button>
 </template>
@@ -9,20 +9,23 @@
 </script>
 
 <style lang="scss" scoped>
+$my-height: 32px;
+$my-width: 200px;
 button {
+  margin-bottom: 5px;
+  font-size: medium;
   position: relative;
   display: inline-block;
-  width: 200px;
-  height: 60px;
+  width: $my-width;
+  height: $my-height;
   color: white;
-  line-height: 60px;
+  line-height: $my-height;
   background: skyblue linear-gradient(90deg,
       #03a9f4, #f441a5, #ffeb3b, #03a9f4
   );
   background-size: 400%;
   border: white;
-  border-radius: 10px;
-  transform-style: preserve-3d;
+  border-radius: 15px;
   /* 渐变色动画 */
   @keyframes animate {
     0% {
@@ -45,7 +48,6 @@ button {
 
   /* 光影盒子，大于原盒子 */
   &:before {
-    transform: translateZ(-1px); /* Z轴方向位移-1px */
     content: "";
     position: absolute;
     left: -5px;
@@ -57,7 +59,7 @@ button {
         #03a9f4, #f441a5, #ffeb3b, #03a9f4
     );
     background-size: 400%;
-    border-radius: 10px;
+    border-radius: 15px;
     opacity: 0;
     transition: all 1s;
   }

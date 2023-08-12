@@ -39,7 +39,7 @@
     <el-sub-menu index="/demo">
       <template #title>小Demo</template>
       <el-menu-item index="/demo/testScss">Scss初探</el-menu-item>
-      <el-menu-item index="/demo/hello">Element按钮</el-menu-item>
+      <el-menu-item index="/demo/hello">流光按钮</el-menu-item>
       <el-menu-item index="/demo/lifeTerm">生命周期</el-menu-item>
       <el-menu-item index="/demo/strataCard">卡片布局</el-menu-item>
       <el-menu-item index="/demo/testForm">表单测试</el-menu-item>
