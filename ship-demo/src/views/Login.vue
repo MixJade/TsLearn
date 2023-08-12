@@ -1,51 +1,89 @@
 <template>
   <div class="login-page">
-    <!-- 定义了此图形，宽1000，高200 -->
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200" preserveAspectRatio="none">
+    <!-- 定义背景图片 -->
+    <svg preserveAspectRatio="none" viewBox="0 0 1000 200" xmlns="http://www.w3.org/2000/svg">
       <!-- 定义填充色-->
       <defs>
         <linearGradient id="Gradient" x1="0" x2="1" y1="0" y2="0">
-          <stop offset="0%" stop-color="MediumVioletRed"/>
-          <stop offset="100%" stop-color="MediumOrchid"/>
+          <stop :stop-color="backColor.begin" offset="0%"/>
+          <stop :stop-color="backColor.end" offset="100%"/>
         </linearGradient>
       </defs>
       <!-- 长方形区域，宽1000，高30，淡蓝色  -->
-      <rect width="1000" height="80" fill="url(#Gradient)"/>
+      <rect fill="url(#Gradient)" height="80" width="1000"/>
       <!-- 弧形区域，从(0,30)出发，低谷点为(500,130)，到(1000,30)结束 -->
-      <path d="M0 80 Q500 280 ,1000 80" stroke="transparent" fill="url(#Gradient)"/>
+      <path d="M0 80 Q500 280 ,1000 80" fill="url(#Gradient)" stroke="transparent"/>
     </svg>
-    <el-tabs type="border-card">
-      <el-tab-pane label="用户">
-        <LoginForm role="USER"/>
-        <el-col>
-          <el-button round type="success" @click="this.$router.push('/reception')">游客登录</el-button>
-          <el-button round type="warning">账号注册</el-button>
-          <el-button round type="danger">找回密码</el-button>
-        </el-col>
-      </el-tab-pane>
-      <el-tab-pane label="管理员">
-        <LoginForm role="ADMIN"/>
-      </el-tab-pane>
-      <el-tab-pane label="医生">
-        <LoginForm role="DOCTOR"/>
-      </el-tab-pane>
-    </el-tabs>
+    <!--登陆卡片-->
+    <!-- 用户登录 -->
+    <div :style="{ transform: pairClient }" class="mixJade">
+      <img alt="管理员入口" height="48" src="/mia.svg" width="64" @click="clientToAdmin">
+      <LoginForm role="USER"/>
+      <el-col>
+        <el-button round type="success" @click="this.$router.push('/reception')">游客登录</el-button>
+        <el-button round type="warning">账号注册</el-button>
+        <el-button round type="danger">找回密码</el-button>
+      </el-col>
+    </div>
+    <!-- 管理员登录 -->
+    <div :style="{ transform: pairAdmin }" class="mixJade">
+      <img alt="普通入口" height="48" src="/mia.svg" width="64" @click="adminToClient">
+      <LoginForm role="ADMIN"/>
+      <el-button plain round type="primary" @click="adminToDoctor">医生登录</el-button>
+    </div>
+    <!-- 医生登录 -->
+    <div :style="{ transform: pairDoctor }" class="mixJade">
+      <LoginForm role="DOCTOR"/>
+      <el-button plain round type="success" @click="doctorToAdmin">管理员登录</el-button>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import LoginForm from "@/components/LoginForm.vue";</script>
+import LoginForm from "@/components/LoginForm.vue";
+import {reactive, ref} from "vue";
+
+const pairClient = ref<string>("rotateY(0deg)")
+const pairAdmin = ref<string>("rotateY(180deg)")
+const pairDoctor = ref<string>("rotateX(180deg)")
+const backColor = reactive({
+  begin: "MediumVioletRed",
+  end: "MediumOrchid"
+})
+
+const clientToAdmin = () => {
+  pairClient.value = "rotateY(180deg)"
+  pairAdmin.value = "rotateY(0deg)";
+  backColor.begin = "ForestGreen"
+  backColor.end = "DeepSkyBlue"
+}
+
+const adminToClient = () => {
+  pairAdmin.value = "rotateY(-180deg)";
+  pairClient.value = "rotateY(0deg)"
+  backColor.begin = "MediumVioletRed"
+  backColor.end = "MediumOrchid"
+}
+
+const adminToDoctor = () => {
+  pairAdmin.value = "rotateX(180deg)"
+  pairDoctor.value = "rotateX(0deg)"
+  backColor.begin = "BlueViolet"
+  backColor.end = "CornflowerBlue"
+}
+
+const doctorToAdmin = () => {
+  pairDoctor.value = "rotateX(180deg)"
+  pairAdmin.value = "rotateX(0deg)"
+  backColor.begin = "ForestGreen"
+  backColor.end = "DeepSkyBlue"
+}
+</script>
 <style lang="scss" scoped>
 /*整个登录组件*/
 .login-page {
-  background: {
-    color: #ccc;
-    size: cover;
-    repeat: no-repeat;
-  };
   width: 98vw;
   height: 90vh;
-  position: fixed;
   /* 背景的svg */
   svg {
     position: fixed;
@@ -54,20 +92,22 @@ import LoginForm from "@/components/LoginForm.vue";</script>
   }
 }
 
-/*登录的标签栏*/
-.el-tabs {
+/* 翻转的卡片 */
+.mixJade {
   position: absolute;
-  margin-top: 5%;
+  width: 320px;
+  margin-top: 8%;
   left: 50%;
-  transform: translateX(-50%);
-
-  .el-tab-pane {
-    background-color: #cccccc;
-  }
-}
-
-.el-col {
-  padding-top: 10px;
+  margin-left: -160px;
   text-align: center;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 7px 7px 17px rgba(52, 56, 66, 0.5);
+  background-color: #FAFAFA;
+  border-radius: 5px;
+  backface-visibility: hidden;
+  transition: all 1s;
+  user-select: none;
+  padding: 10px;
 }
 </style>
