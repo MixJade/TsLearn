@@ -34,19 +34,4 @@ defineProps<{
 }>()
 </script>
 
-<style lang="scss" scoped>
-.my-pet-card {
-  display: flex;
-
-  img {
-    width: 128px;
-    height: 128px;
-  }
-
-  .my-pet-info {
-    padding-left: 10px;
-    text-align: center;
-    font-size: small;
-  }
-}
-</style>
+<style scoped src="public/css/pet-info.css"/>

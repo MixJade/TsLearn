@@ -7,7 +7,7 @@ export interface Appoint {
     doctorId: number | null;
     appointmentInfo: string;
     isSuc: boolean | null;
-    createTime: string | null;
-    updateTime: string | null;
+    createTime?: string;
+    updateTime?: string;
     isDel: string | null;
 }

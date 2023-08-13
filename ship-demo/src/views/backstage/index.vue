@@ -1,9 +1,11 @@
 <template>
   <el-container>
     <el-aside width="200px">
-      <el-avatar src="/picture/lei-jun.jpg"/>
+      <router-link to="/backstage">
+        <el-avatar src="/picture/lei-jun.jpg"/>
+      </router-link>
       <el-menu
-          :default-active="this.$route.path"
+          :default-active="$route.path"
           active-text-color="#ffd04b"
           background-color="#545c64"
           router
@@ -16,7 +18,7 @@
             </el-icon>
             <span>个人中心</span>
           </template>
-          <el-menu-item-group :title="this.$route.path">
+          <el-menu-item-group :title="$route.path">
             <el-menu-item index="/backstage">个人资料</el-menu-item>
             <el-menu-item index="/backstage/x-departmentList">部门列表</el-menu-item>
             <el-menu-item index="/backstage/x-employeeList">员工列表</el-menu-item>

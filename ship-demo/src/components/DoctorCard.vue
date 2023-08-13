@@ -16,7 +16,7 @@
             <br>
             {{ doctor.doctorJob }}
             <p>{{ doctor.doctorInfo }}</p>
-            <el-button type="primary" @click="this.$router.push('/reception/doctorOne/'+doctor.doctorId)">详情
+            <el-button type="primary" @click="$router.push('/reception/doctorOne/'+doctor.doctorId)">详情
             </el-button>
           </div>
         </div>
@@ -35,19 +35,4 @@ defineProps<{
 }>()
 </script>
 
-<style lang="scss" scoped>
-.my-pet-card {
-  display: flex;
-
-  img {
-    width: 128px;
-    height: 128px;
-  }
-
-  .my-pet-info {
-    padding-left: 10px;
-    text-align: center;
-    font-size: small;
-  }
-}
-</style>
+<style scoped src="public/css/pet-info.css"/>

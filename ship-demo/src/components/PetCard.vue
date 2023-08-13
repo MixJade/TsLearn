@@ -13,7 +13,7 @@
             <strong>{{ pet.petName }}</strong>
             <p>{{ getAge(pet.petAge) }}岁，&nbsp;{{ pet.petSex ? "公" : "母" }}</p>
             <p>{{ pet.petInfo }}</p>
-            <el-button type="success" @click="this.$router.push('/reception/petOne/'+pet.petId)">详情
+            <el-button type="success" @click="$router.push('/reception/petOne/'+pet.petId)">详情
             </el-button>
           </div>
         </div>
@@ -31,19 +31,4 @@ defineProps<{
 }>()
 </script>
 
-<style lang="scss" scoped>
-.my-pet-card {
-  display: flex;
-
-  img {
-    width: 128px;
-    height: 128px;
-  }
-
-  .my-pet-info {
-    padding-left: 10px;
-    text-align: center;
-    font-size: small;
-  }
-}
-</style>
+<style scoped src="public/css/pet-info.css"/>
