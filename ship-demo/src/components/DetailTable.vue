@@ -17,7 +17,7 @@
     <tr>
       <td class="bold">其它操作</td>
       <td>
-        <el-button type="danger" @click="this.$router.push('/')">退出登录</el-button>
+        <el-button type="danger" @click="$router.push('/')">退出登录</el-button>
       </td>
     </tr>
   </table>

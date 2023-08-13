@@ -15,7 +15,7 @@
     <div class="box">
       <div class="str">{{ state.str }}</div>
       <div class="brickBox">
-        <div v-for="(item,index) in state.arr" :key="index" :ref="el=>(brickRef[index]=el)"
+        <div v-for="(item,index) in state.arr" :key="index" :ref="setDivs"
              :style="{opacity :item.active ? '0':'1'}"
              class="brick"></div>
       </div>
@@ -61,10 +61,10 @@ const state = reactive({
   score: 404 // 分数
 })
 
-let timer = null, // 小球定时器
+let timer: NodeJS.Timer, // 小球定时器
     speed = 3,// 小球速度
     map = {x: 10, y: 10},
-    timer2 = null, // 挑战成功字眼显示定时器
+    timer2: NodeJS.Timer, // 挑战成功字眼显示定时器
     index = 0 // 挑战成功字眼显示的索引值
 
 // 挑战成功字眼续个显示的方法
@@ -85,10 +85,16 @@ const strFun = (strArr: string): void => {
 //移动小球的方法
 // 1. 确定小球碰到 左右上 及移动方块是否回弹
 const bottomMove = ref<HTMLDivElement>()
-// 2. 循环砖块检测小球碰撞到砖块消失
+// 2. 绑定多个砖块
 const brickRef = ref<HTMLDivElement[]>([])
+const setDivs = (el: any): void => {
+  // el为了规避ts报错用了any
+  // 现在断言为HTMLElement类型的数组
+  (brickRef.value as Array<HTMLDivElement>).push(el);
+};
+// 3. 循环砖块检测小球碰撞到砖块消失
 const moveBall = () => {
-  const {offsetTop, offsetHeight, offsetLeft, offsetWidth} = bottomMove.value
+  const {offsetTop, offsetHeight, offsetLeft, offsetWidth} = bottomMove.value as HTMLDivElement
   if (state.x <= 0) {
     map.x = speed
   } else if (state.x > 500 - 24) {
@@ -107,13 +113,13 @@ const moveBall = () => {
     clearInterval(timer)
     strFun("游戏结束")
   }
-  Array.from(state.arr).forEach((item, index) => {
+  Array.from(state.arr).forEach((_, index) => {
     const {
       offsetLeft,
       offsetTop,
       offsetWidth,
       offsetHeight
-    } = brickRef.value[index]
+    } = brickRef.value[index] as HTMLDivElement
     if (state.x + 24 > offsetLeft
         && state.x < offsetLeft + offsetWidth
         && state.y + 24 > offsetTop

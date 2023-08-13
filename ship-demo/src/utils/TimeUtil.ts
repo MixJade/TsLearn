@@ -5,7 +5,7 @@ export const getAge = (birthday: string): number => {
     return nowYear - birthYear
 }
 // 去除时间中的T
-export const moveT = (str: string): string =>
+export const moveT = (str: any): string =>
     str.toString().replaceAll("T", ' ')
 
 /**

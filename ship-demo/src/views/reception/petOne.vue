@@ -87,10 +87,10 @@ import {PetAskOne} from "@/modal/VO/PetAskOne";
 
 // 如此获取传参
 const props = defineProps<{
-  petId: Number
+  petId: string
 }>()
 // 样例数据
-const pet = examplePetDetail(props.petId)
+const pet = examplePetDetail(parseInt(props.petId))
 
 // 弹出框设置
 const dialogVisible = ref(false)

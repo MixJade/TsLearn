@@ -65,10 +65,6 @@
       <el-carousel :interval="4000" height="200px" type="card">
         <el-carousel-item v-for="item in lun" :key="item">
           <el-image :src="item.image" fit="scale-down"/>
-          <div class="carousel-caption">
-            <h5>{{ item.tit }}</h5>
-            <p>{{ item.text }}</p>
-          </div>
         </el-carousel-item>
       </el-carousel>
       <!-- 公告栏-->
@@ -97,7 +93,7 @@
       <!-- 用户卡片-->
       <h2>用户入口</h2>
       <p>一些与用户相关的功能入口，也可以前往中心查看。
-        <el-link type="warning" @click="this.$router.push('reception/clientCenter')">点击跳转</el-link>
+        <router-link class="my-warn" to="reception/clientCenter">点击跳转</router-link>
       </p>
       <el-row :gutter="12">
         <el-col v-for="card in userCard" :md="8" :sm="12" :xs="24">
@@ -105,10 +101,9 @@
             <template #header>
               <div class="card-header">
                 <span>{{ card.tit }}</span>
-                <el-button :type="card.btnType" @click="this.$router.push(card.routerPath)">{{
-                    card.btnText
-                  }}
-                </el-button>
+                <router-link :to="card.routerPath">
+                  <el-button :type="card.btnType">{{ card.btnText }}</el-button>
+                </router-link>
               </div>
             </template>
             <div>
@@ -120,19 +115,19 @@
       <!-- 待领养宠物-->
       <h2>待领养宠物</h2>
       <p>它们等待一个温暖的家。
-        <el-link type="success" @click="this.$router.push('/reception/petSee')">查看全部</el-link>
+        <router-link class="my-suc" to="/reception/petSee">查看全部</router-link>
       </p>
       <PetCard :card-list="petCardTxt.records"/>
       <!-- 医生卡片-->
       <h2>医生展示</h2>
       <p>我们拥有虚拟的医生。
-        <el-link type="primary" @click="this.$router.push('/reception/doctorSee')">查看全部</el-link>
+        <router-link class="my-pri" to="/reception/doctorSee">查看全部</router-link>
       </p>
       <DoctorCard :card-list="doctorCardTxt.records"/>
       <!-- 寄养卡片-->
       <h2>寄养宠物展示</h2>
       <p>我们提供寄养服务。
-        <el-link type="warning" @click="this.$router.push('/reception/fosterSee')">查看全部</el-link>
+        <router-link class="my-warn" to="/reception/fosterSee">查看全部</router-link>
       </p>
       <FosterCard :card-list="fosterCardTxt.records"/>
       <!-- 折叠筐-->
@@ -174,24 +169,16 @@ const handleSelect = (key: string, keyPath: string[]): void => {
 // 主页轮播图
 interface Lun {
   image: string;
-  tit: string;
-  text: string;
 }// 轮播图
 const lun: Lun[] = [
   {
-    image: "/picture/lun-1.jpg",
-    tit: "医院宗旨",
-    text: "致力于为每一只宠物提供最优质的医疗服务，关注宠物健康与福利。"
+    image: "/picture/lun-1.jpg"
   },
   {
-    image: "/picture/lun-2.jpg",
-    tit: "服务理念",
-    text: "始终坚持“宠爱无限，服务永远“五心”服务----用心、细心、贴心的服务，让您的爱宠舒心，让您放心”"
+    image: "/picture/lun-2.jpg"
   },
   {
-    image: "/picture/lun-3.jpg",
-    tit: "狗狗会“察言观色”",
-    text: "人类对于狗狗的训练行为，其实并不是狗狗能“听懂”人类语言，而是会“察言观色”，根据一些行为指示来完成某种动作，进而牢记心中。"
+    image: "/picture/lun-3.jpg"
   }
 ]
 
@@ -259,18 +246,6 @@ const logout = (): void => {
 
   /*主要内容*/
   .el-main {
-    /*轮播图的文本*/
-    .carousel-caption {
-      background-color: black;
-      opacity: 0.5;
-      position: absolute;
-      right: 15%;
-      bottom: 1.25rem;
-      left: 15%;
-      color: #fff;
-      text-align: center;
-    }
-
     /*小标题与介绍文字*/
     h2, p {
       text-align: center;

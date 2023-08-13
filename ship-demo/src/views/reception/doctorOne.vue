@@ -33,7 +33,7 @@
               </tr>
               <tr>
                 <td colspan="2">
-                  <el-button type="primary" @click="this.$router.push('/reception/chat/'+doctorDetail.doctorId)">咨询
+                  <el-button type="primary" @click="$router.push('/reception/chat/'+doctorDetail.doctorId)">咨询
                   </el-button>
                 </td>
               </tr>
@@ -46,7 +46,7 @@
             <el-table-column label="挂号人" prop="clientName"/>
             <el-table-column label="宠物" prop="petName"/>
             <el-table-column label="描述" prop="appointmentInfo"/>
-            <el-table-column label="时间" prop="appointmentDate" width="180px"/>
+            <el-table-column :formatter="removeT" label="时间" prop="appointmentDate" width="180px"/>
           </el-table>
         </el-col>
       </el-row>
@@ -58,18 +58,16 @@
 import PageHead from "@/components/PageHead.vue";
 import {getAge, moveT} from "@/utils/TimeUtil";
 import {exampleDoctorDetail} from "@/modal/DO/DoctorDto";
-import {exampleDoctorAppoint} from "@/modal/DO/AppointDto";
+import {AppointDto, exampleDoctorAppoint} from "@/modal/DO/AppointDto";
 
 // 如此获取传参
 const props = defineProps<{
-  doctorId: Number
+  doctorId: string
 }>()
 // 样例数据
-const doctorDetail = exampleDoctorDetail(props.doctorId);
-const appointDetail = exampleDoctorAppoint(props.doctorId);
-for (let i = 0; i < appointDetail.length; i++) {
-  appointDetail[i].appointmentDate = moveT(appointDetail[i].appointmentDate)
-}
+const doctorDetail = exampleDoctorDetail(parseInt(props.doctorId));
+const appointDetail = exampleDoctorAppoint(parseInt(props.doctorId));
+const removeT = (row: AppointDto) => moveT(row.appointmentDate)
 </script>
 
 <style lang="scss" scoped>
