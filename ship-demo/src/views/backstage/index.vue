@@ -112,6 +112,7 @@ import {
 
   .el-main {
     background-color: #F0EAD6;
+    z-index: 0;
   }
 }
 </style>

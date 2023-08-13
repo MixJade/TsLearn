@@ -1,5 +1,5 @@
 <template>
-  <el-avatar :src="rolePhoto"/>
+  <el-avatar :src="rolePhoto" alt="头像"/>
   <!-- 用户、管理员、医生的个人信息展示-->
   <table class="myTable">
     <tr v-for="t in tabCon">

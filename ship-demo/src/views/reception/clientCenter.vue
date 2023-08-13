@@ -17,7 +17,9 @@
       </ul>
     </el-radio-group>
     <div class="one-basePage">
-      <router-view></router-view>
+      <div class="really">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
@@ -32,5 +34,4 @@ const getChange = (): void => {
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped src="public/css/one-basePage.css"/>
