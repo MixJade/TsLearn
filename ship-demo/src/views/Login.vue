@@ -105,7 +105,7 @@ const doctorToAdmin = () => {
   box-shadow: 7px 7px 17px rgba(52, 56, 66, 0.5);
   background-color: #FAFAFA;
   border-radius: 5px;
-  backface-visibility: hidden;
+  backface-visibility: hidden; /* 背向时隐藏 */
   transition: all 1s;
   -webkit-user-select: none;
   user-select: none;
