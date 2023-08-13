@@ -130,13 +130,8 @@
         <router-link class="my-warn" to="/reception/fosterSee">查看全部</router-link>
       </p>
       <FosterCard :card-list="fosterCardTxt.records"/>
-      <!-- 折叠筐-->
-      <h2>小小知识</h2>
-      <el-collapse accordion>
-        <el-collapse-item v-for="(notice,index) in notices" :name="index" :title="notice.noticeTitle">
-          <div>{{ notice.textNotice }}</div>
-        </el-collapse-item>
-      </el-collapse>
+      <!-- 页脚-->
+      <VueFoot/>
     </el-main>
   </el-container>
 </template>
@@ -153,6 +148,7 @@ import router from "@/router";
 import {DoctorDto, exampleDoctor} from "@/modal/DO/DoctorDto";
 import {exampleFoster, FosterCardDto} from "@/modal/DO/FosterCardDto";
 import {exampleNotice, NoticeDto} from "@/modal/DO/NoticeDto";
+import VueFoot from "@/components/VueFoot.vue";
 // 导航栏
 const handleSelect = (key: string, keyPath: string[]): void => {
   if (key === "logout") {
@@ -262,17 +258,6 @@ const logout = (): void => {
       display: flex;
       justify-content: space-between;
       align-items: center;
-    }
-
-    /* 折叠框 */
-    .el-collapse {
-      border: 5px solid #ccc;
-      width: 80%;
-      margin-left: 10%;;
-      /* 公告栏标题 */
-      :deep(.el-collapse-item__header) {
-        font-size: large;
-      }
     }
   }
 }
