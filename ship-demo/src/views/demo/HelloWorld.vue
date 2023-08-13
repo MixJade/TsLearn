@@ -4,12 +4,14 @@
     <div class="frame">
       <MyInput/>
     </div>
+    <VueFoot/>
   </div>
 </template>
 
 <script lang="ts" setup>
 import MyBtn from "@/components/MyBtn.vue";
 import MyInput from "@/components/MyInput.vue";
+import VueFoot from "@/components/VueFoot.vue";
 
 const x = () => {
   alert("你好")
@@ -21,12 +23,11 @@ const x = () => {
   height: 98vh;
   width: 98vw;
   text-align: center;
-  background-color: #c8c9cc;
   padding-top: 10px;
   /* 设置z-index,防止遮挡btn的伪元素 */
   position: absolute;
   z-index: -2;
-
+  /* 输入框外面的元素 */
   .frame {
     background-color: white;
     border: 2px solid #17a2b8;
@@ -38,5 +39,4 @@ const x = () => {
     padding: 5px;
   }
 }
-
 </style>
