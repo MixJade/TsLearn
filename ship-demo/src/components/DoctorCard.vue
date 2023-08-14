@@ -6,21 +6,16 @@
         :md="6" :sm="12" :xs="24"
         style="margin-bottom: 10px"
     >
-      <el-card>
-        <div class="my-pet-card">
-          <img alt="医生" src="/picture/doctor-ex.jpg"/>
-          <div class="my-pet-info">
-            <strong>{{ doctor.doctorName }}</strong>
-            <br>
-            {{ getAge(doctor.doctorAge) }}岁，&nbsp;{{ doctor.doctorGender ? "男" : "女" }}
-            <br>
-            {{ doctor.doctorJob }}
-            <p>{{ doctor.doctorInfo }}</p>
-            <el-button type="primary" @click="$router.push('/reception/doctorOne/'+doctor.doctorId)">详情
-            </el-button>
-          </div>
-        </div>
-      </el-card>
+      <MyCard :data='{
+        photo: "doctor-ex.jpg",
+        tit: doctor.doctorName,
+        age: getAge(doctor.doctorAge)+"岁",
+        sex: doctor.doctorGender ? "男" : "女",
+        job: doctor.doctorJob,
+        info1: doctor.doctorCode,
+        info2: doctor.doctorInfo,
+        link:"/reception/doctorOne/"+doctor.doctorId
+      }' :type="'primary'"/>
     </el-col>
   </el-row>
 
@@ -29,6 +24,7 @@
 <script lang="ts" setup>
 import {getAge} from "@/utils/TimeUtil";
 import {DoctorDto} from "@/modal/DO/DoctorDto";
+import MyCard from "@/components/MyCard.vue";
 // 接收参数：医生卡片
 defineProps<{
   readonly cardList: DoctorDto[]

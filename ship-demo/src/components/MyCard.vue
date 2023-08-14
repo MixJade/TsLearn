@@ -1,34 +1,66 @@
 <template>
   <div class="img-card">
-    <img alt="头像" src="/picture/lei-jun.jpg">
+    <img :src="'/picture/'+data.photo" alt="头像">
     <div class="card-main">
-      <div>通的同</div>
+      <div>{{ data.tit }}</div>
       <div class="card-three">
-        <div>33岁</div>
-        <div>男</div>
-        <div>副院长</div>
+        <div>{{ data.age }}</div>
+        <div>{{ data.sex }}</div>
+        <div>{{ data.job }}</div>
       </div>
-      <div class="item-1"><span>tong-de-t</span></div>
-      <div class="item-2"><span>国内著名医学专家，擅长绝育</span></div>
+      <div class="item-1">{{ data.info1 }}</div>
+      <div class="item-2">{{ data.info2 }}</div>
       <div>
-        <button>详情</button>
+        <button type="button" @click="$router.push(data.link)">详情</button>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import {ref} from "vue";
+
+const props = defineProps<{
+  type: "primary" | "success"
+  data: CardData
+}>()
+
+
+const myColorTxt = ref<string>("#337ecc")
+const myColorBor = ref<string>("#409EFF")
+const myColorAct = ref<string>("#79bbff")
+const myColorTit = ref<string>("#a0cfff")
+
+
+if (props.type === "success") {
+  myColorTxt.value = "#529b2e"
+  myColorBor.value = "#67C23A"
+  myColorAct.value = "#95d475"
+  myColorTit.value = "#b3e19d"
+}
+
+export interface CardData {
+  photo: string;
+  tit: string;
+  age: string;
+  sex: string;
+  job: string;
+  info1: string;
+  info2: string;
+  link: string;
+}
 </script>
 
 <style lang="scss" scoped>
 .img-card {
-  $txt-color: #337ecc;
-  $bor-color: #409EFF;
-  $act-color: #79bbff;
-  $tit-color: #a0cfff;
-  width: 380px;
+  --txt-color: v-bind(myColorTxt);
+  --bor-color: v-bind(myColorBor);
+  --act-color: v-bind(myColorAct);
+  --tit-color: v-bind(myColorTit);
+  $my-white: #FAFAFA;
+  width: 370px;
   height: 180px;
-  background-color: whitesmoke;
+  background-color: $my-white;
   display: flex;
   align-items: center;
   padding: 16px;
@@ -39,7 +71,7 @@
 
   &:hover {
     /* 悬浮加阴影 */
-    box-shadow: 5px 5px 15px $act-color;
+    box-shadow: 5px 5px 15px var(--act-color);
   }
 
   img {
@@ -55,7 +87,7 @@
     /* 卡片内容 */
     width: 230px;
     height: 140px;
-    margin-left: 8px;
+    margin-left: 5px;
     box-sizing: border-box;
     border-radius: 16px;
     text-align: center;
@@ -72,17 +104,17 @@
         transition: background-color 0.5s;
 
         &:hover {
-          background-color: $tit-color;
+          background-color: var(--tit-color);
         }
       }
 
       &:last-child {
         /* 脚注 */
         button {
-          background-color: #FAFAFA;
-          color: $bor-color;
+          background-color: $my-white;
+          color: var(--bor-color);
           height: 100%;
-          border: 2px solid $bor-color;
+          border: 2px solid var(--bor-color);
           width: 50%;
           border-radius: 16px;
           transition: width 0.5s;
@@ -90,18 +122,18 @@
           &:hover {
             width: 100%;
             border-radius: 0 0 16px 16px;
-            background-color: #409EFF;
-            color: #FAFAFA;
+            background-color: var(--bor-color);
+            color: $my-white;
           }
         }
       }
 
       &.item-1 {
         /* 特殊文字1 */
-        color: $bor-color;
+        color: var(--bor-color);
 
         &:hover {
-          color: $txt-color;
+          color: var(--txt-color);
         }
       }
 
@@ -117,6 +149,8 @@
 
       div {
         width: 33%;
+        overflow-x: hidden;
+        white-space: nowrap;
 
         &:first-child {
           text-align: right;

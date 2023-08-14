@@ -8,7 +8,7 @@
           router
           text-color="#fff"
       >
-        <el-menu-item index="/doctorPage/d-appoint">挂号处理</el-menu-item>
+        <el-menu-item index="/doctorPage/d-appoint">卡片实验</el-menu-item>
         <el-menu-item index="/doctorPage/d-chat">在线咨询</el-menu-item>
         <el-menu-item index="/doctorPage/doctorOne">个人资料</el-menu-item>
       </el-menu>
