@@ -96,6 +96,8 @@ export interface CardData {
       /* 卡片中的五行 */
       height: 28px;
       width: 100%;
+      overflow-x: hidden;
+      white-space: nowrap;
 
       &:first-child {
         /* 标题 */
@@ -131,6 +133,7 @@ export interface CardData {
       &.item-1 {
         /* 特殊文字1 */
         color: var(--bor-color);
+        font-size: small;
 
         &:hover {
           color: var(--txt-color);
@@ -149,8 +152,6 @@ export interface CardData {
 
       div {
         width: 33%;
-        overflow-x: hidden;
-        white-space: nowrap;
 
         &:first-child {
           text-align: right;

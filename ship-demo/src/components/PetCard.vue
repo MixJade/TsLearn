@@ -12,8 +12,8 @@
         age: getAge(pet.petAge)+"岁",
         sex: pet.petSex ? "公" : "母",
         job: pet.petVariety,
-        info1: pet.petStatus,
-        info2: pet.petInfo,
+        info1: pet.petInfo,
+        info2: pet.petStatus,
         link:"/reception/petOne/"+pet.petId
       }' :type="'success'"/>
     </el-col>
