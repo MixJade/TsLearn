@@ -12,8 +12,8 @@
         age: getAge(doctor.doctorAge)+"岁",
         sex: doctor.doctorGender ? "男" : "女",
         job: doctor.doctorJob,
-        info1: doctor.doctorCode,
-        info2: doctor.doctorInfo,
+        info1: doctor.doctorInfo,
+        info2: doctor.doctorCode,
         link:"/reception/doctorOne/"+doctor.doctorId
       }' :type="'primary'"/>
     </el-col>
