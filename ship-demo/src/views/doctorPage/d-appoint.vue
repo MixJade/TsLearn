@@ -1,6 +1,6 @@
 <template>
   <div class="img-card">
-    <img alt="头像" src="public/picture/lei-jun.jpg">
+    <img alt="头像" src="/picture/lei-jun.jpg">
     <div class="card-main">
       <div>通的同</div>
       <div class="card-three">
@@ -22,6 +22,10 @@
 
 <style lang="scss" scoped>
 .img-card {
+  $txt-color: #337ecc;
+  $bor-color: #409EFF;
+  $act-color: #79bbff;
+  $tit-color: #a0cfff;
   width: 380px;
   height: 180px;
   background-color: whitesmoke;
@@ -32,13 +36,14 @@
   border-radius: 20px;
   box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.5);
   user-select: none;
-  /* 悬浮加阴影 */
+
   &:hover {
-    box-shadow: 5px 5px 15px lightskyblue;
+    /* 悬浮加阴影 */
+    box-shadow: 5px 5px 15px $act-color;
   }
 
-  /* 头像 */
   img {
+    /* 头像 */
     width: 128px;
     height: 128px;
     border-radius: 50%;
@@ -46,38 +51,41 @@
     border-color: #f89898 #eebe77 #79bbff #95d475;
   }
 
-  /* 卡片内容 */
   .card-main {
+    /* 卡片内容 */
     width: 230px;
     height: 140px;
     margin-left: 8px;
     box-sizing: border-box;
     border-radius: 16px;
     text-align: center;
-    /* 卡片中的五行 */
+
     > div {
+      /* 卡片中的五行 */
       height: 28px;
       width: 100%;
-      /* 标题 */
+
       &:first-child {
+        /* 标题 */
         border-radius: 16px 16px 0 0;
         font-weight: bold;
 
         &:hover {
-          background-color: #a0cfff;
+          background-color: $tit-color;
         }
       }
 
-      /* 脚注 */
       &:last-child {
+        /* 脚注 */
         button {
           background-color: #FAFAFA;
-          color: #409EFF;
+          color: $bor-color;
           height: 100%;
-          border: 2px solid #409EFF;
+          border: 2px solid $bor-color;
           width: 50%;
           border-radius: 16px;
           transition: width 0.5s;
+
           &:hover {
             width: 100%;
             border-radius: 0 0 16px 16px;
@@ -87,17 +95,17 @@
         }
       }
 
-      /* 特殊文字1 */
       &.item-1 {
-        color: #409EFF;
+        /* 特殊文字1 */
+        color: $bor-color;
 
         &:hover {
-          color: #337ecc;
+          color: $txt-color;
         }
       }
 
-      /* 特殊文字2 */
       &.item-2 {
+        /* 特殊文字2 */
         font-size: small;
       }
     }
