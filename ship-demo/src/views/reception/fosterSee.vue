@@ -1,10 +1,8 @@
 <template>
-  <div>
+  <div class="my-space">
     <PageHead>查看全部寄养订单</PageHead>
-    <el-space direction="vertical">
-      <FosterCard :card-list="fosterCardTxt.records"/>
-      <el-pagination :page-size="6" :total="20" background hide-on-single-page layout="prev, pager, next"/>
-    </el-space>
+    <FosterCard :card-list="fosterCardTxt.records"/>
+    <el-pagination :page-size="6" :total="20" background hide-on-single-page layout="prev, pager, next"/>
   </div>
 </template>
 
@@ -20,5 +18,4 @@ import PageHead from "@/components/PageHead.vue";
 const fosterCardTxt: Page<FosterCardDto> = reactive(exampleFoster())
 </script>
 
-<style scoped>
-</style>
+<style scoped src="public/css/my-space.css"/>

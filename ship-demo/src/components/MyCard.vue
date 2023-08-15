@@ -66,7 +66,7 @@ export interface CardData {
   align-items: center;
   padding: 16px;
   box-sizing: border-box;
-  border-radius: 20px;
+  border-radius: 16px;
   box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.5);
   position: relative;
   user-select: none;
@@ -92,7 +92,7 @@ export interface CardData {
     height: 140px;
     margin-left: 5px;
     box-sizing: border-box;
-    border-radius: 16px;
+    border-radius: 12px;
     text-align: center;
 
     > div {
