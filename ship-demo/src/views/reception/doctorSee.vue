@@ -1,10 +1,8 @@
 <template>
-  <div>
+  <div class="my-space">
     <PageHead>查看全部医生</PageHead>
-    <el-space direction="vertical">
-      <DoctorCard :card-list="doctorCardTxt.records"/>
-      <el-pagination :page-size="8" :total="7" background hide-on-single-page layout="prev, pager, next"/>
-    </el-space>
+    <DoctorCard :card-list="doctorCardTxt.records"/>
+    <el-pagination :page-size="8" :total="7" background hide-on-single-page layout="prev, pager, next"/>
   </div>
 </template>
 
@@ -20,4 +18,7 @@ const doctorCardTxt: Page<DoctorDto> = reactive(exampleDoctorSee())
 </script>
 
 <style scoped>
+.my-space > *:not(:first-child) {
+  margin-top: 15px;
+}
 </style>
