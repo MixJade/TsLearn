@@ -59,6 +59,7 @@ export interface CardData {
   --tit-color: v-bind(myColorTit);
   $my-white: #FAFAFA;
   width: 370px;
+  max-width: 90vw;
   height: 180px;
   background-color: $my-white;
   display: flex;
@@ -67,10 +68,12 @@ export interface CardData {
   box-sizing: border-box;
   border-radius: 20px;
   box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.5);
+  position: relative;
   user-select: none;
 
   &:hover {
     /* 悬浮加阴影 */
+    z-index: 1000;
     box-shadow: 5px 5px 15px var(--act-color);
   }
 
@@ -149,6 +152,7 @@ export interface CardData {
     .card-three {
       /* 一行一分为三 */
       display: flex;
+      font-size: small;
 
       div {
         width: 33%;
