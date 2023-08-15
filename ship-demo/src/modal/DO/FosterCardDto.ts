@@ -66,6 +66,23 @@ export const exampleFoster = (): Page<FosterCardDto> => {
                 "petStatus": "良好",
                 "petInfo": "这宠物十分开心",
                 "petPhoto": "3b5d2e67-8af1-4a58-9bed-91d5876a1d97.png"
+            },
+            {
+                "fosterId": 7,
+                "fosterCode": "12301125",
+                "petId": 32,
+                "clientId": 3,
+                "fosterTerm": "2023-09-15",
+                "fosterMoney": 200,
+                "fosterInfo": "有事外出",
+                "petName": "布偶二",
+                "clientName": "散玉",
+                "petVariety": "布偶猫",
+                "petSex": true,
+                "petAge": "2012-12-30",
+                "petStatus": "良好",
+                "petInfo": "这宠物十分开心",
+                "petPhoto": "3b5d2e67-8af1-4a58-9bed-91d5876a1d97.png"
             }
         ],
         "total": 20

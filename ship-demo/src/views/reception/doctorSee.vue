@@ -17,8 +17,4 @@ import {DoctorDto, exampleDoctorSee} from "@/modal/DO/DoctorDto";
 const doctorCardTxt: Page<DoctorDto> = reactive(exampleDoctorSee())
 </script>
 
-<style scoped>
-.my-space > *:not(:first-child) {
-  margin-top: 15px;
-}
-</style>
+<style scoped src="public/css/my-space.css"/>

@@ -37,7 +37,6 @@ import {
     ElRadioGroup,
     ElRow,
     ElSelect,
-    ElSpace,
     ElSubMenu,
     ElSwitch,
     ElTable,
@@ -92,7 +91,6 @@ app.component("el-button", ElButton as Component)
     .component("el-col", ElCol as Component)
     .component("el-row", ElRow as Component)
     .component("el-page-header", ElPageHeader as Component)
-    .component("el-space", ElSpace as Component)
     // 菜单
     .component("el-menu", ElMenu as Component)
     .component("el-sub-menu", ElSubMenu as Component)

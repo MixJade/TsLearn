@@ -17,8 +17,4 @@ import PageHead from "@/components/PageHead.vue";
 const petCardTxt: Page<Pet> = reactive(examplePetSee())
 </script>
 
-<style scoped>
-.my-space > *:not(:first-child) {
-  margin-top: 15px;
-}
-</style>
+<style scoped src="public/css/my-space.css"/>
