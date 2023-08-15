@@ -1,10 +1,8 @@
 <template>
-  <div>
+  <div class="my-space">
     <PageHead>查看全部宠物</PageHead>
-    <el-space direction="vertical">
-      <PetCard :card-list="petCardTxt.records"/>
-      <el-pagination :page-size="8" :total="20" background hide-on-single-page layout="prev, pager, next"/>
-    </el-space>
+    <PetCard :card-list="petCardTxt.records"/>
+    <el-pagination :page-size="8" :total="20" background hide-on-single-page layout="prev, pager, next"/>
   </div>
 </template>
 
@@ -20,4 +18,7 @@ const petCardTxt: Page<Pet> = reactive(examplePetSee())
 </script>
 
 <style scoped>
+.my-space > *:not(:first-child) {
+  margin-top: 15px;
+}
 </style>
