@@ -9,7 +9,7 @@
 
 <script lang="ts" setup>
 import {Client, exampleClient} from "@/modal/entiy/Client";
-import DetailTable, {DetailTabType} from "@/components/DetailTable.vue";
+import DetailTable, {DetailTabType} from "@/components/card/DetailTable.vue";
 import {computed, reactive} from "vue";
 // 设置展示信息
 const client: Client = reactive(exampleClient())

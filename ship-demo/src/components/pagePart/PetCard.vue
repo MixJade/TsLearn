@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-import MyCard from "@/components/MyCard.vue";
+import MyCard from "@/components/card/MyCard.vue";
 import {getAge} from "@/utils/TimeUtil";
 import {Pet} from "@/modal/entiy/Pet";
 import MyRow from "@/components/MyRow.vue";

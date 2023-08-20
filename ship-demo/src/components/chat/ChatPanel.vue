@@ -41,7 +41,7 @@ import PageHead from "@/components/PageHead.vue";
 import {ref} from "vue";
 import {ChatGroup} from "@/modal/VO/ChatGroup";
 import {MsgVo} from "@/modal/VO/MsgVo";
-import ChatCard from "@/components/ChatMain.vue";
+import ChatCard from "@/components/chat/ChatMain.vue";
 
 defineProps<{
   opType: "用户" | "医生",

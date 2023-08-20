@@ -19,7 +19,7 @@
 <script lang="ts" setup>
 import {getAge} from "@/utils/TimeUtil";
 import {DoctorDto} from "@/modal/DO/DoctorDto";
-import MyCard from "@/components/MyCard.vue";
+import MyCard from "@/components/card/MyCard.vue";
 import MyRow from "@/components/MyRow.vue";
 // 接收参数：医生卡片
 defineProps<{

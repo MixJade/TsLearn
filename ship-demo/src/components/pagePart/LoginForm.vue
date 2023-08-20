@@ -21,7 +21,7 @@
 <script lang="ts" setup>
 import {computed, reactive} from "vue";
 import {ElMessage} from "element-plus"
-import MyBtn from "@/components/MyBtn.vue";
+import MyBtn from "@/components/button/MyBtn.vue";
 // 定义登录的角色
 const prop = defineProps(['role'])
 // 根据传来的角色设置展示
@@ -103,7 +103,6 @@ const toLogin = () => {
   label {
     position: absolute;
     font-size: medium;
-    font-weight: bold;
     color: #6c757d;
     top: 0;
     left: 28px;

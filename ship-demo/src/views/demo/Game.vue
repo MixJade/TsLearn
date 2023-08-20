@@ -196,7 +196,8 @@ const start = () => {
     .ball {
       width: 24px;
       height: 24px;
-      background-image: radial-gradient(circle, red, #c45656, #f89898);
+      background-image: radial-gradient(circle, red, #c45656);
+      box-shadow: 0 0 10px  #f89898;
       border-radius: 50%;
       position: absolute;
     }

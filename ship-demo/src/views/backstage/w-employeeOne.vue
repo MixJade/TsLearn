@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import DetailTable, {DetailTabType} from "@/components/DetailTable.vue";
+import DetailTable, {DetailTabType} from "@/components/card/DetailTable.vue";
 import {Employee, exampleEmployee} from "@/modal/entiy/Employee";
 import {getJob} from "@/utils/JobUtil";
 import {getDaysFromToday} from "@/utils/TimeUtil";

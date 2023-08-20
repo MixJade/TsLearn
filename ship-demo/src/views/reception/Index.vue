@@ -1,72 +1,32 @@
 <template>
-  <el-container>
-    <el-header>
-      <!-- 导航栏-->
-      <el-menu
-          :ellipsis="false"
-          active-text-color="#ffd04b"
-          background-color="#545c64"
-          mode="horizontal"
-          text-color="#fff"
-          @select="handleSelect"
-      >
-        <el-menu-item index="reception/clientCenter"><img alt="商标" height="30" src="/mia.svg" width="30">
-          宠物医院
-        </el-menu-item>
-        <div class="flex-grow"/>
-        <el-menu-item index="notice">
-          <el-icon>
-            <DataBoard/>
-          </el-icon>
-          网站公告
-        </el-menu-item>
-        <el-menu-item index="/reception/chat">
-          <el-icon>
-            <Phone/>
-          </el-icon>
-          咨询医生
-        </el-menu-item>
-        <el-sub-menu index="/reception/clientCenter">
-          <template #title>
-            <el-icon>
-              <User/>
-            </el-icon>
-            个人中心
-          </template>
-          <el-menu-item index="">
-            <el-icon>
-              <EditPen/>
-            </el-icon>
-            个人资料
-          </el-menu-item>
-          <el-menu-item index="/clientPet">
-            <el-icon>
-              <Football/>
-            </el-icon>
-            宠物信息
-          </el-menu-item>
-          <el-menu-item index="/clientAppoint">
-            <el-icon>
-              <Tickets/>
-            </el-icon>
-            挂号信息
-          </el-menu-item>
-          <el-menu-item index="logout" style="color: #F56C6C">
-            <el-icon>
-              <SwitchButton/>
-            </el-icon>
-            退出登录
-          </el-menu-item>
-        </el-sub-menu>
-      </el-menu>
-    </el-header>
-    <el-main>
-      <!--轮播图-->
-      <el-carousel :interval="4000" height="200px" type="card">
-        <el-carousel-item v-for="item in lun" :key="item">
-          <el-image :src="item.image" fit="scale-down"/>
-        </el-carousel-item>
-      </el-carousel>
+  <div>
+    <header>
+      <router-link to="/reception/clientCenter">
+        MixJade
+      </router-link>
+      <ul>
+        <li><a @click="openDialog(notices[0])">网站公告</a></li>
+        <li>
+          <router-link to="/reception/chat">咨询医生</router-link>
+        </li>
+        <li class="drop">个人中心<span>&#9660</span>
+          <ul class="drop-list">
+            <li>
+              <router-link to="/reception/clientCenter">个人资料</router-link>
+            </li>
+            <li>
+              <router-link to="/reception/clientPet">宠物信息</router-link>
+            </li>
+            <li>
+              <router-link to="/reception/clientAppoint">挂号查看</router-link>
+            </li>
+            <li><a style="color: red" @click="logout">退出登陆</a></li>
+          </ul>
+        </li>
+      </ul>
+    </header>
+    <WindRoll/>
+    <main>
       <!-- 公告栏-->
       <h2>网站公告</h2>
       <p>网站的最新公告</p>
@@ -130,53 +90,25 @@
         <router-link class="my-warn" to="/reception/fosterSee">查看全部</router-link>
       </p>
       <FosterCard :card-list="fosterCardTxt.records"/>
-      <!-- 页脚-->
-      <VueFoot/>
-    </el-main>
-  </el-container>
+    </main>
+    <!-- 页脚-->
+    <VueFoot/>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import {DataBoard, EditPen, Football, Phone, SwitchButton, Tickets, User} from "@element-plus/icons-vue"
 import {reactive, ref} from "vue";
 import {examplePetFour, Pet} from "@/modal/entiy/Pet";
 import {Page} from "@/modal/DO/Page";
-import PetCard from "@/components/PetCard.vue";
-import DoctorCard from "@/components/DoctorCard.vue";
-import FosterCard from "@/components/FosterCard.vue";
+import PetCard from "@/components/pagePart/PetCard.vue";
+import DoctorCard from "@/components/pagePart/DoctorCard.vue";
+import FosterCard from "@/components/card/FosterCard.vue";
 import router from "@/router";
 import {DoctorDto, exampleDoctor} from "@/modal/DO/DoctorDto";
 import {exampleFoster, FosterCardDto} from "@/modal/DO/FosterCardDto";
 import {exampleNotice, NoticeDto} from "@/modal/DO/NoticeDto";
 import VueFoot from "@/components/VueFoot.vue";
-// 导航栏
-const handleSelect = (key: string, keyPath: string[]): void => {
-  if (key === "logout") {
-    logout()
-    return
-  } else if (key === "notice") {
-    openDialog(notices[0])
-    return;
-  }
-  // 将数组的分割逗号换成空白之后,转为路径跳转
-  router.push(keyPath.join('').toString())
-}
-
-// 主页轮播图
-interface Lun {
-  image: string;
-}// 轮播图
-const lun: Lun[] = [
-  {
-    image: "/picture/lun-1.jpg"
-  },
-  {
-    image: "/picture/lun-2.jpg"
-  },
-  {
-    image: "/picture/lun-3.jpg"
-  }
-]
+import WindRoll from "@/components/WindRoll.vue";
 
 // 公告栏
 const notices: NoticeDto[] = reactive(exampleNotice())
@@ -233,32 +165,115 @@ const logout = (): void => {
 }
 </script>
 <style lang="scss" scoped>
-.el-container {
-  background-color: #e9e9f5;
-  /*将导航栏除Logo以外放在旁边*/
-  .flex-grow {
-    flex-grow: 1;
+/* 导航栏 */
+header {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 60px;
+  background-color: #228B22;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+
+  & > a:first-child {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: 700;
+    letter-spacing: 2px;
   }
 
-  /*主要内容*/
-  .el-main {
-    /*小标题与介绍文字*/
-    h2, p {
+  > ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    > li {
+      list-style: none;
+
+      a {
+        text-decoration: none;
+        color: #fff;
+        padding: 4px 24px;
+        border-radius: 20px;
+
+        &:hover, &:active {
+          background-color: #fff;
+          color: #000;
+        }
+      }
+    }
+  }
+
+  /* 导航下拉框 */
+  .drop {
+    cursor: pointer;
+    color: #fff;
+    padding: 4px 24px;
+
+    span {
+      display: inline-block;
+      transform: rotate(0deg);
+      transition: transform 200ms;
+    }
+
+    &:hover {
+      color: #FFD700;
+
+      span {
+        transform: rotate(180deg);
+      }
+
+      .drop-list {
+        visibility: visible;
+        height: 128px;
+      }
+    }
+
+    .drop-list {
+      position: absolute;
+      width: 136px;
+      margin-left: -28px;
+      background: #3CB371;
+      box-shadow: 0 1px 2px #333333;
+      border: dashed seashell;
+      border-radius: 20px;
+      list-style: none;
       text-align: center;
-    }
+      padding: 5px 5px;
+      z-index: 70;
+      transition: height 500ms;
+      height: 0;
+      overflow-y: hidden;
+      visibility: hidden;
 
-    /*公告换行*/
-    .textNotice {
-      white-space: pre-wrap;
-      word-break: break-all;
+      li {
+        padding-top: 4px;
+        padding-bottom: 4px;
+      }
     }
+  }
+}
 
-    /* 卡片 */
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+/*主要内容*/
+main {
+  /*小标题与介绍文字*/
+  h2, p {
+    text-align: center;
+  }
+
+  /*公告换行*/
+  .textNotice {
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  /* 卡片 */
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 </style>
