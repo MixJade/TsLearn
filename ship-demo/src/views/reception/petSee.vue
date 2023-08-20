@@ -10,7 +10,7 @@
 // 宠物的卡片信息
 import {Page} from "@/modal/DO/Page";
 import {examplePetSee, Pet} from "@/modal/entiy/Pet";
-import PetCard from "@/components/PetCard.vue";
+import PetCard from "@/components/pagePart/PetCard.vue";
 import {reactive} from "vue";
 import PageHead from "@/components/PageHead.vue";
 

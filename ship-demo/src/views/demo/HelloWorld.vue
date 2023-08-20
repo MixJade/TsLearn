@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-import MyBtn from "@/components/MyBtn.vue";
+import MyBtn from "@/components/button/MyBtn.vue";
 import MyInput from "@/components/MyInput.vue";
 import VueFoot from "@/components/VueFoot.vue";
 

@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import {exampleClientChat} from "@/modal/VO/ChatGroup";
 import {exampleMsg} from "@/modal/VO/MsgVo";
-import ChatPanel from "@/components/ChatPanel.vue";
+import ChatPanel from "@/components/chat/ChatPanel.vue";
 
 const props = defineProps<{
   doctorId?: string

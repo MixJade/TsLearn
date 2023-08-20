@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts" setup>
-import LoginForm from "@/components/LoginForm.vue";
+import LoginForm from "@/components/pagePart/LoginForm.vue";
 import {reactive, ref} from "vue";
 
 const pairClient = ref<string>("rotateY(0deg)")
@@ -106,7 +106,7 @@ const doctorToAdmin = () => {
   background-color: #FAFAFA;
   border-radius: 5px;
   backface-visibility: hidden; /* 背向时隐藏 */
-  transition: all 1s;
+  transition: transform 1s;
   -webkit-user-select: none;
   user-select: none;
   padding: 10px;

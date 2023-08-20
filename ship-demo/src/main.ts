@@ -8,8 +8,6 @@ import {
     ElButton,
     ElButtonGroup,
     ElCard,
-    ElCarousel,
-    ElCarouselItem,
     ElCol,
     ElContainer,
     ElDatePicker,
@@ -66,9 +64,6 @@ app.component("el-button", ElButton as Component)
     .component("el-descriptions-item", ElDescriptionsItem as Component)
     .component("el-empty", ElEmpty as Component)
     .component("el-pagination", ElPagination as Component)
-    // 轮播图
-    .component("el-carousel", ElCarousel as Component)
-    .component("el-carousel-item", ElCarouselItem as Component)
     // 消息相关
     .component(ElMessage.name, ElMessage as Component)
     .component("el-dialog", ElDialog as Component)
