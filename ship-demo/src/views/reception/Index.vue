@@ -15,10 +15,10 @@
               <router-link to="/reception/clientCenter">个人资料</router-link>
             </li>
             <li>
-              <router-link to="/reception/clientPet">宠物信息</router-link>
+              <router-link to="/reception/clientCenter/clientPet">宠物信息</router-link>
             </li>
             <li>
-              <router-link to="/reception/clientAppoint">挂号查看</router-link>
+              <router-link to="/reception/clientCenter/clientAppoint">挂号查看</router-link>
             </li>
             <li><a style="color: red" @click="logout">退出登陆</a></li>
           </ul>
@@ -53,7 +53,7 @@
       <!-- 用户卡片-->
       <h2>用户入口</h2>
       <p>一些与用户相关的功能入口，也可以前往中心查看。
-        <router-link class="my-warn" to="reception/clientCenter">点击跳转</router-link>
+        <router-link style="color: #E6A23C;" to="reception/clientCenter">点击跳转</router-link>
       </p>
       <el-row :gutter="12">
         <el-col v-for="card in userCard" :md="8" :sm="12" :xs="24">
@@ -75,19 +75,19 @@
       <!-- 待领养宠物-->
       <h2>待领养宠物</h2>
       <p>它们等待一个温暖的家。
-        <router-link class="my-suc" to="/reception/petSee">查看全部</router-link>
+        <router-link style="color: #67C23A;" to="/reception/petSee">查看全部</router-link>
       </p>
       <PetCard :card-list="petCardTxt.records"/>
       <!-- 医生卡片-->
       <h2>医生展示</h2>
       <p>我们拥有虚拟的医生。
-        <router-link class="my-pri" to="/reception/doctorSee">查看全部</router-link>
+        <router-link style="color: #409EFF;" to="/reception/doctorSee">查看全部</router-link>
       </p>
       <DoctorCard :card-list="doctorCardTxt.records"/>
       <!-- 寄养卡片-->
       <h2>寄养宠物展示</h2>
       <p>我们提供寄养服务。
-        <router-link class="my-warn" to="/reception/fosterSee">查看全部</router-link>
+        <router-link style="color: #E6A23C;" to="/reception/fosterSee">查看全部</router-link>
       </p>
       <FosterCard :card-list="fosterCardTxt.records"/>
     </main>
@@ -169,7 +169,7 @@ const logout = (): void => {
 header {
   box-sizing: border-box;
   width: 100%;
-  padding: 0 60px;
+  padding: 0 8px;
   background-color: #228B22;
   display: flex;
   justify-content: space-between;
@@ -181,13 +181,20 @@ header {
     text-decoration: none;
     font-size: 1.5em;
     font-weight: 700;
-    letter-spacing: 2px;
   }
 
   > ul {
     display: flex;
     justify-content: center;
     align-items: center;
+    @media (max-width: 768px) {
+      a {
+        padding: 4px 4px;
+      }
+      .drop {
+        padding: 4px 4px;
+      }
+    }
 
     > li {
       list-style: none;
@@ -233,8 +240,8 @@ header {
 
     .drop-list {
       position: absolute;
-      width: 136px;
-      margin-left: -28px;
+      width: 128px;
+      margin-left: -36px;
       background: #3CB371;
       box-shadow: 0 1px 2px #333333;
       border: dashed seashell;
