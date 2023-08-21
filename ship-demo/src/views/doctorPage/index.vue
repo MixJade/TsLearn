@@ -1,5 +1,6 @@
 <template>
   <div class="my-index">
+    <!-- 导航 -->
     <header>
       <ul>
         <li>
@@ -14,6 +15,7 @@
       </ul>
     </header>
     <main>
+      <!-- 时钟 -->
       <div class="clock">
         <p>{{ timeNum.hh1 }}</p>
         <p>{{ timeNum.hh2 }}</p>
@@ -24,6 +26,39 @@
         <p>{{ timeNum.ss1 }}</p>
         <p>{{ timeNum.ss2 }}</p>
       </div>
+      <!-- 卡片 -->
+      <MyRow>
+        <div class="box">
+          <span></span>
+          <div class="content">
+            <h2>个人中心</h2>
+            <p>修改密码，施展权限</p>
+            <router-link to="/doctorPage/doctorOne">
+              <el-button plain size="large" type="success">个人中心</el-button>
+            </router-link>
+          </div>
+        </div>
+        <div class="box">
+          <span></span>
+          <div class="content">
+            <h2>处理挂号</h2>
+            <p>头痛医头，脚痛医脚</p>
+            <router-link to="/doctorPage/d-appoint">
+              <el-button plain size="large" type="danger">处理挂号</el-button>
+            </router-link>
+          </div>
+        </div>
+        <div class="box">
+          <span></span>
+          <div class="content">
+            <h2>在线咨询</h2>
+            <p>言语交流，答疑解惑</p>
+            <router-link to="/doctorPage/d-chat">
+              <el-button plain size="large" type="primary">在线咨询</el-button>
+            </router-link>
+          </div>
+        </div>
+      </MyRow>
     </main>
   </div>
 </template>
@@ -31,6 +66,7 @@
 <script lang="ts" setup>
 
 import {onBeforeUnmount, onMounted, reactive} from "vue";
+import MyRow from "@/components/MyRow.vue";
 // 一秒执行一次
 let timeTimer: NodeJS.Timer;
 
@@ -152,6 +188,83 @@ header {
     0 9px 9px rgba(231, 156, 156, 0.3),
     0 12px 12px rgba(231, 156, 156, 0.3),
     0 15px 15px rgba(231, 156, 156, 0.3);
+  }
+}
+
+/* 卡片入口 */
+.box {
+  position: relative;
+  width: 360px;
+  height: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:before {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 90px;
+    width: 50%;
+    height: 100%;
+    text-decoration: none;
+    background: linear-gradient(315deg, #ffbc00, #ff0058);
+    border-radius: 8px;
+    transform: skewX(15deg);
+    transition: 0.5s;
+  }
+
+  &:hover:before {
+    transform: skewX(0deg) scaleX(1.3);
+  }
+
+  span {
+    /* 上下的小方块 */
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      width: 50px;
+      height: 50px;
+    }
+
+    &:before {
+      top: -40px;
+      left: 40px;
+    }
+
+    &:after {
+      bottom: -40px;
+      right: 40px;
+    }
+  }
+
+  .content {
+    position: relative;
+    width: 190px;
+    height: 254px;
+    padding: 20px 40px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    color: #fff;
+    text-align: center;
+
+    h2 {
+      font-size: 20px;
+      color: #fff;
+      margin-bottom: 10px;
+    }
   }
 }
 </style>
