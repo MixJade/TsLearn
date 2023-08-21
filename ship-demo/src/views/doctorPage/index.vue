@@ -1,30 +1,157 @@
 <template>
-  <el-container>
-    <el-header>
-      <el-menu
-          active-text-color="#ffd04b"
-          background-color="#545c64"
-          mode="horizontal"
-          router
-          text-color="#fff"
-      >
-        <el-menu-item index="/doctorPage/d-appoint">卡片实验</el-menu-item>
-        <el-menu-item index="/doctorPage/d-chat">在线咨询</el-menu-item>
-        <el-menu-item index="/doctorPage/doctorOne">个人资料</el-menu-item>
-      </el-menu>
-    </el-header>
-    <el-main>
-      <h2>此处搬空，样式待定</h2>
-    </el-main>
-  </el-container>
-
+  <div class="my-index">
+    <header>
+      <ul>
+        <li>
+          <router-link to="/doctorPage/doctorOne">个人中心</router-link>
+        </li>
+        <li>
+          <router-link to="/doctorPage/d-appoint">处理挂号</router-link>
+        </li>
+        <li>
+          <router-link to="/doctorPage/d-chat">在线咨询</router-link>
+        </li>
+      </ul>
+    </header>
+    <main>
+      <div class="clock">
+        <p>{{ timeNum.hh1 }}</p>
+        <p>{{ timeNum.hh2 }}</p>
+        <p>:</p>
+        <p>{{ timeNum.mm1 }}</p>
+        <p>{{ timeNum.mm2 }}</p>
+        <p>:</p>
+        <p>{{ timeNum.ss1 }}</p>
+        <p>{{ timeNum.ss2 }}</p>
+      </div>
+    </main>
+  </div>
 </template>
 
 <script lang="ts" setup>
+
+import {onBeforeUnmount, onMounted, reactive} from "vue";
+// 一秒执行一次
+let timeTimer: NodeJS.Timer;
+
+onMounted(() => {
+  timeTimer = setInterval(myTime, 1000);
+})
+
+onBeforeUnmount(() => {
+  clearInterval(timeTimer)
+})
+
+const timeNum = reactive({
+  hh1: 0,
+  hh2: 0,
+  mm1: 0,
+  mm2: 0,
+  ss1: 0,
+  ss2: 0
+})
+
+const myTime = () => {
+  const time = new Date();
+  const hh = time.getHours();  //时
+  const mm = time.getMinutes();  //分
+  const ss = time.getSeconds();  //秒
+  // Math.floor() 向下取整
+  timeNum.hh1 = Math.floor(hh / 10)
+  timeNum.hh2 = hh % 10
+  timeNum.mm1 = Math.floor(mm / 10)
+  timeNum.mm2 = mm % 10
+  timeNum.ss1 = Math.floor(ss / 10)
+  timeNum.ss2 = ss % 10
+}
 </script>
 
 <style lang="scss" scoped>
-.el-menu {
+.my-index {
+  -webkit-user-select: none;
+  user-select: none;
+  height: 98vh;
+  background-color: #606266;
+}
+
+/* 导航 */
+header {
+  width: 100%;
+  height: 50px;
+  position: relative;
+  top: 0;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  background-color: #303133;
+  display: flex;
+  align-items: center;
   justify-content: center;
+
+  ul {
+    width: 36%;
+    min-width: 240px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    line-height: 50px;
+
+    li {
+      width: 100%;
+      display: inline-block;
+      text-align: center;
+      list-style: none;
+      color: #FAFAFA;
+
+      a {
+        font-size: 16px;
+        font-weight: bold;
+        display: block;
+      }
+
+      &:nth-child(1):hover {
+        color: #67C23A;
+        border-bottom: #67C23A solid 5px;
+      }
+
+      &:nth-child(2):hover {
+        color: red;
+        border-bottom: red solid 5px;
+      }
+
+      &:nth-child(3):hover {
+        color: mediumpurple;
+        border-bottom: mediumpurple solid 5px;
+      }
+    }
+  }
+}
+
+/* 时钟 */
+.clock {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+
+  p {
+    width: 56px;
+    font-size: 64px;
+    color: #fff;
+    text-align: center;
+    font-weight: 700;
+    /* 文字阴影 实现3D效果 */
+    text-shadow: 0 1px 0 #deafaf,
+    0 2px 0 #bda8a8,
+    0 3px 0 #d8a1a1,
+    0 4px 0 #d59999,
+    0 5px 0 #d29292,
+    0 6px 0 #cf8b8b,
+    0 7px 0 #cc8484,
+    0 8px 0 #c97d7d,
+    0 0 5px rgba(231, 156, 156, 0.05),
+    0 -1px 3px rgba(231, 156, 156, 0.2),
+    0 9px 9px rgba(231, 156, 156, 0.3),
+    0 12px 12px rgba(231, 156, 156, 0.3),
+    0 15px 15px rgba(231, 156, 156, 0.3);
+  }
 }
 </style>
