@@ -32,7 +32,8 @@
           <span></span>
           <div class="content">
             <h2>个人中心</h2>
-            <p>修改密码，施展权限</p>
+            <p>或涵盖个人信息</p>
+            <p>或守护数据隐私</p>
             <router-link to="/doctorPage/doctorOne">
               <el-button plain size="large" type="success">个人中心</el-button>
             </router-link>
@@ -42,7 +43,8 @@
           <span></span>
           <div class="content">
             <h2>处理挂号</h2>
-            <p>头痛医头，脚痛医脚</p>
+            <p>或安排专业治疗</p>
+            <p>或护佑生命安宁</p>
             <router-link to="/doctorPage/d-appoint">
               <el-button plain size="large" type="danger">处理挂号</el-button>
             </router-link>
@@ -52,7 +54,8 @@
           <span></span>
           <div class="content">
             <h2>在线咨询</h2>
-            <p>言语交流，答疑解惑</p>
+            <p>或提供专业解答</p>
+            <p>或构建知识桥梁</p>
             <router-link to="/doctorPage/d-chat">
               <el-button plain size="large" type="primary">在线咨询</el-button>
             </router-link>
@@ -106,7 +109,7 @@ const myTime = () => {
 .my-index {
   -webkit-user-select: none;
   user-select: none;
-  height: 98vh;
+  min-height: 98vh;
   background-color: #606266;
 }
 
@@ -194,6 +197,7 @@ header {
 /* 卡片入口 */
 .box {
   position: relative;
+  margin-top: 8px;
   width: 360px;
   height: 280px;
   display: flex;
