@@ -5,69 +5,7 @@
   <meta charset="UTF-8">
   <title>单人详情</title>
   <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    /* 基础区域 */
-    #basePage {
-      position: absolute;
-      width: 60%;
-      left: 20%;
-      top: 5%;
-    }
-
-    /* 用户区域 */
-    .rolePa {
-      position: absolute;
-      left: 15%;
-      /* background-color: wheat; */
-    }
-
-    /*向上消失动画*/
-    @keyframes byeBye {
-      100% {
-        transform: translateY(-110%);
-        opacity: 0;
-      }
-    }
-
-    /*向下出现动画*/
-    @keyframes hello {
-      from {
-        transform: translateY(100%);
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    /* 按钮组 */
-    #btnGroup {
-      position: absolute;
-      left: 10%;
-      top: 10%;
-    }
-
-    /*翻转*/
-    .mixJ {
-      position: absolute;
-      backface-visibility: hidden;
-      transition: all 1s;
-    }
-
-    #opTwo_2 {
-      transform: rotateY(-108deg);
-    }
-
-    /*警告框*/
-    #alertWrapper {
-      position: absolute;
-      width: 40%;
-      top: 30%;
-      left: 30%;
-      z-index: 1061;
-    }
-  </style>
+  <link href="clientOne.css" rel="stylesheet">
 </head>
 
 <body>
@@ -95,7 +33,7 @@
             <label class="col-md-3 col-form-label" for="myFile">用户头像</label>
             <div class="col-md-8">
               <label for="myFile">
-                <img src="../picture/lei-jun.jpg" class="rounded-circle img-fluid p-3" alt="" id="rolePhoto" />
+                <img src="../../picture/lei-jun.jpg" class="rounded-circle img-fluid p-3" alt="" id="rolePhoto" />
               </label>
               <input type="file" id="myFile" hidden="hidden" />
               <label for="myFile" id="myFileText" style="color: red;display: none">上传文件大小应小于1MB</label>
@@ -168,7 +106,7 @@
       <div class="card mb-3" style="max-width: 540px;">
         <div class="row g-0">
           <div class="col-md-4">
-            <img src="../picture/lei-jun.jpg" class="rounded-circle img-fluid p-3" alt="" />
+            <img src="../../picture/lei-jun.jpg" class="rounded-circle img-fluid p-3" alt="" />
           </div>
           <div class="col-md-8">
             <div class="card-body">
@@ -184,7 +122,7 @@
       <div class="card mb-3" style="max-width: 540px;">
         <div class="row g-0">
           <div class="col-md-4">
-            <img src="../picture/lei-jun.jpg" class="rounded-circle img-fluid p-3" alt="" />
+            <img src="../../picture/lei-jun.jpg" class="rounded-circle img-fluid p-3" alt="" />
           </div>
           <div class="col-md-8">
             <div class="card-body">
@@ -200,31 +138,6 @@
   </div>
 </body>
 <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script>
-<script>
-  "use strict";
-
-  (function () {// 表单允许与禁止访问
-    const opTwo_1 = document.getElementById("opTwo_1")
-    const opTwo_2 = document.getElementById("opTwo_2")
-    document.getElementById("op_2").onclick = () => {
-      document.getElementById("fieldset").removeAttribute("disabled");
-      opTwo_1.style.transform = "rotateY(180deg)"
-      opTwo_2.style.transform = "rotateY(0deg)";
-    }
-    document.getElementById("op_4").onclick = () => {
-      document.getElementById("fieldset").setAttribute("disabled", "disabled");
-      opTwo_2.style.transform = "rotateY(180deg)"
-      opTwo_1.style.transform = "rotateY(0deg)";
-    }
-    const rolePa = document.getElementsByClassName("rolePa");
-    let a=0;
-    window.sayHi=b=> {
-      rolePa[a].style.animation = "byeBye 1.2s forwards";
-      rolePa[b].style.display = "";
-      rolePa[b].style.animation = "hello 1.2s forwards";
-      a=b;
-    }
-  }());
-</script>
+<script src="clientOne.js"></script>
 
 </html>
