@@ -34,8 +34,6 @@ const getRoleName = computed(() => {
   switch (prop.role) {
     case "ADMIN":
       return "管理员";
-    case "DOCTOR":
-      return "医生";
     default:
       return "用户";
   }
@@ -128,6 +126,7 @@ const toLogin = () => {
   margin-top: 5px;
   margin-bottom: 5px;
   left: 32px;
+  width: 80px;
 
   .check-label {
     .check-block {

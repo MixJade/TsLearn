@@ -4,7 +4,7 @@
     <header>
       <ul>
         <li>
-          <router-link to="/doctorPage/doctorOne">个人中心</router-link>
+          <router-link to="/backstage">个人中心</router-link>
         </li>
         <li>
           <router-link to="/doctorPage/d-appoint">处理挂号</router-link>
@@ -34,7 +34,7 @@
             <h2>个人中心</h2>
             <p>或涵盖个人信息</p>
             <p>或守护数据隐私</p>
-            <router-link to="/doctorPage/doctorOne">
+            <router-link to="/backstage">
               <el-button plain size="large" type="success">个人中心</el-button>
             </router-link>
           </div>

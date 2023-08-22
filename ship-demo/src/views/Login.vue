@@ -15,6 +15,7 @@
       <path d="M0 80 Q500 280 ,1000 80" fill="url(#Gradient)" stroke="transparent"/>
     </svg>
     <!--登陆卡片-->
+    <h2 class="my-h2">轻触牌间喵，进入影中境</h2>
     <!-- 用户登录 -->
     <div :style="{ transform: pairClient }" class="mixJade">
       <img alt="管理员入口" height="48" src="/mia.svg" width="64" @click="clientToAdmin">
@@ -29,12 +30,7 @@
     <div :style="{ transform: pairAdmin }" class="mixJade">
       <img alt="普通入口" height="48" src="/mia.svg" width="64" @click="adminToClient">
       <LoginForm role="ADMIN"/>
-      <el-button plain round type="primary" @click="adminToDoctor">医生登录</el-button>
-    </div>
-    <!-- 医生登录 -->
-    <div :style="{ transform: pairDoctor }" class="mixJade">
-      <LoginForm role="DOCTOR"/>
-      <el-button plain round type="success" @click="doctorToAdmin">管理员登录</el-button>
+      <div style="color: #6c757d">智慧唯在沉思中得享</div>
     </div>
   </div>
 </template>
@@ -45,7 +41,6 @@ import {reactive, ref} from "vue";
 
 const pairClient = ref<string>("rotateY(0deg)")
 const pairAdmin = ref<string>("rotateY(180deg)")
-const pairDoctor = ref<string>("rotateX(180deg)")
 const backColor = reactive({
   begin: "MediumVioletRed",
   end: "MediumOrchid"
@@ -64,20 +59,6 @@ const adminToClient = () => {
   backColor.begin = "MediumVioletRed"
   backColor.end = "MediumOrchid"
 }
-
-const adminToDoctor = () => {
-  pairAdmin.value = "rotateX(180deg)"
-  pairDoctor.value = "rotateX(0deg)"
-  backColor.begin = "BlueViolet"
-  backColor.end = "CornflowerBlue"
-}
-
-const doctorToAdmin = () => {
-  pairDoctor.value = "rotateX(180deg)"
-  pairAdmin.value = "rotateX(0deg)"
-  backColor.begin = "ForestGreen"
-  backColor.end = "DeepSkyBlue"
-}
 </script>
 <style lang="scss" scoped>
 /*整个登录组件*/
@@ -89,6 +70,14 @@ const doctorToAdmin = () => {
     position: fixed;
     height: 50vh;
     width: 98vw;
+  }
+
+  /* 欢迎文字 */
+  .my-h2 {
+    position: fixed;
+    color: #FAFAFA;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 

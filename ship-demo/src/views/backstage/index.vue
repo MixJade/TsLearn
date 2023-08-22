@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-aside width="200px">
-      <router-link to="/backstage">
+      <router-link :to="$route.path==='/backstage'?'/doctorPage':'/backstage'">
         <el-avatar src="/picture/lei-jun.jpg"/>
       </router-link>
       <el-menu
