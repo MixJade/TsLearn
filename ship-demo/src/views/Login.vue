@@ -64,7 +64,7 @@ const adminToClient = () => {
 /*整个登录组件*/
 .login-page {
   width: 98vw;
-  height: 90vh;
+  height: 98vh;
   /* 背景的svg */
   svg {
     position: fixed;

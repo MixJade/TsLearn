@@ -107,8 +107,8 @@ import router from "@/router";
 import {DoctorDto, exampleDoctor} from "@/modal/DO/DoctorDto";
 import {exampleFoster, FosterCardDto} from "@/modal/DO/FosterCardDto";
 import {exampleNotice, NoticeDto} from "@/modal/DO/NoticeDto";
-import VueFoot from "@/components/VueFoot.vue";
-import WindRoll from "@/components/WindRoll.vue";
+import VueFoot from "@/components/show/VueFoot.vue";
+import WindRoll from "@/components/show/WindRoll.vue";
 
 // 公告栏
 const notices: NoticeDto[] = reactive(exampleNotice())
