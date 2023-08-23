@@ -6,14 +6,14 @@
   <p></p>
   <!--列表展示-->
   <el-table :data="employeeList.records"
-            max-height="430"
+            max-height="80vh"
             row-key="employeeId"
             stripe
             style="width: 100%"
             @selection-change="handleSelectionChange">
     <el-table-column type="selection" width="30"/>
     <el-table-column label="图像">
-      <el-avatar src="/picture/lei-jun.jpg"/>
+      <MyAvatar name="lei-jun.jpg"/>
     </el-table-column>
     <el-table-column label="账号" prop="employeeUsername"/>
     <el-table-column label="姓名" prop="employeeName"/>
@@ -68,6 +68,7 @@ import {XEmployeeList} from "@/modal/VO/BackQuery";
 import {getDaysFromToday} from "@/utils/TimeUtil";
 import {getJob} from "@/utils/JobUtil";
 import {Employee, exampleEmployeeBack} from "@/modal/entiy/Employee";
+import MyAvatar from "@/components/show/MyAvatar.vue";
 
 // 查询的参数
 const qp: XEmployeeList = reactive({

@@ -7,7 +7,7 @@
   <p></p>
   <!--列表展示-->
   <el-table :data="fosterList.records"
-            max-height="430"
+            max-height="80vh"
             row-key="fosterId"
             stripe
             style="width: 100%"

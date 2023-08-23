@@ -6,14 +6,14 @@
   <p></p>
   <!--列表展示-->
   <el-table :data="clientList.records"
-            max-height="430"
+            max-height="80vh"
             row-key="clientId"
             stripe
             style="width: 100%"
             @selection-change="handleSelectionChange">
     <el-table-column type="selection" width="30"/>
     <el-table-column label="图像">
-      <el-avatar src="/picture/lei-jun.jpg"/>
+      <MyAvatar name="lei-jun.jpg"/>
     </el-table-column>
     <el-table-column label="用户名" prop="clientName"/>
     <el-table-column label="账号" prop="clientUsername"/>
@@ -69,6 +69,7 @@ import {YClientList} from "@/modal/VO/BackQuery";
 import {getAge} from "@/utils/TimeUtil";
 import {Client, exampleClientBack} from "@/modal/entiy/Client";
 import TagSex from "@/components/TagSex.vue";
+import MyAvatar from "@/components/show/MyAvatar.vue";
 
 // 查询的参数
 const qp: YClientList = reactive({

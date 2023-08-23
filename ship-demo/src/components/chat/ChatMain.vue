@@ -2,7 +2,7 @@
   <div ref="innerRef" style="overflow: auto;height: 100%" @click="rollBottom">
     <!--信息主体-->
     <div v-for="m in msgList" :key="m.msgId" :class="{'right-align':m.isMine}" class="msg-card">
-      <img class="my-avatar" alt="头像" :src="'/picture/'+m.rolePhoto">
+      <MyAvatar :name="m.rolePhoto"/>
       <div class="msg">
         <span>{{ m.roleName }}&nbsp;{{ getDisplayTime(m.createTime) }}</span>
         <div :class="m.isMine?'bg-success':'bg-light'" class="msgText">
@@ -20,6 +20,7 @@
 import {MsgVo} from "@/modal/VO/MsgVo";
 import {onMounted, ref} from "vue";
 import {getDisplayTime} from "@/utils/TimeUtil";
+import MyAvatar from "@/components/show/MyAvatar.vue";
 
 defineProps<{
   msgList: MsgVo[]
@@ -42,13 +43,6 @@ onMounted(() => {
 .msg-card {
   display: flex;
   padding-bottom: 5px;
-
-  img.my-avatar {
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
-  }
-
   /*消息卡片*/
   .msg {
     max-width: 50%;

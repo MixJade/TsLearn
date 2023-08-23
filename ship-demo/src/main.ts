@@ -4,7 +4,6 @@ import App from './App.vue'
 // ElementPlus
 import {
     ElAside,
-    ElAvatar,
     ElButton,
     ElButtonGroup,
     ElCard,
@@ -53,7 +52,6 @@ app.component("el-button", ElButton as Component)
     .component("el-card", ElCard as Component)
     .component("el-icon", ElIcon as Component)
     .component("el-image", ElImage as Component)
-    .component("el-avatar", ElAvatar as Component)
     .component("el-tag", ElTag as Component)
     .component("el-table", ElTable as Component)
     .component("el-table-column", ElTableColumn as Component)

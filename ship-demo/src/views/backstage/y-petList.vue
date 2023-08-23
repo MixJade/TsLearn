@@ -7,14 +7,14 @@
   <p></p>
   <!--列表展示-->
   <el-table :data="petList.records"
-            max-height="430"
+            max-height="80vh"
             row-key="petId"
             stripe
             style="width: 100%"
             @selection-change="handleSelectionChange">
     <el-table-column type="selection" width="30"/>
     <el-table-column label="图像">
-      <el-avatar src="/picture/pet-ex.jpg"/>
+      <MyAvatar name="pet-ex.jpg"/>
     </el-table-column>
     <el-table-column label="宠物名" prop="petName"/>
     <el-table-column label="品种">
@@ -80,6 +80,7 @@ import {examplePetBack} from "@/modal/DO/PetDto";
 import {getAge} from "@/utils/TimeUtil";
 import {Pet} from "@/modal/entiy/Pet";
 import TagSex from "@/components/TagSex.vue";
+import MyAvatar from "@/components/show/MyAvatar.vue";
 
 // 查询的参数
 const qp: YPetList = reactive({

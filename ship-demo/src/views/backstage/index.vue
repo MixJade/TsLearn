@@ -2,7 +2,7 @@
   <el-container>
     <el-aside width="200px">
       <router-link :to="$route.path==='/backstage'?'/doctorPage':'/backstage'">
-        <el-avatar src="/picture/lei-jun.jpg"/>
+        <img class="my-avatar" alt="头像" src="/picture/lei-jun.jpg"/>
       </router-link>
       <el-menu
           :default-active="$route.path"
@@ -94,7 +94,8 @@ import {
     background-color: #545c64;
     user-select: none;
     /*头像*/
-    .el-avatar {
+    img.my-avatar {
+      border-radius: 50%;
       position: relative;
       height: 72px;
       width: 72px;

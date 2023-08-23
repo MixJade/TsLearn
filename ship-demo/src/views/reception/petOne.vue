@@ -10,7 +10,7 @@
           <!-- 左边div：宠物头像-->
           <el-col :md="8" :sm="10" :xs="24">
             <div class="left-div">
-              <el-avatar src="/picture/pet-ex.jpg"/>
+              <img class="my-avatar" alt="头像" src="/picture/pet-ex.jpg">
               <h3>{{ pet.petName }}</h3>
               <span>{{ getAge(pet.petAge) }}岁</span>
             </div>
@@ -125,7 +125,8 @@ const dialogAsk: PetAskOne = reactive({
   .left-div {
     text-align: center;
 
-    .el-avatar {
+    img.my-avatar {
+      border-radius: 50%;
       margin-top: 10px;
       width: 128px;
       height: 128px;
