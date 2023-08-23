@@ -20,7 +20,7 @@
 import {getAge} from "@/utils/TimeUtil";
 import {DoctorDto} from "@/modal/DO/DoctorDto";
 import MyCard from "@/components/card/MyCard.vue";
-import MyRow from "@/components/MyRow.vue";
+import MyRow from "@/components/show/MyRow.vue";
 // 接收参数：医生卡片
 defineProps<{
   readonly cardList: DoctorDto[]

@@ -9,7 +9,7 @@
         <!-- 左边div：医生卡片-->
         <el-col :md="8" :sm="10" :xs="24">
           <div class="left-div">
-            <el-avatar src="/picture/doctor-ex.jpg"/>
+            <img class="my-avatar" alt="头像" src="/picture/doctor-ex.jpg">
             <table class="my-show-tab">
               <tr>
                 <td colspan="2"><span style="font-weight: bolder">{{ doctorDetail.doctorName }}</span></td>
@@ -77,7 +77,8 @@ const removeT = (row: AppointDto) => moveT(row.appointmentDate)
     width: 70vw;
     left: 15vw;
 
-    .el-avatar {
+    img.my-avatar {
+      border-radius: 50%;
       margin-top: 10px;
       width: 128px;
       height: 128px;
@@ -90,7 +91,8 @@ const removeT = (row: AppointDto) => moveT(row.appointmentDate)
     width: 80vw;
     left: 10vw;
 
-    .el-avatar {
+    img.my-avatar {
+      border-radius: 50%;
       width: 64px;
       height: 64px;
     }

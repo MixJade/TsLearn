@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts" setup>
-import WindRoll from "@/components/WindRoll.vue";</script>
+import WindRoll from "@/components/show/WindRoll.vue";</script>
 
 <style lang="scss" scoped>
 .sec {

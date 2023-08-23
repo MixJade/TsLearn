@@ -1,5 +1,5 @@
 <template>
-  <el-avatar :src="rolePhoto" alt="头像"/>
+  <img class="my-avatar" alt="头像" :src="rolePhoto"/>
   <!-- 用户、管理员、医生的个人信息展示-->
   <table class="myTable">
     <tr v-for="t in tabCon">
@@ -47,7 +47,8 @@ const updatePwd = () => {
 </script>
 
 <style lang="scss" scoped>
-.el-avatar {
+img.my-avatar {
+  border-radius: 50%;
   width: 128px;
   height: 128px;
   position: relative;

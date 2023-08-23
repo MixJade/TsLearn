@@ -19,7 +19,7 @@
 import MyCard from "@/components/card/MyCard.vue";
 import {getAge} from "@/utils/TimeUtil";
 import {Pet} from "@/modal/entiy/Pet";
-import MyRow from "@/components/MyRow.vue";
+import MyRow from "@/components/show/MyRow.vue";
 // 接收参数：宠物卡片
 defineProps<{
   readonly cardList: Pet[]

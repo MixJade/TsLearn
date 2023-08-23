@@ -7,7 +7,7 @@
 
 <script lang="ts" setup>
 import MyBtn from "@/components/button/MyBtn.vue";
-import VueFoot from "@/components/VueFoot.vue";
+import VueFoot from "@/components/show/VueFoot.vue";
 
 const x = () => {
   alert("你好")

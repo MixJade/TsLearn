@@ -2,11 +2,11 @@
   <div ref="innerRef" style="overflow: auto;height: 100%" @click="rollBottom">
     <!--信息主体-->
     <div v-for="m in msgList" :key="m.msgId" :class="{'right-align':m.isMine}" class="msg-card">
-      <el-avatar :src="'/picture/'+m.rolePhoto"/>
+      <img class="my-avatar" alt="头像" :src="'/picture/'+m.rolePhoto">
       <div class="msg">
         <span>{{ m.roleName }}&nbsp;{{ getDisplayTime(m.createTime) }}</span>
         <div :class="m.isMine?'bg-success':'bg-light'" class="msgText">
-          <el-image v-if="m.isImg" fit="cover" src="/picture/lun-3.jpg"/>
+          <el-image v-if="m.isImg" fit="cover" src="/picture/wall.png"/>
           <div v-else style="font-family: serif;">
             {{ m.msgContent }}
           </div>
@@ -42,6 +42,13 @@ onMounted(() => {
 .msg-card {
   display: flex;
   padding-bottom: 5px;
+
+  img.my-avatar {
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+  }
+
   /*消息卡片*/
   .msg {
     max-width: 50%;

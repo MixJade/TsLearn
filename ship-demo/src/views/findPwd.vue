@@ -1,17 +1,44 @@
 <template>
-  <div class="send-mail">
-    <img alt="信封表面" src="/picture/envelope_1.svg">
-    <div>
-      <div>你好</div>
+  <div class="find-pwd">
+    <PageHead>找回密码</PageHead>
+    <img class="cloud" alt="云朵" src="/picture/cloud.png">
+    <div class="send-mail">
+      <img alt="信封表面" src="/picture/envelope_1.svg">
+      <div>
+        <div>你好</div>
+      </div>
+      <img alt="信封背景" src="/picture/envelope_2.svg">
     </div>
-    <img alt="信封背景" src="/picture/envelope_2.svg">
+    <img class="cloud" alt="云朵" src="/picture/cloud.png">
   </div>
 </template>
 
 <script lang="ts" setup>
-</script>
+import PageHead from "@/components/PageHead.vue";</script>
 
 <style lang="scss" scoped>
+.find-pwd {
+  width: 98vw;
+  height: 98vh;
+  background-image: linear-gradient(#F0E68C, transparent);
+
+  & > img.cloud {
+    position: absolute;
+
+    &:first-of-type {
+      mix-blend-mode: screen; /* 设置背景融合 */
+      left: 10%;
+      top: 10%;
+    }
+
+    &:last-of-type {
+      left: 55%;
+      top: 50%;
+      z-index: -1;
+    }
+  }
+}
+
 .send-mail {
   position: absolute;
   left: 50%;
