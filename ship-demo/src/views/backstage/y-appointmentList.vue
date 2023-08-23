@@ -12,7 +12,7 @@
   <p></p>
   <!--列表展示-->
   <el-table :data="appointList.records"
-            max-height="430"
+            max-height="80vh"
             row-key="appointId"
             stripe
             style="width: 100%"

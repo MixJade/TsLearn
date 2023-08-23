@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="happy hover-effect">
-      <el-avatar src="/picture/doctor-ex.jpg" @click="$router.push('/doctorPage/doctorOne')"/>
+      <img class="my-avatar" alt="头像" src="/picture/doctor-ex.jpg" @click="$router.push('/doctorPage/doctorOne')"/>
     </div>
   </div>
 </template>
@@ -66,7 +66,8 @@
     margin-top: -32px;
     text-align: center;
     /*头像图片*/
-    .el-avatar {
+    img.my-avatar {
+      border-radius: 50%;
       width: 64px;
       height: 64px;
     }

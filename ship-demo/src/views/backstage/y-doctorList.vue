@@ -7,14 +7,14 @@
   <p></p>
   <!--列表展示-->
   <el-table :data="doctorList.records"
-            max-height="430"
+            max-height="80vh"
             row-key="doctorId"
             stripe
             style="width: 100%"
             @selection-change="handleSelectionChange">
     <el-table-column type="selection" width="30"/>
     <el-table-column label="图像">
-      <el-avatar src="/picture/doctor-ex.jpg"/>
+      <MyAvatar name="doctor-ex.jpg"/>
     </el-table-column>
     <el-table-column label="医生名" prop="doctorName"/>
     <el-table-column label="工号" prop="doctorCode"/>
@@ -81,6 +81,7 @@ import {getAge} from "@/utils/TimeUtil";
 import {Doctor} from "@/modal/entiy/Doctor";
 import {exampleDoctorBack} from "@/modal/DO/DoctorDto";
 import TagSex from "@/components/TagSex.vue";
+import MyAvatar from "@/components/show/MyAvatar.vue";
 
 // 查询的参数
 const qp: YDoctorList = reactive({
