@@ -40,6 +40,8 @@ $txt-color: #337ecc;
 $round-color: #DBA21C;
 $bord-color: #887456;
 .radio-group {
+  margin-left: 40px;
+  margin-top: 10px;
   @media (max-width: 800px) {
     display: flex;
   }
