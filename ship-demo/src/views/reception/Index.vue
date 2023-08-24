@@ -30,16 +30,17 @@
       <!-- 公告栏-->
       <h2>网站公告</h2>
       <p>网站的最新公告</p>
-      <el-row :gutter="12">
-        <el-col v-for="notice in notices" :key="notice.noticeId" :md="8" :sm="12" :xs="24">
-          <el-card shadow="hover" @click="openDialog(notice)">{{ notice.noticeTitle }}</el-card>
-        </el-col>
-      </el-row>
+      <MyRow>
+        <NoticeBtn v-for="notice in notices" :key="notice.noticeId" @click="openDialog(notice)">
+          {{ notice.noticeTitle }}
+        </NoticeBtn>
+      </MyRow>
       <!--公告的对话框-->
       <el-dialog
           v-model="showDialog"
           :title="noticeDialog.noticeTitle"
           width="50%"
+          min-width="500px"
       >
         <div class="textNotice">{{ noticeDialog.textNotice }}</div>
         <template #footer>
@@ -109,6 +110,8 @@ import {exampleFoster, FosterCardDto} from "@/modal/DO/FosterCardDto";
 import {exampleNotice, NoticeDto} from "@/modal/DO/NoticeDto";
 import VueFoot from "@/components/show/VueFoot.vue";
 import WindRoll from "@/components/show/WindRoll.vue";
+import MyRow from "@/components/show/MyRow.vue";
+import NoticeBtn from "@/components/button/NoticeBtn.vue";
 
 // 公告栏
 const notices: NoticeDto[] = reactive(exampleNotice())
