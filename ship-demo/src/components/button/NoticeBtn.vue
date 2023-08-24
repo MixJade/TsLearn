@@ -11,8 +11,8 @@
 .btn {
   width: 100%;
   height: 56px;
-  background-color: #f3d19e;
-  border: solid orange;
+  background-color: #98FB98;
+  border: solid #32CD32;
   font-size: 1.1em;
   cursor: pointer;
   border-radius: 12px;
