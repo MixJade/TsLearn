@@ -18,17 +18,16 @@
         <span>挂号查看</span>
       </label>
     </div>
-    <div class="one-basePage">
-      <div class="really">
-        <router-view></router-view>
-      </div>
-    </div>
+    <LightBox>
+      <router-view></router-view>
+    </LightBox>
   </div>
 </template>
 
 <script lang="ts" setup>
 import {ref, watch} from 'vue'
 import router from "@/router";
+import LightBox from "@/components/card/LightBox.vue";
 
 const checkValue = ref<string>(router.currentRoute.value.fullPath)
 watch(checkValue, () => {
@@ -36,7 +35,6 @@ watch(checkValue, () => {
 })
 </script>
 
-<style scoped src="public/css/one-basePage.css"/>
 <style lang="scss" scoped>
 $txt-color: #337ecc;
 $round-color: #DBA21C;

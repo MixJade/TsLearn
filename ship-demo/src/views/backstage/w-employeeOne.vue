@@ -1,17 +1,15 @@
 <template>
-  <div class="one-basePage">
-    <div class="really">
-      <router-link to="/doctorPage">
-        <el-button style="position: absolute" type="success">悬壶济世</el-button>
-      </router-link>
-      <DetailTable
-          :tab-con="em"
-          role-photo="/picture/lei-jun.jpg"
-          @upPwd="updatePwd"
-          @upRole="updateRole"
-      />
-    </div>
-  </div>
+  <LightBox>
+    <router-link to="/doctorPage">
+      <el-button style="position: absolute" type="success">悬壶济世</el-button>
+    </router-link>
+    <DetailTable
+        :tab-con="em"
+        role-photo="/picture/lei-jun.jpg"
+        @upPwd="updatePwd"
+        @upRole="updateRole"
+    />
+  </LightBox>
 </template>
 
 <script lang="ts" setup>
@@ -20,6 +18,7 @@ import {Employee, exampleEmployee} from "@/modal/entiy/Employee";
 import {getJob} from "@/utils/JobUtil";
 import {getAge, getDaysFromToday} from "@/utils/TimeUtil";
 import {computed, reactive} from "vue";
+import LightBox from "@/components/card/LightBox.vue";
 // 设置展示信息
 const employee: Employee = reactive(exampleEmployee())
 const em = computed((): DetailTabType[] => [
@@ -41,4 +40,4 @@ const updatePwd = () => {
 }
 </script>
 
-<style scoped src="public/css/one-basePage.css"/>
+<style scoped></style>
