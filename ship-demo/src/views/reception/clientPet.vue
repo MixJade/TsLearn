@@ -1,6 +1,6 @@
 <template>
   <el-card v-for="pet in petList" :key="pet.petId">
-    <el-row :gutter="20" class="my-pet-card">
+    <el-row :gutter="20">
       <el-col
           :md="6" :sm="8" :xs="24"
       ><img alt="宠物" src="/picture/pet-ex.jpg"/>
