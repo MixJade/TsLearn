@@ -9,7 +9,6 @@ import {
     ElCard,
     ElCol,
     ElContainer,
-    ElDatePicker,
     ElDescriptions,
     ElDescriptionsItem,
     ElDialog,
@@ -29,8 +28,6 @@ import {
     ElMessage,
     ElOption,
     ElPagination,
-    ElRadio,
-    ElRadioGroup,
     ElRow,
     ElSelect,
     ElSubMenu,
@@ -67,9 +64,6 @@ app.component("el-button", ElButton as Component)
     .component("el-form-item", ElFormItem as Component)
     .component("el-input", ElInput as Component)
     .component("el-input-number", ElInputNumber as Component)
-    .component("el-date-picker", ElDatePicker as Component)
-    .component("el-radio-group", ElRadioGroup as Component)
-    .component("el-radio", ElRadio as Component)
     .component("el-select", ElSelect as Component)
     .component("el-option", ElOption as Component)
     // 布局相关
