@@ -55,6 +55,8 @@ if (props.type === "warning") {
   border: 3px solid $bor-color;
   transition: 0.5s ease-out;
   overflow: visible;
+  -webkit-user-select: none;
+  user-select: none;
 
   &:hover {
     border-color: $hov-color;

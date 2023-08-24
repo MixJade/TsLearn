@@ -166,6 +166,8 @@ header {
   justify-content: space-between;
   align-items: center;
   z-index: 100;
+  -webkit-user-select: none;
+  user-select: none;
 
   & > a:first-child {
     color: #fff;
