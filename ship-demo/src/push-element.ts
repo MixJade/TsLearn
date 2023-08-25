@@ -1,23 +1,18 @@
 import {App as Vpp, Component} from 'vue'
 // ElementPlus
 import {
-    ElAside,
     ElButton,
     ElButtonGroup,
-    ElContainer,
     ElDescriptions,
     ElDescriptionsItem,
     ElDialog,
     ElEmpty,
-    ElFooter,
     ElForm,
     ElFormItem,
-    ElHeader,
     ElIcon,
     ElImage,
     ElInput,
     ElInputNumber,
-    ElMain,
     ElMenu,
     ElMenuItem,
     ElMenuItemGroup,
@@ -53,12 +48,6 @@ import "element-plus/es/components/input/style/css";
 import "element-plus/es/components/input-number/style/css";
 import "element-plus/es/components/select/style/css";
 import "element-plus/es/components/option/style/css";
-// 布局相关
-import "element-plus/es/components/container/style/css";
-import "element-plus/es/components/header/style/css";
-import "element-plus/es/components/footer/style/css";
-import "element-plus/es/components/main/style/css";
-import "element-plus/es/components/aside/style/css";
 // 菜单
 import "element-plus/es/components/menu/style/css";
 import "element-plus/es/components/sub-menu/style/css";
@@ -89,12 +78,6 @@ export const pushElement = (app: Vpp) => {
         .component("el-input-number", ElInputNumber as Component)
         .component("el-select", ElSelect as Component)
         .component("el-option", ElOption as Component)
-        // 布局相关
-        .component("el-container", ElContainer as Component)
-        .component("el-header", ElHeader as Component)
-        .component("el-footer", ElFooter as Component)
-        .component("el-main", ElMain as Component)
-        .component("el-aside", ElAside! as Component)
         // 菜单
         .component("el-menu", ElMenu as Component)
         .component("el-sub-menu", ElSubMenu as Component)
