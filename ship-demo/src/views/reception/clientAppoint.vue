@@ -1,10 +1,8 @@
 <template>
-  <el-card v-for="a in appointList" :key="a.appointmentId" shadow="always">
-    <template #header>
-      <div>
-        <span>单号：{{ a.appointmentId }}</span>
-      </div>
-    </template>
+  <div class="pa-card" v-for="a in appointList" :key="a.appointmentId">
+    <div class="card-tit">
+      <span>单号：{{ a.appointmentId }}</span>
+    </div>
     <el-descriptions :column="3" :title="'就诊时间：'+ moveT(a.appointmentDate)" border>
       <el-descriptions-item
           align="center"
@@ -25,7 +23,7 @@
         {{ moveT(a.createTime) }}
       </el-descriptions-item>
     </el-descriptions>
-  </el-card>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -36,4 +34,5 @@ const appointList = exampleClientAppoint()
 </script>
 
 <style scoped>
+@import url("/css/pa-card.css");
 </style>

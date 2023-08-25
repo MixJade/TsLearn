@@ -1,57 +1,47 @@
 <template>
-  <el-container class="base-page">
+  <div class="base-page">
     <!-- 导航栏-->
-    <el-header>
-      <PageHead>医生详情</PageHead>
-    </el-header>
-    <el-main>
-      <el-row>
-        <!-- 左边div：医生卡片-->
-        <el-col :md="8" :sm="10" :xs="24">
-          <div class="left-div">
-            <img class="my-avatar" alt="头像" src="/picture/doctor-ex.jpg">
-            <table class="my-show-tab">
-              <tr>
-                <td colspan="2"><span style="font-weight: bolder">{{ doctorDetail.doctorName }}</span></td>
-              </tr>
-              <tr>
-                <td colspan="2">工号：{{ doctorDetail.doctorCode }}</td>
-              </tr>
-              <tr class="hide-narrow">
-                <td class="right-align">{{ getAge(doctorDetail.doctorAge) }}岁&nbsp;</td>
-                <td class="left-align">&nbsp;{{ doctorDetail.doctorGender ? "男" : "女" }}</td>
-              </tr>
-              <tr class="hide-narrow">
-                <td class="right-align">{{ doctorDetail.doctorJob }}&nbsp;</td>
-                <td class="left-align">&nbsp;{{ doctorDetail.departmentName }}</td>
-              </tr>
-              <tr class="hide-narrow">
-                <td colspan="2">{{ doctorDetail.doctorTel }}</td>
-              </tr>
-              <tr class="hide-narrow">
-                <td colspan="2">{{ doctorDetail.doctorInfo }}</td>
-              </tr>
-              <tr>
-                <td colspan="2">
-                  <el-button type="primary" @click="$router.push('/reception/chat/'+doctorDetail.doctorId)">咨询
-                  </el-button>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </el-col>
-        <!-- 右边div，挂号信息-->
-        <el-col :md="16" :sm="14" :xs="24" style="text-align: center">
-          <el-table :data="appointDetail" height="300px" stripe style="width: 100%">
-            <el-table-column label="挂号人" prop="clientName"/>
-            <el-table-column label="宠物" prop="petName"/>
-            <el-table-column label="描述" prop="appointmentInfo"/>
-            <el-table-column :formatter="removeT" label="时间" prop="appointmentDate" width="180px"/>
-          </el-table>
-        </el-col>
-      </el-row>
-    </el-main>
-  </el-container>
+    <PageHead>医生详情</PageHead>
+    <MyRow2>
+      <img class="my-avatar" alt="头像" src="/picture/doctor-ex.jpg">
+      <table class="my-show-tab">
+        <tr>
+          <td colspan="2"><span style="font-weight: bolder">{{ doctorDetail.doctorName }}</span></td>
+        </tr>
+        <tr>
+          <td colspan="2">工号：{{ doctorDetail.doctorCode }}</td>
+        </tr>
+        <tr class="hide-narrow">
+          <td class="right-align">{{ getAge(doctorDetail.doctorAge) }}岁&nbsp;</td>
+          <td class="left-align">&nbsp;{{ doctorDetail.doctorGender ? "男" : "女" }}</td>
+        </tr>
+        <tr class="hide-narrow">
+          <td class="right-align">{{ doctorDetail.doctorJob }}&nbsp;</td>
+          <td class="left-align">&nbsp;{{ doctorDetail.departmentName }}</td>
+        </tr>
+        <tr class="hide-narrow">
+          <td colspan="2">{{ doctorDetail.doctorTel }}</td>
+        </tr>
+        <tr class="hide-narrow">
+          <td colspan="2">{{ doctorDetail.doctorInfo }}</td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <el-button type="primary" @click="$router.push('/reception/chat/'+doctorDetail.doctorId)">咨询
+            </el-button>
+          </td>
+        </tr>
+      </table>
+      <template #right>
+        <el-table :data="appointDetail" height="300px" stripe>
+          <el-table-column label="挂号人" prop="clientName"/>
+          <el-table-column label="宠物" prop="petName"/>
+          <el-table-column label="描述" prop="appointmentInfo"/>
+          <el-table-column :formatter="removeT" label="时间" prop="appointmentDate" width="180px"/>
+        </el-table>
+      </template>
+    </MyRow2>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -59,6 +49,7 @@ import PageHead from "@/components/PageHead.vue";
 import {getAge, moveT} from "@/utils/TimeUtil";
 import {exampleDoctorDetail} from "@/modal/DO/DoctorDto";
 import {AppointDto, exampleDoctorAppoint} from "@/modal/DO/AppointDto";
+import MyRow2 from "@/components/show/MyRow2.vue";
 
 // 如此获取传参
 const props = defineProps<{
@@ -110,25 +101,18 @@ const removeT = (row: AppointDto) => moveT(row.appointmentDate)
   top: 15vh;
   background-color: whitesmoke;
   box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.5);
+  padding: 16px;
+  border-radius: 12px;
+  /*医生卡片的表格*/
+  .my-show-tab {
+    width: 100%;
 
-  .el-header {
-    height: 5vh;
-  }
+    .right-align {
+      text-align: right;
+    }
 
-  .left-div {
-    text-align: center;
-    /*医生卡片的表格*/
-    .my-show-tab {
-      text-align: center;
-      width: 100%;
-
-      .right-align {
-        text-align: right;
-      }
-
-      .left-align {
-        text-align: left;
-      }
+    .left-align {
+      text-align: left;
     }
   }
 }

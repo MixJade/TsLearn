@@ -6,8 +6,6 @@ import {
     ElAside,
     ElButton,
     ElButtonGroup,
-    ElCard,
-    ElCol,
     ElContainer,
     ElDescriptions,
     ElDescriptionsItem,
@@ -28,7 +26,6 @@ import {
     ElMessage,
     ElOption,
     ElPagination,
-    ElRow,
     ElSelect,
     ElSubMenu,
     ElTable,
@@ -46,7 +43,6 @@ app.use(router)
 app.component("el-button", ElButton as Component)
     .component("el-button-group", ElButtonGroup as Component)
     // 展示组件
-    .component("el-card", ElCard as Component)
     .component("el-icon", ElIcon as Component)
     .component("el-image", ElImage as Component)
     .component("el-tag", ElTag as Component)
@@ -72,8 +68,6 @@ app.component("el-button", ElButton as Component)
     .component("el-footer", ElFooter as Component)
     .component("el-main", ElMain as Component)
     .component("el-aside", ElAside! as Component)
-    .component("el-col", ElCol as Component)
-    .component("el-row", ElRow as Component)
     // 菜单
     .component("el-menu", ElMenu as Component)
     .component("el-sub-menu", ElSubMenu as Component)
