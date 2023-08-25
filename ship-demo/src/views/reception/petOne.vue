@@ -1,55 +1,47 @@
 <template>
   <div>
-    <el-container class="base-page">
+    <div class="base-page">
       <!-- 导航栏-->
-      <el-header>
-        <PageHead>宠物详情</PageHead>
-      </el-header>
-      <el-main>
-        <el-row>
-          <!-- 左边div：宠物头像-->
-          <el-col :md="8" :sm="10" :xs="24">
-            <div class="left-div">
-              <img class="my-avatar" alt="头像" src="/picture/pet-ex.jpg">
-              <h3>{{ pet.petName }}</h3>
-              <span>{{ getAge(pet.petAge) }}岁</span>
-            </div>
-          </el-col>
+      <PageHead>宠物详情</PageHead>
+      <MyRow2>
+        <!-- 左边div：宠物头像-->
+        <img class="my-avatar" alt="头像" src="/picture/pet-ex.jpg">
+        <h3>{{ pet.petName }}</h3>
+        <span>{{ getAge(pet.petAge) }}岁</span>
+        <template #right>
           <!-- 右边div，宠物信息-->
-          <el-col :md="16" :sm="14" :xs="24" style="text-align: center">
-            <table class="myTable">
-              <tr>
-                <td class="bold">姓名</td>
-                <td>{{ pet.petName }}</td>
-              </tr>
-              <tr>
-                <td class="bold">品种</td>
-                <td>{{ pet.petVariety }}</td>
-              </tr>
-              <tr>
-                <td class="bold">性别</td>
-                <td>{{ pet.petSex ? "公" : "母" }}</td>
-              </tr>
-              <tr>
-                <td class="bold">出生日期</td>
-                <td>{{ pet.petAge }}</td>
-              </tr>
-              <tr>
-                <td class="bold">最近状况</td>
-                <td>{{ pet.petInfo }}</td>
-              </tr>
-              <tr>
-                <td class="bold">健康状况</td>
-                <td>{{ pet.petStatus }}</td>
-              </tr>
-            </table>
-            <el-button v-if="pet.clientId==null" style="width: 50%" type="primary" @click="dialogVisible = true">
-              申请领养
-            </el-button>
-          </el-col>
-        </el-row>
-      </el-main>
-    </el-container>
+          <table class="myTable">
+            <tr>
+              <td class="bold">姓名</td>
+              <td>{{ pet.petName }}</td>
+            </tr>
+            <tr>
+              <td class="bold">品种</td>
+              <td>{{ pet.petVariety }}</td>
+            </tr>
+            <tr>
+              <td class="bold">性别</td>
+              <td>{{ pet.petSex ? "公" : "母" }}</td>
+            </tr>
+            <tr>
+              <td class="bold">出生日期</td>
+              <td>{{ pet.petAge }}</td>
+            </tr>
+            <tr>
+              <td class="bold">最近状况</td>
+              <td>{{ pet.petInfo }}</td>
+            </tr>
+            <tr>
+              <td class="bold">健康状况</td>
+              <td>{{ pet.petStatus }}</td>
+            </tr>
+          </table>
+          <el-button v-if="pet.clientId==null" style="width: 50%" type="primary" @click="dialogVisible = true">
+            申请领养
+          </el-button>
+        </template>
+      </MyRow2>
+    </div>
     <!--弹出框-->
     <el-dialog v-model="dialogVisible" title="申请领养">
       <el-form :model="dialogAsk">
@@ -84,6 +76,7 @@ import {examplePetDetail} from "@/modal/entiy/Pet";
 import {getAge} from "@/utils/TimeUtil";
 import {reactive, ref} from "vue";
 import {PetAskOne} from "@/modal/VO/PetAskOne";
+import MyRow2 from "@/components/show/MyRow2.vue";
 
 // 如此获取传参
 const props = defineProps<{
@@ -109,6 +102,8 @@ const dialogAsk: PetAskOne = reactive({
   box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.5);
   width: 50vw;
   left: 25vw;
+  padding: 16px;
+  border-radius: 12px;
   @media (min-width: 576px) and (max-width: 768px) {
     width: 60vw;
     left: 20vw;
@@ -118,19 +113,11 @@ const dialogAsk: PetAskOne = reactive({
     left: 10vw;
   }
 
-  .el-header {
-    height: 5vh;
-  }
-
-  .left-div {
-    text-align: center;
-
-    img.my-avatar {
-      border-radius: 50%;
-      margin-top: 10px;
-      width: 128px;
-      height: 128px;
-    }
+  img.my-avatar {
+    border-radius: 50%;
+    margin-top: 10px;
+    width: 128px;
+    height: 128px;
   }
 }
 

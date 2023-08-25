@@ -67,7 +67,7 @@ export interface CardData {
   padding: 16px;
   box-sizing: border-box;
   border-radius: 16px;
-  box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.3);
   position: relative;
   -webkit-user-select: none;
   user-select: none;

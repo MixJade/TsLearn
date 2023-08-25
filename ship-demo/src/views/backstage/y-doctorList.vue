@@ -7,7 +7,7 @@
   <p></p>
   <!--列表展示-->
   <el-table :data="doctorList.records"
-            max-height="80vh"
+            max-height="70vh"
             row-key="doctorId"
             stripe
             style="width: 100%"

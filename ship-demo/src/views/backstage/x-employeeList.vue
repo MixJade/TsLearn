@@ -6,7 +6,7 @@
   <p></p>
   <!--列表展示-->
   <el-table :data="employeeList.records"
-            max-height="80vh"
+            max-height="70vh"
             row-key="employeeId"
             stripe
             style="width: 100%"
