@@ -33,6 +33,8 @@
   .right {
     grid-area: right;
     text-align: center;
+    max-height: 360px;
+    overflow-y: auto;
   }
 }
 </style>
