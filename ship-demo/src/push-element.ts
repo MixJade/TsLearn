@@ -10,7 +10,6 @@ import {
     ElForm,
     ElFormItem,
     ElIcon,
-    ElImage,
     ElInput,
     ElInputNumber,
     ElMenu,
@@ -30,7 +29,6 @@ import "element-plus/es/components/button/style/css";
 import "element-plus/es/components/button-group/style/css";
 // 展示组件
 import "element-plus/es/components/icon/style/css";
-import "element-plus/es/components/image/style/css";
 import "element-plus/es/components/tag/style/css";
 import "element-plus/es/components/table/style/css";
 import "element-plus/es/components/table-column/style/css";
@@ -60,7 +58,6 @@ export const pushElement = (app: Vpp) => {
         .component("el-button-group", ElButtonGroup as Component)
         // 展示组件
         .component("el-icon", ElIcon as Component)
-        .component("el-image", ElImage as Component)
         .component("el-tag", ElTag as Component)
         .component("el-table", ElTable as Component)
         .component("el-table-column", ElTableColumn as Component)

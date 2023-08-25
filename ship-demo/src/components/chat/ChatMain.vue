@@ -6,7 +6,7 @@
       <div class="msg">
         <span>{{ m.roleName }}&nbsp;{{ getDisplayTime(m.createTime) }}</span>
         <div :class="m.isMine?'bg-success':'bg-light'" class="msgText">
-          <el-image v-if="m.isImg" fit="cover" src="/picture/wall.png"/>
+          <img alt="聊天图片" v-if="m.isImg" src="/picture/wall.png"/>
           <div v-else style="font-family: serif;">
             {{ m.msgContent }}
           </div>
@@ -59,6 +59,10 @@ onMounted(() => {
       margin: 5px;
       border-radius: 8px;
       text-align: left;
+      /* 聊天图片 */
+      img {
+        object-fit: cover;
+      }
     }
 
     /*用户信息背景*/
