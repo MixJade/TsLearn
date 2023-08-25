@@ -123,6 +123,7 @@ const noMail = (): boolean => {
 
   img {
     width: 452px;
+    max-width: 92vw;
     height: 456px;
     pointer-events: none; /* 禁用事件，让下面div事件能够触发 */
     &:first-of-type {
@@ -209,6 +210,12 @@ const noMail = (): boolean => {
         background-color: #fab6b6;
       }
     }
+  }
+}
+
+@media screen and (max-width: 520px) {
+  img.cloud {
+    display: none;
   }
 }
 </style>

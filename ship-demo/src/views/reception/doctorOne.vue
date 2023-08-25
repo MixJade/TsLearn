@@ -3,7 +3,7 @@
     <!-- 导航栏-->
     <PageHead>医生详情</PageHead>
     <MyRow2>
-      <img class="my-avatar" alt="头像" src="/picture/doctor-ex.jpg">
+      <img alt="头像" class="my-avatar" src="/picture/doctor-ex.jpg">
       <table class="my-show-tab">
         <tr>
           <td colspan="2"><span style="font-weight: bolder">{{ doctorDetail.doctorName }}</span></td>
@@ -33,12 +33,24 @@
         </tr>
       </table>
       <template #right>
-        <el-table :data="appointDetail" height="300px" stripe>
-          <el-table-column label="挂号人" prop="clientName"/>
-          <el-table-column label="宠物" prop="petName"/>
-          <el-table-column label="描述" prop="appointmentInfo"/>
-          <el-table-column :formatter="removeT" label="时间" prop="appointmentDate" width="180px"/>
-        </el-table>
+        <table class="appoint">
+          <thead>
+          <tr>
+            <th>挂号人</th>
+            <th>宠物</th>
+            <th>描述</th>
+            <th>时间</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="a in appointDetail" :key="a.appointmentId">
+            <td>{{ a.clientName }}</td>
+            <td>{{ a.petName }}</td>
+            <td>{{ a.appointmentInfo }}</td>
+            <td>{{ moveT(a.appointmentDate) }}</td>
+          </tr>
+          </tbody>
+        </table>
       </template>
     </MyRow2>
   </div>
@@ -48,7 +60,7 @@
 import PageHead from "@/components/PageHead.vue";
 import {getAge, moveT} from "@/utils/TimeUtil";
 import {exampleDoctorDetail} from "@/modal/DO/DoctorDto";
-import {AppointDto, exampleDoctorAppoint} from "@/modal/DO/AppointDto";
+import {exampleDoctorAppoint} from "@/modal/DO/AppointDto";
 import MyRow2 from "@/components/show/MyRow2.vue";
 
 // 如此获取传参
@@ -58,7 +70,6 @@ const props = defineProps<{
 // 样例数据
 const doctorDetail = exampleDoctorDetail(parseInt(props.doctorId));
 const appointDetail = exampleDoctorAppoint(parseInt(props.doctorId));
-const removeT = (row: AppointDto) => moveT(row.appointmentDate)
 </script>
 
 <style lang="scss" scoped>
@@ -114,6 +125,15 @@ const removeT = (row: AppointDto) => moveT(row.appointmentDate)
     .left-align {
       text-align: left;
     }
+  }
+}
+
+/* 挂号的表格 */
+table.appoint {
+  width: 100%;
+
+  thead {
+    background-color: lightblue;
   }
 }
 </style>
