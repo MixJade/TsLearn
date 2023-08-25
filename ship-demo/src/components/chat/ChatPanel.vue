@@ -1,10 +1,8 @@
 <template>
-  <el-container>
-    <el-header>
-      <PageHead>与{{ groupList[0].roleName }}{{ opType }}的聊天</PageHead>
-    </el-header>
-    <el-container>
-      <el-aside>
+  <div class="chat-panel">
+    <PageHead>与{{ groupList[0].roleName }}{{ opType }}的聊天</PageHead>
+    <section>
+      <aside>
         <h4>当前聊天</h4>
         <ul>
           <li>{{ groupList[0].roleName }}</li>
@@ -13,12 +11,12 @@
         <ul v-if="groupList.length>1">
           <li v-for="gItem in groupList.slice(1)" :key="gItem.roleId">{{ gItem.roleName }}</li>
         </ul>
-      </el-aside>
-      <el-container>
-        <el-main>
+      </aside>
+      <div class="chat-right">
+        <main>
           <ChatMain :msg-list="msgList"/>
-        </el-main>
-        <el-footer>
+        </main>
+        <footer>
           <el-icon size="36">
             <PictureRounded/>
           </el-icon>
@@ -29,10 +27,10 @@
               type="textarea"
           />
           <el-button :icon="Position" type="success" @click="sendMsgB">发送</el-button>
-        </el-footer>
-      </el-container>
-    </el-container>
-  </el-container>
+        </footer>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -61,18 +59,15 @@ const sendMsgB = (): void => {
 
 <style lang="scss" scoped>
 /*聊天主体页面*/
-.el-container {
+.chat-panel {
   width: 98vw;
   height: 88vh;
-  /*页头*/
-  .el-header {
-    height: 40px;
-    background-color: #A8ABB2;
-  }
-
   /*页头下面*/
-  .el-container {
-    .el-aside {
+  section {
+    display: flex;
+    height: 100%;
+
+    aside {
       background-color: lightgray;
       width: 15vw;
       @media (max-width: 576px) {
@@ -90,15 +85,20 @@ const sendMsgB = (): void => {
     }
 
     /*侧边栏右边*/
-    .el-container {
+    .chat-right {
+      width: 100%;
       /*信息展示区域*/
-      .el-main {
+      main {
+        box-sizing: border-box;
+        padding: 8px;
+        height: calc(100% - 50px);
         background-color: whitesmoke;
       }
 
       /*输入区域*/
-      .el-footer {
-        padding-top: 8px;
+      footer {
+        box-sizing: border-box;
+        padding: 8px;
         display: flex;
         height: 50px;
         background-color: #909399;

@@ -9,20 +9,20 @@
           <h3>找回密码</h3>
           <label>
             账号：
-            <input v-model="findPwd.username" autocomplete="off" placeholder="账号" type="text">
+            <input v-model="findPwd.username" autocomplete="off" name="username" placeholder="账号" type="text">
           </label>
           <label>
             邮箱：
-            <input v-model="findPwd.mail" autocomplete="off" placeholder="邮箱" type="email">
+            <input v-model="findPwd.mail" autocomplete="off" name="mail" placeholder="邮箱" type="email">
           </label>
           <label class="check-code">
             验证码
-            <input v-model="findPwd.checkCode" autocomplete="off" placeholder="验证码" type="text">
+            <input v-model="findPwd.checkCode" autocomplete="off" name="checkCode" placeholder="验证码" type="text">
             <button type="button" v-bind:disabled="mailBtn.dis" @click="sendMail">{{ mailBtn.btnTxt }}</button>
           </label>
           <label>
             密码：
-            <input v-model="findPwd.newPwd" autocomplete="off" placeholder="密码" type="password">
+            <input v-model="findPwd.newPwd" autocomplete="off" name="password" placeholder="密码" type="password">
           </label>
           <button type="button" @click="toFind">重置密码</button>
         </div>

@@ -1,8 +1,8 @@
 <template>
-  <el-container>
-    <el-aside width="200px">
+  <div class="backstage">
+    <aside>
       <router-link :to="$route.path==='/backstage'?'/doctorPage':'/backstage'">
-        <img class="my-avatar" alt="头像" src="/picture/lei-jun.jpg"/>
+        <img alt="头像" class="my-avatar" src="/picture/lei-jun.jpg"/>
       </router-link>
       <el-menu
           :default-active="$route.path"
@@ -18,7 +18,7 @@
             </el-icon>
             <span>个人中心</span>
           </template>
-          <el-menu-item-group :title="$route.path">
+          <el-menu-item-group title="医生姓名">
             <el-menu-item index="/backstage">个人资料</el-menu-item>
             <el-menu-item index="/backstage/x-departmentList">部门列表</el-menu-item>
             <el-menu-item index="/backstage/x-employeeList">员工列表</el-menu-item>
@@ -67,11 +67,11 @@
           <span>公告列表</span>
         </el-menu-item>
       </el-menu>
-    </el-aside>
-    <el-main>
+    </aside>
+    <main>
       <router-view></router-view>
-    </el-main>
-  </el-container>
+    </main>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -87,11 +87,17 @@ import {
 } from '@element-plus/icons-vue'</script>
 
 <style lang="scss" scoped>
-.el-container {
+.backstage {
   height: 96vh;
+  display: flex;
   /*侧边栏*/
-  .el-aside {
+  aside {
+    max-width: 180px;
+    height: 100%;
     background-color: #545c64;
+    box-sizing: border-box;
+    padding: 4px;
+    -webkit-user-select: none;
     user-select: none;
     /*头像*/
     img.my-avatar {
@@ -111,7 +117,10 @@ import {
     }
   }
 
-  .el-main {
+  main {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
     background-color: #F0EAD6;
     z-index: 0;
   }
