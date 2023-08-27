@@ -4,34 +4,21 @@
     <PageHead>医生详情</PageHead>
     <MyRow2>
       <img alt="头像" class="my-avatar" src="/picture/doctor-ex.jpg">
-      <table class="my-show-tab">
-        <tr>
-          <td colspan="2"><span style="font-weight: bolder">{{ doctorDetail.doctorName }}</span></td>
-        </tr>
-        <tr>
-          <td colspan="2">工号：{{ doctorDetail.doctorCode }}</td>
-        </tr>
-        <tr class="hide-narrow">
-          <td class="right-align">{{ getAge(doctorDetail.doctorAge) }}岁&nbsp;</td>
-          <td class="left-align">&nbsp;{{ doctorDetail.doctorGender ? "男" : "女" }}</td>
-        </tr>
-        <tr class="hide-narrow">
-          <td class="right-align">{{ doctorDetail.doctorJob }}&nbsp;</td>
-          <td class="left-align">&nbsp;{{ doctorDetail.departmentName }}</td>
-        </tr>
-        <tr class="hide-narrow">
-          <td colspan="2">{{ doctorDetail.doctorTel }}</td>
-        </tr>
-        <tr class="hide-narrow">
-          <td colspan="2">{{ doctorDetail.doctorInfo }}</td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <el-button type="primary" @click="$router.push('/reception/chat/'+doctorDetail.doctorId)">咨询
-            </el-button>
-          </td>
-        </tr>
-      </table>
+      <ul>
+        <li><span style="font-weight: bolder">{{ doctorDetail.doctorName }}</span></li>
+        <li>工号：{{ doctorDetail.doctorCode }}</li>
+      </ul>
+      <ul class="hide-narrow">
+        <li>{{ getAge(doctorDetail.doctorAge) }}岁&nbsp;&nbsp;&nbsp;{{ doctorDetail.doctorGender ? "男" : "女" }}</li>
+        <li>{{ doctorDetail.doctorJob }}&nbsp;&nbsp;&nbsp;{{ doctorDetail.departmentName }}</li>
+        <li>{{ doctorDetail.doctorTel }}</li>
+        <li>{{ doctorDetail.doctorInfo }}</li>
+        <li>
+          <router-link :to="'/reception/chat/'+doctorDetail.doctorId">
+            <el-button type="primary">咨询</el-button>
+          </router-link>
+        </li>
+      </ul>
       <template #right>
         <table class="appoint">
           <thead>
@@ -114,17 +101,10 @@ const appointDetail = exampleDoctorAppoint(parseInt(props.doctorId));
   box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.5);
   padding: 16px;
   border-radius: 12px;
-  /*医生卡片的表格*/
-  .my-show-tab {
-    width: 100%;
-
-    .right-align {
-      text-align: right;
-    }
-
-    .left-align {
-      text-align: left;
-    }
+  /*医生卡片的信息*/
+  ul {
+    list-style: none;
+    margin-left: -24px;
   }
 }
 
