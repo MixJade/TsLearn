@@ -18,9 +18,9 @@
             style="width: 100%"
             @selection-change="handleSelectionChange">
     <el-table-column type="selection" width="30"/>
-    <el-table-column label="就诊时间" prop="appointmentDate" sortable/>
+    <el-table-column :formatter="removeT" label="就诊时间" prop="appointmentDate" sortable/>
     <el-table-column label="简介" prop="appointmentInfo"/>
-    <el-table-column label="创建时间" prop="createTime" sortable/>
+    <el-table-column :formatter="removeT" label="创建时间" prop="createTime" sortable/>
     <el-table-column label="宠物名" prop="petName"/>
     <el-table-column label="挂号人" prop="clientName"/>
     <el-table-column label="医生" prop="doctorName"/>
@@ -69,6 +69,7 @@ import {Delete, Edit} from '@element-plus/icons-vue'
 import BackOpCol from "@/components/BackOpCol.vue";
 import {YAppointList} from "@/modal/VO/BackQuery";
 import {Appoint} from "@/modal/entiy/Appoint";
+import {moveT} from "@/utils/TimeUtil";
 import {exampleAppointBack} from "@/modal/DO/AppointDto";
 
 // 查询的参数
@@ -91,6 +92,9 @@ const delBatchB = (): void => {
 }
 // 列表展示
 const appointList = reactive(exampleAppointBack())
+const removeT = (row: Appoint) => {
+  return moveT(row.createTime)
+}
 // 多选与反选
 const roleIdList = ref<number[]>([])
 const handleSelectionChange = (val: Appoint[]): void => {
