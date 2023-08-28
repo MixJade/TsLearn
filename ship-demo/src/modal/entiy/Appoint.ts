@@ -8,6 +8,6 @@ export interface Appoint {
     appointmentInfo: string;
     isSuc: boolean | null;
     createTime?: string;
-    updateTime?: string;
+    updateTime?: string | null;
     isDel: string | null;
 }
