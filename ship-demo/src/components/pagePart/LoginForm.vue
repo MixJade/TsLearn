@@ -32,6 +32,7 @@
 import {computed, reactive} from "vue";
 import {ElMessage} from "element-plus"
 import MyBtn from "@/components/button/MyBtn.vue";
+import router from "@/router";
 // 定义登录的角色
 const prop = defineProps(['role'])
 // 根据传来的角色设置展示
@@ -56,6 +57,8 @@ const toLogin = () => {
     message: `登录成功!账号:${formLogin.username},密码:${formLogin.password},记住我:${formLogin.remember}`,
     type: 'success',
   })
+  if (prop.role == "ADMIN") router.push("/backstage")
+  else router.push("/reception");
 }
 </script>
 
