@@ -16,10 +16,12 @@
     <el-table-column label="简介" prop="departmentInfo"/>
     <el-table-column label="地址" prop="departmentAddress"/>
     <el-table-column fixed="right" label="操作">
-      <el-button-group>
-        <el-button :icon="Edit" circle type="warning" @click="showDialog"/>
-        <el-button :icon="Delete" circle type="danger"/>
-      </el-button-group>
+      <template #default="scope">
+        <el-button-group>
+          <el-button :icon="Edit" circle type="warning" @click="showDialog"/>
+          <el-button :icon="Delete" circle type="danger" @click="delOne(scope.row)"/>
+        </el-button-group>
+      </template>
     </el-table-column>
   </el-table>
   <p></p>
@@ -55,6 +57,7 @@ import {Delete, Edit} from '@element-plus/icons-vue'
 import BackOpCol from "@/components/BackOpCol.vue";
 import {XDepartmentList} from "@/modal/VO/BackQuery";
 import {Department, exampleDepartBack} from "@/modal/entiy/Department";
+import {ElMessage, ElMessageBox} from "element-plus";
 
 // 查询的参数
 const qp: XDepartmentList = reactive({
@@ -73,6 +76,34 @@ const addRoleB = (): void => {
 }
 const delBatchB = (): void => {
   console.log("批量删除")
+  ElMessageBox.confirm(
+      '对于这些乱我朝纲的叛乱组织，臣定当以毫不留情的决心和无比坚定的信念去镇压。',
+      '删除多个确认',
+      {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }
+  ).then(() => {
+    ElMessage.success('删除成功')
+  }).catch(() => {
+    ElMessage.info('删除取消')
+  })
+}
+const delOne = (row: Department) => {
+  ElMessageBox.confirm(
+      `在最后行动之前，我有必要再次确认您的决策，是否决定真的撤销这个【${row.departmentName}】？`,
+      '删除单个确认',
+      {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }
+  ).then(() => {
+    ElMessage.success('删除成功')
+  }).catch(() => {
+    ElMessage.info('删除取消')
+  })
 }
 // 列表展示
 const departmentList = reactive(exampleDepartBack())

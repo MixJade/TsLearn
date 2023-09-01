@@ -39,10 +39,12 @@
       </template>
     </el-table-column>
     <el-table-column fixed="right" label="操作">
-      <el-button-group>
-        <el-button :icon="Edit" circle type="warning" @click="showDialog"/>
-        <el-button :icon="Delete" circle type="danger"/>
-      </el-button-group>
+      <template #default="scope">
+        <el-button-group>
+          <el-button :icon="Edit" circle type="warning" @click="showDialog"/>
+          <el-button :icon="Delete" circle type="danger" @click="delOne(scope.row)"/>
+        </el-button-group>
+      </template>
     </el-table-column>
   </el-table>
   <p></p>
@@ -82,6 +84,7 @@ import {Doctor} from "@/modal/entiy/Doctor";
 import {exampleDoctorBack} from "@/modal/DO/DoctorDto";
 import TagSex from "@/components/TagSex.vue";
 import MyAvatar from "@/components/show/MyAvatar.vue";
+import {ElMessage, ElMessageBox} from "element-plus";
 
 // 查询的参数
 const qp: YDoctorList = reactive({
@@ -101,6 +104,34 @@ const addRoleB = (): void => {
 }
 const delBatchB = (): void => {
   console.log("批量删除")
+  ElMessageBox.confirm(
+      '这些被选中者，将迎来一场浩大而又凄美的结局。这是对他们选择和坚持的回报，是既悲痛又美丽的终结。',
+      '删除多个确认',
+      {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }
+  ).then(() => {
+    ElMessage.success('删除成功')
+  }).catch(() => {
+    ElMessage.info('删除取消')
+  })
+}
+const delOne = (row: Doctor) => {
+  ElMessageBox.confirm(
+      `【${row.doctorName}】已无路可退，只能接受命运的裁决。`,
+      '删除单个确认',
+      {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }
+  ).then(() => {
+    ElMessage.success('删除成功')
+  }).catch(() => {
+    ElMessage.info('删除取消')
+  })
 }
 // 列表展示
 const doctorList = reactive(exampleDoctorBack())

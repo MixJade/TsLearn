@@ -26,10 +26,12 @@
       </template>
     </el-table-column>
     <el-table-column fixed="right" label="操作">
-      <el-button-group>
-        <el-button :icon="Edit" circle type="warning" @click="showDialog"/>
-        <el-button :icon="Delete" circle type="danger"/>
-      </el-button-group>
+      <template #default="scope">
+        <el-button-group>
+          <el-button :icon="Edit" circle type="warning" @click="showDialog"/>
+          <el-button :icon="Delete" circle type="danger" @click="delOne(scope.row.adoptId)"/>
+        </el-button-group>
+      </template>
     </el-table-column>
   </el-table>
   <p></p>
@@ -66,6 +68,7 @@ import BackOpCol from "@/components/BackOpCol.vue";
 import {YFosterList} from "@/modal/VO/BackQuery";
 import {Foster} from "@/modal/entiy/Foster";
 import {exampleFosterBack} from "@/modal/DO/FosterDto";
+import {ElMessage, ElMessageBox} from "element-plus";
 
 // 查询的参数
 const qp: YFosterList = reactive({
@@ -84,6 +87,35 @@ const addRoleB = (): void => {
 }
 const delBatchB = (): void => {
   console.log("批量删除")
+  ElMessageBox.confirm(
+      '在您做出指示之前，我还是要再次确认，您确定要焚毁这些的订单吗？',
+      '删除多个确认',
+      {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }
+  ).then(() => {
+    ElMessage.success('删除成功')
+  }).catch(() => {
+    ElMessage.info('删除取消')
+  })
+}
+const delOne = (delId: number) => {
+  console.log("所删除的ID是", delId)
+  ElMessageBox.confirm(
+      `解脱一纸束缚的契约，赐予其尘归尘的命运。`,
+      '删除单个确认',
+      {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }
+  ).then(() => {
+    ElMessage.success('删除成功')
+  }).catch(() => {
+    ElMessage.info('删除取消')
+  })
 }
 // 列表展示
 const fosterList = reactive(exampleFosterBack())
