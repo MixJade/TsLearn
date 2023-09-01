@@ -15,7 +15,7 @@ import {
     ElMenu,
     ElMenuItem,
     ElMenuItemGroup,
-    ElMessage,
+    ElMessage, ElMessageBox,
     ElOption,
     ElPagination,
     ElSelect,
@@ -38,6 +38,7 @@ import "element-plus/es/components/empty/style/css";
 import "element-plus/es/components/pagination/style/css";
 // 消息相关
 import "element-plus/es/components/message/style/css";
+import "element-plus/es/components/message-box/style/css";
 import "element-plus/es/components/dialog/style/css";
 // 表单
 import "element-plus/es/components/form/style/css";
@@ -67,6 +68,7 @@ export const pushElement = (app: Vpp) => {
         .component("el-pagination", ElPagination as Component)
         // 消息相关
         .component(ElMessage.name, ElMessage as Component)
+        .component(ElMessageBox.name, ElMessageBox as Component)
         .component("el-dialog", ElDialog as Component)
         // 表单
         .component("el-form", ElForm as Component)

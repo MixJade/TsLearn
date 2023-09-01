@@ -38,10 +38,12 @@
     <el-table-column label="近况" prop="petInfo"/>
     <el-table-column label="主人" prop="clientName"/>
     <el-table-column fixed="right" label="操作">
-      <el-button-group>
-        <el-button :icon="Edit" circle type="warning" @click="showDialog"/>
-        <el-button :icon="Delete" circle type="danger"/>
-      </el-button-group>
+      <template #default="scope">
+        <el-button-group>
+          <el-button :icon="Edit" circle type="warning" @click="showDialog"/>
+          <el-button :icon="Delete" circle type="danger" @click="delOne(scope.row)"/>
+        </el-button-group>
+      </template>
     </el-table-column>
   </el-table>
   <p></p>
@@ -81,6 +83,7 @@ import {getAge} from "@/utils/TimeUtil";
 import {Pet} from "@/modal/entiy/Pet";
 import TagSex from "@/components/TagSex.vue";
 import MyAvatar from "@/components/show/MyAvatar.vue";
+import {ElMessage, ElMessageBox} from "element-plus";
 
 // 查询的参数
 const qp: YPetList = reactive({
@@ -100,6 +103,34 @@ const addRoleB = (): void => {
 }
 const delBatchB = (): void => {
   console.log("批量删除")
+  ElMessageBox.confirm(
+      '此处犹如寒冰之墓，飘落的雪消声无息。一群疲惫的动物在这冰冷的静寂里深深铭记，无尽等待，等待着凄凉的宿命落幕。',
+      '删除多个确认',
+      {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }
+  ).then(() => {
+    ElMessage.success('删除成功')
+  }).catch(() => {
+    ElMessage.info('删除取消')
+  })
+}
+const delOne = (row: Pet) => {
+  ElMessageBox.confirm(
+      `此地死寂如冰，落雪无声，一只憔悴的【${row.petName}】于静默中铭记与等待`,
+      '删除单个确认',
+      {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }
+  ).then(() => {
+    ElMessage.success('删除成功')
+  }).catch(() => {
+    ElMessage.info('删除取消')
+  })
 }
 // 列表展示
 const petList = reactive(examplePetBack())
