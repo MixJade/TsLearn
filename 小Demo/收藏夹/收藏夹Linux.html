@@ -1,147 +1,159 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="UTF-8">
-    <title>收藏夹模板</title>
+    <title>收藏夹Linux</title>
+    <link rel="icon" type="image/svg+xml" href='money.svg'/>
     <style>
-        /* 基础区域 */
-        #basePage {
-            position: absolute;
-            width: 60%;
-            left: 20%;
-            top: 5%;
+        body {
+            text-align: center;
+            background-color: #9BDEAC;
         }
 
-        /* 用户区域 */
-        .rolePa {
-            position: absolute;
-            left: 10%;
+        h1 {
+            /* 设置上下的空隙 */
+            margin-top: 56px;
+            margin-bottom: 56px;
+            /* 给文字添加阴影效果 */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .my-row {
+            /* 卡片专属的行布局 */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            justify-items: center;
+            grid-gap: 10px;
+        }
+
+        .card {
+            position: relative;
+            width: 360px;
+            height: 420px;
+            color: #fff;
+            transition: 0.5s;
+            cursor: pointer;
+        }
+
+        /* 响应式，父元素宽度除0.9 */
+        @media (max-width: 756px) {
+            .card {
+                width: 90%;
+            }
+        }
+
+        .card:hover {
+            transform: translateY(-20px);
+        }
+
+        .card::before {
+            content: '';
             width: 100%;
-            border: 5px solid #ccc; /*自定义边框样式、颜色等*/
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: linear-gradient(45deg, #eebe77, #f89898);
+            border-radius: 1.2em;
         }
 
-        .rolePa ul {
+        /* 卡片阴影 */
+        .card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, #eebe77, #f89898);
+            filter: blur(30px);
+        }
+
+        .card span {
+            position: absolute;
+            inset: 6px;
+            background-color: rgba(0, 0, 0, 0.1);
+            z-index: 2;
+            border-radius: 1em;
+        }
+
+        .card .content {
+            position: relative;
+            z-index: 10;
+            inset: 6px;
+        }
+
+        ul {
+            /* 取消卡片内的列表样式 */
             list-style: none;
+            /* 设置字体大小 */
+            font-size: medium;
+            /* 设置文字靠左 */
+            text-align: start;
         }
 
         a {
+            /* 取消链接的下划线 */
             text-decoration: none;
-        }
-
-        /*向上消失动画*/
-        @keyframes byeBye {
-            100% {
-                transform: translateY(-110%);
-                opacity: 0;
-            }
-        }
-
-        /*向下出现动画*/
-        @keyframes hello {
-            from {
-                transform: translateY(100%);
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        /*左侧导航*/
-        #radio-button-group {
-            position: absolute;
-            left: 10%;
-            top: 10%;
-            align-items: center;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .radio-button {
-            display: none;
-        }
-
-        .radio-label {
-            padding: 8px 15px;
-            border: 1px solid #000;
+            /* 链接字体加粗 */
             font-weight: bold;
-            cursor: pointer;
-            background-color: transparent;
-            color: #000;
-            transition: all 0.3s;
         }
 
-        .radio-button:checked + .radio-label {
-            background-color: #5b88ea;
-            color: #fff;
-        }
-
-        .radio-label:not(:last-child):not(.radio-button:checked + .radio-label) {
-            border-bottom: none;
+        .small-font {
+            font-size: smaller;
         }
     </style>
 </head>
-
 <body>
-<!--左侧导航-->
-<div id="radio-button-group">
-    <input type="radio" class="radio-button" name="vb-radio" id="vb-radio1" onclick="sayHi(0)" checked>
-    <label class="radio-label" for="vb-radio1">群贤毕至</label>
-    <input type="radio" class="radio-button" name="vb-radio" id="vb-radio2" onclick="sayHi(1)">
-    <label class="radio-label" for="vb-radio2">狗头军师</label>
-    <input type="radio" class="radio-button" name="vb-radio" id="vb-radio3" onclick="sayHi(2)">
-    <label class="radio-label" for="vb-radio3">其他补充</label>
-</div>
-
-<!--面板一-->
-<div id="basePage">
-    <div class="rolePa">
-        <ul>
-            <li><a href="https://blog.csdn.net/weixin_42905141/article/details/124071137">「安装Typora」</a></li>
-            <li><a href="https://www.bilibili.com/read/cv18230089/">「Navicat安装」</a></li>
-            <li><a href="https://www.linuxcapable.com/how-to-install-oracle-java-17-on-linux-mint/">「Java17安装」</a>
-            </li>
-            <li><a href="https://blog.csdn.net/qq_51246603/article/details/127474314">「安装IDEA」</a></li>
-            <li><a href="https://zhuanlan.zhihu.com/p/144885938">「安装Node.js」</a>记得将14.x改成18.x</li>
-            <li><a href="https://www.microsoft.com/zh-cn/edge?form=MA13FJ#evergreen">「Edge下载」</a></li>
-            <li>你好</li>
-        </ul>
+<h1>Linux-Mint收藏夹</h1>
+<div class="my-row">
+    <div class="card">
+        <span></span>
+        <div class="content">
+            <h2>软件安装</h2>
+            <ul>
+                <li><a href="https://blog.csdn.net/weixin_42905141/article/details/124071137">「安装Typora」</a></li>
+                <li><a href="https://www.bilibili.com/read/cv18230089/">「Navicat安装」</a></li>
+                <li><a href="https://www.linuxcapable.com/how-to-install-oracle-java-17-on-linux-mint/">「Java17安装」</a>
+                </li>
+                <li><a href="https://blog.csdn.net/qq_51246603/article/details/127474314">「安装IDEA」</a></li>
+                <li><a href="https://zhuanlan.zhihu.com/p/144885938">「安装Node.js」</a>将14.x改成18.x</li>
+                <li><a href="https://www.microsoft.com/zh-cn/edge?form=MA13FJ#evergreen">「Edge下载」</a></li>
+                <li><a href="http://www.mintos.org/soft/native-wechat.html">【Linux-Mint安装微信】</a></li>
+            </ul>
+        </div>
     </div>
-    <!-- 面板二 -->
-    <div class="rolePa" style="z-index: 9;display: none;">
-        <ul>
-            <li><a href="https://blog.csdn.net/qq_42843894/article/details/112639174">「使用SSH连接Github」</a></li>
-            <li><a href="https://blog.csdn.net/wangye8312166/article/details/86573832">「彻底卸载MySQL」</a></li>
-            <li><a href="https://blog.csdn.net/hai1124948893/article/details/107297582">「MySQL初始化root用户」</a></li>
-            <li><a href="https://www.likecs.com/show-205296529.html">「Linux寻找JAVA路径」</a>可举一反三</li>
-            <li>「sudo kill -s 9 进程号」 ==》用这个杀死进程</li>
-            <li><a href="https://wenku.csdn.net/answer/d8644b5d773c0baf5c6c4ec5e40012ab">「Linux Mint调节亮度」</a></li>
-        </ul>
+    <div class="card">
+        <span></span>
+        <div class="content">
+            <h2>操作教程</h2>
+            <ul>
+                <li><a href="https://blog.csdn.net/qq_42843894/article/details/112639174">「使用SSH连接Github」</a></li>
+                <li><a href="https://blog.csdn.net/wangye8312166/article/details/86573832">「彻底卸载MySQL」</a></li>
+                <li><a href="https://blog.csdn.net/hai1124948893/article/details/107297582">「MySQL初始化root用户」</a>
+                </li>
+                <li><a href="https://www.likecs.com/show-205296529.html">「Linux寻找JAVA路径」</a>可举一反三</li>
+                <li class="small-font">「sudo kill -s 9 进程号」以此杀死进程</li>
+                <li><a href="https://wenku.csdn.net/answer/d8644b5d773c0baf5c6c4ec5e40012ab">「Linux Mint调节亮度」</a>
+                </li>
+            </ul>
+        </div>
     </div>
-    <!-- 面板三 -->
-    <div class="rolePa" style="z-index: 9;display: none;">
-        <ul>
-            <li><a href="https://blog.csdn.net/weixin_45732391/article/details/118719802">「IDEA默认设置」</a>不用每次都设置Maven
-            </li>
-            <li><a href="https://blog.csdn.net/weixin_44757863/article/details/129188336">「Linux-Mint软件安装」</a>参考一下
-            </li>
-            <li>发过火</li>
-            <li>发过火</li>
-        </ul>
+    <div class="card">
+        <span></span>
+        <div class="content">
+            <h2>其它补充</h2>
+            <ul>
+                <li><a href="https://blog.csdn.net/weixin_45732391/article/details/118719802">「IDEA默认设置」</a>不用每次都设置Maven
+                </li>
+                <li><a href="https://blog.csdn.net/weixin_44757863/article/details/129188336">「Linux-Mint软件安装」</a>参考一下
+                </li>
+                <li><a href="https://www.initroot.com/tutorial/linux/install/linuxinstallmint.html">【Linux安装教程】</a>阿门
+                </li>
+                <li class="small-font">This ISO looks like a Windows image.Windows images require special processing.
+                </li>
+                <li><a href="https://linuxmint-user-guide.readthedocs.io/en/latest/winiso.html">【Linux制作Win安装盘】</a>最后的退路
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 </body>
-<script>
-    const rolePa = document.getElementsByClassName("rolePa");
-    let a = 0;
-    const sayHi = b => {
-        rolePa[a].style.animation = "byeBye 1.2s forwards";
-        rolePa[b].style.display = "";
-        rolePa[b].style.animation = "hello 1.2s forwards";
-        a = b;
-    }
-</script>
-
 </html>
