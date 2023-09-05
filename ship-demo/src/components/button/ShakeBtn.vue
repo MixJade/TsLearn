@@ -14,11 +14,13 @@ button {
   padding: 12px 24px;
   cursor: pointer;
   background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 4px dashed #67C23A;
   border-radius: 10px;
   z-index: 0;
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
 
   span {
     color: #67C23A;
@@ -46,7 +48,7 @@ button {
     animation: rotate624 0.7s ease-in-out both;
 
     span {
-      animation: storm1261 0.7s ease-in-out both;
+      animation: storm1261 1s ease-in-out both;
       animation-delay: 0.06s;
     }
 
