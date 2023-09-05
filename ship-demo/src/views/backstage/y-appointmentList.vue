@@ -68,7 +68,7 @@
 <script lang="ts" setup>
 import {reactive, ref} from 'vue'
 import {Delete, Edit} from '@element-plus/icons-vue'
-import BackOpCol from "@/components/BackOpCol.vue";
+import BackOpCol from "@/components/row/BackOpCol.vue";
 import {YAppointList} from "@/modal/VO/BackQuery";
 import {Appoint} from "@/modal/entiy/Appoint";
 import {moveT} from "@/utils/TimeUtil";

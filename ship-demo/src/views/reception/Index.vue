@@ -92,8 +92,8 @@
 import {reactive, ref} from "vue";
 import {examplePetFour, Pet} from "@/modal/entiy/Pet";
 import {Page} from "@/modal/DO/Page";
-import PetCard from "@/components/pagePart/PetCard.vue";
-import DoctorCard from "@/components/pagePart/DoctorCard.vue";
+import PetCard from "@/components/zoneView/PetCard.vue";
+import DoctorCard from "@/components/zoneView/DoctorCard.vue";
 import FosterCard from "@/components/card/FosterCard.vue";
 import router from "@/router";
 import {DoctorDto, exampleDoctor} from "@/modal/DO/DoctorDto";
@@ -101,7 +101,7 @@ import {exampleFoster, FosterCardDto} from "@/modal/DO/FosterCardDto";
 import {exampleNotice, NoticeDto} from "@/modal/DO/NoticeDto";
 import VueFoot from "@/components/show/VueFoot.vue";
 import WindRoll from "@/components/show/WindRoll.vue";
-import MyRow from "@/components/show/MyRow.vue";
+import MyRow from "@/components/row/MyRow.vue";
 import NoticeBtn from "@/components/button/NoticeBtn.vue";
 import LinkCard from "@/components/card/LinkCard.vue";
 

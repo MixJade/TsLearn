@@ -34,7 +34,7 @@
 <script lang="ts" setup>
 import {exampleClientPet} from "@/modal/entiy/Pet";
 import {getAge} from "@/utils/TimeUtil";
-import TagSex from "@/components/TagSex.vue";
+import TagSex from "@/components/show/TagSex.vue";
 
 const petList = exampleClientPet()
 </script>

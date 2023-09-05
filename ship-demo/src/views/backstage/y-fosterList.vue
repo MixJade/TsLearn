@@ -64,7 +64,7 @@
 <script lang="ts" setup>
 import {reactive, ref} from 'vue'
 import {Delete, Edit} from '@element-plus/icons-vue'
-import BackOpCol from "@/components/BackOpCol.vue";
+import BackOpCol from "@/components/row/BackOpCol.vue";
 import {YFosterList} from "@/modal/VO/BackQuery";
 import {Foster} from "@/modal/entiy/Foster";
 import {exampleFosterBack} from "@/modal/DO/FosterDto";

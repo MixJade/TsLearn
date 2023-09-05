@@ -76,12 +76,12 @@
 <script lang="ts" setup>
 import {reactive, ref} from 'vue'
 import {Delete, Edit} from '@element-plus/icons-vue'
-import BackOpCol from "@/components/BackOpCol.vue";
+import BackOpCol from "@/components/row/BackOpCol.vue";
 import {YPetList} from "@/modal/VO/BackQuery";
 import {examplePetBack} from "@/modal/DO/PetDto";
 import {getAge} from "@/utils/TimeUtil";
 import {Pet} from "@/modal/entiy/Pet";
-import TagSex from "@/components/TagSex.vue";
+import TagSex from "@/components/show/TagSex.vue";
 import MyAvatar from "@/components/show/MyAvatar.vue";
 import {ElMessage, ElMessageBox} from "element-plus";
 

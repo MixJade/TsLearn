@@ -1,5 +1,8 @@
 <template>
-  <LightBox>
+  <el-button plain style="position: absolute;margin-left: 24px" type="warning" @click="isShow=!isShow">
+    {{ isShow ? "隐藏" : "显示" }}面板
+  </el-button>
+  <LightBox v-show="isShow">
     <router-link to="/doctorPage">
       <el-button style="position: absolute" type="success">悬壶济世</el-button>
     </router-link>
@@ -17,9 +20,10 @@ import DetailTable, {DetailTabType} from "@/components/card/DetailTable.vue";
 import {Employee, exampleEmployee} from "@/modal/entiy/Employee";
 import {getJob} from "@/utils/JobUtil";
 import {getAge, getDaysFromToday} from "@/utils/TimeUtil";
-import {computed, reactive} from "vue";
+import {computed, reactive, ref} from "vue";
 import LightBox from "@/components/card/LightBox.vue";
 // 设置展示信息
+const isShow = ref<boolean>(true)
 const employee: Employee = reactive(exampleEmployee())
 const em = computed((): DetailTabType[] => [
   {tit: "账号", con: employee.employeeUsername},
