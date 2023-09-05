@@ -44,11 +44,11 @@
 </template>
 
 <script lang="ts" setup>
-import PageHead from "@/components/PageHead.vue";
+import PageHead from "@/components/row/PageHead.vue";
 import {getAge, moveT} from "@/utils/TimeUtil";
 import {exampleDoctorDetail} from "@/modal/DO/DoctorDto";
 import {exampleDoctorAppoint} from "@/modal/DO/AppointDto";
-import MyRow2 from "@/components/show/MyRow2.vue";
+import MyRow2 from "@/components/row/MyRow2.vue";
 
 // 如此获取传参
 const props = defineProps<{

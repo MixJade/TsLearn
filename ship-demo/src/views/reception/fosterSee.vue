@@ -12,7 +12,7 @@ import {Page} from "@/modal/DO/Page";
 import {exampleFoster, FosterCardDto} from "@/modal/DO/FosterCardDto";
 import {reactive} from "vue";
 import FosterCard from "@/components/card/FosterCard.vue";
-import PageHead from "@/components/PageHead.vue";
+import PageHead from "@/components/row/PageHead.vue";
 
 // 寄养宠物的卡片信息
 const fosterCardTxt: Page<FosterCardDto> = reactive(exampleFoster())

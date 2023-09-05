@@ -35,7 +35,7 @@
 
 <script lang="ts" setup>
 import {PictureRounded, Position} from "@element-plus/icons-vue"
-import PageHead from "@/components/PageHead.vue";
+import PageHead from "@/components/row/PageHead.vue";
 import {ref} from "vue";
 import {ChatGroup} from "@/modal/VO/ChatGroup";
 import {MsgVo} from "@/modal/VO/MsgVo";

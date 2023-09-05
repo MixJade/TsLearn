@@ -77,12 +77,12 @@
 <script lang="ts" setup>
 import {reactive, ref} from 'vue'
 import {Delete, Edit} from '@element-plus/icons-vue'
-import BackOpCol from "@/components/BackOpCol.vue";
+import BackOpCol from "@/components/row/BackOpCol.vue";
 import {YDoctorList} from "@/modal/VO/BackQuery";
 import {getAge} from "@/utils/TimeUtil";
 import {Doctor} from "@/modal/entiy/Doctor";
 import {exampleDoctorBack} from "@/modal/DO/DoctorDto";
-import TagSex from "@/components/TagSex.vue";
+import TagSex from "@/components/show/TagSex.vue";
 import MyAvatar from "@/components/show/MyAvatar.vue";
 import {ElMessage, ElMessageBox} from "element-plus";
 

@@ -65,7 +65,7 @@
 <script lang="ts" setup>
 import {reactive, ref} from 'vue'
 import {Delete, Edit} from '@element-plus/icons-vue'
-import BackOpCol from "@/components/BackOpCol.vue";
+import BackOpCol from "@/components/row/BackOpCol.vue";
 import {XEmployeeList} from "@/modal/VO/BackQuery";
 import {getDaysFromToday} from "@/utils/TimeUtil";
 import {getJob} from "@/utils/JobUtil";

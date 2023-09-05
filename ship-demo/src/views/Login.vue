@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts" setup>
-import LoginForm from "@/components/pagePart/LoginForm.vue";
+import LoginForm from "@/components/zoneView/LoginForm.vue";
 import {reactive, ref} from "vue";
 
 const pairClient = ref<string>("rotateY(0deg)")

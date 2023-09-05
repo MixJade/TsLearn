@@ -9,9 +9,9 @@
 <script lang="ts" setup>
 // 宠物的卡片信息
 import {Page} from "@/modal/DO/Page";
-import DoctorCard from "@/components/pagePart/DoctorCard.vue";
+import DoctorCard from "@/components/zoneView/DoctorCard.vue";
 import {reactive} from "vue";
-import PageHead from "@/components/PageHead.vue";
+import PageHead from "@/components/row/PageHead.vue";
 import {DoctorDto, exampleDoctorSee} from "@/modal/DO/DoctorDto";
 
 const doctorCardTxt: Page<DoctorDto> = reactive(exampleDoctorSee())

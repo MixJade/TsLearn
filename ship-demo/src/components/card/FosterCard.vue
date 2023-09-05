@@ -27,7 +27,7 @@
 <script lang="ts" setup>
 import {getAge} from "@/utils/TimeUtil";
 import {FosterCardDto} from "@/modal/DO/FosterCardDto";
-import MyRow from "@/components/show/MyRow.vue";
+import MyRow from "@/components/row/MyRow.vue";
 // 接收参数：宠物卡片
 defineProps<{
   readonly cardList: FosterCardDto[]
