@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>测试OutPut标签</title>
+</head>
+<body>
+<form oninput="x.value=parseInt(a.value)+parseInt(b.value)">
+    <label for="a">进度条:</label>0<input type="range" id="a" value="50">100
+    +<label for="b">数字</label><input type="number" id="b" value="50">
+    =
+    <output name="x" for="a b"></output>
+</form>
+</body>
+</html>
