@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>测试对话框</title>
+</head>
+<body>
+<button type="button" onclick="showMe()">展示</button>
+<dialog id="myDialog">
+    砸瓦鲁多
+    <button type="button" onclick="closeMe()">关闭</button>
+</dialog>
+</body>
+<script>
+    /**
+     * showModal()和show()的区别在于，前者会创建一个模态对话框，禁止用户与页面上的其它部分交互，
+     * 而后者创建的是非模态对话框，用户还可以与页面上的其他部分交互。
+     */
+    const dialog = document.getElementById("myDialog");
+    /**
+     * 展示模态框
+     */
+    const showMe = () => {
+        dialog.showModal(); // 或者 dialog.show();
+    }
+    /**
+     * 关闭模态框
+     */
+    const closeMe = () => {
+        dialog.close()
+    }
+</script>
+</html>
