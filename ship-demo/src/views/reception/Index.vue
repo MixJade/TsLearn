@@ -36,21 +36,7 @@
         </NoticeBtn>
       </MyRow>
       <!--公告的对话框-->
-      <el-dialog
-          v-model="showDialog"
-          :title="noticeDialog.noticeTitle"
-          width="50%"
-          min-width="500px"
-      >
-        <div class="textNotice">{{ noticeDialog.textNotice }}</div>
-        <template #footer>
-            <span class="dialog-footer">
-              <el-button type="primary" @click="showDialog = false">
-                确认
-              </el-button>
-            </span>
-        </template>
-      </el-dialog>
+      <MyDialog :tit="noticeDialog.tit" :content="noticeDialog.content" ref="myShow"/>
       <!-- 用户卡片-->
       <h2>用户入口</h2>
       <p>一些与用户相关的功能入口，也可以前往中心查看。
@@ -104,16 +90,17 @@ import WindRoll from "@/components/show/WindRoll.vue";
 import MyRow from "@/components/row/MyRow.vue";
 import NoticeBtn from "@/components/button/NoticeBtn.vue";
 import LinkCard from "@/components/card/LinkCard.vue";
+import MyDialog from "@/components/show/MyDialog.vue";
 
 // 公告栏
 const notices: NoticeDto[] = reactive(exampleNotice())
 // 公告弹出框
-const showDialog = ref(false);
-const noticeDialog = reactive({noticeTitle: "标题", textNotice: "文本内容"})
+const myShow = ref<InstanceType<typeof MyDialog> | null>(null)
+const noticeDialog = reactive({tit: "标题", content: "文本内容"})
 const openDialog = (notice: NoticeDto) => {
-  noticeDialog.noticeTitle = notice.noticeTitle
-  noticeDialog.textNotice = notice.textNotice
-  showDialog.value = true
+  noticeDialog.tit = notice.noticeTitle
+  noticeDialog.content = notice.textNotice
+  myShow.value.showMe()
 }
 
 // 常量：用户卡片
