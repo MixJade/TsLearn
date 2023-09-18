@@ -1,6 +1,8 @@
 <template>
-  <dialog ref="dialog">
-    <header>{{ tit }}</header>
+  <dialog ref="dialog" :class="{ shake: disabled }">
+    <header>
+      <h2>{{ tit }}</h2>
+    </header>
     <main>
       {{ content }}
     </main>
@@ -25,9 +27,17 @@ defineProps<{
   content: string
 }>()
 const dialog = ref<HTMLDialogElement>()
-const showMe = () => dialog.value?.showModal()
+const disabled = ref(false)
+const showMe = () => {
+  dialog.value?.showModal()
+  disabled.value = true
+  setTimeout(() => {
+    disabled.value = false
+  }, 1500)
+}
 const closeMe = () => dialog.value?.close()
 defineExpose({showMe})
+
 </script>
 
 <style lang="scss" scoped>
@@ -45,9 +55,6 @@ dialog {
 
   header {
     text-align: center;
-    font-size: larger;
-    font-weight: bolder;
-    padding: 8px 0;
   }
 
   main {
@@ -103,6 +110,26 @@ dialog {
           transform: scale(1.2);
         }
       }
+    }
+  }
+}
+
+/* 动画类 */
+.shake {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  @keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+    30%, 50%, 70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+    40%, 60% {
+      transform: translate3d(4px, 0, 0);
     }
   }
 }
