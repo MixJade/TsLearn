@@ -5,7 +5,7 @@
       {{ content }}
     </main>
     <footer>
-      点击确认
+      点击按钮确认
       <button type="button" @click="closeMe">
         <svg height="24" width="24" fill="#FFFFFF" viewBox="0 0 24 24" id="sparkle">
           <path
@@ -34,7 +34,8 @@ defineExpose({showMe})
 dialog {
   border-radius: 20px;
   border: 6px solid;
-  border-color: #95d475 #79bbff #eebe77 #f89898;
+  border-color: #337ecc #b88230 #529b2e #c45656;
+  box-shadow: 0 0 180px 0 #fcd611;
   font-size: 16px;
   line-height: 2; /* 2倍行高 */
   background-color: #EBEDF0;
@@ -46,6 +47,7 @@ dialog {
     text-align: center;
     font-size: larger;
     font-weight: bolder;
+    padding: 8px 0;
   }
 
   main {
@@ -56,6 +58,7 @@ dialog {
   footer {
     display: flex;
     justify-content: right;
+    padding-top: 8px;
 
     button {
       $back-col: #3b91ea;
