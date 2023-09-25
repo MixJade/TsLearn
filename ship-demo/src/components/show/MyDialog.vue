@@ -50,6 +50,7 @@ dialog {
   line-height: 2; /* 2倍行高 */
   background-color: #EBEDF0;
   max-width: 90%;
+  max-height: 80%;
   -webkit-user-select: none;
   user-select: none;
 
