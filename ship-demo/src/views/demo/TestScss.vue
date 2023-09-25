@@ -5,7 +5,7 @@
     <div>在吗</div>
     <div>不在</div>
     <div>
-      <button type="button" @click="myShow.showMe()">展示弹出框</button>
+      <button type="button" @click="myShow?.showMe()">展示弹出框</button>
     </div>
     <MyDialog :tit="notices[0].noticeTitle" :content="notices[0].textNotice" ref="myShow"/>
   </div>
