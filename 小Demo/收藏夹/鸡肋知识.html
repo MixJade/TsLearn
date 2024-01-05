@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>鸡肋知识</title>
+    <link rel="icon" type="image/svg+xml" href='money.svg'/>
+    <style>
+        body {
+            background-color: #f5f5f5;
+            text-align: center;
+        }
+
+        /*头标签*/
+        header {
+            padding: 8px;
+        }
+
+        /*下拉框*/
+        #select-style {
+            font-size: 2em;
+            font-weight: bolder;
+            border: none;
+            outline: none;
+            background-color: #f5f5f5;
+            color: #00754B;
+            border-bottom: 3px solid #00754B;
+            appearance: none;
+            -moz-appearance: none; /* Firefox */
+            -webkit-appearance: none; /* Chrome and Safari */
+        }
+
+        /*下拉框选项*/
+        #select-style option:checked {
+            background: #f3d19e;
+        }
+
+        /*主要内容*/
+        main {
+            padding-left: 8px;
+            padding-right: 8px;
+            border: 3px dashed green;
+            border-radius: 8px;
+            position: relative;
+            text-align: left;
+            background-color: #d1edc4;
+        }
+
+        /*响应式*/
+        @media (min-width: 768px) {
+            main {
+                width: 50vw;
+                left: 25vw;
+            }
+        }
+
+        @media (min-width: 576px) and (max-width: 768px) {
+            main {
+                width: 60vw;
+                left: 20vw;
+            }
+        }
+
+        @media (max-width: 575px) {
+            main {
+                width: 80vw;
+                left: 10vw;
+            }
+        }
+
+        /*主界面列表空隙*/
+        main li {
+            list-style: none;
+            padding-top: 2px;
+            padding-bottom: 2px;
+        }
+
+        main a {
+            text-decoration: none;
+        }
+
+        .show-text {
+            margin-left: 8px;
+        }
+
+        /*脚注*/
+        footer {
+            color: #cccccc;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+<!--顶部标题-->
+<header>
+    <label for="select-style">类别：</label>
+    <select id="select-style">
+        <option value="0">爪哇知识</option>
+        <option value="1">前端知识</option>
+        <option value="2">吹水博客</option>
+    </select>
+</header>
+<!--中部内容-->
+<main>
+    <!--区域一：爪哇知识-->
+    <div class="show-text">
+        <ul>
+            <li>说明: <a href="https://blog.csdn.net/grd_java/article/details/107614274">【Maven强制更新】</a>较为实用
+            </li>
+            <li>说明: <a href="https://blog.csdn.net/m0_53067943/article/details/123926050">【SpringMVC执行流程】</a>面试问题
+            </li>
+            <li>说明: <a href="https://www.iteye.com/blog/wanxw2001-1570339">【JAVA字符编码说明】</a>上学看的</li>
+            <li>说明: <a href="https://blog.csdn.net/evasnowind/article/details/115735854">【字符乱码对照】</a>乱码出现原因
+            </li>
+            <li>说明: <a href="https://blog.csdn.net/qq_45404035/article/details/107411688">【三层架构】</a>面试问题
+            </li>
+            <li>说明: <a href="https://zhuanlan.zhihu.com/p/446588282">【领域模型命名规范】</a>涉猎即可</li>
+            <li>说明: <a
+                    href="https://blog.csdn.net/qq_42549792/article/details/100128293">【MyBatis使用MBG逆向生成代码】</a>
+            </li>
+            <li>说明: <a
+                    href="https://blog.csdn.net/qlzw1990/article/details/116996422">【MP使用LambdaQueryWrapper】</a>
+            </li>
+            <li>
+                <hr>
+            </li>
+            <li>安全：<a href="https://blog.csdn.net/qq_39826207/article/details/130264488">【微服务限流算法】</a></li>
+            <li>安全：<a href="https://blog.csdn.net/koastal/article/details/53456696">【放重放攻击方案】</a></li>
+            <li>安全：<a href="https://www.cnblogs.com/little-monster-lhq/p/17701795.html">【10种网络安全方案】</a></li>
+            <li>安全：<a href="https://www.yingtwo.com/article/7411853.html">【Gateway加解密方案】</a>有代码</li>
+        </ul>
+    </div>
+    <!--区域二：前端知识-->
+    <div class="show-text" style="display: none">
+        <ul>
+            <li>说明: <a href="https://blog.csdn.net/qq_41153943/article/details/104734054">【本地端口被占用解决方法】</a>
+            </li>
+        </ul>
+    </div>
+    <!--区域三：吹水博客-->
+    <div class="show-text" style="display: none">
+        <ul>
+            <li>开源: <a
+                    href="https://docs.github.com/zh/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository">【开源证书添加】</a>
+            </li>
+            <li>修改: <a href="https://bbs.3dmgame.com/thread-5596590-1-1.html">【缺氧修改教程】</a>dn-spy直接百度下载
+            </li>
+        </ul>
+    </div>
+</main>
+<!--脚注-->
+<footer>
+    都是平时用不上，没事可以看看的知识
+</footer>
+</body>
+<script>
+    "use strict";
+    (() => {
+        let now_index = 0;//当前显示
+        const myText = document.getElementsByClassName("show-text");
+        document.getElementById('select-style').addEventListener('change', function () {
+            console.log(this.value);
+            myText[now_index].style.display = 'none';
+            myText[this.value].style.display = 'block';
+            now_index = this.value;
+        });
+    })();
+</script>
+</html>
