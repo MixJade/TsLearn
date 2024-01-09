@@ -1,0 +1,90 @@
+/*让body为A4纸的尺寸*/
+body {
+    width: 210mm;
+    height: 297mm;
+    margin: 0 auto;
+    border: 1px #D3D3D3 solid;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    padding: 24px;
+}
+
+/*纵向打印时的样式*/
+@media print {
+    body {
+        padding: 0;
+        border: none;
+        box-shadow: none;
+        -webkit-print-color-adjust: exact;
+    }
+}
+
+/*简历头，包括了照片与联系方式*/
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+#myName {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/*联系方式表格*/
+#myTelTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/*联系方式表头，上下空隙2px，左16，右4(顺时针)*/
+#myTelTable th {
+    padding: 2px 4px 2px 16px;;
+}
+
+/*联系方式内容，上下空隙2px，左4，右16(顺时针)*/
+#myTelTable td {
+    padding: 2px 16px 2px 4px;
+}
+
+/*分割线*/
+hr {
+    border: none;
+    border-top: 2px solid #ccc;
+
+}
+
+/*绿色的标题*/
+.green-tit {
+    margin-bottom: 0;
+    color: #67C23A;
+    border-left: 6px solid #67C23A;
+    padding-left: 12px;
+}
+
+/*学校信息，独立一行*/
+#school-p {
+    display: flex;
+    justify-content: space-between;
+    margin: 2px 0;
+}
+
+/*学校信息，一行四个空*/
+#school-p span {
+    flex: 1;
+    font-weight: bolder;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/*一行展示多个信息*/
+.two-space-p {
+    display: flex;
+    justify-content: space-between;
+    margin: 4px 0;
+}
+
+/*去除链接的下划线*/
+.two-space-p a {
+    text-decoration: none;
+}
