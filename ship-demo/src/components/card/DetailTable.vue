@@ -65,6 +65,10 @@ img.my-avatar {
   width: 60%;
   left: 20%;
   margin-bottom: 20px;
+  @media (max-width: 575px) {
+    width: 100%;
+    left: 0;
+  }
 
   td {
     border: none;
@@ -79,6 +83,9 @@ img.my-avatar {
   .bold + td {
     text-align: left;
     padding-left: 50px;
+    @media (max-width: 575px) {
+      padding-left: 6px;
+    }
   }
 }
 </style>

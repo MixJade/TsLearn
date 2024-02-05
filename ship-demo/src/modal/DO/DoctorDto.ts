@@ -21,7 +21,7 @@ export const exampleDoctorDetail = (doctorId: number): DoctorDto => {
         "doctorGender": true,
         "doctorAge": "1990-10-10",
         "doctorPhoto": "doctor-1.jpg",
-        "doctorTel": "1114185977@qq.com",
+        "doctorTel": "sanyu0201@163.com",
         "doctorJob": "副院长",
         "doctorInfo": "国内著名医学专家，擅长绝育",
         "doctorPassword": null,
@@ -46,7 +46,7 @@ export const exampleDoctorBack = (): Page<DoctorDto> => {
                 "doctorGender": true,
                 "doctorAge": "1990-10-10",
                 "doctorPhoto": "doctor-1.jpg",
-                "doctorTel": "1114185977@qq.com",
+                "doctorTel": "sanyu0201@163.com",
                 "doctorJob": "副院长",
                 "doctorInfo": "国内著名医学专家，擅长绝育",
                 "doctorPassword": null,
@@ -63,7 +63,7 @@ export const exampleDoctorBack = (): Page<DoctorDto> => {
                 "doctorGender": false,
                 "doctorAge": "2003-02-01",
                 "doctorPhoto": "doctor-2.jpg",
-                "doctorTel": "mix_pet_doctor@sina.com",
+                "doctorTel": "sanyu0201@163.com",
                 "doctorJob": "麻醉科主任",
                 "doctorInfo": "擅长麻醉",
                 "doctorPassword": null,
@@ -80,7 +80,7 @@ export const exampleDoctorBack = (): Page<DoctorDto> => {
                 "doctorGender": true,
                 "doctorAge": "2000-01-11",
                 "doctorPhoto": "doctor-3.jpg",
-                "doctorTel": "1114185977@qq.com",
+                "doctorTel": "sanyu0201@163.com",
                 "doctorJob": "医生",
                 "doctorInfo": "擅长x光拍片",
                 "doctorPassword": null,
@@ -97,7 +97,7 @@ export const exampleDoctorBack = (): Page<DoctorDto> => {
                 "doctorGender": false,
                 "doctorAge": "2002-01-05",
                 "doctorPhoto": "doctor-4.jpg",
-                "doctorTel": "mix_pet_doctor@sina.com",
+                "doctorTel": "sanyu0201@163.com",
                 "doctorJob": "医生",
                 "doctorInfo": "著名宠物医美专家",
                 "doctorPassword": null,
@@ -114,7 +114,7 @@ export const exampleDoctorBack = (): Page<DoctorDto> => {
                 "doctorGender": true,
                 "doctorAge": "2001-01-06",
                 "doctorPhoto": "3b161abe-7142-449c-ab36-07a689da65de.jpg",
-                "doctorTel": "1114185977@qq.com",
+                "doctorTel": "sanyu0201@163.com",
                 "doctorJob": "医生",
                 "doctorInfo": "国外著名医学专家",
                 "doctorPassword": null,
@@ -131,7 +131,7 @@ export const exampleDoctorBack = (): Page<DoctorDto> => {
                 "doctorGender": false,
                 "doctorAge": "2000-01-28",
                 "doctorPhoto": "3cd8e749-e177-4e5b-846c-930efab7bd38.jpg",
-                "doctorTel": "1114185977@qq.com",
+                "doctorTel": "sanyu0201@163.com",
                 "doctorJob": "医生",
                 "doctorInfo": "国内外著名骨科专家",
                 "doctorPassword": null,
@@ -148,7 +148,7 @@ export const exampleDoctorBack = (): Page<DoctorDto> => {
                 "doctorGender": true,
                 "doctorAge": "2000-02-10",
                 "doctorPhoto": "92833192-79d4-42d6-a657-d000d8ca6295.jpg",
-                "doctorTel": "mix_pet_doctor@sina.com",
+                "doctorTel": "sanyu0201@163.com",
                 "doctorJob": "医生",
                 "doctorInfo": "多年老中医",
                 "doctorPassword": null,
@@ -174,7 +174,7 @@ export const exampleDoctor = (): Page<DoctorDto> => {
                 "doctorGender": true,
                 "doctorAge": "1990-10-10",
                 "doctorPhoto": "doctor-1.jpg",
-                "doctorTel": "1114185977@qq.com",
+                "doctorTel": "sanyu0201@163.com",
                 "doctorJob": "副院长",
                 "doctorInfo": "国内著名医学专家，擅长绝育",
                 "departmentName": "犬猫科"
@@ -187,7 +187,7 @@ export const exampleDoctor = (): Page<DoctorDto> => {
                 "doctorGender": false,
                 "doctorAge": "2003-02-01",
                 "doctorPhoto": "doctor-2.jpg",
-                "doctorTel": "mix_pet_doctor@sina.com",
+                "doctorTel": "sanyu0201@163.com",
                 "doctorJob": "麻醉科主任",
                 "doctorInfo": "擅长麻醉",
                 "departmentName": "美容室"
@@ -200,7 +200,7 @@ export const exampleDoctor = (): Page<DoctorDto> => {
                 "doctorGender": true,
                 "doctorAge": "2000-01-11",
                 "doctorPhoto": "doctor-3.jpg",
-                "doctorTel": "1114185977@qq.com",
+                "doctorTel": "sanyu0201@163.com",
                 "doctorJob": "医生",
                 "doctorInfo": "擅长x光拍片",
                 "departmentName": "中兽科"
@@ -213,7 +213,7 @@ export const exampleDoctor = (): Page<DoctorDto> => {
                 "doctorGender": false,
                 "doctorAge": "2002-01-05",
                 "doctorPhoto": "doctor-4.jpg",
-                "doctorTel": "mix_pet_doctor@sina.com",
+                "doctorTel": "sanyu0201@163.com",
                 "doctorJob": "医生",
                 "doctorInfo": "著名宠物医美专家",
                 "departmentName": "美容室"
@@ -235,7 +235,7 @@ export const exampleDoctorSee = (): Page<DoctorDto> => {
                 "doctorGender": true,
                 "doctorAge": "1990-10-10",
                 "doctorPhoto": "doctor-1.jpg",
-                "doctorTel": "1114185977@qq.com",
+                "doctorTel": "sanyu0201@163.com",
                 "doctorJob": "副院长",
                 "doctorInfo": "国内著名医学专家，擅长绝育",
                 "departmentName": "犬猫科"
@@ -248,7 +248,7 @@ export const exampleDoctorSee = (): Page<DoctorDto> => {
                 "doctorGender": false,
                 "doctorAge": "2003-02-01",
                 "doctorPhoto": "doctor-2.jpg",
-                "doctorTel": "mix_pet_doctor@sina.com",
+                "doctorTel": "sanyu0201@163.com",
                 "doctorJob": "麻醉科主任",
                 "doctorInfo": "擅长麻醉",
                 "departmentName": "美容室"
@@ -261,7 +261,7 @@ export const exampleDoctorSee = (): Page<DoctorDto> => {
                 "doctorGender": true,
                 "doctorAge": "2000-01-11",
                 "doctorPhoto": "doctor-3.jpg",
-                "doctorTel": "1114185977@qq.com",
+                "doctorTel": "sanyu0201@163.com",
                 "doctorJob": "医生",
                 "doctorInfo": "擅长x光拍片",
                 "departmentName": "中兽科"
@@ -274,7 +274,7 @@ export const exampleDoctorSee = (): Page<DoctorDto> => {
                 "doctorGender": true,
                 "doctorAge": "1990-10-10",
                 "doctorPhoto": "doctor-1.jpg",
-                "doctorTel": "1114185977@qq.com",
+                "doctorTel": "sanyu0201@163.com",
                 "doctorJob": "副院长",
                 "doctorInfo": "国内著名医学专家，擅长绝育",
                 "departmentName": "犬猫科"
@@ -287,7 +287,7 @@ export const exampleDoctorSee = (): Page<DoctorDto> => {
                 "doctorGender": false,
                 "doctorAge": "2003-02-01",
                 "doctorPhoto": "doctor-2.jpg",
-                "doctorTel": "mix_pet_doctor@sina.com",
+                "doctorTel": "sanyu0201@163.com",
                 "doctorJob": "麻醉科主任",
                 "doctorInfo": "擅长麻醉",
                 "departmentName": "美容室"
@@ -300,7 +300,7 @@ export const exampleDoctorSee = (): Page<DoctorDto> => {
                 "doctorGender": true,
                 "doctorAge": "2000-01-11",
                 "doctorPhoto": "doctor-3.jpg",
-                "doctorTel": "1114185977@qq.com",
+                "doctorTel": "sanyu0201@163.com",
                 "doctorJob": "医生",
                 "doctorInfo": "擅长x光拍片",
                 "departmentName": "中兽科"
@@ -313,35 +313,12 @@ export const exampleDoctorSee = (): Page<DoctorDto> => {
                 "doctorGender": false,
                 "doctorAge": "2002-01-05",
                 "doctorPhoto": "doctor-4.jpg",
-                "doctorTel": "mix_pet_doctor@sina.com",
+                "doctorTel": "sanyu0201@163.com",
                 "doctorJob": "医生",
                 "doctorInfo": "著名宠物医美专家",
                 "departmentName": "美容室"
             }
         ],
         "total": 7
-    }
-}
-
-/**
- * 医生个人中心
- */
-export const exampleDoctorOne = (): DoctorDto => {
-    return {
-        "doctorId": 1,
-        "departmentId": null,
-        "doctorCode": "32312221",
-        "doctorName": "童德统",
-        "doctorGender": true,
-        "doctorAge": "1990-10-10",
-        "doctorPhoto": "doctor-1.jpg",
-        "doctorTel": "1114185977@qq.com",
-        "doctorJob": "副院长",
-        "doctorInfo": "国内著名医学专家，擅长绝育",
-        "doctorPassword": null,
-        "createTime": null,
-        "updateTime": null,
-        "isDel": null,
-        "departmentName": "犬猫科"
     }
 }

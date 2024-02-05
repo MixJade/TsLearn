@@ -59,7 +59,7 @@ const sendMail = () => {
   if (noMail()) return;
   mailBtn.dis = true;
   let countDown = 30;
-  let intVal = setInterval(function () {
+  let intVal = setInterval(() => {
     if (countDown === 0) {
       clearInterval(intVal)
       mailBtn.dis = false;
@@ -124,7 +124,7 @@ const noMail = (): boolean => {
   img {
     width: 452px;
     max-width: 92vw;
-    height: 456px;
+    bottom: 0;
     pointer-events: none; /* 禁用事件，让下面div事件能够触发 */
     &:first-of-type {
       position: absolute;
