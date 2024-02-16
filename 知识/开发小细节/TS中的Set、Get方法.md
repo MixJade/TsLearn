@@ -44,7 +44,7 @@ class MyClass {
 </template>
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import QuestAddModel from "@/views/questTemp/QuestAddModel.vue";
+import QuestAddModel from "@/views/QuestAddModel.vue";
 
 @Options({
   name: "FatherPart",
@@ -77,8 +77,7 @@ export default class FatherPart extends Vue {
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import tipUIService from "@/services/tip-ui.service";
-import { Code } from "@/constants/enum/general/code.enum";
+import { Code } from "@/constants/enum/code.enum";
 import apiService from "@/services/api.service";
 import { Prop, Watch } from "vue-property-decorator";
 
@@ -90,14 +89,9 @@ export default class QuestAddModel extends Vue {
   hiddenView = false; //隐藏开关
 
   hideModal() {
-    tipUIService.showLoading();
-    apiService.general(questApi.addByCopy, null).then((resp: Res) => {
-      tipUIService.hideLoading();
+    apiService.queryByLike(questApi.addByCopy).then((resp: Res) => {
       if (resp.code === Code.SUCCESS.code) {
-        this.$message.success(resp.msg!);
-        this.$emit("selectAll"); // 为什么这个调用一直没有成功
-      } else {
-        this.$message.error(resp.msg!);
+        this.$emit("selectAll"); // 为什么这个调用一直没有成功，问题在下一行代码
       }
     });
 
@@ -113,6 +107,7 @@ export default class QuestAddModel extends Vue {
     // 下面的emit父组件没有接收，导致整个组件都卡住了。
     this.hiddenView = newValue;
     setTimeout(() => {
+      // 实际上父组件没有这个方法，这样传会报错，然后整个卡住
       this.$emit("update:modelValue", newValue);
     }, 300);
   }
