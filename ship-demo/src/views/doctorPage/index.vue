@@ -28,7 +28,8 @@
       </div>
       <!-- 卡片 -->
       <MyRow>
-        <div class="box">
+        <!-- 此处clr是行内css变量-->
+        <div class="box" style="--clr: #ff0058;">
           <span></span>
           <div class="content">
             <h2>个人中心</h2>
@@ -39,7 +40,7 @@
             </router-link>
           </div>
         </div>
-        <div class="box">
+        <div class="box" style="--clr:#0033ff;">
           <span></span>
           <div class="content">
             <h2>处理挂号</h2>
@@ -50,7 +51,7 @@
             </router-link>
           </div>
         </div>
-        <div class="box">
+        <div class="box" style="--clr:#f700ff;">
           <span></span>
           <div class="content">
             <h2>在线咨询</h2>
@@ -204,7 +205,7 @@ header {
     width: 50%;
     height: 100%;
     text-decoration: none;
-    background: linear-gradient(315deg, #ffbc00, #ff0058);
+    background: linear-gradient(315deg, #ffbc00, var(--clr));
     border-radius: 8px;
     transform: skewX(15deg);
     transition: 0.5s;
