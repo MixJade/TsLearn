@@ -149,6 +149,7 @@
     <h2>软件清单页</h2>
     <ul>
         <li class="aside-tit now-tit">开发软件</li>
+        <li class="aside-tit">工作能力</li>
         <li class="aside-tit">日常装机</li>
         <li class="aside-tit">电脑知识</li>
         <li class="aside-tit">杂鱼软件</li>
@@ -156,7 +157,7 @@
 </aside>
 <!--主界面-->
 <main>
-    <!-- 第一个界面-->
+    <!-- 界面:开发软件-->
     <div class="my-con">
         <h3>开发</h3>
         <ul>
@@ -184,16 +185,15 @@
                     注意事项
                 </button>
             </li>
-            <li>IDE: <a href="https://www.jetbrains.com/idea/download/other.html">【IDEA下载】</a>编辑爪哇，
-                ,以及<a href="https://zhuanlan.zhihu.com/p/353912445">【IDEA快捷键】</a>
+            <li>IDE: <a href="https://www.jetbrains.com/idea/download/other.html">【IDEA下载】</a>编辑爪哇
             </li>
             <li>IDE破解: <a href="https://www.jb51.net/article/197138.htm">【IntelliJ IDEA破解教程】</a>这个仅做参考，主要是<a
-                    href="https://jetbra.in/5d84466e31722979266057664941a71893322460">这个破解包的官网</a>
+                    href="https://jetbra.in/5d84466e31722979266057664941a71893322460">破解包的官网</a>
             </li>
             <li>Git: <a href="https://git-scm.com/">【Git下载】</a>及<a
                     href="https://registry.npmmirror.com/binary.html?path=git-for-windows/">其镜像</a> 还有<a
                     href="https://www.runoob.com/manual/git-guide/">说明书</a></li>
-            <li>前端: <a href="https://nodejs.org/zh-cn/">【Node.js官网】</a>服务端js运行环境</li>
+            <li>前端: <a href="https://nodejs.org">【Node.js官网】</a>服务端js运行环境</li>
             <li>IDE: <a href="https://www.jetbrains.com/webstorm/download/other.html">【WebStorm下载】</a>编辑前端</li>
             <li>Py: <a href="https://registry.npmmirror.com/binary.html?path=python/3.10.0/">【Python下载】</a>下载3.10.0-amd64.exe
             </li>
@@ -228,22 +228,22 @@
             <li>测试工具: <a href="https://www.postman.com/downloads/">【postMan下载】</a>模拟前端发送请求</li>
         </ul>
     </div>
-    <!-- 第二个界面-->
+    <!-- 界面:工作能力-->
     <div class="my-con" style="display: none">
         <h3>便利</h3>
         <ul>
             <li>笔记: <a href="https://yxmiaoyu.lanzouo.com/il403xa5dpg">【Typ-ora】</a>，编辑markdown,密码windows</li>
-            <li>文本查看: <a href="https://code.visualstudio.com/">【VSCode】</a>别装插件
+            <li>交流: <a href="https://www.axure.com/">【ax-ure】</a>原型设计工具(有破解版)</li>
+            <li>梳理: <a href="https://xmind.cn/">【x-mind】</a>思维导图工具</li>
+            <li>文本查看: <a href="https://code.visualstudio.com/">【VSCode】</a>不装插件
                 ，以及<a href="https://www.ujiuye.com/wenda/2021/70924.html">【VsCode快捷键】</a>
-            </li>
-            <li>播放: <a href="http://www.potplayercn.com/download">【PotPlayer下载】</a>视频播放软件，可<a
-                    href="https://www.bilibili.com/video/BV1Tx4y1X7Fh/?share_source=copy_web&vd_source=d9b4a1809a26db8158174fcff6eb69f9">自定义设置</a>
-            </li>
-            <li>翻译: <a href="https://fanyi.youdao.com/download-Windows?keyfrom=fanyi_web_banner">【网易有道翻译】</a>可截图翻译
             </li>
             <li>截图: <a href="https://zh.snipaste.com/">【Sni-paste】</a>好用的截图软件
             </li>
         </ul>
+    </div>
+    <!-- 界面:日常装机-->
+    <div class="my-con" style="display: none">
         <h3>娱乐</h3>
         <ul>
             <li>游戏: <a href="https://store.steampowered.com/about/">【Steam】</a>
@@ -251,6 +251,11 @@
             </li>
             <li>加速器: <a href="https://www.qiyou.cn/">【七游加速器】</a>用于在Steam上发言</li>
             <li>找资源: <a href="https://dl.xunlei.com/">【迅雷】</a>充满铜臭，但有资源</li>
+            <li>播放: <a href="http://www.potplayercn.com/download">【PotPlayer下载】</a>视频播放软件，可<a
+                    href="https://www.bilibili.com/video/BV1Tx4y1X7Fh/?share_source=copy_web&vd_source=d9b4a1809a26db8158174fcff6eb69f9">自定义设置</a>
+            </li>
+            <li>翻译: <a href="https://fanyi.youdao.com/download-Windows?keyfrom=fanyi_web_banner">【网易有道翻译】</a>可截图翻译
+            </li>
         </ul>
         <h3>装机</h3>
         <ul>
@@ -259,7 +264,7 @@
             <li>驱动：<a href="https://dm.weishi.360.cn/home.html">【360驱动大师】</a>修复驱动</li>
         </ul>
     </div>
-    <!-- 第三个界面-->
+    <!-- 界面:电脑知识-->
     <div class="my-con" style="display: none">
         <h3>电脑知识</h3>
         <ul>
@@ -267,6 +272,7 @@
                 <button type="button" onclick="showMe(this)"
                         data-text="打开设备管理：Win+X。
                             打开运行：Win+R。
+                            任务管理器: Shift+Ctrl+Esc
                             切换窗口：Win+Tab。
                             解除功能键锁定：Fn+Esc">
                     快捷键知识
@@ -286,7 +292,7 @@
             <li>附: 写Word文档时，可以在【标题】-【修改样式】-【格式】-【编号】处设置编号</li>
         </ul>
     </div>
-    <!-- 第四个界面-->
+    <!-- 界面:杂鱼软件-->
     <div class="my-con" style="display: none">
         <h3>杂鱼软件</h3>
         <ul>

@@ -95,8 +95,10 @@
 <!--顶部标题-->
 <header>
     <div class="now-tag">Java</div>
-    <div>前端</div>
+    <div>网络</div>
     <div>吹水</div>
+    <div>Python</div>
+    <div>小方案</div>
 </header>
 <!--中部内容-->
 <main>
@@ -126,13 +128,6 @@
             </li>
             <li>教程: <a href="https://blog.csdn.net/weixin_44360895/article/details/112451841">【Async注解】</a>Spring的Async注解使用
             </li>
-            <li>
-                <hr>
-            </li>
-            <li>安全：<a href="https://blog.csdn.net/qq_39826207/article/details/130264488">【微服务限流算法】</a></li>
-            <li>安全：<a href="https://blog.csdn.net/koastal/article/details/53456696">【放重放攻击方案】</a></li>
-            <li>安全：<a href="https://www.cnblogs.com/little-monster-lhq/p/17701795.html">【10种网络安全方案】</a></li>
-            <li>安全：<a href="https://www.yingtwo.com/article/7411853.html">【Gateway加解密方案】</a>有代码</li>
         </ul>
     </div>
     <!--区域二：前端知识-->
@@ -140,6 +135,7 @@
         <ul>
             <li>说明: <a href="https://blog.csdn.net/qq_41153943/article/details/104734054">【本地端口被占用解决方法】</a>
             </li>
+            <li>说明: <a href="http://tools.jb51.net/table/http_status_code">【网页状态码大全】</a></li>
         </ul>
     </div>
     <!--区域三：吹水博客-->
@@ -152,6 +148,24 @@
             </li>
             <li>设计: <a href="https://learn.microsoft.com/zh-cn/dotnet/desktop/winforms/overview/?view=netdesktop-8.0">【WinForms介绍】</a>可以直接输出exe的UI设计
             </li>
+            <li>课题: <a href="http://www.tablego.cn/">【tableGo】</a>其它人的课题，代码生成器</li>
+        </ul>
+    </div>
+    <!--区域四：Python-->
+    <div class="show-text" style="display: none">
+        <ul>
+            <li>软件说: <a href="https://blog.csdn.net/dkjkls/article/details/88933950">【Py添加方法注释】</a></li>
+            <li>软件说: <a href="https://zhuanlan.zhihu.com/p/286797485">【PyCharm设置文件头模板】</a></li>
+            <li>说明: <a href="https://www.cnblogs.com/LXP-Never/p/11361393.html">【python爬虫参数模块教程】</a></li>
+        </ul>
+    </div>
+    <!--区域五：Java方案-->
+    <div class="show-text" style="display: none">
+        <ul>
+            <li>安全：<a href="https://blog.csdn.net/qq_39826207/article/details/130264488">【微服务限流算法】</a></li>
+            <li>安全：<a href="https://blog.csdn.net/koastal/article/details/53456696">【放重放攻击方案】</a></li>
+            <li>安全：<a href="https://www.cnblogs.com/little-monster-lhq/p/17701795.html">【10种网络安全方案】</a></li>
+            <li>安全：<a href="https://www.yingtwo.com/article/7411853.html">【Gateway加解密方案】</a>有代码</li>
         </ul>
     </div>
 </main>
@@ -160,7 +174,7 @@
     "use strict";
     window.onload = () => {
         // 在初始化时，为标签赋予颜色
-        const colors = ["red", "orange", "yellow", "LightSalmon", "LightSlateBlue", "OrangeRed", "LawnGreen"];
+        const colors = ["red", "orange", "yellow", "LightSalmon", "OrangeRed", "LawnGreen"];
         const headerDivs = document.querySelectorAll("header div");
         for (let i = 0; i < headerDivs.length; i++) {
             headerDivs[i].style.backgroundColor = colors[i % colors.length];
