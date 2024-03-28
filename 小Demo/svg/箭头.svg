@@ -2,7 +2,8 @@
     <defs>
         <!-- marker元素:箭头形状-->
         <marker id="markerArrow" markerWidth="10" markerHeight="10" refX="1" refY="5" orient="auto">
-            <polyline points="0,0 10,5 0,10 1,5" fill="#000000"/>
+            <!-- 多边形：三个点为(0,0)、(10,5)、(0,10)-->
+            <polyline points="0,0 10,5 0,10" fill="#000000"/>
         </marker>
     </defs>
     <!-- 从点(50,250)画一条直线到点(250,50) -->
