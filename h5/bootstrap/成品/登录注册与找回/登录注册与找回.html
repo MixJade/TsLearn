@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>登录页面</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="登录注册与找回.css" rel="stylesheet">
+</head>
+
+<body>
+<!-- 用户登录 -->
+<div class="mixJade" id="pairJade">
+    <form class="container" style="width: 80%;">
+        <img class="mb-4" id="myImg01" src="../../picture/mia.svg" alt="管理员入口" width="72" height="57">
+        <h3 class="h3 mb-3 fw-normal text-white">用户登录</h3>
+
+        <div class="form-floating">
+            <input type="email" class="form-control" id="clUse" placeholder="username">
+            <label for="clUse">账号</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="clPwd" placeholder="Password">
+            <label for="clPwd">密码</label>
+        </div>
+
+        <div class="mb-3">
+            <label class="text-white">
+                <input type="checkbox" value="remember-me" checked> 记住我
+            </label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">登录</button>
+        <div class="row row-cols-1 row-cols-md-3">
+            <a href="#">游客登录</a>
+            <a href="javascript:void(0);" id="toReg">进行注册</a>
+            <a href="javascript:void(0);" id="toFin">找回密码</a>
+        </div>
+        <p class="mt-5 mb-3 text-muted">&copy; 2022 - 2023</p>
+    </form>
+</div>
+<!-- 管理员登录 -->
+<div class="mixJade" id="pairJade02">
+    <form class="container" style="width: 80%;">
+        <img class="mb-4" id="myImg02" src="../../picture/mia.svg" alt="普通入口" width="72" height="57">
+        <h3 class="h3 mb-3 fw-normal text-white">管理员登录</h3>
+
+        <div class="form-floating">
+            <input type="email" class="form-control" id="empUse" placeholder="username">
+            <label for="empUse">账号</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="empPwd" placeholder="Password">
+            <label for="empPwd">密码</label>
+        </div>
+        <div class="mb-3">
+            <label class="text-white">
+                <input type="checkbox" value="remember-me" checked> 记住我
+            </label>
+        </div>
+        <button class="w-100 btn btn-lg btn-success" type="submit">管理员登录</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2022 - 2023</p>
+    </form>
+</div>
+<!-- 注册 -->
+<div class="mixJade" id="pairJade03" style="top: 5%;">
+    <form class="container" style="width: 80%;">
+        <h3 class="h3 mb-3 fw-normal text-warning">注册</h3>
+        <div class="form-floating">
+            <input type="email" class="form-control" id="regMail" placeholder="reg@qq.com" autocomplete="off">
+            <label for="regMail">邮箱</label>
+        </div>
+        <div class="d-flex">
+            <div class="form-floating" style="width: 60%;">
+                <input type="text" class="form-control is-invalid" id="regCode" placeholder="reg"
+                       autocomplete="off">
+                <label for="regCode">验证码</label>
+            </div>
+            <input class="btn btn-warning" type="button" style="width: 40%;" value="发送验证码"
+                   onclick="settime(this)"/>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="regName" placeholder="reg" autocomplete="off">
+            <label for="regName">姓名</label>
+        </div>
+        <div class="form-floating">
+            <select class="form-select" id="regSex">
+                <option value="1" selected>男</option>
+                <option value="0">女</option>
+            </select>
+            <label for="regSex">性别</label>
+        </div>
+
+        <div class="form-floating">
+            <input type="text" class="form-control" id="regUse" placeholder="reg" autocomplete="off">
+            <label for="regUse">设置账号</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="regPwd" placeholder="reg" autocomplete="off">
+            <label for="regPwd">设置密码</label>
+        </div>
+        <label class="text-white">
+            <input type="checkbox" value="remember-me" checked> 记住我
+        </label>
+        <button class="w-100 btn btn-lg btn-warning" type="submit">进行注册</button>
+        <a class="link-light" href="javascript:void(0);" id="toLog">已有账号？前往登录</a>
+    </form>
+</div>
+<!-- 找回密码 -->
+<div class="mixJade" id="pairJade04">
+    <form class="container" style="width: 80%;">
+        <h3 class="h3 mb-3 fw-bold text-danger">找回密码</h3>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="finUse" placeholder="fin" autocomplete="off">
+            <label for="finUse">账号</label>
+        </div>
+        <div class="form-floating">
+            <input type="email" class="form-control" id="finMail" placeholder="fin@qq.com" autocomplete="off">
+            <label for="finMail">邮箱</label>
+        </div>
+        <div class="d-flex">
+            <div class="form-floating" style="width: 60%;">
+                <input type="text" class="form-control is-invalid" id="finCode" placeholder="fin"
+                       autocomplete="off">
+                <label for="finCode">验证码</label>
+            </div>
+            <input class="btn btn-danger" type="button" style="width: 40%;" value="发送验证码" onclick="settime(this)"/>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="finPwd" placeholder="fin" autocomplete="off">
+            <label for="finPwd">设置新密码</label>
+        </div>
+        <br>
+        <button class="w-100 btn btn-lg btn-danger" type="submit">找回密码</button>
+        <a class="link-light" href="javascript:void(0);" id="toLog02">想起密码？前往登录</a>
+    </form>
+</div>
+</body>
+<script src="登录注册与找回.js"></script>
+</html>

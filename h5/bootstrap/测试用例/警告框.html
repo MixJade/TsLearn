@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>警告框</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #alertWrapper{
+            position: absolute;
+            width: 40%;
+            left: 30%;
+            z-index: 100;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="btn btn-info" onclick="ss('规划局快乐')">急急急</button>
+    <div id="alertWrapper"></div>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+<script>
+    var myAlert = document.getElementById('alertWrapper')
+    function ss(text) {
+        myAlert.innerHTML = '<div class="alert alert-warning alert-dismissible fade show" role="alert" id="myAlert"><strong>'
+            + text
+            + '</strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+    }
+</script>
+
+</html>

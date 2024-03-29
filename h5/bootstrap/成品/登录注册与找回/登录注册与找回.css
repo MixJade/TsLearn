@@ -1,0 +1,31 @@
+.mixJade {
+    width: 37%;
+    top: 15%;
+    left: 30%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 7px 7px 17px rgba(52, 56, 66, 0.5);
+    background: rgba(0, 0, 0, 40%);
+    border-radius: 5px;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: all 1s;
+    user-select: none;
+}
+
+#pairJade02 {
+    transform: rotateY(180deg);
+}
+
+#pairJade03 {
+    transform: rotateX(180deg);
+}
+
+#pairJade04 {
+    transform: rotate3d(1, 1, 0, 180deg);
+}
+
+img {
+    cursor: pointer;
+}

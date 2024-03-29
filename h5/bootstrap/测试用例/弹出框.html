@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <title>吐司消息</title>
+</head>
+
+<body>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" onclick="dds()">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="delModal" tabindex="-1" aria-labelledby="delModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="delModalLabel">删除确认</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    一旦删除，数据无法找回，是否删除
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-danger" id="sureDelBtn">删除</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+<script>
+    const delModalFirst = document.getElementById("delModal")
+    const delModal = new bootstrap.Modal(delModalFirst, { keyboard: false })
+    const sureDelBtn = document.getElementById("sureDelBtn")
+    function dds() {
+        console.log(dsds())
+    }
+    // 用async/await获取异步返回值
+    async function dsds() {
+        return await confirmDel()
+    }
+    function confirmDel() {
+        delModal.show();
+        return new Promise(function (resolve, reject) {
+            delModalFirst.addEventListener('hide.bs.modal', function (event) {
+                resolve(false)
+            })
+            sureDelBtn.onclick = function () {
+                resolve(true);
+                delModal.hide();
+            }
+        })
+    }
+</script>
+
+</html>

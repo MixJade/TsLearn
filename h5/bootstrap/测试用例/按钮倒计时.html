@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+</head>
+
+<body>
+    <input type="button" id="btn" value="发送验证码" onclick="settime(this)" />
+    <script type="text/javascript">
+        "use strict";
+        function settime(val) {
+            let countDown = 30;
+            val.setAttribute("disabled", "disabled");
+            let intval = setInterval(function() {
+                if (countDown === 0) {
+                    clearInterval(intval)
+                    val.removeAttribute("disabled");
+                    val.value = "发送验证码";
+                    return
+                }
+                val.value = "重新发送(" + countDown + ")";
+                countDown--;
+            }, 1000)
+        } 
+    </script>
+</body>
+
+</html>

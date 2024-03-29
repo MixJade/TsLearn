@@ -1,0 +1,38 @@
+.carousel-item .carousel-caption {
+    background: rgba(0, 0, 0, 30%);
+}
+
+.text-center {
+    cursor: pointer;
+}
+
+#clientImgDiv {
+    cursor: pointer;
+}
+
+#clientNoneDiv {
+    width: 18rem;
+    position: fixed;
+    top: 10%;
+    left: 40%;
+    z-index: 1100;
+    display: none;
+}
+
+#clientImg {
+    height: 32px;
+    width: 32px;
+    z-index: 1200;
+    position: fixed;
+    top: 2%;
+    left: 50%;
+    transition: all 0.5s;
+}
+
+#clientImgDiv:hover #clientImg {
+    transform: scale(2.5) translate(0, 20px);
+}
+
+#clientImgDiv:hover #clientNoneDiv {
+    display: block;
+}
