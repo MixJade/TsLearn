@@ -1,0 +1,30 @@
+<template>
+  <MyRow>
+    <MyCard v-for="pet in cardList"
+            :key="pet.petId"
+            :data='{
+        photo: "pet-ex.jpg",
+        tit: pet.petName,
+        age: getAge(pet.petAge)+"岁",
+        sex: pet.petSex ? "公" : "母",
+        job: pet.petVariety,
+        info1: pet.petInfo,
+        info2: "健康："+pet.petStatus,
+        link:"/reception/petOne/"+pet.petId
+      }' :type="'success'"/>
+  </MyRow>
+</template>
+
+<script lang="ts" setup>
+import MyCard from "@/components/card/MyCard.vue";
+import {getAge} from "@/utils/TimeUtil";
+import {Pet} from "@/modal/entiy/Pet";
+import MyRow from "@/components/row/MyRow.vue";
+// 接收参数：宠物卡片
+defineProps<{
+  readonly cardList: Pet[]
+}>()
+</script>
+
+<style scoped>
+</style>
