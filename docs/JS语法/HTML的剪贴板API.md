@@ -1,0 +1,24 @@
+# HTML的剪贴板API
+
+不是复制，而是直接操作剪贴板
+
+```html
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>测试复制</title>
+</head>
+<body>
+<h1>Hello</h1>
+<button onclick="getCopy(this)" data-text="何当共剪西窗烛">点击复制</button>
+</body>
+<script>
+    function getCopy(e) {
+        const text = e.getAttribute("data-text")
+        navigator.clipboard.writeText(text)
+    }
+</script>
+</html>
+```
+
