@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>测试const函数</title>
+</head>
+<body>
+then的链式调用结果：
+</body>
+<script>
+    new Promise(resolve => resolve("hello"))
+        .then(res => fun1(res))
+        .then(res2 => fun2(res2))
+        .then(res3 => {
+            console.log(res3)
+            document.body.append(res3)
+        })
+
+    const fun1 = x => x + "[1]"
+    const fun2 = x => x + "[2]"
+</script>
+</html>

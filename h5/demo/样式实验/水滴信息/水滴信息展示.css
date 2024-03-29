@@ -1,0 +1,34 @@
+body {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200" preserveAspectRatio="none"><path d="M0 0,V30, Q500 130 ,1000 30,V0" stroke="transparent" fill="lightblue"/></svg>');
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+    background-color: #f8f9fa;
+}
+
+
+.circle {
+    width: 120px;
+    height: 120px;
+    border: 5px solid orange;
+    border-radius: 50%;
+    border-bottom: none;
+    /*居中*/
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    margin-left: -50px;
+    /*文字居中*/
+    text-align: center;
+}
+
+.circle span {
+    /*字体字号*/
+    font-size: large;
+    width: 100px;
+    /*定位*/
+    color: #f8f9fa;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

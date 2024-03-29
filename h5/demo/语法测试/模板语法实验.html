@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>模板语法实验</title>
+    <link rel="stylesheet" href="table.css">
+</head>
+<body>
+<table id="product-table">
+    <thead>
+    <tr>
+        <td>001</td>
+        <td>一行瑠璃</td>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- 现有数据可以可选地包括在这里 -->
+    </tbody>
+</table>
+<!--模板是看不到的，只能供给JS使用-->
+<template id="product-row">
+    <tr>
+        <td class="record"></td>
+        <td></td>
+    </tr>
+</template>
+</body>
+<script>
+    // 通过检查来测试浏览器是否支持 HTML 模板元素
+    // 用于保存模板元素的内容属性。
+    if ('content' in document.createElement('template')) {
+
+        // 使用现有的 HTML tbody 实例化表和该行与模板
+        let t = document.querySelector('#product-row'),
+            newTd = t.content.querySelectorAll("td");
+        // 要将模板写入的地方
+        let myTb = document.getElementsByTagName("tbody");
+
+        /*=====添加第二行，向模板中写入内容=====*/
+        newTd[0].textContent = "002";
+        newTd[1].textContent = "坚书立直";
+        // 克隆新行并将其插入表中
+        let clone = document.importNode(t.content, true);
+        myTb[0].appendChild(clone);
+
+        /*=====添加第三行=====*/
+        // 向模板写入新的内容
+        newTd[0].textContent = "003";
+        newTd[1].textContent = "坚叔立直";
+        // 克隆新行并将其插入表中
+        let clone2 = document.importNode(t.content, true);
+        myTb[0].appendChild(clone2);
+
+    } else {
+        // 找到另一种方法来添加行到表，因为不支持 HTML 模板元素。
+    }
+
+</script>
+</html>

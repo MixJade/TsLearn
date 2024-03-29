@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>测试CSS变量</title>
+    <style>
+        /*根伪类:root的变量可以全局引用*/
+        :root {
+            --main-bg-color: green;
+        }
+
+        /*这里是在子元素进行引用的*/
+        .second-cls {
+            --second-color: red;
+        }
+
+        .three-cls {
+            color: var(--three-clo, blue);
+        }
+    </style>
+</head>
+<body>
+<p style="color:var(--main-bg-color)">
+    一、可以在任何地方引用根伪类:root的变量
+</p>
+<div class="second-cls">
+    二、当然也可以在自己的class里面设置变量，
+    <p style="color:var(--second-color)">然后给子元素使用</p>
+</div>
+<p style="color:var(--second-color)">而非子元素引用不了</p>
+<!-- 这里的blue是备用值，当`&#45;&#45;second-color`不生效时，会启用Blue-->
+<p style="color: var(--second-color, blue);">三、使用var变量可以设置备用值，万一不生效还有得用</p>
+<!--这里是行内设置变量，在class中使用-->
+<p>四、这里是<span class="three-cls" style="--three-clo:yellow">行内设置变量</span>
+    ,<span class="three-cls" style="--three-clo:green">在class中使用</span>
+    ,一般用于<span class="three-cls" style="--three-clo:#d000ff">同一类但有小分别的</span></p>
+<p>五、JS也可以设置
+    <span id="my-five" style="--my-var:red;color:var(--my-var)">dom元素的css变量</span>
+    <span id="my-five-txt">green</span>
+</p>
+<button type="button" onclick="cssVarSet()">Js设置CSS变量</button>
+</body>
+<script>
+    function cssVarSet() {
+        const element = document.getElementById("my-five");
+        // 获取一个 Dom 节点上的 CSS 变量
+        const propertyValue0 = element.style.getPropertyValue("--my-var");
+        console.log(propertyValue0)
+
+        // 获取任意 Dom 节点上的 CSS 变量
+        const propertyValue = getComputedStyle(element).getPropertyValue("--my-var");
+        document.getElementById("my-five-txt").innerHTML = propertyValue;
+        if (propertyValue === 'red') {
+            // 修改一个 Dom 节点上的 CSS 变量
+            element.style.setProperty("--my-var", 'green');
+        } else {
+            element.style.setProperty("--my-var", 'red');
+        }
+    }
+
+</script>
+</html>

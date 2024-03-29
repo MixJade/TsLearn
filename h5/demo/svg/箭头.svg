@@ -1,0 +1,12 @@
+<svg width="300px" height="300px" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <!-- marker元素:箭头形状-->
+        <marker id="markerArrow" markerWidth="10" markerHeight="10" refX="1" refY="5" orient="auto">
+            <!-- 多边形：三个点为(0,0)、(10,5)、(0,10)-->
+            <polyline points="0,0 10,5 0,10" fill="#000000"/>
+        </marker>
+    </defs>
+    <!-- 从点(50,250)画一条直线到点(250,50) -->
+    <!-- 通过marker-end属性引用，使路径末端显示箭头 -->
+    <path d="M50,250 L250,50" style="stroke:#000000;stroke-width:2px;marker-end:url(#markerArrow);" fill="none"/>
+</svg>

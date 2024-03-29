@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>SVG操作板</title>
+    <style>
+        #mouse-pos {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            font-size: 1.5em;
+        }
+        img{
+            background-color: #9BDEAC;
+        }
+    </style>
+</head>
+<body>
+<img src="流程示意图.svg" alt="svg"/>
+<div id="mouse-pos"></div>
+</body>
+<script>
+    const mousePos = document.getElementById('mouse-pos');
+    // 实时打印鼠标位置
+    document.onmousemove = (e) => {
+        const x = e.pageX;
+        const y = e.pageY;
+        mousePos.innerHTML = '坐标: ' + x + ', ' + y;
+    };
+</script>
+</html>

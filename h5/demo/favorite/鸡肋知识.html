@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>鸡肋知识</title>
+    <link rel="icon" type="image/svg+xml" href='v.svg'/>
+    <style>
+        body {
+            background-color: #f5f5f5;
+            text-align: center;
+        }
+
+        /*头标签*/
+        header {
+            display: flex;
+            position: relative;
+            z-index: 2;
+            margin-left: 6px;
+        }
+
+        header div {
+            width: 56px;
+            height: 24px;
+            /* 字体居中,这应与高度相同 */
+            line-height: 24px;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 10px;
+            margin-left: 2px;
+            background: white;
+            font-size: small;
+            font-weight: bold;
+            /*指针变为小手*/
+            cursor: pointer;
+        }
+
+        .now-tag {
+            /*让背景覆盖变得非常重要*/
+            background-color: #d1edc4 !important;
+            border: 3px solid green;
+            border-bottom: none;
+            margin-bottom: -3px;
+        }
+
+        /*主要内容*/
+        main {
+            padding-left: 8px;
+            padding-right: 8px;
+            border: 3px solid green;
+            border-radius: 8px;
+            position: relative;
+            z-index: 1;
+            text-align: left;
+            background-color: #d1edc4;
+        }
+
+        /*响应式*/
+        @media (min-width: 768px) {
+            main, header {
+                width: 50vw;
+                left: 25vw;
+            }
+        }
+
+        @media (min-width: 576px) and (max-width: 768px) {
+            main, header {
+                width: 60vw;
+                left: 20vw;
+            }
+        }
+
+        @media (max-width: 575px) {
+            main, header {
+                width: 80vw;
+                left: 10vw;
+            }
+        }
+
+        /*主界面列表空隙*/
+        main li {
+            list-style: none;
+            padding-top: 2px;
+            padding-bottom: 2px;
+        }
+
+        main a {
+            text-decoration: none;
+        }
+
+        .show-text {
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+<!--顶部标题-->
+<header>
+    <div class="now-tag">Java</div>
+    <div>网络</div>
+    <div>吹水</div>
+    <div>Python</div>
+    <div>小方案</div>
+</header>
+<!--中部内容-->
+<main>
+    <!--区域一：爪哇知识-->
+    <div class="show-text">
+        <ul>
+            <li>说明: <a href="https://blog.csdn.net/grd_java/article/details/107614274">【Maven强制更新】</a>较为实用
+            </li>
+            <li>说明: <a href="https://blog.csdn.net/m0_53067943/article/details/123926050">【SpringMVC执行流程】</a>面试问题
+            </li>
+            <li>说明: <a href="https://www.iteye.com/blog/wanxw2001-1570339">【JAVA字符编码说明】</a>上学看的</li>
+            <li>说明: <a href="https://blog.csdn.net/evasnowind/article/details/115735854">【字符乱码对照】</a>乱码出现原因
+            </li>
+            <li>说明: <a href="https://blog.csdn.net/qq_45404035/article/details/107411688">【三层架构】</a>面试问题
+            </li>
+            <li>说明: <a href="https://zhuanlan.zhihu.com/p/446588282">【领域模型命名规范】</a>涉猎即可</li>
+            <li>说明: <a
+                    href="https://blog.csdn.net/qq_42549792/article/details/100128293">【MyBatis使用MBG逆向生成代码】</a>
+            </li>
+            <li>说明: <a
+                    href="https://blog.csdn.net/qlzw1990/article/details/116996422">【MP使用LambdaQueryWrapper】</a>
+            </li>
+            <li>说明: <a
+                    href="https://developer.aliyun.com/article/1285846">【上传jar至Nexus的两种方式】</a>使用Maven私服的方法
+            </li>
+            <li>说明: <a href="https://blog.csdn.net/zzti_erlie/article/details/123558837">【RocketMQ：消息丢失排查】</a>
+            </li>
+            <li>教程: <a href="https://blog.csdn.net/weixin_44360895/article/details/112451841">【Async注解】</a>Spring的Async注解使用
+            </li>
+        </ul>
+    </div>
+    <!--区域二：前端知识-->
+    <div class="show-text" style="display: none">
+        <ul>
+            <li>说明: <a href="https://blog.csdn.net/qq_41153943/article/details/104734054">【本地端口被占用解决方法】</a>
+            </li>
+            <li>说明: <a href="http://tools.jb51.net/table/http_status_code">【网页状态码大全】</a></li>
+        </ul>
+    </div>
+    <!--区域三：吹水博客-->
+    <div class="show-text" style="display: none">
+        <ul>
+            <li>开源: <a
+                    href="https://docs.github.com/zh/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository">【开源证书添加】</a>
+            </li>
+            <li>修改: <a href="https://bbs.3dmgame.com/thread-5596590-1-1.html">【缺氧修改教程】</a>dn-spy直接百度下载
+            </li>
+            <li>设计: <a href="https://learn.microsoft.com/zh-cn/dotnet/desktop/winforms/overview/?view=netdesktop-8.0">【WinForms介绍】</a>可以直接输出exe的UI设计
+            </li>
+            <li>课题: <a href="http://www.tablego.cn/">【tableGo】</a>其它人的课题，代码生成器</li>
+        </ul>
+    </div>
+    <!--区域四：Python-->
+    <div class="show-text" style="display: none">
+        <ul>
+            <li>软件说: <a href="https://blog.csdn.net/dkjkls/article/details/88933950">【Py添加方法注释】</a></li>
+            <li>软件说: <a href="https://zhuanlan.zhihu.com/p/286797485">【PyCharm设置文件头模板】</a></li>
+            <li>说明: <a href="https://www.cnblogs.com/LXP-Never/p/11361393.html">【python爬虫参数模块教程】</a></li>
+        </ul>
+    </div>
+    <!--区域五：Java方案-->
+    <div class="show-text" style="display: none">
+        <ul>
+            <li>安全：<a href="https://blog.csdn.net/qq_39826207/article/details/130264488">【微服务限流算法】</a></li>
+            <li>安全：<a href="https://blog.csdn.net/koastal/article/details/53456696">【放重放攻击方案】</a></li>
+            <li>安全：<a href="https://www.cnblogs.com/little-monster-lhq/p/17701795.html">【10种网络安全方案】</a></li>
+            <li>安全：<a href="https://www.yingtwo.com/article/7411853.html">【Gateway加解密方案】</a>有代码</li>
+        </ul>
+    </div>
+</main>
+</body>
+<script>
+    "use strict";
+    window.onload = () => {
+        // 在初始化时，为标签赋予颜色
+        const colors = ["red", "orange", "yellow", "LightSalmon", "OrangeRed", "LawnGreen"];
+        const headerDivs = document.querySelectorAll("header div");
+        for (let i = 0; i < headerDivs.length; i++) {
+            headerDivs[i].style.backgroundColor = colors[i % colors.length];
+        }
+    }
+
+    (() => {
+        let now_index = 0;//切换显示
+        const myTag = document.querySelectorAll("header div");
+        const myCon = document.getElementsByClassName("show-text");
+        for (let i = 0; i < myTag.length; i++) {
+            myTag.item(i).onclick = () => {
+                // 隐藏现在的区域与变化按钮
+                myCon[now_index].style.display = 'none';
+                myTag.item(now_index).classList.remove("now-tag")
+                // 展示另外一个
+                myCon[i].style.display = 'block';
+                myTag.item(i).classList.add("now-tag");
+                now_index = i;
+            }
+        }
+    })();
+</script>
+</html>

@@ -1,0 +1,6 @@
+<!-- 定义了此图形，宽1000，高200 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200" preserveAspectRatio="none">
+  <!-- 长方形区域，宽1000，高30，淡蓝色  -->
+  <!-- 弧形区域，从(0,30)出发，低谷点为(500,130)，到(1000,30)结束 -->
+  <path d="M0,0 V30 Q500,130 1000,30 V0" stroke="transparent" fill="lightblue"/>
+</svg>

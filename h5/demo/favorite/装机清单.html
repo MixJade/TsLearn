@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>装机清单</title>
+    <link rel="icon" type="image/svg+xml" href='v.svg'/>
+    <style>
+        /*侧边栏*/
+        .sidebar {
+            width: 160px;
+            background: #f5f5f5;
+            height: 90vh;
+            position: absolute;
+            padding: 10px;
+            box-sizing: border-box;
+            /*禁止文字选中*/
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /*导航栏侧边标题*/
+        .sidebar h2 {
+            color: #5b88ea;
+            margin-bottom: 36px;
+        }
+
+        .sidebar ul {
+            /*消除列表样式*/
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            /*更改指针样式*/
+            cursor: pointer;
+        }
+
+        /*导航栏侧边选项卡*/
+        .aside-tit {
+            text-align: center;
+            margin-bottom: 16px;
+            font-weight: bolder;
+            font-size: 20px;
+            padding: 10px;
+        }
+
+        /*选项卡的鼠标悬停*/
+        .aside-tit:hover {
+            background-color: #d1edc4;
+            border-top-right-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
+
+        /*当前激活的栏目*/
+        .now-tit {
+            background-color: #67C23A;
+            border: 3px dashed green;
+            border-top-right-radius: 50px;
+            border-bottom-right-radius: 50px;
+            color: white;
+        }
+
+        /*主界面*/
+        main {
+            background: #dedfe0;
+            height: 96vh;
+            width: calc(96vw - 160px);
+            position: absolute;
+            left: 160px;
+            /*边框*/
+            border: 3px dashed green;
+            border-radius: 12px;
+            /*内边距*/
+            padding: 16px;
+            box-sizing: border-box;
+            /*滚动条*/
+            overflow-y: auto;
+        }
+
+        /*主界面内部按钮*/
+        main button {
+            border-radius: 6px;
+            border: 2px solid #008A5B;
+            color: #008A5B;
+            transition: 0.5s box-shadow; /* 慢慢过渡的效果 */
+        }
+
+        /*主界面内部按钮悬停*/
+        main button:hover {
+            box-shadow: 0 0 6px 6px #b3e19d;
+            background-color: #9BDEAC;
+        }
+
+        /*主界面内部标题*/
+        .my-con h3 {
+            /*标题样式*/
+            border-left: 6px solid red;
+            padding-left: 12px;
+            color: red;
+            margin-top: 4px;
+            margin-bottom: 4px;
+        }
+
+        /*主界面内部列表*/
+        .my-con ul {
+            /*行间距为字体的1.5倍*/
+            line-height: 1.5;
+        }
+
+        /*主界面内部链接*/
+        .my-con ul a {
+            text-decoration: none;
+        }
+
+        /*弹出框*/
+        #myDialog {
+            background: #98c0c9;
+            border: 3px solid #1c3c31;
+            border-radius: 12px;
+            width: 380px;
+            text-align: center;
+        }
+
+        /*弹出框关闭按钮*/
+        #dialogBtn {
+            width: 60px;
+            height: 30px;
+            background: #437371;
+            border: 1px solid;
+            border-radius: 12px;
+            cursor: pointer;
+            color: #98c0c9;
+        }
+
+        /*弹出框内部文本*/
+        #dialogTxt {
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+<!--弹出框-->
+<dialog id="myDialog">
+    <div id="dialogTxt">
+        你好
+    </div>
+    <button id="dialogBtn" type="button" onclick="closeMe()">关闭</button>
+</dialog>
+<!--侧边栏-->
+<aside class="sidebar">
+    <h2>软件清单页</h2>
+    <ul>
+        <li class="aside-tit now-tit">开发软件</li>
+        <li class="aside-tit">工作能力</li>
+        <li class="aside-tit">日常装机</li>
+        <li class="aside-tit">电脑知识</li>
+        <li class="aside-tit">杂鱼软件</li>
+    </ul>
+</aside>
+<!--主界面-->
+<main>
+    <!-- 界面:开发软件-->
+    <div class="my-con">
+        <h3>开发</h3>
+        <ul>
+            <li>Java: <a href="https://www.oracle.com/java/technologies/downloads/#jdk20-windows">【JDK下载】</a>
+                <button type="button" onclick="showMe(this)"
+                        data-text="系统变量中，新建JAVA_HOME，
+                            值为：C:\Program Files\Java\jdk1.8.0_361
+                            然后在Path中，添加%JAVA_HOME%\bin">
+                    环境设置
+                </button>
+            </li>
+            <li>Maven: <a href="https://maven.apache.org/download.cgi">【Maven-bin下载】</a>
+                <button type="button" onclick="showMe(this)"
+                        data-text="系统变量中，新建MAVEN_HOME，
+                            值为：D:\apache-maven-3.8.6
+                            然后在Path中，添加%MAVEN_HOME%\bin">
+                    环境设置
+                </button>
+            </li>
+            <li>Maven仓库: <a href="https://developer.aliyun.com/mvn/guide">【阿里云仓库】</a>修改Maven配置文件
+                <button type="button" onclick="showMe(this)"
+                        data-text="粘贴完阿里云的mirror配置之后，
+                            在setting.xml文件中，
+                            除了阿里云的mirror其它全部注释掉">
+                    注意事项
+                </button>
+            </li>
+            <li>IDE: <a href="https://www.jetbrains.com/idea/download/other.html">【IDEA下载】</a>编辑爪哇
+            </li>
+            <li>IDE破解: <a href="https://www.jb51.net/article/197138.htm">【IntelliJ IDEA破解教程】</a>这个仅做参考，主要是<a
+                    href="https://jetbra.in/5d84466e31722979266057664941a71893322460">破解包的官网</a>
+            </li>
+            <li>Git: <a href="https://git-scm.com/">【Git下载】</a>及<a
+                    href="https://registry.npmmirror.com/binary.html?path=git-for-windows/">其镜像</a> 还有<a
+                    href="https://www.runoob.com/manual/git-guide/">说明书</a></li>
+            <li>前端: <a href="https://nodejs.org">【Node.js官网】</a>服务端js运行环境</li>
+            <li>IDE: <a href="https://www.jetbrains.com/webstorm/download/other.html">【WebStorm下载】</a>编辑前端</li>
+            <li>Py: <a href="https://registry.npmmirror.com/binary.html?path=python/3.10.0/">【Python下载】</a>下载3.10.0-amd64.exe
+            </li>
+            <li>IDE: <a href="https://www.jetbrains.com/pycharm/download/other.html">【PyCharm下载】</a>编辑Py，以及
+                <a href="https://blog.csdn.net/weixin_55629186/article/details/132549074">【pip设置镜像源】</a>
+            </li>
+        </ul>
+        <h3>辅助</h3>
+        <ul>
+            <li>数据库: <a href="https://dev.mysql.com/downloads/mysql/">【MySQL下载】</a>，以及驱动<a
+                    href="https://visualstudio.microsoft.com/zh-hans/downloads/">【Visual Studio】</a>
+                <button type="button" onclick="showMe(this)"
+                        data-text="下拉选择【其他工具、框架】-【Microsoft Visual C++ Redistributable for Visual Studio 2022】">
+                    下载选项
+                </button>
+            </li>
+            <li>数据库: <a href="https://www.webyang.net/Html/web/article_378.html">【Navicat破解说明】</a>建议找15的</li>
+            <li>数据库: <a href="https://dbeaver.io/download/">【dbeaver下载】</a>免费且带中文，
+                教程：<a href="https://blog.csdn.net/z19950712/article/details/117689017">【DB连接Oracle】</a>
+            </li>
+            <li>从数据库: <a href="https://github.com/tporadowski/redis/releases">【redis下载】</a>
+                ,有<a href="https://blog.csdn.net/weixin_44893902/article/details/123087435">【安装教程】</a>
+            </li>
+            <li>从数据库: <a href="https://redis.com/redis-enterprise/redis-insight/">【RedisDesktopManager】</a>
+                安装包去网盘找
+            </li>
+            <li>测试工具: <a href="https://www.postman.com/downloads/">【postMan下载】</a>模拟前端发送请求</li>
+        </ul>
+    </div>
+    <!-- 界面:工作能力-->
+    <div class="my-con" style="display: none">
+        <h3>便利</h3>
+        <ul>
+            <li>笔记: <a href="https://yxmiaoyu.lanzouo.com/il403xa5dpg">【Typ-ora】</a>，编辑markdown,密码windows</li>
+            <li>交流: <a href="https://www.axure.com/">【ax-ure】</a>原型设计工具(有破解版),
+                以及<a href="https://help.wulihub.com.cn/">部署教程</a>、
+                <a href="https://www.wulihub.com.cn/webapp/workspace/index">部署地址</a>
+            </li>
+            <li>梳理: <a href="https://xmind.cn/">【x-mind】</a>思维导图工具</li>
+            <li>文本查看: <a href="https://code.visualstudio.com/">【VSCode】</a>不装插件
+                ，以及<a href="https://www.ujiuye.com/wenda/2021/70924.html">【VsCode快捷键】</a>
+            </li>
+            <li>截图: <a href="https://zh.snipaste.com/">【Sni-paste】</a>好用的截图软件
+            </li>
+        </ul>
+    </div>
+    <!-- 界面:日常装机-->
+    <div class="my-con" style="display: none">
+        <h3>娱乐</h3>
+        <ul>
+            <li>游戏: <a href="https://store.steampowered.com/about/">【Steam】</a>
+                ,以及<a href="https://uu.163.com/">【UU加速器】</a>
+            </li>
+            <li>加速器: <a href="https://www.qiyou.cn/">【七游加速器】</a>用于在Steam上发言</li>
+            <li>找资源: <a href="https://dl.xunlei.com/">【迅雷】</a>充满铜臭，但有资源</li>
+            <li>播放: <a href="http://www.potplayercn.com/download">【PotPlayer下载】</a>视频播放软件，可<a
+                    href="https://www.bilibili.com/video/BV1Tx4y1X7Fh/?share_source=copy_web&vd_source=d9b4a1809a26db8158174fcff6eb69f9">自定义设置</a>
+            </li>
+            <li>翻译: <a href="https://fanyi.youdao.com/download-Windows?keyfrom=fanyi_web_banner">【网易有道翻译】</a>可截图翻译
+            </li>
+        </ul>
+        <h3>装机</h3>
+        <ul>
+            <li>重装：<a href="https://www.xitongzhijia.net/soft/142406.html">【Etcher下载】</a>U盘启动制作工具</li>
+            <li>清理：<a href="https://www.wisecleaner.com.cn/wise-care-365.html">【WiseCare365】</a>垃圾清理软件</li>
+            <li>驱动：<a href="https://dm.weishi.360.cn/home.html">【360驱动大师】</a>修复驱动</li>
+        </ul>
+    </div>
+    <!-- 界面:电脑知识-->
+    <div class="my-con" style="display: none">
+        <h3>电脑知识</h3>
+        <ul>
+            <li>任务管理器快捷键: Shift+Ctrl+Esc
+                <button type="button" onclick="showMe(this)"
+                        data-text="打开设备管理：Win+X。
+                            打开运行：Win+R。
+                            任务管理器: Shift+Ctrl+Esc
+                            切换窗口：Win+Tab。
+                            解除功能键锁定：Fn+Esc">
+                    快捷键知识
+                </button>
+            </li>
+            <li>拆机: <a
+                    href="https://www.dell.com/support/manuals/zh-cn/inspiron-14-5498-laptop/inspiron-5498-service-manual/%E5%8D%B8%E4%B8%8B%E7%94%B5%E6%B1%A0?guid=guid-98de88f9-b9a1-46de-a72a-48b4da118610&lang=zh-cn">【DELL拆卸教程】</a>认真看，特别是电池部分
+            </li>
+            <li>这是: <a href="https://www.reneelab.com.cn/cannot-delete-folder-in-use.html">【取消文件夹占用】</a>意义重大
+            </li>
+            <li>这是: <a href="https://www.zhihu.com/question/501459127">【Win11屏幕亮度不能调】</a>最终【设备管理-显示适配器-扫描检测硬件改动】
+            </li>
+            <li>这是: <a
+                    href="https://www.disktool.cn/content-center/usb-is-divided-into-two-disk-how-to-merge-369.html">【USB分区合并】</a>缺点是会全部格式化
+            </li>
+            <li>附: 调整Word文档周围的空白可以去页面布局里面设置</li>
+            <li>附: 写Word文档时，可以在【标题】-【修改样式】-【格式】-【编号】处设置编号</li>
+        </ul>
+    </div>
+    <!-- 界面:杂鱼软件-->
+    <div class="my-con" style="display: none">
+        <h3>杂鱼软件</h3>
+        <ul>
+            <li>开发: <a href="https://visualstudio.microsoft.com/zh-hans/free-developer-offers/">【VisualStudio】</a>开发游戏Mod
+            </li>
+            <li>文本: <a href="https://www.sublimetext.com/">【sublime】</a>高级记事本</li>
+            <li>软件: <a href="https://natapp.cn/">【nat-app】</a>内网穿透</li>
+        </ul>
+        <h3>补充应用</h3>
+        <ul>
+            <li>文档: <a href="https://github.com/jgm/pandoc">【pandoc】</a>md文档转epub
+            </li>
+            <li>游戏: <a href="https://github.com/gibbed/SteamAchievementManager">【SteamAchievementManager】</a>批量解锁steam成就
+            </li>
+        </ul>
+    </div>
+</main>
+</body>
+<script>
+    "use strict";
+    (() => {
+        let now_index = 0;//切换显示
+        const myTit = document.getElementsByClassName("aside-tit");
+        const myCon = document.getElementsByClassName("my-con");
+        for (let i = 0; i < myTit.length; i++) {
+            myTit.item(i).onclick = () => {
+                // 隐藏现在的区域与变化按钮
+                myCon[now_index].style.display = 'none';
+                myTit.item(now_index).classList.remove('now-tit');
+                // 展示另外一个
+                myCon[i].style.display = 'block';
+                myTit.item(i).classList.add('now-tit');
+                now_index = i;
+            }
+        }
+    })();
+
+
+    /**
+     * 模态框相关
+     */
+    const dialog = document.getElementById("myDialog");
+    const dialogTxt = document.getElementById("dialogTxt");
+    const showMe = (e) => {
+        dialogTxt.innerText = e.getAttribute("data-text");
+        dialog.showModal();
+    }
+    const closeMe = () => {
+        dialog.close()
+    }
+
+</script>
+</html>
