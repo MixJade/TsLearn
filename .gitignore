@@ -1,0 +1,7 @@
+node_modules
+.idea
+.temp
+.cache
+dist
+# 忽略TS的编译输出文件
+ts01/js
