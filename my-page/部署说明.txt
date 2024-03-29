@@ -1,0 +1,11 @@
+打开文件资源管理器，在地址栏输入：
+
+C:\Program Files\Git\bin\sh.exe
+
+然后在弹窗中输入
+
+sh up.sh
+
+接着访问网站
+
+https://mixjade.github.io/
