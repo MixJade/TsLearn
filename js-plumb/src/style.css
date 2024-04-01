@@ -1,0 +1,35 @@
+#app {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+a {
+    font-weight: 500;
+    color: #42b883;
+    padding: 8px;
+    text-decoration: none;
+}
+
+/*单个待连接卡片*/
+.state-item {
+    width: 80px;
+    height: 40px;
+    background: #e9e9eb;
+    border: 2px solid rgb(14, 232, 44);
+    text-align: center;
+    line-height: 40px;
+    border-radius: 4px;
+    margin-right: 60px;
+}
+
+/*卡片行*/
+.line-wrap {
+    display: flex;
+    margin-bottom: 40px;
+}
