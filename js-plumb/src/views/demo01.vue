@@ -1,5 +1,5 @@
 <template>
-  <h3>1.连接两个节点(可拖动)</h3>
+  <h3>1.连接两个节点(可拖动、基础属性说明)</h3>
 
   <div class="line-wrap">
     <div id="item_left" class="state-item">卡片1</div>
