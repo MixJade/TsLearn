@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import {fileURLToPath, URL} from 'node:url'
 
 // https://vitejs.dev/config/
+// noinspection JSUnusedGlobalSymbols
 export default defineConfig({
     plugins: [vue({
         template: {

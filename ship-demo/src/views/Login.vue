@@ -9,10 +9,8 @@
           <stop :stop-color="backColor.end" offset="100%"/>
         </linearGradient>
       </defs>
-      <!-- 长方形区域，宽1000，高30，淡蓝色  -->
-      <rect fill="url(#Gradient)" height="80" width="1000"/>
-      <!-- 弧形区域，从(0,30)出发，低谷点为(500,130)，到(1000,30)结束 -->
-      <path d="M0 80 Q500 280 ,1000 80" fill="url(#Gradient)" stroke="transparent"/>
+      <!-- 弧形区域-->
+      <path d="M0 0,V80,Q500 280,1000 80,V0" fill="url(#Gradient)" stroke="transparent"/>
     </svg>
     <!--登陆卡片-->
     <h2 class="my-h2">轻触牌间喵，进入影中境</h2>
