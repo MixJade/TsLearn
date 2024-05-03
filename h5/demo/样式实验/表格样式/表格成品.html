@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>表格成品</title>
+    <link href="myCurl.min.css" rel="stylesheet">
+</head>
+<body>
+<!--搜索框-->
+<section class="mySearch">
+    <form role="search" onsubmit="return false">
+        <input type="search" placeholder="学生名字" aria-label="Search" id="searchInput">
+        <button class="btn-line-suc" type="submit">Search</button>
+    </form>
+    <div>
+        <button type="button" class="my-btn btn-danger" onclick="toConfirm()">批量删除</button>
+        <button type="button" class="my-btn btn-success" onclick="showDialog()">添加学生</button>
+    </div>
+</section>
+<!-- 表格 -->
+<table class="my-table">
+    <caption>测试表格</caption>
+    <thead>
+    <tr>
+        <th><input type="checkbox" id="checkALL">
+            <label for="checkALL"></label>
+        </th>
+        <th>姓名</th>
+        <th>社团</th>
+        <th>性别</th>
+        <th>英语</th>
+        <th>数学</th>
+        <th>年龄</th>
+        <th>钱</th>
+        <th>身高</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody id="tb-main">
+    <tr>
+        <td>
+            <label>
+                <input type="checkbox" name="checkA" placeholder="9">
+            </label>
+        </td>
+        <td>中野梓</td>
+        <td>轻音部</td>
+        <td>女</td>
+        <td>70</td>
+        <td>80</td>
+        <td>14</td>
+        <td>7000</td>
+        <td>1.5</td>
+        <td>
+            <button class="del-btn" type="button">删除</button>
+            <button class="upd-btn" type="button">修改</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>
+                <input type="checkbox" name="checkA" placeholder="10">
+            </label>
+        </td>
+        <td>小鸟游六花</td>
+        <td>极东魔术昼寝结社</td>
+        <td>女</td>
+        <td>67</td>
+        <td>1</td>
+        <td>12</td>
+        <td>5000</td>
+        <td>1.5</td>
+        <td>
+            <button class="del-btn" type="button">删除</button>
+            <button class="upd-btn" type="button">修改</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>
+                <input type="checkbox" name="checkA" placeholder="11">
+            </label>
+        </td>
+        <td>富㭴勇太</td>
+        <td>极东魔术昼寝结社</td>
+        <td>男</td>
+        <td>80</td>
+        <td>80</td>
+        <td>12</td>
+        <td>5000</td>
+        <td>1.7</td>
+        <td>
+            <button class="del-btn" type="button">删除</button>
+            <button class="upd-btn" type="button">修改</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>
+                <input type="checkbox" name="checkA" placeholder="14">
+            </label>
+        </td>
+        <td>布加拉提</td>
+        <td>黄金之风</td>
+        <td>男</td>
+        <td>88</td>
+        <td>90</td>
+        <td>44</td>
+        <td>100000</td>
+        <td>1.78</td>
+        <td>
+            <button class="del-btn" type="button">删除</button>
+            <button class="upd-btn" type="button">修改</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>
+                <input type="checkbox" name="checkA" placeholder="15">
+            </label>
+        </td>
+        <td>乔鲁诺·乔巴拿</td>
+        <td>黄金之风</td>
+        <td>男</td>
+        <td>100</td>
+        <td>100</td>
+        <td>39</td>
+        <td>5000</td>
+        <td>1.72</td>
+        <td>
+            <button class="del-btn" type="button">删除</button>
+            <button class="upd-btn" type="button">修改</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<!--添加模态框-->
+<dialog class="myDialog" id="myDialog">
+    <form class="myForm" id="addPetForm">
+        <fieldset>
+            <legend>添加学生</legend>
+            <input type="hidden" id="id">
+            <div class="form-row">
+                <label for="studentName">学生姓名</label>
+                <input id="studentName" type="text" placeholder="学生姓名">
+            </div>
+            <div class="form-row">
+                <label>性别</label>
+                <div style="display: inline-block">
+                    <input name="sex" id="petSexRad_1" type="radio" autocomplete="off"
+                           checked>
+                    <label for="petSexRad_1">男</label>
+                    <input name="sex" id="petSexRad_2" type="radio" autocomplete="off">
+                    <label for="petSexRad_2">女</label>
+                </div>
+            </div>
+            <div class="form-row">
+                <label for="englishGrade">英语</label>
+                <input id="englishGrade" type="number" step="5" min="1" max="100"
+                       value="1">
+            </div>
+            <div class="form-row">
+                <label for="mathGrade">数学</label>
+                <input id="mathGrade" type="number" step="5" min="1" max="100"
+                       value="1">
+            </div>
+            <div class="form-row">
+                <label for="societyId">社团</label>
+                <select id="societyId">
+                    <option value="1" selected>散人</option>
+                    <option value="2">头文字D</option>
+                    <option value="3">轻音部</option>
+                    <option value="4">黄金之风</option>
+                    <option value="5">极东魔术昼寝结社</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="height">身高</label>
+                <input id="height" type="number" step="0.1" min="0.5" max="2"
+                       value="1">
+            </div>
+            <div class="form-row">
+                <label for="birthday">出生日期</label>
+                <input id="birthday" type="date">
+            </div>
+            <div class="form-row">
+                <label for="money">钱</label>
+                <input id="money" type="number" step="100" min="0" value="0">
+            </div>
+        </fieldset>
+        <div class="form-footer">
+            <button class="my-btn btn-secondary" type="button" onclick="closeDialog()">关闭</button>
+            <button class="my-btn btn-primary" type="button">确认提交</button>
+        </div>
+    </form>
+</dialog>
+<!--删除确认框-->
+<dialog id="sureDelModal">
+    <p>
+        一旦删除，数据无法找回，是否删除
+    </p>
+    <div style="text-align: right">
+        <button class="my-btn btn-danger" type="button" id="sureDelBtn">确认</button>
+        <button class="my-btn btn-secondary" type="button" onclick="cancelDel()">取消</button>
+    </div>
+</dialog>
+<!--吐司消息显示框-->
+<div id="myTus"></div>
+</body>
+<!--吐司：正确消息-->
+<template id="tus-temp">
+    <div class="tus tus-suc">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+            <circle cx="12" cy="12" r="11" fill="#67C23A"/>
+            <path d="M7 12 L12 17 L17 7" stroke="white" stroke-width="2" fill="none"/>
+        </svg>
+        <span>这是一条吐司消息</span>
+    </div>
+</template>
+<!--吐司：错误消息-->
+<template id="tus-temp2">
+    <div class="tus tus-fail">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+            <circle cx="12" cy="12" r="11" fill="#F56C6C"/>
+            <line x1="17" y1="7" x2="7" y2="17" stroke="white" stroke-width="2"/>
+            <line x1="17" y1="17" x2="7" y2="7" stroke="white" stroke-width="2"/>
+        </svg>
+        <span>这是一条吐司消息</span>
+    </div>
+</template>
+<script>
+    // 添加修改模态框
+    const dialog = document.getElementById("myDialog");
+    const showDialog = () => {
+        dialog.showModal();
+    }
+    const closeDialog = () => {
+        dialog.close()
+    }
+
+    // 删除确认模态框
+    const toConfirm = async () => {
+        if (await confirmDel()) {
+            showTus("删除成功")
+        } else {
+            showTus2("取消删除")
+        }
+    }
+    const sureDelModal = document.getElementById("sureDelModal"); // 确认删除模态框
+    const sureDelBtn = document.getElementById("sureDelBtn"); // 确认删除按钮
+    const confirmDel = () => {
+        sureDelModal.showModal();
+        return new Promise((resolve) => {
+            sureDelModal.addEventListener('close', () => {
+                resolve(false);
+            });
+            sureDelBtn.onclick = () => {
+                resolve(true);
+                sureDelModal.close()
+            }
+        })
+    }
+    const cancelDel = () => {
+        sureDelModal.close()
+    }
+
+    // 吐司消息
+    const showTus = (text) => {
+        if ('content' in document.createElement('template')) {
+            // 使用现有的 HTML tbody 实例化表和该行与模板
+            let t = document.getElementById('tus-temp'),
+                tSpan = t.content.querySelectorAll('span');
+            // 要将模板写入的地方
+            let myTus = document.getElementById('myTus');
+            /*=====向模板中写入内容=====*/
+            tSpan[0].textContent = text;
+            // 克隆新行并将其插入表中
+            let clone = document.importNode(t.content, true);
+            myTus.appendChild(clone);
+            // 设定4秒后删除这个元素
+            setTimeout(function () {
+                myTus.removeChild(myTus.firstElementChild);
+            }, 4000);
+        }
+    }
+
+    const showTus2 = (text) => {
+        if ('content' in document.createElement('template')) {
+            let t = document.getElementById('tus-temp2'),
+                tSpan = t.content.querySelectorAll('span');
+            let myTus = document.getElementById('myTus');
+            tSpan[0].textContent = text;
+            // 克隆新行并插入
+            let clone = document.importNode(t.content, true);
+            myTus.appendChild(clone);
+            // 设定4秒后删除这个元素
+            setTimeout(function () {
+                myTus.removeChild(myTus.firstElementChild);
+            }, 4000);
+        }
+    }
+</script>
+</html>

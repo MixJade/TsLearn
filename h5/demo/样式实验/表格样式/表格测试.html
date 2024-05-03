@@ -1,218 +1,75 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <title>表格测试</title>
-    <!--    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.3/css/bootstrap.css" rel="stylesheet">-->
-    <link href="myTable.css" rel="stylesheet">
-    <link href="myBtn.css" rel="stylesheet">
-    <link href="mySearch.css" rel="stylesheet">
-    <link href="myForm.css" rel="stylesheet">
-    <link href="myDialog.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>表格测试</title>
+  <!--    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.3/css/bootstrap.css" rel="stylesheet">-->
+  <link href="myTable.css" rel="stylesheet">
 </head>
 <body>
-<!--搜索框-->
-<section class="mySearch">
-    <form role="search" onsubmit="return false">
-        <input type="search" placeholder="学生名字" aria-label="Search" id="searchInput">
-        <button class="btn-line-suc" type="submit">Search</button>
-    </form>
-    <div>
-        <button type="button" class="my-btn btn-danger">批量删除</button>
-        <button type="button" class="my-btn btn-success" onclick="showMe()">添加学生</button>
-    </div>
-</section>
 <!-- 表格 -->
 <table class="my-table">
-    <caption>测试表格</caption>
-    <thead>
-    <tr>
-        <th><input type="checkbox" id="checkALL">
-            <label for="checkALL"></label>
-        </th>
-        <th>姓名</th>
-        <th>社团</th>
-        <th>性别</th>
-        <th>英语</th>
-        <th>数学</th>
-        <th>年龄</th>
-        <th>钱</th>
-        <th>身高</th>
-        <th>操作</th>
-    </tr>
-    </thead>
-    <tbody id="tb-main">
-    <tr>
-        <td>
-            <label>
-                <input type="checkbox" name="checkA" placeholder="9">
-            </label>
-        </td>
-        <td>中野梓</td>
-        <td>轻音部</td>
-        <td>女</td>
-        <td>70</td>
-        <td>80</td>
-        <td>14</td>
-        <td>7000</td>
-        <td>1.5</td>
-        <td>
-            <button class="del-btn" type="button">删除</button>
-            <button class="upd-btn" type="button">修改</button>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <label>
-                <input type="checkbox" name="checkA" placeholder="10">
-            </label>
-        </td>
-        <td>小鸟游六花</td>
-        <td>极东魔术昼寝结社</td>
-        <td>女</td>
-        <td>67</td>
-        <td>1</td>
-        <td>12</td>
-        <td>5000</td>
-        <td>1.5</td>
-        <td>
-            <button class="del-btn" type="button">删除</button>
-            <button class="upd-btn" type="button">修改</button>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <label>
-                <input type="checkbox" name="checkA" placeholder="11">
-            </label>
-        </td>
-        <td>富㭴勇太</td>
-        <td>极东魔术昼寝结社</td>
-        <td>男</td>
-        <td>80</td>
-        <td>80</td>
-        <td>12</td>
-        <td>5000</td>
-        <td>1.7</td>
-        <td>
-            <button class="del-btn" type="button">删除</button>
-            <button class="upd-btn" type="button">修改</button>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <label>
-                <input type="checkbox" name="checkA" placeholder="14">
-            </label>
-        </td>
-        <td>布加拉提</td>
-        <td>黄金之风</td>
-        <td>男</td>
-        <td>88</td>
-        <td>90</td>
-        <td>44</td>
-        <td>100000</td>
-        <td>1.78</td>
-        <td>
-            <button class="del-btn" type="button">删除</button>
-            <button class="upd-btn" type="button">修改</button>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <label>
-                <input type="checkbox" name="checkA" placeholder="15">
-            </label>
-        </td>
-        <td>乔鲁诺·乔巴拿</td>
-        <td>黄金之风</td>
-        <td>男</td>
-        <td>100</td>
-        <td>100</td>
-        <td>39</td>
-        <td>5000</td>
-        <td>1.72</td>
-        <td>
-            <button class="del-btn" type="button">删除</button>
-            <button class="upd-btn" type="button">修改</button>
-        </td>
-    </tr>
-    </tbody>
+  <caption>测试表格</caption>
+  <thead>
+  <tr>
+    <th>姓名</th>
+    <th>品种</th>
+    <th>性别</th>
+    <th>年龄</th>
+    <th>健康状况</th>
+    <th>是否住院</th>
+  </tr>
+  </thead>
+  <tbody id="tb-main">
+  <tr>
+    <td>saber</td>
+    <td>金毛犬</td>
+    <td>母</td>
+    <td>19</td>
+    <td>怀孕待产</td>
+    <td>否</td>
+  </tr>
+  <tr>
+    <td>甘雨</td>
+    <td>椰羊</td>
+    <td>母</td>
+    <td>119</td>
+    <td>频繁掉毛</td>
+    <td>是</td>
+  </tr>
+  <tr>
+    <td>甘雨</td>
+    <td>椰羊</td>
+    <td>母</td>
+    <td>119</td>
+    <td>频繁掉毛</td>
+    <td>是</td>
+  </tr>
+  <tr>
+    <td>甘雨</td>
+    <td>椰羊</td>
+    <td>母</td>
+    <td>119</td>
+    <td>频繁掉毛</td>
+    <td>是</td>
+  </tr>
+  <tr>
+    <td>泳信羊</td>
+    <td>山羊</td>
+    <td>公</td>
+    <td>23</td>
+    <td>绝育手术</td>
+    <td>否</td>
+  </tr>
+  <tr>
+    <td>神里凌华</td>
+    <td>柴犬</td>
+    <td>母</td>
+    <td>20</td>
+    <td>肛裂</td>
+    <td>是</td>
+  </tr>
+  </tbody>
 </table>
-<!--添加模态框-->
-<dialog class="myDialog" id="myDialog">
-    <form class="myForm" id="addPetForm">
-        <fieldset>
-            <legend>添加学生</legend>
-            <input type="hidden" id="id">
-            <div class="form-row">
-                <label for="studentName">学生姓名</label>
-                <input id="studentName" type="text" placeholder="学生姓名">
-            </div>
-            <div class="form-row">
-                <label>性别</label>
-                <div style="display: inline-block">
-                    <input name="sex" id="petSexRad_1" type="radio" autocomplete="off"
-                           checked>
-                    <label for="petSexRad_1">男</label>
-                    <input name="sex" id="petSexRad_2" type="radio" autocomplete="off">
-                    <label for="petSexRad_2">女</label>
-                </div>
-            </div>
-            <div class="form-row">
-                <label for="englishGrade">英语</label>
-                <input id="englishGrade" type="number" step="5" min="1" max="100"
-                       value="1">
-            </div>
-            <div class="form-row">
-                <label for="mathGrade">数学</label>
-                <input id="mathGrade" type="number" step="5" min="1" max="100"
-                       value="1">
-            </div>
-            <div class="form-row">
-                <label for="societyId">社团</label>
-                <select id="societyId">
-                    <option value="1" selected>散人</option>
-                    <option value="2">头文字D</option>
-                    <option value="3">轻音部</option>
-                    <option value="4">黄金之风</option>
-                    <option value="5">极东魔术昼寝结社</option>
-                </select>
-            </div>
-            <div class="form-row">
-                <label for="height">身高</label>
-                <input id="height" type="number" step="0.1" min="0.5" max="2"
-                       value="1">
-            </div>
-            <div class="form-row">
-                <label for="birthday">出生日期</label>
-                <input id="birthday" type="date">
-            </div>
-            <div class="form-row">
-                <label for="money">钱</label>
-                <input id="money" type="number" step="100" min="0" value="0">
-            </div>
-        </fieldset>
-        <div class="form-footer">
-            <button class="my-btn btn-secondary" type="button" onclick="closeMe()">关闭</button>
-            <button class="my-btn btn-primary" type="button">确认提交</button>
-        </div>
-    </form>
-</dialog>
 </body>
-<script>
-    const dialog = document.getElementById("myDialog");
-    /**
-     * 展示模态框
-     */
-    const showMe = () => {
-        dialog.showModal();
-    }
-    /**
-     * 关闭模态框
-     */
-    const closeMe = () => {
-        dialog.close()
-    }
-</script>
 </html>
