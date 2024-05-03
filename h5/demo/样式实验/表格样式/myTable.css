@@ -33,8 +33,31 @@
     background-color: #b3e19d;
 }
 
-caption {
+.my-table > caption {
+    /*表标题*/
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     color: #606266;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.my-table .del-btn {
+    /*表中删除按钮*/
+    padding: 3px 5px 3px 8px;
+    font-size: small;
+    color: white;
+    background-color: #F56C6C;
+    border: 2px solid #c45656;
+    border-radius: 12px 0 0 12px;
+}
+
+.my-table .upd-btn {
+    /*表中修改按钮*/
+    padding: 3px 8px 3px 5px;
+    font-size: small;
+    color: white;
+    background-color: #409EFF;
+    border: 2px solid #337ecc;
+    border-radius: 0 12px 12px 0;
 }

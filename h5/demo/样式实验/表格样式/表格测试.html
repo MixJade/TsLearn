@@ -5,8 +5,21 @@
     <title>表格测试</title>
     <!--    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.3/css/bootstrap.css" rel="stylesheet">-->
     <link href="myTable.css" rel="stylesheet">
+    <link href="myBtn.css" rel="stylesheet">
+    <link href="mySearch.css" rel="stylesheet">
 </head>
 <body>
+<!--搜索框-->
+<section class="mySearch">
+    <form role="search" onsubmit="return false">
+        <input class="form-control me-2" type="search" placeholder="学生名字" aria-label="Search" id="searchInput">
+        <button class="btn-line-suc" type="submit">Search</button>
+    </form>
+    <div>
+        <button type="button" class="my-btn btn-danger">批量删除</button>
+        <button type="button" class="my-btn btn-success">添加学生</button>
+    </div>
+</section>
 <!-- 表格 -->
 <table class="my-table">
     <caption>测试表格</caption>
@@ -42,8 +55,8 @@
         <td>7000</td>
         <td>1.5</td>
         <td>
-            <button type="button">删除</button>
-            <button type="button">修改</button>
+            <button class="del-btn" type="button">删除</button>
+            <button class="upd-btn" type="button">修改</button>
         </td>
     </tr>
     <tr>
@@ -61,8 +74,8 @@
         <td>5000</td>
         <td>1.5</td>
         <td>
-            <button type="button">删除</button>
-            <button type="button">修改</button>
+            <button class="del-btn" type="button">删除</button>
+            <button class="upd-btn" type="button">修改</button>
         </td>
     </tr>
     <tr>
@@ -80,8 +93,8 @@
         <td>5000</td>
         <td>1.7</td>
         <td>
-            <button type="button">删除</button>
-            <button type="button">修改</button>
+            <button class="del-btn" type="button">删除</button>
+            <button class="upd-btn" type="button">修改</button>
         </td>
     </tr>
     <tr>
@@ -99,8 +112,8 @@
         <td>100000</td>
         <td>1.78</td>
         <td>
-            <button type="button">删除</button>
-            <button type="button">修改</button>
+            <button class="del-btn" type="button">删除</button>
+            <button class="upd-btn" type="button">修改</button>
         </td>
     </tr>
     <tr>
@@ -118,8 +131,8 @@
         <td>5000</td>
         <td>1.72</td>
         <td>
-            <button type="button">删除</button>
-            <button type="button">修改</button>
+            <button class="del-btn" type="button">删除</button>
+            <button class="upd-btn" type="button">修改</button>
         </td>
     </tr>
     </tbody>

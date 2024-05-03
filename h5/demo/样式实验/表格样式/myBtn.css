@@ -44,3 +44,15 @@
     background-color: #409EFF;
     border: 2px solid #337ecc;
 }
+
+.btn-danger {
+    color: white;
+    background-color: #F56C6C;
+    border: 2px solid #c45656;
+}
+
+.btn-success {
+    color: white;
+    background-color: #67C23A;
+    border: 2px solid #529b2e;
+}
