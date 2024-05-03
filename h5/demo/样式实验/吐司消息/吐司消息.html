@@ -46,11 +46,11 @@
             let clone = document.importNode(t.content, true);
             myTus.appendChild(clone);
             // 设定4秒后删除这个元素
-            setTimeout(function () {
+            setTimeout(() => {
                 myTus.removeChild(myTus.firstElementChild);
             }, 4000);
         }
-    }
+    };
 
     const showTus2 = () => {
         if ('content' in document.createElement('template')) {
@@ -65,10 +65,10 @@
             let clone = document.importNode(t.content, true);
             myTus.appendChild(clone);
             // 设定4秒后删除这个元素
-            setTimeout(function () {
+            setTimeout(() => {
                 myTus.removeChild(myTus.firstElementChild);
             }, 4000);
         }
-    }
+    };
 </script>
 </html>
