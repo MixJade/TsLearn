@@ -7,17 +7,19 @@
     <link href="myTable.css" rel="stylesheet">
     <link href="myBtn.css" rel="stylesheet">
     <link href="mySearch.css" rel="stylesheet">
+    <link href="myForm.css" rel="stylesheet">
+    <link href="myDialog.css" rel="stylesheet">
 </head>
 <body>
 <!--搜索框-->
 <section class="mySearch">
     <form role="search" onsubmit="return false">
-        <input class="form-control me-2" type="search" placeholder="学生名字" aria-label="Search" id="searchInput">
+        <input type="search" placeholder="学生名字" aria-label="Search" id="searchInput">
         <button class="btn-line-suc" type="submit">Search</button>
     </form>
     <div>
         <button type="button" class="my-btn btn-danger">批量删除</button>
-        <button type="button" class="my-btn btn-success">添加学生</button>
+        <button type="button" class="my-btn btn-success" onclick="showMe()">添加学生</button>
     </div>
 </section>
 <!-- 表格 -->
@@ -137,5 +139,80 @@
     </tr>
     </tbody>
 </table>
+<!--添加模态框-->
+<dialog class="myDialog" id="myDialog">
+    <form class="myForm" id="addPetForm">
+        <fieldset>
+            <legend>添加学生</legend>
+            <input type="hidden" id="id">
+            <div class="form-row">
+                <label for="studentName">学生姓名</label>
+                <input id="studentName" type="text" placeholder="学生姓名">
+            </div>
+            <div class="form-row">
+                <label>性别</label>
+                <div style="display: inline-block">
+                    <input name="sex" id="petSexRad_1" type="radio" autocomplete="off"
+                           checked>
+                    <label for="petSexRad_1">男</label>
+                    <input name="sex" id="petSexRad_2" type="radio" autocomplete="off">
+                    <label for="petSexRad_2">女</label>
+                </div>
+            </div>
+            <div class="form-row">
+                <label for="englishGrade">英语</label>
+                <input id="englishGrade" type="number" step="5" min="1" max="100"
+                       value="1">
+            </div>
+            <div class="form-row">
+                <label for="mathGrade">数学</label>
+                <input id="mathGrade" type="number" step="5" min="1" max="100"
+                       value="1">
+            </div>
+            <div class="form-row">
+                <label for="societyId">社团</label>
+                <select id="societyId">
+                    <option value="1" selected>散人</option>
+                    <option value="2">头文字D</option>
+                    <option value="3">轻音部</option>
+                    <option value="4">黄金之风</option>
+                    <option value="5">极东魔术昼寝结社</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="height">身高</label>
+                <input id="height" type="number" step="0.1" min="0.5" max="2"
+                       value="1">
+            </div>
+            <div class="form-row">
+                <label for="birthday">出生日期</label>
+                <input id="birthday" type="date">
+            </div>
+            <div class="form-row">
+                <label for="money">钱</label>
+                <input id="money" type="number" step="100" min="0" value="0">
+            </div>
+        </fieldset>
+        <div class="form-footer">
+            <button class="my-btn btn-secondary" type="button" onclick="closeMe()">关闭</button>
+            <button class="my-btn btn-primary" type="button">确认提交</button>
+        </div>
+    </form>
+</dialog>
 </body>
+<script>
+    const dialog = document.getElementById("myDialog");
+    /**
+     * 展示模态框
+     */
+    const showMe = () => {
+        dialog.showModal();
+    }
+    /**
+     * 关闭模态框
+     */
+    const closeMe = () => {
+        dialog.close()
+    }
+</script>
 </html>

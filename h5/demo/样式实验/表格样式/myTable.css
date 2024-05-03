@@ -42,6 +42,12 @@
     user-select: none;
 }
 
+.my-table button:hover {
+    /*表中按钮*/
+    box-shadow: 0 0 8px 0 #73767a;
+}
+
+
 .my-table .del-btn {
     /*表中删除按钮*/
     padding: 3px 5px 3px 8px;
