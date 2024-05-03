@@ -2,7 +2,7 @@
     width: 100%;
     margin-bottom: 1rem;
     /*表名放下面*/
-    caption-side: bottom;
+    /*caption-side: bottom;*/
     /*文字居中*/
     text-align: center;
     /*单元格之间空隙*/
