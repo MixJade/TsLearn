@@ -44,7 +44,7 @@
 <dialog class="myDialog" id="myDialog">
     <form class="myForm" id="addPetForm">
         <fieldset>
-            <legend>添加学生</legend>
+            <legend id="dialogTit">添加学生</legend>
             <input type="hidden" id="id">
             <div class="form-row">
                 <label for="studentName">学生姓名</label>
@@ -96,7 +96,7 @@
         </fieldset>
         <div class="form-footer">
             <button class="my-btn btn-secondary" type="button" onclick="closeDialog()">关闭</button>
-            <button class="my-btn btn-primary" type="button">确认提交</button>
+            <button class="my-btn btn-primary" type="button" onclick="submitForm()">确认提交</button>
         </div>
     </form>
 </dialog>

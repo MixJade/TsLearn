@@ -1,6 +1,11 @@
 window.onload = () => {
     addTableRow(getAll())
 };
+const ele = (id) => {
+    return document.getElementById(id);
+}
+
+
 const getAll = () => {
     return [
         {
@@ -84,13 +89,13 @@ const getAll = () => {
 };
 // 传来的json变成表格
 const addTableRow = (myStu) => {
-    const tbMain = document.getElementById("tb-main")
+    const tbMain = ele("tb-main")
     for (let i = 0; i < myStu.length; i++) { //遍历一下json数据
         const trow = getDataRow(myStu[i]); //定义一个方法,返回tr数据
         tbMain.appendChild(trow);
     }
 };
-const t = document.getElementById("trTemp");
+const t = ele("trTemp");
 const getDataRow = (h) => {
     if ('content' in document.createElement('template')) {
         let newTd = t.content.querySelectorAll("td");
@@ -115,9 +120,7 @@ const getDataRow = (h) => {
         });
         // 修改事件
         const updBtn = clone.querySelectorAll("button.upd-btn")[0];
-        updBtn.addEventListener('click', () => {
-            console.log("尝试获取：", h)
-        });
+        updBtn.addEventListener('click', () => jsonToForm(h));
         return clone;
     }
 };
@@ -146,8 +149,9 @@ const getAge = (birthday) => {
 };
 
 // 添加修改模态框
-const dialog = document.getElementById("myDialog");
+const dialog = ele("myDialog");
 const showDialog = () => {
+    setPopTitle()
     dialog.showModal();
 };
 const closeDialog = () => {
@@ -171,8 +175,8 @@ const toConfirm = async () => {
         showTus2("取消删除")
     }
 }
-const sureDelModal = document.getElementById("sureDelModal"); // 确认删除模态框
-const sureDelBtn = document.getElementById("sureDelBtn"); // 确认删除按钮
+const sureDelModal = ele("sureDelModal"); // 确认删除模态框
+const sureDelBtn = ele("sureDelBtn"); // 确认删除按钮
 const confirmDel = () => {
     sureDelModal.showModal();
     return new Promise((resolve) => {
@@ -192,9 +196,9 @@ const cancelDel = () => {
 // 吐司消息
 const showTus = (text) => {
     if ('content' in document.createElement('template')) {
-        let t = document.getElementById('tus-temp'),
+        let t = ele('tus-temp'),
             tSpan = t.content.querySelectorAll('span');
-        let myTus = document.getElementById('myTus');
+        let myTus = ele('myTus');
         tSpan[0].textContent = text;
         // 克隆新行并插入
         let clone = document.importNode(t.content, true);
@@ -207,9 +211,9 @@ const showTus = (text) => {
 };
 const showTus2 = (text) => {
     if ('content' in document.createElement('template')) {
-        let t = document.getElementById('tus-temp2'),
+        let t = ele('tus-temp2'),
             tSpan = t.content.querySelectorAll('span');
-        let myTus = document.getElementById('myTus');
+        let myTus = ele('myTus');
         tSpan[0].textContent = text;
         // 克隆新行并插入
         let clone = document.importNode(t.content, true);
@@ -227,4 +231,59 @@ const checkAll = (e) => {
     for (let i = 0; i < checkAS.length; i++) {
         checkAS[i].checked = e.checked;
     }
+};
+
+// 设置表单标题(添加)
+const setPopTitle = () => {
+    const addPetForm = ele('addPetForm');
+    addPetForm.reset();
+    ele('id').value = ''
+    const legend = ele('dialogTit');
+    legend.innerText = "添加学生"
+};
+
+// 提交表单信息
+const submitForm = () => {
+    dialog.close()
+    if (ele('dialogTit').innerText === "修改学生") {
+        console.log("修改信息", formToJson())
+    } else {
+        console.log("新增信息", formToJson())
+    }
+};
+
+//表单数据转json
+const formToJson = () => {
+    return {
+        "studentName": ele('studentName').value,
+        "birthday": ele('birthday').value,
+        "id": ele('id').value,
+        "sex": ele("petSexRad_1").checked ? 1 : 0,
+        "englishGrade": ele('englishGrade').value,
+        "mathGrade": ele('mathGrade').value,
+        "societyId": ele("societyId").value,
+        "money": ele("money").value,
+        "height": ele("height").value
+    };
+};
+
+//json数据转表单
+const jsonToForm = (h) => {
+    const {studentName, birthday, id, sex, englishGrade, mathGrade, societyId, money, height} = h
+    ele('studentName').value = studentName;
+    ele('birthday').value = birthday;
+    ele('id').value = id;
+    if (sex === 1) {
+        ele("petSexRad_1").checked = true;
+    } else {
+        ele("petSexRad_2").checked = true;
+    }
+    ele('englishGrade').value = englishGrade;
+    ele('mathGrade').value = mathGrade;
+    ele("societyId").value = societyId;
+    ele("money").value = money;
+    ele("height").value = height;
+    // 展示模态框
+    ele('dialogTit').innerText = "修改学生"
+    dialog.showModal();
 };
