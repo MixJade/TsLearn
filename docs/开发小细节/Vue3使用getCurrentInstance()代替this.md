@@ -2,14 +2,14 @@
 
 > 时间：2024年3月1日15:46:20
 
-```js
+```ts
 // 又名：为什么使用proxy来代替this
-const proxy = getCurrentInstance()!.proxy as this;
+const proxy = getCurrentInstance()?.proxy as this;
 ```
 
-## 一、背景:公司广泛使用
+## 一、背景:不愿了解最新规范
 
-因为我这个公司前端的代码写的特别乱，所有的代码都写在setup中，然后调用又不能通过`this`来调用，所以公司就推崇使用`const proxy = getCurrentInstance()!.proxy as this;`来代替`this`。
+因公司前端的代码写的特别乱，用vue3的setup，但又按vue2的写法使用`this`调用，所以公司就推崇使用`const proxy = getCurrentInstance()?.proxy as this;`来代替`this`。
 
 ## 二、规范:官方不推荐
 
