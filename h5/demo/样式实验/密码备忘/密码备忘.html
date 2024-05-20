@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>密码备忘</title>
+    <link href="layout.css" rel="stylesheet">
+    <link href="tooltip.css" rel="stylesheet">
+    <link href="myTable2.css" rel="stylesheet">
+</head>
+<body>
+<!--头部-->
+<header>
+    <h2>试问藏锋何处</h2>
+</header>
+<!--主体-->
+<div id="main-body">
+    <!--侧边栏-->
+    <aside>
+        <h2>隐秘软件</h2>
+        <ul id="soft-ul">
+        </ul>
+    </aside>
+    <!--主界面-->
+    <main>
+        <h2>密码备忘录</h2>
+        <!-- 表格 -->
+        <table id="my-table2">
+            <thead>
+            <tr>
+                <th>网址</th>
+                <th>备注</th>
+                <th>密码</th>
+            </tr>
+            </thead>
+            <tbody id="tb-main2">
+            </tbody>
+        </table>
+    </main>
+</div>
+</body>
+<script src="pwdBak.js">
+</script>
+<script>
+    // 使用定时器防止动态加载的元素获取不准
+    setTimeout(() => {
+        // Div高度
+        let div = document.getElementById("tb-main2");
+        let divHeight = div.offsetHeight;
+        console.log("Div高度：", divHeight);
+        // 视图高度
+        let vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+        console.log(vh);
+    }, 1000)
+</script>
+</html>
