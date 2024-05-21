@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>分页条</title>
+    <link href="pageNav.css" rel="stylesheet">
+</head>
+<body>
+<!-- 分页条 -->
+<nav id="pageNav">
+    <label class="paTxt" for="pageSize" id="paTex1">
+        <small>页面大小</small>
+        <select id="pageSize">
+            <option selected value="7">7</option>
+            <option value="10">10</option>
+            <option value="13">13</option>
+        </select>
+    </label>
+    <ul>
+        <li>
+            <span class="pa-btn" id="addPa">&lt;</span>
+        </li>
+        <li id="pageStrip">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+        </li>
+        <li>
+            <span class="pa-btn" id="reducePa">&gt;</span>
+        </li>
+    </ul>
+    <small class="paTxt">共<span>11</span>条数据</small>
+</nav>
+</body>
+</html>

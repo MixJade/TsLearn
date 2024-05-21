@@ -1,0 +1,62 @@
+#pageNav {
+    display: flex;
+    /*设置主轴为水平方向，起点在左端*/
+    flex-direction: row;
+    /*在主轴线上的多个项目之间留有空白*/
+    justify-content: space-between;
+    /*对齐交叉轴*/
+    align-items: center;
+    /*禁止文字选中*/
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+#pageNav ul {
+    flex: 1; /*用于元素居中*/
+    display: flex;
+    /* 对齐主轴 */
+    align-items: center;
+    justify-content: center;
+}
+
+#pageNav ul li {
+    /*移除列表默认样式*/
+    list-style: none;
+    /*按钮与页数的空隙*/
+    margin: 2px;
+}
+
+#pageNav ul li span {
+    padding: 3px 8px;
+    border: 2px solid #67C23A;
+    background-color: white;
+    border-radius: 50%;
+    color: #67C23A;
+    /*鼠标小手*/
+    cursor: pointer;
+}
+
+#pageNav .paTxt {
+    flex: 1; /*用于元素居中*/
+    color: #67C23A;
+}
+
+#pageNav #paTex1 {
+    /*内容靠右*/
+    display: flex;
+    justify-content: end;
+}
+
+#pageNav span.pa-btn {
+    background-color: #67C23A;
+    color: white;
+    font-weight: bolder;
+}
+
+#pageNav span#addPa {
+    border-radius: 50% 0 0 50%;
+}
+
+#pageNav span#reducePa {
+    border-radius: 0 50% 50% 0;
+}
