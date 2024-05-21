@@ -26,12 +26,26 @@
     margin: 2px;
 }
 
+#pageNav ul #pageStrip {
+    /*让页码不换行*/
+    display: flex;
+}
+
 #pageNav ul li span {
-    padding: 3px 8px;
+    /*设置span宽高需要先设置display*/
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    /*文字居中*/
+    line-height: 24px;
+    text-align: center;
+    margin: 2px;
+    /*边框样式*/
     border: 2px solid #67C23A;
-    background-color: white;
     border-radius: 50%;
+    background-color: white;
     color: #67C23A;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
     /*鼠标小手*/
     cursor: pointer;
 }
@@ -59,4 +73,11 @@
 
 #pageNav span#reducePa {
     border-radius: 0 50% 50% 0;
+}
+
+#pageNav span.active {
+    color: white;
+    background-color: #67C23A;
+    /*鼠标禁止*/
+    cursor: not-allowed;
 }
