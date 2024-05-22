@@ -39,21 +39,21 @@ class MyClass {
 <template>
   <div>
     ...巴拉巴拉
-    <quest-add-model v-if="addModelSwitch" v-model="addModelSwitch" @selectAll="selectAll"></quest-add-model>
+    <example-model v-if="exModelShow" v-model="exModelShow" @selectAll="selectAll"></example-model>
   </div>
 </template>
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import QuestAddModel from "@/views/QuestAddModel.vue";
+import ExampleModel from "@/views/ExampleModel.vue";
 
 @Options({
   name: "FatherPart",
   components: {
-    QuestAddModel,
+    ExampleModel,
   },
 })
 export default class FatherPart extends Vue {
-  addModelSwitch = false; //新增模态框开关
+  exModelShow = false; //新增模态框开关
 
   mounted(): void {
     this.selectAll();
@@ -71,7 +71,7 @@ export default class FatherPart extends Vue {
 ```vue
 <template>
   <div>
-    <a-modal wrapClassName="QuestAddModel" v-model:visible="modalView" title="引入模板元件"> ...巴拉巴拉 </a-modal>
+    <a-modal wrapClassName="ExampleModel" v-model:visible="modalView" title="测试模态框"> ...巴拉巴拉 </a-modal>
   </div>
 </template>
 
@@ -82,14 +82,14 @@ import apiService from "@/services/api.service";
 import { Prop, Watch } from "vue-property-decorator";
 
 @Options({
-  name: "QuestAddModel",
+  name: "ExampleModel",
 })
-export default class QuestAddModel extends Vue {
+export default class ExampleModel extends Vue {
   @Prop({ default: () => false, required: true }) modelValue!: boolean; // 是否显示
   hiddenView = false; //隐藏开关
 
   hideModal() {
-    apiService.queryByLike(questApi.addByCopy).then((resp: Res) => {
+    apiService.queryByLike(expApi.addByCopy).then((resp: Res) => {
       if (resp.code === Code.SUCCESS.code) {
         this.$emit("selectAll"); // 为什么这个调用一直没有成功，问题在下一行代码
       }
