@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>装机清单</title>
-    <link rel="icon" type="image/svg+xml" href='v.svg'/>
+    <link href='v.svg' rel="icon" type="image/svg+xml"/>
     <style>
         /*侧边栏*/
         .sidebar {
@@ -142,7 +142,7 @@
     <div id="dialogTxt">
         你好
     </div>
-    <button id="dialogBtn" type="button" onclick="closeMe()">关闭</button>
+    <button id="dialogBtn" onclick="closeMe()" type="button">关闭</button>
 </dialog>
 <!--侧边栏-->
 <aside class="sidebar">
@@ -162,26 +162,26 @@
         <h3>开发</h3>
         <ul>
             <li>Java: <a href="https://www.oracle.com/java/technologies/downloads/#jdk20-windows">【JDK下载】</a>
-                <button type="button" onclick="showMe(this)"
-                        data-text="系统变量中，新建JAVA_HOME，
+                <button data-text="系统变量中，新建JAVA_HOME，
                             值为：C:\Program Files\Java\jdk1.8.0_361
-                            然后在Path中，添加%JAVA_HOME%\bin">
+                            然后在Path中，添加%JAVA_HOME%\bin" onclick="showMe(this)"
+                        type="button">
                     环境设置
                 </button>
             </li>
             <li>Maven: <a href="https://maven.apache.org/download.cgi">【Maven-bin下载】</a>
-                <button type="button" onclick="showMe(this)"
-                        data-text="系统变量中，新建MAVEN_HOME，
+                <button data-text="系统变量中，新建MAVEN_HOME，
                             值为：D:\apache-maven-3.8.6
-                            然后在Path中，添加%MAVEN_HOME%\bin">
+                            然后在Path中，添加%MAVEN_HOME%\bin" onclick="showMe(this)"
+                        type="button">
                     环境设置
                 </button>
             </li>
             <li>Maven仓库: <a href="https://developer.aliyun.com/mvn/guide">【阿里云仓库】</a>修改Maven配置文件
-                <button type="button" onclick="showMe(this)"
-                        data-text="粘贴完阿里云的mirror配置之后，
+                <button data-text="粘贴完阿里云的mirror配置之后，
                             在setting.xml文件中，
-                            除了阿里云的mirror其它全部注释掉">
+                            除了阿里云的mirror其它全部注释掉" onclick="showMe(this)"
+                        type="button">
                     注意事项
                 </button>
             </li>
@@ -205,8 +205,9 @@
         <ul>
             <li>数据库: <a href="https://dev.mysql.com/downloads/mysql/">【MySQL下载】</a>，以及驱动<a
                     href="https://visualstudio.microsoft.com/zh-hans/downloads/">【Visual Studio】</a>
-                <button type="button" onclick="showMe(this)"
-                        data-text="下拉选择【其他工具、框架】-【Microsoft Visual C++ Redistributable for Visual Studio 2022】">
+                <button data-text="下拉选择【其他工具、框架】-【Microsoft Visual C++ Redistributable for Visual Studio 2022】"
+                        onclick="showMe(this)"
+                        type="button">
                     下载选项
                 </button>
             </li>
@@ -265,12 +266,12 @@
         <h3>电脑知识</h3>
         <ul>
             <li>任务管理器快捷键: Shift+Ctrl+Esc
-                <button type="button" onclick="showMe(this)"
-                        data-text="打开设备管理：Win+X。
+                <button data-text="打开设备管理：Win+X。
                             打开运行：Win+R。
                             任务管理器: Shift+Ctrl+Esc
                             切换窗口：Win+Tab。
-                            解除功能键锁定：Fn+Esc">
+                            解除功能键锁定：Fn+Esc" onclick="showMe(this)"
+                        type="button">
                     快捷键知识
                 </button>
             </li>
