@@ -6,6 +6,7 @@
     <link href="layout.css" rel="stylesheet">
     <link href="tooltip.css" rel="stylesheet">
     <link href="myTable2.css" rel="stylesheet">
+    <link href="../分页条/pageNav.css" rel="stylesheet">
 </head>
 <body>
 <!--头部-->
@@ -35,21 +36,31 @@
             <tbody id="tb-main2">
             </tbody>
         </table>
+        <!-- 分页条 -->
+        <nav id="pageNav">
+            <label class="paTxt" for="paSize" id="paTex1">
+                <small>页面大小</small>
+                <select id="paSize" onclick="pwdBak.paSizeChange()">
+                    <option selected value="6">6</option>
+                    <option value="9">9</option>
+                    <option value="12">12</option>
+                </select>
+            </label>
+            <ul>
+                <li>
+                    <span class="pa-btn" id="addPa" onclick="pwdBak.addPaNum(true)">&lt;</span>
+                </li>
+                <li id="pageStrip">
+                </li>
+                <li>
+                    <span class="pa-btn" id="reducePa" onclick="pwdBak.addPaNum(false)">&gt;</span>
+                </li>
+            </ul>
+            <small class="paTxt">共<span id="dataNum">0</span>条数据</small>
+        </nav>
     </main>
 </div>
 </body>
 <script src="pwdBak.js">
-</script>
-<script>
-    // 使用定时器防止动态加载的元素获取不准
-    setTimeout(() => {
-        // Div高度
-        let div = document.getElementById("tb-main2");
-        let divHeight = div.offsetHeight;
-        console.log("Div高度：", divHeight);
-        // 视图高度
-        let vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
-        console.log(vh);
-    }, 1000)
 </script>
 </html>
