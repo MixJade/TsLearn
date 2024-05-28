@@ -1,0 +1,29 @@
+{
+  "/javaLearn/": [
+    {
+      "text": "Java学习笔记",
+      "collapsible": true,
+      "children": [
+        "/javaLearn/README.md"
+      ]
+    }
+  ],
+  "/tsLearn/": [
+    {
+      "text": "TS学习笔记",
+      "collapsible": true,
+      "children": [
+        "/tsLearn/README.md"
+      ]
+    }
+  ],
+  "/pyLearn/": [
+    {
+      "text": "Python学习笔记",
+      "collapsible": true,
+      "children": [
+        "/pyLearn/README.md"
+      ]
+    }
+  ]
+}

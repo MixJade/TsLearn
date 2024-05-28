@@ -8,11 +8,11 @@ heroAlt: 只是一个LOGO
 heroText: HELLO_WORLD
 actions:
 
-- text: 测试页面
-  link: javaLearn/测试页面.html
+- text: Java笔记
+  link: javaLearn/
   type: primary
-- text: 学习笔记
-  link: tsLearn/测试页面.html
+- text: 前端笔记
+  link: tsLearn/
   type: secondary
 
 features:

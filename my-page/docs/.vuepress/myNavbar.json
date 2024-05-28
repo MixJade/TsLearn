@@ -1,0 +1,14 @@
+[
+  {
+    "text": "Java",
+    "link": "/javaLearn/README.md"
+  },
+  {
+    "text": "TS",
+    "link": "/tsLearn/README.md"
+  },
+  {
+    "text": "Python",
+    "link": "/pyLearn/README.md"
+  }
+]

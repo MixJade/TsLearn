@@ -6,8 +6,6 @@ dist
 package-lock.json
 
 docs/javaLearn/*
-!docs/javaLearn/测试页面.md
 docs/pyLearn/*
-!docs/pyLearn/测试页面.md
 docs/tsLearn/*
-!docs/tsLearn/测试页面.md
+!docs/*/README.md
