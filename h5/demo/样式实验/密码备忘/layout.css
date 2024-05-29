@@ -5,6 +5,24 @@ header {
     border: 3px dashed #F56C6C;
     border-radius: 42px;
     color: #F56C6C;
+    position: relative;
+    /*禁止文字选中*/
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+header #hide-txt {
+    /*密语列表*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 6px 24px;
+    opacity: 0;
+    transition: all 1s; /* 设置过渡效果 */
+}
+
+header:hover #hide-txt { /* 鼠标悬浮时新文本出现 */
+    opacity: 1;
 }
 
 #main-body {

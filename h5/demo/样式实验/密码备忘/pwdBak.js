@@ -22,6 +22,7 @@ const pwdBak = (() => {
         { href: "#", name: "少时诵诗12", remark: "每日签到送1个小时", pwd: "撒阿达大大" },
         { href: "#", name: "少时诵诗13", remark: "每日签到送1个小时", pwd: "撒阿达大大" },
     ];
+    const pwdSay = ["长铗归来兮！食无鱼", "长铗归来兮！出无车", "长铗归来兮！无以为家"];
     window.onload = () => {
         firstDataLoad();
     };
@@ -38,6 +39,12 @@ const pwdBak = (() => {
             });
         }
         firstLoadPa(pwdMagList.length);
+        const hideTxt = document.getElementById("hide-txt");
+        if (hideTxt !== null) {
+            pwdSay.forEach(item => {
+                hideTxt.innerHTML += item + "&nbsp;&nbsp;";
+            });
+        }
     };
     const writeValToTbMain = (nowPaIndex, pageSize) => {
         const tbMain = document.getElementById("tb-main2");
