@@ -4,6 +4,7 @@
   "description": "编译sass所用",
   "scripts": {
     "dev": "sass --no-source-map src/:out-css/",
+    "watch": "sass --no-source-map src/:out-css/ --watch",
     "build": "sass --no-source-map --style=compressed src/:out-css/"
   },
   "author": "MixJade",
