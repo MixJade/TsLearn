@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>测试事件冒泡</title>
+    <style>
+        .father {
+            width: 200px;
+            height: 200px;
+            background-color: #00ff0a
+        }
+
+        .son {
+            width: 68px;
+            height: 68px;
+            background-color: red
+        }
+    </style>
+</head>
+<body>
+<h3>点击子元素，会同时触发父元素的事件</h3>
+<div class="father" onclick="alert('父元素事件')">
+    <div class="son" onclick="alert('zi元素事件')"></div>
+</div>
+<h3>使用css,让同级元素看起来像父子元素</h3>
+<div>
+    <div class="father" style="position: absolute" onclick="alert('父元素事件')">
+    </div>
+    <div class="son" style="position: absolute" onclick="alert('zi元素事件')"></div>
+</div>
+</body>
+</html>
