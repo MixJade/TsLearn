@@ -1,0 +1,87 @@
+header
+  background-color: #fcd3d3
+  text-align: center
+  padding: 3px
+  border: 3px dashed #F56C6C
+  border-radius: 42px
+  color: #F56C6C
+  position: relative
+  /*禁止文字选中*/
+  user-select: none
+  -webkit-user-select: none
+
+  #hide-txt
+    /*密语列表*/
+    position: absolute
+    top: 0
+    left: 0
+    padding: 6px 24px
+    opacity: 0
+    /* 设置过渡效果 */
+    transition: all 1s
+
+  &:hover #hide-txt
+    /* 鼠标悬浮时新文本出现 */
+    opacity: 1
+
+
+#main-body
+  background-color: #dedfe0
+  display: grid
+  grid-gap: 24px
+  /*设置grid布局的子元素间隙*/
+  grid-template-columns: 30% 68%
+  /*设置grid布局的两列子元素*/
+  margin: 8px
+  border: 3px dashed #909399
+  border-radius: 42px
+  box-sizing: border-box
+  padding: 24px
+  /*元素内边距*/
+  text-align: center
+
+
+aside
+  background-color: #c6e2ff
+  grid-column: 1 / 2
+  /*grid列的第一根垂直线到第二根垂直线之间*/
+  box-sizing: border-box
+  padding: 12px
+  border: 3px dashed #409EFF
+  border-radius: 42px
+  color: #409EFF
+
+
+  ul
+    list-style-type: none
+    margin: 0
+    padding: 0
+
+    li
+      box-sizing: border-box
+      padding: 8px
+      background-color: #409EFF
+      border-radius: 24px
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3)
+      /*让内容居中*/
+      width: 80%
+      margin: 8px 0 8px 10%
+
+      a
+        color: white
+        text-decoration: none
+
+
+main
+  /*主体区域*/
+  background-color: #d1edc4
+  grid-column: 2 / 3
+  /*grid列的第2根垂直线到第3根垂直线之间*/
+  box-sizing: border-box
+  padding: 12px
+  border: 3px dashed #67C23A
+  border-radius: 42px
+
+  h2
+    color: #67C23A
+

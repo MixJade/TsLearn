@@ -1,0 +1,26 @@
+.tooltip
+  position: relative
+
+  .tip-text
+    visibility: hidden
+    width: 160px
+    background-color: #555
+    color: #fff
+    text-align: center
+    padding: 5px 0
+    border-radius: 6px
+    /*定位*/
+    position: absolute
+    z-index: 1
+    /*悬停在a标签上*/
+    bottom: 100%
+    /*居中显示*/
+    left: 50%
+    margin-left: -80px
+    /*显示动画*/
+    opacity: 0
+    transition: opacity 0.5s
+
+  &:hover .tip-text
+    visibility: visible
+    opacity: 1

@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "pageNav-b": "sass 分页条/pageNav.sass:分页条/pageNav.min.css --no-source-map --style=compressed",
+    "rightMenu-b": "sass 右键菜单/rightMenu.sass:右键菜单/rightMenu.min.css --no-source-map --style=compressed",
+    "tus-b": "sass 吐司消息/tus.sass:吐司消息/tus.min.css --no-source-map --style=compressed",
+    "pwdBak-b": "sass 密码备忘/sass/pwdBak.sass:密码备忘/pwdBak.min.css --no-source-map --style=compressed",
+    "cartoonLayout-b": "sass 漫画布局/cartoonLayout.sass:漫画布局/cartoonLayout.min.css --no-source-map --style=compressed",
+    "lightLogin-b": "sass 登录页面/lightLogin.sass:登录页面/lightLogin.min.css --no-source-map --style=compressed",
+    "sureDelModal-b": "sass 确认框/sureDelModal.sass:确认框/sureDelModal.min.css --no-source-map --style=compressed",
+    "myBtn-b": "sass 表格样式/sass/myBtn.sass:表格样式/myBtn.min.css --no-source-map --style=compressed",
+    "myForm-b": "sass 表格样式/sass/myForm.sass:表格样式/myForm.min.css --no-source-map --style=compressed",
+    "myTable-b": "sass 表格样式/sass/myTable.sass:表格样式/myTable.min.css --no-source-map --style=compressed",
+    "myCurl-b": "sass 表格样式/sass/myCurl.sass:表格样式/myCurl.min.css --no-source-map --style=compressed"
+  }
+}
