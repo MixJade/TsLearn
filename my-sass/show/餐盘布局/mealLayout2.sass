@@ -1,0 +1,77 @@
+body
+  background-color: #f4f4f5
+
+$layout-height: 580px
+$layout-weight: 1130px
+$layout-padding: 24px
+
+$long-nav-weight: 80px
+$box-padding: 20px
+$bottom-box-weight: 240px
+
+.meal-layout
+  width: $layout-weight
+  height: $layout-height
+  position: relative
+  left: 45px
+  background: linear-gradient(-45deg, #40c9ff 0%, #e81cff 100%)
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.7)
+  border-radius: 36px
+  //内边距调整
+  box-sizing: border-box
+  padding: $layout-padding
+
+  & > *
+    position: absolute
+    border: 2px solid #008A5B
+    box-sizing: border-box
+    background-color: #e9e9eb
+    box-shadow: 0 0 16px rgb(0, 0, 0, 0.7)
+    //文字内容
+    text-align: center
+  .box
+    border-radius: 36px
+
+#long-nav
+  left: $layout-padding
+  width: $long-nav-weight
+  height: $layout-height - 2*$layout-padding
+
+#main-box
+  top: $layout-padding
+  left: $layout-padding + $long-nav-weight + $box-padding
+  width: $layout-weight - 2*$layout-padding - 2*$box-padding - $long-nav-weight - $bottom-box-weight
+  height: $layout-height - $bottom-box-weight - 2*$layout-padding - $box-padding
+  //内容
+  color: #529b2e
+
+#big-side
+  top: $layout-padding
+  right: $layout-padding
+  width: $bottom-box-weight
+  height: $layout-height - $bottom-box-weight - 2*$layout-padding - $box-padding
+
+#bottom1
+  bottom: $layout-padding
+  left: $layout-padding + $long-nav-weight + $box-padding
+  width: $bottom-box-weight
+  height: $bottom-box-weight
+
+#bottom2
+  bottom: $layout-padding
+  left: $layout-padding + $long-nav-weight + 2*$box-padding + $bottom-box-weight
+  width: $bottom-box-weight
+  height: $bottom-box-weight
+
+#bottom3
+  bottom: $layout-padding
+  left: $layout-padding + $long-nav-weight + 3*$box-padding + 2*$bottom-box-weight
+  width: $bottom-box-weight
+  height: $bottom-box-weight
+
+#circle
+  bottom: $layout-padding
+  right: $layout-padding
+  width: 150px
+  height: 150px
+  border-radius: 50%
