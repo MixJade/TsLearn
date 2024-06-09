@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>win11桌面全屏</title>
+    <style>
+        #divFullScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1920px;
+            height: 1080px;
+        }
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="divFullScreen">
+    <img src="../../../../MyPicture/wallpaper/wp004.jpg" alt="桌面图片">
+    <img src="win11桌面.svg" alt="svg图"/>
+</div>
+</body>
+<script>
+    "use strict";
+    (() => {
+        const divFullScreen = document.getElementById('divFullScreen');
+        if (divFullScreen != null) {
+            divFullScreen.addEventListener('click', function () {
+                divFullScreen.requestFullscreen();
+            });
+        }
+    })();
+</script>
+</html>
