@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>桌面背景全屏</title>
+    <style>
+        #divFullScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1920px;
+            height: 1080px;
+        }
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #topBtn {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            background-color: #3c3c3c;
+            padding: 6px;
+        }
+    </style>
+</head>
+<body>
+<div id="divFullScreen">
+    <img id="backImg" src="../../../../MyPicture/wallpaper/wp004.jpg" alt="桌面图片">
+    <img id="mySvg" src="win11桌面.svg" alt="svg图"/>
+</div>
+<div id="topBtn">
+    <button type="button" onclick="wws.changeSvg('win10桌面.svg','wp007.jpg')">切换win10的背景</button>
+    <button type="button" onclick="wws.changeSvg('win11桌面.svg','wp004.jpg')">切换win11的背景</button>
+</div>
+</body>
+<script>
+    "use strict";
+    const wws = (() => {
+        const divFullScreen = document.getElementById('divFullScreen');
+        if (divFullScreen != null) {
+            divFullScreen.addEventListener('click', function () {
+                divFullScreen.requestFullscreen();
+            });
+        }
+
+        const mySvg = document.getElementById("mySvg")
+        const backImg = document.getElementById("backImg")
+
+        const changeSvg = (newSvgSrc, newImgSrc) => {
+            mySvg.src = newSvgSrc;
+            backImg.src = `../../../../MyPicture/wallpaper/${newImgSrc}`
+        }
+
+        return {
+            changeSvg
+        }
+    })();
+</script>
+</html>
