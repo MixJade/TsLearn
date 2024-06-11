@@ -168,4 +168,10 @@ body {
   width: 150px;
   height: 150px;
   border-radius: 50%;
+  background: repeating-conic-gradient(from 30deg, rgba(0, 0, 0, 0) 0 120deg, #3c3c3c 0 180deg), 75px 43.275px, repeating-conic-gradient(from 30deg, #1d1d1d 0 60deg, #4e4f51 0 120deg, #3c3c3c 0 180deg);
+  background-size: 150px 86.55px;
+}
+#circle span {
+  color: white;
+  line-height: 150px;
 }
