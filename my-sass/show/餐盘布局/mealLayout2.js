@@ -164,6 +164,8 @@ const mealLayout = (() => {
     const setLongNavUl = (dataIndex) => {
         if (longNavUl == null)
             return;
+        if (dataIndex === nowSelectNav)
+            return;
         longNavUl.getElementsByTagName("div")[dataIndex].classList.add("selectNav");
         longNavUl.getElementsByTagName("div")[nowSelectNav].classList.remove("selectNav");
         nowSelectNav = dataIndex;
