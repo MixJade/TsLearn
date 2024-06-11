@@ -198,7 +198,8 @@ const mealLayout = (() => {
      * @param dataIndex 数据的索引值
      */
     const setLongNavUl = (dataIndex: number) => {
-        if (longNavUl == null) return
+        if (longNavUl == null) return;
+        if (dataIndex === nowSelectNav) return;
         longNavUl.getElementsByTagName("div")[dataIndex].classList.add("selectNav")
         longNavUl.getElementsByTagName("div")[nowSelectNav].classList.remove("selectNav")
         nowSelectNav = dataIndex
