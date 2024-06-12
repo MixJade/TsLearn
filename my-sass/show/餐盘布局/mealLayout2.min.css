@@ -44,13 +44,14 @@ body {
 }
 .meal-layout > * {
   position: absolute;
-  border: 3px solid #008A5B;
   box-sizing: border-box;
-  background-color: #e9e9eb;
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.7);
   text-align: center;
 }
 .meal-layout .box {
+  background-color: #e9e9eb;
+  border-style: solid;
+  border-width: 3px;
   border-radius: 36px;
 }
 .meal-layout .box ul {
@@ -67,6 +68,9 @@ body {
   width: 96px;
   height: 532px;
   border-color: #337ecc;
+}
+#long-nav:hover {
+  box-shadow: 0 0 16px #337ecc;
 }
 #long-nav h3 {
   color: #337ecc;
@@ -114,7 +118,10 @@ body {
   height: 272px;
   border-color: #529b2e;
 }
-#main-box h2 {
+#main-box:hover {
+  box-shadow: 0 0 16px #529b2e;
+}
+#main-box h3 {
   color: #529b2e;
 }
 
@@ -124,6 +131,9 @@ body {
   width: 240px;
   height: 272px;
   border-color: #73767a;
+}
+#big-side:hover {
+  box-shadow: 0 0 16px #73767a;
 }
 #big-side h3 {
   color: #73767a;
@@ -136,6 +146,9 @@ body {
   height: 240px;
   border-color: #b88230;
 }
+#bottom1:hover {
+  box-shadow: 0 0 16px #b88230;
+}
 #bottom1 h3 {
   color: #b88230;
 }
@@ -146,6 +159,9 @@ body {
   width: 240px;
   height: 240px;
   border-color: #c45656;
+}
+#bottom2:hover {
+  box-shadow: 0 0 16px #c45656;
 }
 #bottom2 h3 {
   color: #c45656;
@@ -158,6 +174,9 @@ body {
   height: 240px;
   border-color: #337ecc;
 }
+#bottom3:hover {
+  box-shadow: 0 0 16px #337ecc;
+}
 #bottom3 h3 {
   color: #337ecc;
 }
@@ -168,10 +187,19 @@ body {
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  background: repeating-conic-gradient(from 30deg, rgba(0, 0, 0, 0) 0 120deg, #3c3c3c 0 180deg), 75px 43.275px, repeating-conic-gradient(from 30deg, #1d1d1d 0 60deg, #4e4f51 0 120deg, #3c3c3c 0 180deg);
-  background-size: 150px 86.55px;
+  background-image: linear-gradient(135deg, #ca1eb3, #FD2E24, #FFD701);
 }
-#circle span {
-  color: white;
-  line-height: 150px;
+#circle #updateTime {
+  position: relative;
+  width: 134px;
+  height: 134px;
+  top: 8px;
+  left: 8px;
+  background-color: #e9e9eb;
+  border-radius: 50%;
+  font-weight: bolder;
+  display: flex;
+  box-sizing: border-box;
+  padding: 8px;
+  align-items: center;
 }

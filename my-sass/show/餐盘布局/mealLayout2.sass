@@ -1,3 +1,4 @@
+@charset "UTF-8"
 @import "../密码备忘/sass/tooltip"
 body
   background-color: #f4f4f5
@@ -9,6 +10,15 @@ $layout-padding: 24px
 $long-nav-weight: 96px
 $box-padding: 20px
 $bottom-box-weight: 240px
+$box-background: #e9e9eb
+
+//盒子的边框与标题颜色
+@mixin box-color($line-color: #008A5B)
+  border-color: $line-color
+  &:hover
+    box-shadow: 0 0 16px $line-color
+  h3
+    color: $line-color
 
 .meal-layout
   width: $layout-weight
@@ -24,15 +34,17 @@ $bottom-box-weight: 240px
 
   & > *
     position: absolute
-    border: 3px solid #008A5B
     box-sizing: border-box
-    background-color: #e9e9eb
     box-shadow: 0 0 16px rgb(0, 0, 0, 0.7)
     //文字内容
     text-align: center
 
   .box
-    border-radius: 36px
+    background-color: $box-background
+    border:
+      style: solid
+      width: 3px
+      radius: 36px
     //去除列表小黑点
     ul
       list-style: none
@@ -46,12 +58,7 @@ $bottom-box-weight: 240px
   left: $layout-padding
   width: $long-nav-weight
   height: $layout-height - 2*$layout-padding
-  //内容
-  $line-color: #337ecc
-  border-color: $line-color
-
-  h3
-    color: $line-color
+  @include box-color(#337ecc)
 
   .item
     height: 20px
@@ -98,60 +105,35 @@ $bottom-box-weight: 240px
   left: $layout-padding + $long-nav-weight + $box-padding
   width: $layout-weight - 2*$layout-padding - 2*$box-padding - $long-nav-weight - $bottom-box-weight
   height: $layout-height - $bottom-box-weight - 2*$layout-padding - $box-padding
-  //内容
-  $line-color: #529b2e
-  border-color: $line-color
-
-  h2
-    color: $line-color
+  @include box-color(#529b2e)
 
 #big-side
   top: $layout-padding
   right: $layout-padding
   width: $bottom-box-weight
   height: $layout-height - $bottom-box-weight - 2*$layout-padding - $box-padding
-  //内容
-  $line-color: #73767a
-  border-color: $line-color
-
-  h3
-    color: $line-color
+  @include box-color(#73767a)
 
 #bottom1
   bottom: $layout-padding
   left: $layout-padding + $long-nav-weight + $box-padding
   width: $bottom-box-weight
   height: $bottom-box-weight
-  //内容
-  $line-color: #b88230
-  border-color: $line-color
-
-  h3
-    color: $line-color
+  @include box-color(#b88230)
 
 #bottom2
   bottom: $layout-padding
   left: $layout-padding + $long-nav-weight + 2*$box-padding + $bottom-box-weight
   width: $bottom-box-weight
   height: $bottom-box-weight
-  //内容
-  $line-color: #c45656
-  border-color: $line-color
-
-  h3
-    color: $line-color
+  @include box-color(#c45656)
 
 #bottom3
   bottom: $layout-padding
   left: $layout-padding + $long-nav-weight + 3*$box-padding + 2*$bottom-box-weight
   width: $bottom-box-weight
   height: $bottom-box-weight
-  //内容
-  $line-color: #337ecc
-  border-color: $line-color
-
-  h3
-    color: $line-color
+  @include box-color(#337ecc)
 
 #circle
   bottom: $layout-padding
@@ -160,8 +142,20 @@ $bottom-box-weight: 240px
   width: $circle-width
   height: $circle-width
   border-radius: 50%
+  background-image: linear-gradient(135deg, #ca1eb3, #FD2E24, #FFD701)
+  $border-width: 8px
   //样式
-
-  span
-    color: white
-    line-height: $circle-width
+  #updateTime
+    position: relative
+    width: $circle-width - 2*$border-width
+    height: $circle-width - 2*$border-width
+    top: $border-width
+    left: $border-width
+    background-color: $box-background
+    border-radius: 50%
+    //字体
+    font-weight: bolder
+    display: flex
+    box-sizing: border-box
+    padding: 8px
+    align-items: center
