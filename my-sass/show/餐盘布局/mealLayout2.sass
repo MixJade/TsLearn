@@ -2,15 +2,18 @@
 @import "../密码备忘/sass/tooltip"
 body
   background-color: #f4f4f5
-
+// 布局相关变量
 $layout-height: 580px
 $layout-weight: 1130px
 $layout-padding: 24px
-
+// 盒子相关变量
 $long-nav-weight: 96px
 $box-padding: 20px
 $bottom-box-weight: 240px
 $box-background: #e9e9eb
+//计算的变量
+$top-height: $layout-height - $bottom-box-weight - 2*$layout-padding - $box-padding
+$left-box-left: $layout-padding + $long-nav-weight + $box-padding
 
 //盒子的边框与标题颜色
 @mixin box-color($line-color: #008A5B)
@@ -49,7 +52,7 @@ $box-background: #e9e9eb
     ul
       list-style: none
       text-align: left
-      margin-left: -16px
+      margin-left: -20px
 
       a
         text-decoration: none
@@ -91,21 +94,21 @@ $box-background: #e9e9eb
 
 #main-box
   top: $layout-padding
-  left: $layout-padding + $long-nav-weight + $box-padding
+  left: $left-box-left
   width: $layout-weight - 2*$layout-padding - 2*$box-padding - $long-nav-weight - $bottom-box-weight
-  height: $layout-height - $bottom-box-weight - 2*$layout-padding - $box-padding
+  height: $top-height
   @include box-color(#529b2e)
 
 #big-side
   top: $layout-padding
   right: $layout-padding
   width: $bottom-box-weight
-  height: $layout-height - $bottom-box-weight - 2*$layout-padding - $box-padding
+  height: $top-height
   @include box-color(#73767a)
 
 #bottom1
   bottom: $layout-padding
-  left: $layout-padding + $long-nav-weight + $box-padding
+  left: $left-box-left
   width: $bottom-box-weight
   height: $bottom-box-weight
   @include box-color(#b88230)

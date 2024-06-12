@@ -1,59 +1,65 @@
-body
-  background-color: #f4f4f5
-
+$layout-height: 600px
+$layout-weight: 1100px
+$layout-padding: 24px
+$background: linear-gradient(-45deg, #b1b3b8 0%, #f4f4f5 100%)
+$top-box-weight: 240px
+$circle-weight: 150px
+$right-weight: 80px
 .meal-layout
-  width: 1130px
-  height: 600px
+  width: $layout-weight
+  height: $layout-height
   position: relative
   left: 45px
-  background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100%)
+  background: $background
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.7)
   //内边距调整
   border-radius: 36px
   box-sizing: border-box
-  padding: 24px
+  padding: $layout-padding
 
   & > *
     position: absolute
-    background: linear-gradient(-45deg, #ffbc00, #FFEFD5)
+    background: $background
     box-shadow: 0 0 16px rgb(0, 0, 0, 0.7) inset
 
   .box
     border-radius: 36px
 
 #circle
-  width: 150px
-  height: 150px
+  width: $circle-weight
+  height: $circle-weight
   border-radius: 50%
 
 #top1
-  left: 200px
-  width: 240px
-  height: 240px
+  left: $circle-weight + 2*$layout-padding
+  width: $top-box-weight
+  height: $top-box-weight
 
 
 #top2
-  left: 480px
-  width: 240px
-  height: 240px
+  left: $circle-weight + 3*$layout-padding + $top-box-weight
+  width: $top-box-weight
+  height: $top-box-weight
 
 #top3
-  right: 134px
-  width: 240px
-  height: 240px
+  right: 2*$layout-padding + $right-weight
+  width: $top-box-weight
+  height: $top-box-weight
 
 #right
-  right: 24px
-  width: 80px
-  height: 560px
+  right: $layout-padding
+  width: $right-weight
+  height: $layout-height - 2*$layout-padding
+
+$bottom-height: $layout-height - 3*$layout-padding - $top-box-weight
 
 #bottom1
-  bottom: 20px
-  width: 240px
-  height: 290px
+  bottom: $layout-padding
+  width: $top-box-weight
+  height: $bottom-height
 
 #bottom2
-  bottom: 20px
-  left: 300px
-  width: 700px
-  height: 290px
+  bottom: $layout-padding
+  left: $top-box-weight + 2*$layout-padding
+  width: $layout-weight - 4*$layout-padding - $top-box-weight - $right-weight
+  height: $bottom-height

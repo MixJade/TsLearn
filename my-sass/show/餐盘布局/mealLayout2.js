@@ -7,7 +7,8 @@ const mealLayout = (() => {
             ul: [{
                 href: "https://cn.vuejs.org/guide/quick-start.html",
                 name: "Vue上手",
-                remark: "一切根基"
+                remark: "一切根基",
+                pwd: "测试复制"
             }, {
                 href: "https://element-plus.org/zh-CN/",
                 name: "Element-Plus",
@@ -182,25 +183,28 @@ const mealLayout = (() => {
         const datum = myData[dataIndex];
         mainBoxUl.innerHTML = '';
         mainBoxH.innerText = datum.mainBox.name;
-        datum.mainBox.ul.forEach(item => mainBoxUl.innerHTML += getUlStr(item));
+        datum.mainBox.ul.forEach(item => mainBoxUl.innerHTML += getMainUlStr(item));
         bigSideUl.innerHTML = '';
         bigSideH.innerText = datum.bigSide.name;
-        datum.bigSide.ul.forEach(item => bigSideUl.innerHTML += getUlStr2(item));
+        datum.bigSide.ul.forEach(item => bigSideUl.innerHTML += getUlStr(item));
         bottom1Ul.innerHTML = '';
         bottom1H.innerText = datum.bottom1.name;
-        datum.bottom1.ul.forEach(item => bottom1Ul.innerHTML += getUlStr2(item));
+        datum.bottom1.ul.forEach(item => bottom1Ul.innerHTML += getUlStr(item));
         bottom2Ul.innerHTML = '';
         bottom2H.innerText = datum.bottom2.name;
-        datum.bottom2.ul.forEach(item => bottom2Ul.innerHTML += getUlStr2(item));
+        datum.bottom2.ul.forEach(item => bottom2Ul.innerHTML += getUlStr(item));
         bottom3Ul.innerHTML = '';
         bottom3H.innerText = datum.bottom3.name;
-        datum.bottom3.ul.forEach(item => bottom3Ul.innerHTML += getUlStr2(item));
+        datum.bottom3.ul.forEach(item => bottom3Ul.innerHTML += getUlStr(item));
         updateTime.innerText = datum.updateTime;
     };
-    const getUlStr = (defA) => {
+    const getMainUlStr = (defA) => {
+        if (defA.pwd !== undefined && defA.pwd !== "") {
+            return `<li><a href="${defA.href}">【${defA.name}】</a>${defA.remark}<button type="button" onclick="mealLayout.getCopy(this)" data-text="${defA.pwd}">复制密码</button></li>`;
+        }
         return `<li><a href="${defA.href}">【${defA.name}】</a>${defA.remark}</li>`;
     };
-    const getUlStr2 = (defA) => {
+    const getUlStr = (defA) => {
         if (defA.remark === "") {
             return `<li><a href="${defA.href}">【${defA.name}】</a></li>`;
         }
@@ -208,7 +212,16 @@ const mealLayout = (() => {
             return `<li><a href="${defA.href}" class="tooltip">【${defA.name}】<span class="tip-text">${defA.remark}</span></a></li>`;
         }
     };
+    const getCopy = (e) => {
+        const text = e.getAttribute("data-text");
+        if (text !== null) {
+            navigator.clipboard.writeText(text).then(() => {
+                console.log("复制成功");
+            });
+        }
+    };
     return {
-        setLongNavUl
+        setLongNavUl,
+        getCopy
     };
 })();
