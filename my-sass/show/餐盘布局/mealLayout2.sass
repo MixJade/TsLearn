@@ -73,32 +73,21 @@ $box-background: #e9e9eb
     cursor: pointer
     user-select: none
     -webkit-user-select: none
+    // 设置单、偶数的卡片颜色
+    @mixin item-color($my-color: #67C23A,$my-color2: #e1f3d8)
+      color: $my-color
+      border-color: $my-color
+      &:hover
+        background-color: $my-color2
+      &.selectNav
+        background-color: $my-color
+        color: $my-color2
     // 奇数元素
     &:nth-child(even)
-      $my-color: #67C23A
-      $my-color2: #e1f3d8
-      color: $my-color
-      border-color: $my-color
-
-      &:hover
-        background-color: $my-color2
-
-      &.selectNav
-        background-color: $my-color
-        color: $my-color2
+      @include item-color()
     // 偶数元素
     &:nth-child(odd)
-      $my-color: #409EFF
-      $my-color2: #c6e2ff
-      color: $my-color
-      border-color: $my-color
-
-      &:hover
-        background-color: $my-color2
-
-      &.selectNav
-        background-color: $my-color
-        color: $my-color2
+      @include item-color(#409EFF, #c6e2ff)
 
 #main-box
   top: $layout-padding
@@ -154,6 +143,7 @@ $box-background: #e9e9eb
     background-color: $box-background
     border-radius: 50%
     //字体
+    color: #303133
     font-weight: bolder
     display: flex
     box-sizing: border-box
