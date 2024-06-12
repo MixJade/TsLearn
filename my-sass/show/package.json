@@ -13,7 +13,8 @@
     "myTable-b": "sass 表格样式/sass/myTable.sass:表格样式/myTable.min.css --no-source-map --style=compressed",
     "myCurl-b": "sass 表格样式/sass/myCurl.sass:表格样式/myCurl.min.css --no-source-map --style=compressed",
     "mealLayout-b": "sass 餐盘布局/mealLayout.sass:餐盘布局/mealLayout.min.css --no-source-map --style=compressed",
-    "mealLayout2": "sass 餐盘布局/mealLayout2.sass:餐盘布局/mealLayout2.min.css --no-source-map --watch",
+    "mealLayout2-w": "sass 餐盘布局/mealLayout2.sass:餐盘布局/mealLayout2.min.css --no-source-map --watch",
+    "mealLayout2-b": "sass 餐盘布局/mealLayout2.sass:餐盘布局/mealLayout2.min.css --no-source-map --style=compressed",
     "tooltipNav-b": "sass 侧边栏/tooltipNav.sass:侧边栏/tooltipNav.min.css --no-source-map --style=compressed"
   }
 }
