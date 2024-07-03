@@ -31,7 +31,7 @@
 </head>
 <body>
 <div id="divFullScreen">
-    <img id="backImg" src="../../../../MyPicture/wallpaper/wp004.jpg" alt="桌面图片">
+    <img id="backImg" src="http://127.0.0.1:9527/pic/wallpaper/wp004.jpg" alt="桌面图片">
     <img id="mySvg" src="win11桌面.svg" alt="svg图"/>
 </div>
 <div id="topBtn">
@@ -54,7 +54,7 @@
 
         const changeSvg = (newSvgSrc, newImgSrc) => {
             mySvg.src = newSvgSrc;
-            backImg.src = `../../../../MyPicture/wallpaper/${newImgSrc}`
+            backImg.src = `http://127.0.0.1:9527/pic/wallpaper/${newImgSrc}`
         }
 
         return {
