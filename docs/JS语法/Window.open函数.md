@@ -2,6 +2,8 @@
 
 > 2024年7月5日12:00:04
 
+## 一、简介
+
 `window.open()` 是一个可以打开一个新窗口，或者重新加载已经存在的窗口的JavaScript函数。其基本语法如下：
 
 ```javascript
@@ -39,3 +41,22 @@ window.open(URL, name, specs, replace);
 5. 在同源策略的限制下，其他网页无法通过JavaScript访问新打开窗口的DOM，只有当新窗口与原窗口同源（同域名，同协议，同端口）时才可以进行访问。
 
 6. 通过`window.open()`打开新窗口时，得到的新窗口引用反馈较慢，特别是网络慢的时候，没有完全打开之前是得不到新窗口的引用。因此，需要注意在新窗口完全打开之前应该避免对新窗口进行操作，否则可能引发错误。
+
+## 二、示例
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>windowOpen测试</title>
+</head>
+<body>
+<p>window.open可以打开其它网站的页面,不会触发同源策略</p>
+<p>参数“_blank”意为使用新窗口打开</p>
+<p>但也只是单纯的打开页面，无法进行诸如读取dom等操作</p>
+<button type="button" onclick="window.open('https://www.baidu.com/','_blank')">点击打开百度</button>
+</body>
+</html>
+```
+
