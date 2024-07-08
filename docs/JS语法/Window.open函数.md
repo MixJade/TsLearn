@@ -60,3 +60,13 @@ window.open(URL, name, specs, replace);
 </html>
 ```
 
+## 三、题外话
+
+* 使用`window.open`往往是为了与其它系统对接。比如我在后端处通过http工具请求其它系统接口，返回了诸如“任务ID"、"其它系统的Token"这种参数，然后我需要在前端展示一个详情页面。
+* 这时可以用`window.open`，但需要与该系统的开发人员沟通好，让他们将Token校验放在url里，这样我们才能通过url来打开对应页面。
+* 另外：`window.open`作为与其它系统对接页面的方案，其实往往是先在后端通过像`hutool`这种库，发起http请求、调用一系列接口，得到token后，将查看详情页面所需的参数、Token一起给前端，前端就只负责最后的打开详情页面。
+* 关于**后端调用http接口**，可以使用**hutool的httprequest**或者**Spring自带的restTemplate**
+* 相关链接：
+    * 1. [Spring Boot发送GET/POST请求](https://blog.csdn.net/weixin_50637551/article/details/120804096)
+      2. [使用hutool发送POST请求](https://blog.csdn.net/acaSADag/article/details/124533943)
+
