@@ -1,0 +1,6 @@
+<svg height="300" width="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 田字格-->
+    <rect x="3" y="3" width="294" height="294" stroke="#ff4242" fill="white" stroke-width="3"/>
+    <polyline points="7,150 294,150" stroke="#ff4242" stroke-width="3" stroke-dasharray="10 10"/>
+    <polyline points="150,7 150,294" stroke="#ff4242" stroke-width="3" stroke-dasharray="10 10"/>
+</svg>
