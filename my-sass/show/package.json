@@ -12,6 +12,7 @@
     "myForm-b": "sass 表格样式/sass/myForm.sass:表格样式/myForm.min.css --no-source-map --style=compressed",
     "myTable-b": "sass 表格样式/sass/myTable.sass:表格样式/myTable.min.css --no-source-map --style=compressed",
     "myCurl-b": "sass 表格样式/sass/myCurl.sass:表格样式/myCurl.min.css --no-source-map --style=compressed",
+    "输入框-w": "sass 输入框/inputAndBtn.sass:输入框/inputAndBtn.min.css --no-source-map --style=compressed --watch",
     "mealLayout-b": "sass 餐盘布局/mealLayout.sass:餐盘布局/mealLayout.min.css --no-source-map --style=compressed",
     "mealLayout2-w": "sass 餐盘布局/mealLayout2.sass:餐盘布局/mealLayout2.min.css --no-source-map --watch",
     "mealLayout2-b": "sass 餐盘布局/mealLayout2.sass:餐盘布局/mealLayout2.min.css --no-source-map --style=compressed",
