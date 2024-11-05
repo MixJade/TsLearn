@@ -1,0 +1,47 @@
+.msgDiv
+  //聊天消息的样式
+  padding: 12px
+
+.msgUser
+  height: 24px
+  //文字样式
+  font-size: small
+  font-weight: bold
+  color: #909399
+
+.msgImg
+  $msgImgHeight: 46px
+  height: $msgImgHeight
+  width: $msgImgHeight
+  //大致样式
+  background-color: #8047b2
+  border-radius: 12px
+  //字体样式
+  text-align: center
+  font-weight: bolder
+  color: white
+  font-size: larger
+  line-height: $msgImgHeight
+
+.msgContent
+  //定位
+  margin-left: 64px
+  margin-top: -32px
+  //大体样式
+  padding: 6px
+  border-radius: 12px
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.7)
+  //换行
+  white-space: pre-wrap
+  word-break: break-all
+  background-color: #FAFAFA
+  //允许文字选中
+  user-select: text
+  -webkit-user-select: text
+
+.noticeMsg
+  @extend .msgUser
+  //系统通知消息需居中
+  display: block
+  width: 100%
+  text-align: center
