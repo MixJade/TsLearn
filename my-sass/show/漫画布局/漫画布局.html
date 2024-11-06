@@ -6,7 +6,7 @@
     <link href="cartoonLayout.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="wrapper">
+<div id="divFullScreen" class="wrapper">
     <div class="item"></div>
     <div class="item"></div>
     <div class="item"></div>
@@ -16,4 +16,16 @@
     <div class="item"></div>
 </div>
 </body>
+<script>
+    "use strict";
+    (() => {
+        // 全屏展示
+        const divFullScreen = document.getElementById('divFullScreen');
+        if (divFullScreen != null) {
+            divFullScreen.addEventListener('click', function () {
+                divFullScreen.requestFullscreen();
+            });
+        }
+    })();
+</script>
 </html>
