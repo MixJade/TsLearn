@@ -13,6 +13,7 @@
     "表格成品-b": "sass 表格样式/myCurl.sass:表格样式/myCurl.min.css --no-source-map --style=compressed",
     "聊天入口-w": "sass 聊天页面/inputAndBtn.sass:聊天页面/inputAndBtn.min.css --no-source-map --style=compressed --watch",
     "聊天主页面-w": "sass 聊天页面/chatMain.sass:聊天页面/chatMain.min.css --no-source-map --style=compressed --watch",
+    "遮罩卡片-b": "sass 遮罩卡片/遮罩卡片.sass:遮罩卡片/遮罩卡片.min.css --no-source-map --style=compressed",
     "餐盘布局2-b": "sass 餐盘布局/mealLayout2.sass:餐盘布局/mealLayout2.min.css --no-source-map --style=compressed",
     "侧边栏-b": "sass 侧边栏/tooltipNav.sass:侧边栏/tooltipNav.min.css --no-source-map --style=compressed"
   }

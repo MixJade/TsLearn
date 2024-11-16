@@ -1,0 +1,72 @@
+body
+  text-align: center
+  background-color: #9BDEAC
+
+h1
+  // 设置上下的空隙
+  margin-top: 56px
+  margin-bottom: 56px
+  // 给文字添加阴影效果
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)
+
+
+.my-row
+  // 卡片专属的行布局
+  display: grid
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr))
+  justify-items: center
+  grid-gap: 10px
+
+
+.card
+  position: relative
+  width: 360px
+  height: 420px
+  transition: 0.5s
+  cursor: pointer
+  // 卡片阴影
+  &::after
+    content: ''
+    position: absolute
+    inset: 0
+    background: linear-gradient(45deg, #eebe77, #f89898)
+    filter: blur(30px)
+
+  &:hover
+    transform: translateY(-20px)
+
+  &::before
+    content: ''
+    width: 100%
+    height: 100%
+    position: absolute
+    top: 0
+    left: 0
+    background: linear-gradient(45deg, #eebe77, #f89898)
+    border-radius: 1.2em
+
+  span
+    position: absolute
+    inset: 6px
+    background-color: rgba(0, 0, 0, 0.1)
+    z-index: 2
+    border-radius: 1em
+
+  .content
+    position: relative
+    z-index: 10
+    inset: 6px
+
+
+ul
+  // 取消卡片内的列表样式
+  list-style: none
+  // 设置文字靠左
+  text-align: start
+
+
+a
+  // 取消链接的下划线
+  text-decoration: none
+  // 链接字体加粗
+  font-weight: bold
