@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>觅长生丹方</title>
+</head>
+<body>
+<h3>丹药</h3>
+<!--选中丹药-->
+<label for="formulaData">丹药</label>
+<select id="formulaData">
+</select>
+<!--丹药概况-->
+<div id="formulaInfo">
+</div>
+
+<h3 id="mainTit">主药</h3>
+<label for="mainMater">药材</label>
+<select id="mainMater">
+</select>
+<p id="mainP"></p>
+
+<div id="pu1Div" style="display: none">
+    <h3 id="pu1Tit">辅药1</h3>
+    <label for="pu1Mater">药材</label>
+    <select id="pu1Mater">
+    </select>
+    <p id="pu1p"></p>
+</div>
+
+<div id="pu2Div" style="display: none">
+    <h3 id="pu2Tit">辅药2</h3>
+    <label for="pu2Mater">药材</label>
+    <select id="pu2Mater">
+    </select>
+    <p id="pu2p"></p>
+</div>
+
+<h3 id="leadTit">药引</h3>
+<button type="button" id="leadBtn">计算</button>
+<label for="leadMater"><span id="leadP1"></span>药材</label>
+<select id="leadMater">
+</select>
+<p id="leadP2"></p>
+
+</body>
+<script src="觅长生炼丹.js">
+</script>
+</html>
