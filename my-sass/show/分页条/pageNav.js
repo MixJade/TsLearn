@@ -1,22 +1,24 @@
 window.onload = () => {
     firstLoadPa(29)
 }
-const paSize = document.getElementById("paSize") // 调整大小的选择框
-const pageStrip = document.getElementById("pageStrip") // 分页条(存储页码)
-let nowPage = 0; // 当前页码
+const $ = id => document.getElementById(id);
+const paSize = $("paSize") // 调整大小的选择框
+const pageStrip = $("pageStrip") // 分页条(存储页码)
+let nowPage = 1; // 当前页码
 /**
- * 初始化页面
+ * 初始化分页条
  * @param dataNum 数据长度
  */
 const firstLoadPa = (dataNum) => {
-    document.getElementById("dataNum").innerText = dataNum;
+    console.log("初始化")
+    $("dataNum").innerText = dataNum;
     const pageSize = paSize.value;
     const pageNum = Math.ceil(dataNum / pageSize); // 向上取整
-    for (let i = 0; i < pageNum; i++) {
-        pageStrip.innerHTML += `<span onclick="cutPage(${i})">${i + 1}</span>`
+    for (let i = 1; i < pageNum + 1; i++) {
+        pageStrip.innerHTML += `<span onclick="cutPage(${i})">${i}</span>`
     }
     // 选中第一个子元素
-    nowPage = 0
+    nowPage = 1
     const paOneList = pageStrip.getElementsByTagName("span");
     paOneList[0].classList.add("active")
 }
@@ -27,9 +29,10 @@ const firstLoadPa = (dataNum) => {
  */
 const cutPage = (paNum) => {
     const paOneList = pageStrip.getElementsByTagName("span");
-    paOneList[nowPage].classList.remove("active")
-    paOneList[paNum].classList.add("active")
+    paOneList[nowPage - 1].classList.remove("active")
+    paOneList[paNum - 1].classList.add("active")
     nowPage = paNum
+    console.log(nowPage, paSize.value)
 }
 
 /**
@@ -38,10 +41,10 @@ const cutPage = (paNum) => {
  */
 const addPaNum = (isLeft) => {
     if (isLeft) {
-        if (nowPage === 0) return;
+        if (nowPage === 1) return;
         cutPage(nowPage - 1)
     } else {
-        if (nowPage === pageStrip.getElementsByTagName("span").length - 1) return;
+        if (nowPage === pageStrip.getElementsByTagName("span").length) return;
         cutPage(nowPage + 1)
     }
 }
