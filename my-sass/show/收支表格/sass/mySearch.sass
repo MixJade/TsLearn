@@ -12,17 +12,16 @@
     box-sizing: border-box
 
   > form
-    & > input[type=search]
+    & > input,select
       /*搜索框*/
       padding: 8px
       border: 2px solid #67C23A
-      border-radius: 12px 0 0 12px
+      border-radius: 8px
 
-      &:focus
-        /*搜索框*/
-        outline-color: #00ff0a
-        border-color: #00ff0a
-        box-shadow: 0 0 6px 6px #d1edc4
+    label
+      //搜索label
+      color: #529b2e
+      font-size: smaller
 
     > .btn-line-suc
       /*搜索按钮*/
@@ -30,7 +29,7 @@
       color: #67C23A
       background-color: #f0f9eb
       border: 2px solid #67C23A
-      border-radius: 0 12px 12px 0
+      border-radius: 8px
 
       &:hover
         /*搜索按钮*/
