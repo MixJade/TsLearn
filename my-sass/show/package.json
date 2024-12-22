@@ -1,21 +1,22 @@
 {
   "scripts": {
+    "侧边栏-b": "sass 侧边栏/tooltipNav.sass:侧边栏/tooltipNav.min.css --no-source-map --style=compressed",
     "分页条-b": "sass 分页条/pageNav.sass:分页条/pageNav.min.css --no-source-map --style=compressed",
     "右键菜单-b": "sass 右键菜单/rightMenu.sass:右键菜单/rightMenu.min.css --no-source-map --style=compressed",
     "吐司消息-b": "sass 吐司消息/tus.sass:吐司消息/tus.min.css --no-source-map --style=compressed",
     "密码备忘-b": "sass 密码备忘/pwdBak.sass:密码备忘/pwdBak.min.css --no-source-map --style=compressed",
     "收支表格-b": "sass 收支表格/payCurl.sass:收支表格/payCurl.min.css --no-source-map --style=compressed",
+    "日历-b": "sass 日历/calendar.sass:日历/calendar.min.css --no-source-map --style=compressed",
     "漫画布局-b": "sass 漫画布局/cartoonLayout.sass:漫画布局/cartoonLayout.min.css --no-source-map --style=compressed",
     "登录页面-b": "sass 登录页面/lightLogin.sass:登录页面/lightLogin.min.css --no-source-map --style=compressed",
     "确认框-b": "sass 确认框/确认框.sass:确认框/确认框.min.css --no-source-map --style=compressed",
+    "聊天入口-w": "sass 聊天页面/inputAndBtn.sass:聊天页面/inputAndBtn.min.css --no-source-map --style=compressed --watch",
+    "聊天主页面-w": "sass 聊天页面/chatMain.sass:聊天页面/chatMain.min.css --no-source-map --style=compressed --watch",
     "背景样式-b": "sass 背景样式/backTes.sass:背景样式/backTes.min.css --no-source-map --style=compressed",
     "表单测试-b": "sass 表格样式/表单测试.sass:表格样式/表单测试.min.css --no-source-map --style=compressed",
     "表格测试-b": "sass 表格样式/myTable.sass:表格样式/myTable.min.css --no-source-map --style=compressed",
     "表格成品-b": "sass 表格样式/myCurl.sass:表格样式/myCurl.min.css --no-source-map --style=compressed",
-    "聊天入口-w": "sass 聊天页面/inputAndBtn.sass:聊天页面/inputAndBtn.min.css --no-source-map --style=compressed --watch",
-    "聊天主页面-w": "sass 聊天页面/chatMain.sass:聊天页面/chatMain.min.css --no-source-map --style=compressed --watch",
     "遮罩卡片-b": "sass 遮罩卡片/遮罩卡片.sass:遮罩卡片/遮罩卡片.min.css --no-source-map --style=compressed",
-    "餐盘布局2-b": "sass 餐盘布局/mealLayout2.sass:餐盘布局/mealLayout2.min.css --no-source-map --style=compressed",
-    "侧边栏-b": "sass 侧边栏/tooltipNav.sass:侧边栏/tooltipNav.min.css --no-source-map --style=compressed"
+    "餐盘布局2-b": "sass 餐盘布局/mealLayout2.sass:餐盘布局/mealLayout2.min.css --no-source-map --style=compressed"
   }
 }
