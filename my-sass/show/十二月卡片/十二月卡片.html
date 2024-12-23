@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>十二月卡片</title>
+    <link href="twelveCard.min.css" rel="stylesheet">
+</head>
+<body>
+<h1>2024</h1>
+<div id="twelveCard">
+</div>
+</body>
+<script>
+    const twelveCard = document.getElementById("twelveCard");
+    window.onload = () => {
+        for (let i = 1; i < 13; i++) {
+            twelveCard.innerHTML += `
+    <div>
+        <h2>${i}月</h2>
+        <p>收支：<span class="in">+19000</span></p>
+        <hr>
+        <p>支出：<span class="out">-2000</span>&nbsp&nbsp&nbsp&nbsp&nbsp收入：<span class="in">+21000</span></p>
+        <hr>
+        <button type="button">柱状图</button>
+        <button type="button">饼状图</button>
+        <button type="button">日历图</button>
+        <button type="button">收支记录</button>
+    </div>`
+        }
+    }
+</script>
+</html>

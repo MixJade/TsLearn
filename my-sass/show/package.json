@@ -2,6 +2,7 @@
   "scripts": {
     "侧边栏-b": "sass 侧边栏/tooltipNav.sass:侧边栏/tooltipNav.min.css --no-source-map --style=compressed",
     "分页条-b": "sass 分页条/pageNav.sass:分页条/pageNav.min.css --no-source-map --style=compressed",
+    "十二月卡片-b": "sass 十二月卡片/twelveCard.sass:十二月卡片/twelveCard.min.css --no-source-map --style=compressed",
     "右键菜单-b": "sass 右键菜单/rightMenu.sass:右键菜单/rightMenu.min.css --no-source-map --style=compressed",
     "吐司消息-b": "sass 吐司消息/tus.sass:吐司消息/tus.min.css --no-source-map --style=compressed",
     "密码备忘-b": "sass 密码备忘/pwdBak.sass:密码备忘/pwdBak.min.css --no-source-map --style=compressed",
