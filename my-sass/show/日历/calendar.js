@@ -2,7 +2,7 @@ const defaultDate = new Date()
 const $ = id => document.getElementById(id);
 window.onload = () => init();
 
-let year, month, dateString
+let year, month
 
 const init = () => {
     const defaultYear = defaultDate.getFullYear();
@@ -47,8 +47,7 @@ const setDate = (yearVar, monthVar) => {
 
 const renderCurrentDate = () => {
     const currentDateEL = $('currentDate');
-    dateString = getDateString(year, month);
-    currentDateEL.textContent = dateString;
+    currentDateEL.textContent = `${year}-${month}`;
 }
 
 const getLastMonthInfo = () => {
@@ -83,11 +82,9 @@ const getNextMonthInfo = () => {
     }
 }
 
-const getDateString = (year, month) => `${year}-${month}`;
-
 const renderDates = () => {
     // DOM
-    const datesEL = document.getElementById('dates');
+    const datesEL = $('dates');
     datesEL.innerHTML = '';
     const dayCountInCurrentMonth = getDayCount(year, month);
     const firstDay = getDayOfFirstDate();
@@ -103,11 +100,11 @@ const renderDates = () => {
         if (firstDay > 1 && i < firstDay) {
             // dates in last month
             date = dayCountInLastMonth - (firstDay - i) + 1;
-            dateString = getDateString(yearOfLastMonth, lastMonth);
+            dateString = `${yearOfLastMonth}-${lastMonth}`;
         } else if (i >= dayCountInCurrentMonth + firstDay) {
             // dates in next month
             date = i - (dayCountInCurrentMonth + firstDay) + 1;
-            dateString = getDateString(yearOfNextMonth, nextMonth);
+            dateString = `${yearOfNextMonth}-${nextMonth}`;
         } else {
             // dates in current month
             date = i - firstDay + 1;
