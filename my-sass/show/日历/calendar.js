@@ -95,10 +95,11 @@ const renderDates = () => {
     const {nextMonth, yearOfNextMonth} = getNextMonthInfo();
 
     for (let i = 1; i <= 42; i++) {
-        const dateEL = document.createElement('button');
+        const dateEL = document.createElement('div');
         dateEL.classList.add('date');
         let dateString;
         let date;
+        let isThisMonth = false;
         if (firstDay > 1 && i < firstDay) {
             // dates in last month
             date = dayCountInLastMonth - (firstDay - i) + 1;
@@ -110,11 +111,20 @@ const renderDates = () => {
         } else {
             // dates in current month
             date = i - firstDay + 1;
-            dateString = getDateString(year, month);
+            dateString = `${year}-${month}-${date}`;
             dateEL.classList.add('currentMonth');
+            isThisMonth = true;
         }
         dateEL.textContent = date;
         dateEL.title = dateString;
+        // 满足某个条件后，插入记录
+        if (isThisMonth) {
+            dateEL.innerHTML += `
+        <span class="count">2</span>
+        <span class="out">-2000</span>
+        <span class="in">+2000</span>
+        `
+        }
         datesEL.append(dateEL);
     }
 }
