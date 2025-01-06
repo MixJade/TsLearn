@@ -259,11 +259,10 @@ const mealLayout = (() => {
     }
 
     const getUlStr = (defA: defA): string => {
-        if (defA.remark === "") {
+        if (defA.remark === "")
             return `<li><a href="${defA.href}">【${defA.name}】</a></li>`
-        } else {
-            return `<li><a href="${defA.href}" class="tooltip">【${defA.name}】<span class="tip-text">${defA.remark}</span></a></li>`
-        }
+        else
+            return `<li><a href="${defA.href}" title="${defA.remark}">【${defA.name}】</a>...</li>`;
     }
 
     /**

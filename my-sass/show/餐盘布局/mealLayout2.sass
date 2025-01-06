@@ -1,19 +1,20 @@
 @charset "UTF-8"
-@import "../密码备忘/sass/tooltip"
 body
   background-color: #f4f4f5
-// 布局相关变量
-$layout-height: 580px
-$layout-weight: 1130px
-$layout-padding: 24px
-// 盒子相关变量
+// 导航条相关变量
 $long-nav-weight: 96px
+// 盒子相关变量
 $box-padding: 20px
-$bottom-box-weight: 240px
+$box-weight: 240px
 $box-background: #e9e9eb
-//计算的变量
-$top-height: $layout-height - $bottom-box-weight - 2*$layout-padding - $box-padding
-$left-box-left: $layout-padding + $long-nav-weight + $box-padding
+// 大餐盘相关变量
+$layout-weight: 1130px
+// 乘以0.66是因为：当前浏览器被放大了1.5倍
+// floor丢掉小数，round四舍五入
+$layout-height: floor(891px * 0.66) - $box-padding
+// 盒子:计算的变量
+$top-height: $layout-height - $box-weight - 3*$box-padding
+$left-box-left: 2*$box-padding + $long-nav-weight
 
 //盒子的边框与标题颜色
 @mixin box-color($line-color: #008A5B)
@@ -23,17 +24,17 @@ $left-box-left: $layout-padding + $long-nav-weight + $box-padding
   h3
     color: $line-color
 
-.meal-layout
+#meal-layout
   width: $layout-weight
   height: $layout-height
   position: relative
-  left: 45px
+  left: floor((1908px * 0.66 - $layout-weight) * 0.5)
   background: linear-gradient(-45deg, #40c9ff 0%, #e81cff 100%)
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.7)
   border-radius: 36px
   //内边距调整
   box-sizing: border-box
-  padding: $layout-padding
+  padding: $box-padding
 
   & > *
     position: absolute
@@ -48,19 +49,19 @@ $left-box-left: $layout-padding + $long-nav-weight + $box-padding
       style: solid
       width: 3px
       radius: 36px
-    //去除列表小黑点
-    ul
-      list-style: none
-      text-align: left
-      margin-left: -20px
+//去除列表小黑点
+ul
+  list-style: none
+  text-align: left
+  margin-left: -20px
 
-      a
-        text-decoration: none
+  a
+    text-decoration: none
 
 #long-nav
-  left: $layout-padding
+  left: $box-padding
   width: $long-nav-weight
-  height: $layout-height - 2*$layout-padding
+  height: $layout-height - 2*$box-padding
   @include box-color(#337ecc)
 
   .item
@@ -92,57 +93,56 @@ $left-box-left: $layout-padding + $long-nav-weight + $box-padding
     &:nth-child(odd)
       @include item-color(#409EFF, #c6e2ff)
 
-#main-box
-  top: $layout-padding
-  left: $left-box-left
-  width: $layout-weight - 2*$layout-padding - 2*$box-padding - $long-nav-weight - $bottom-box-weight
+//上面的盒子
+.top
+  top: $box-padding
   height: $top-height
+
+#main-box
+  left: $left-box-left
+  width: $layout-weight - 4*$box-padding - $long-nav-weight - $box-weight
   @include box-color(#529b2e)
 
 #big-side
-  top: $layout-padding
-  right: $layout-padding
-  width: $bottom-box-weight
-  height: $top-height
+  right: $box-padding
+  width: $box-weight
   @include box-color(#73767a)
 
+//下面的盒子
+.bottom
+  bottom: $box-padding
+  width: $box-weight
+  height: $box-weight
+
 #bottom1
-  bottom: $layout-padding
   left: $left-box-left
-  width: $bottom-box-weight
-  height: $bottom-box-weight
   @include box-color(#b88230)
 
 #bottom2
-  bottom: $layout-padding
-  left: $layout-padding + $long-nav-weight + 2*$box-padding + $bottom-box-weight
-  width: $bottom-box-weight
-  height: $bottom-box-weight
+  left: 3*$box-padding + $long-nav-weight + $box-weight
   @include box-color(#c45656)
 
 #bottom3
-  bottom: $layout-padding
-  left: $layout-padding + $long-nav-weight + 3*$box-padding + 2*$bottom-box-weight
-  width: $bottom-box-weight
-  height: $bottom-box-weight
+  left: 4*$box-padding + $long-nav-weight + 2*$box-weight
   @include box-color(#337ecc)
 
 #circle
-  bottom: $layout-padding
-  right: $layout-padding
+  // 圆的相关变量
   $circle-width: 150px
+  $circle-border-width: 8px
+  bottom: $box-padding
+  right: $box-padding
   width: $circle-width
   height: $circle-width
   border-radius: 50%
   background-image: linear-gradient(135deg, #ca1eb3, #FD2E24, #FFD701)
-  $border-width: 8px
   //样式
   #updateTime
     position: relative
-    width: $circle-width - 2*$border-width
-    height: $circle-width - 2*$border-width
-    top: $border-width
-    left: $border-width
+    width: $circle-width - 2*$circle-border-width
+    height: $circle-width - 2*$circle-border-width
+    top: $circle-border-width
+    left: $circle-border-width
     background-color: $box-background
     border-radius: 50%
     //字体

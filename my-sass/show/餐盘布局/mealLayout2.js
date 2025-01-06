@@ -205,12 +205,10 @@ const mealLayout = (() => {
         return `<li><a href="${defA.href}">【${defA.name}】</a>${defA.remark}</li>`;
     };
     const getUlStr = (defA) => {
-        if (defA.remark === "") {
+        if (defA.remark === "")
             return `<li><a href="${defA.href}">【${defA.name}】</a></li>`;
-        }
-        else {
-            return `<li><a href="${defA.href}" class="tooltip">【${defA.name}】<span class="tip-text">${defA.remark}</span></a></li>`;
-        }
+        else
+            return `<li><a href="${defA.href}" title="${defA.remark}">【${defA.name}】</a>...</li>`;
     };
     const getCopy = (e) => {
         const text = e.getAttribute("data-text");
