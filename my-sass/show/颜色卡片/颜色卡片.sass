@@ -1,0 +1,36 @@
+#container
+  //自动换行
+  display: flex
+  flex-wrap: wrap
+
+$card-height: 125px
+$card-weight: 400px
+.colorCard
+  height: $card-height
+  width: $card-weight
+  //禁止文字选中
+  -webkit-user-select: none
+  user-select: none
+  //排外
+  margin: 48px
+  border-radius: 8px
+  overflow: hidden
+
+.topDiv
+  height: $card-height * 0.6
+  width: $card-weight
+  // 文字样式
+  box-sizing: border-box
+  padding: 18px
+  color: white
+
+.bottomDiv
+  height: $card-height * 0.4
+  width: $card-weight
+  //6等分的小色卡
+  display: grid
+  grid-template-columns: repeat(6, 1fr)
+
+  div
+    height: $card-height * 0.4
+    grid-column: span 1

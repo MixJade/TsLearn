@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>颜色卡片</title>
+    <link href="颜色卡片.min.css" rel="stylesheet">
+</head>
+<body>
+<h5>element色卡</h5>
+<!--色卡存放区-->
+<div id="container">
+</div>
+</body>
+<script>
+    // 色卡
+    const elementColor = [
+        ["Brand Color", "#409eff", "#337ecc", "#79bbff", "#9fceff", "#c5e1ff", "#d8ebff", "#ebf5ff"],
+        ["Success", "#67c23a", "#529b2e", "#95d475", "#b3e19d", "#d1edc4", "#e1f3d8", "#f0f9eb"],
+        ["Warning", "#e6a23c", "#b88230", "#eebe77", "#f3d19e", "#f8e3c5", "#faecd8", "#fdf6ec"],
+        ["Danger", "#f56c6c", "#c45656", "#f89898", "#fab6b6", "#fcd3d3", "#fde2e2", "#fef0f0"],
+        ["Info", "#909399", "#73767a", "#b1b3b8", "#c8c9cc", "#dedfe0", "#e9e9eb", "#e9e9eb"],
+    ]
+    // 加载色卡
+    window.onload = () => {
+        const container = document.getElementById("container")
+        elementColor.forEach(item => {
+            container.innerHTML += `
+<div class="colorCard">
+    <div class="topDiv" onclick="copyColor('${item[1]}')" style="background-color: ${item[1]}">${item[0]}<br>${item[1]}</div>
+    <div class="bottomDiv">
+        <div style="background-color: ${item[2]}" onclick="copyColor('${item[2]}')"></div>
+        <div style="background-color: ${item[3]}" onclick="copyColor('${item[3]}')"></div>
+        <div style="background-color: ${item[4]}" onclick="copyColor('${item[4]}')"></div>
+        <div style="background-color: ${item[5]}" onclick="copyColor('${item[5]}')"></div>
+        <div style="background-color: ${item[6]}" onclick="copyColor('${item[6]}')"></div>
+        <div style="background-color: ${item[7]}" onclick="copyColor('${item[7]}')"></div>
+    </div>
+</div>`
+        })
+    }
+    // 复制函数
+    const copyColor = (text) => {
+        navigator.clipboard.writeText(text).then(() => {
+            alert("复制成功:" + text);
+        });
+    };
+</script>
+</html>
