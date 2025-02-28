@@ -13,6 +13,7 @@
 </h1>
 <button type="button">收支变化折线图</button>
 <button type="button">消费成分饼状图</button>
+<button type="button">年度消费报告</button>
 <hr>
 <div id="twelveCard">
 </div>
@@ -23,12 +24,12 @@
         for (let i = 1; i < 13; i++) {
             twelveCard.innerHTML += `
     <div>
+        <a class="downA" href="#">导出</a>
         <h2>${i}月</h2>
         <p>收支：<span class="in">+19000</span></p>
         <hr>
         <p>支出：<span class="out">-2000</span>&nbsp&nbsp&nbsp&nbsp&nbsp收入：<span class="in">+21000</span></p>
         <hr>
-        <button type="button">柱状图</button>
         <button type="button">饼状图</button>
         <button type="button">日历图</button>
         <button type="button">收支记录</button>
