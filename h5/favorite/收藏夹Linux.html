@@ -8,7 +8,8 @@
     <link href='v.svg' rel="icon" type="image/svg+xml"/>
     <style>
         body {
-            background-color: #cccccc;
+            /* 淡绿色背景 */
+            background-color: #E5F6E5;
         }
 
         #main {
@@ -17,23 +18,52 @@
         }
 
         .content {
-            background-color: #F5F5F5;
-            /*圆角边框*/
+            /* 比背景稍深一点的绿色作为内容区域背景 */
+            background-color: #D4EBD4;
             border-radius: 16px;
-            border: 3px solid #B88130;
+            /* 绿色边框 */
+            border: 3px solid #73A673;
+            /* 添加过渡效果，让鼠标悬停时的变化更平滑 */
+            transition: all 0.3s ease;
         }
 
+        .content:hover {
+            /* 鼠标悬停时，内容区域微微放大 */
+            transform: scale(1.02);
+        }
 
         h1, h2 {
-            /*给文字添加阴影效果*/
+            /* 给文字添加阴影效果 */
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            /* 深绿色标题 */
+            color: #336633;
         }
 
         a {
-            /*取消链接的下划线*/
             text-decoration: none;
-            /*链接字体加粗*/
             font-weight: bold;
+            /* 蓝色链接，与绿色系形成对比又和谐 */
+            color: #1E90FF;
+            /* 链接添加下划线动画效果 */
+            position: relative;
+        }
+
+        a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #1E90FF;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+
+        a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
         }
     </style>
 </head>
