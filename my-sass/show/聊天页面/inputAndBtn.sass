@@ -8,9 +8,7 @@ $borderColor: #008A5B
 
 //聊天页面
 #user
-  border-width: 3px
-  border-style: solid
-  border-color: $borderColor
+  border: 3px solid $borderColor
   height: 36px
   width: 108px
   //50%圆角
@@ -22,7 +20,7 @@ $borderColor: #008A5B
   $imgSize: 42px
   width: $imgSize
   height: $imgSize
-  margin-bottom: -($imgSize/2)
+  margin-bottom: - calc($imgSize / 2)
 
 #container
   display: flex
@@ -52,3 +50,6 @@ $borderColor: #008A5B
 
 #fileDiv
   background-color: #c45656
+
+#qrCode
+  background-color: #198754
