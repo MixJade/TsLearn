@@ -4,6 +4,7 @@
 
 .msgUser
   height: 24px
+  display: inline-block
   //文字样式
   font-size: small
   font-weight: bold
@@ -28,9 +29,12 @@
   margin-left: 64px
   margin-top: -32px
   //大体样式
-  padding: 6px
+  padding: 8px
   border-radius: 12px
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.7)
+  // 为内部文本宽度
+  display: table
+  max-width: 70%
   //换行
   white-space: pre-wrap
   word-break: break-all
@@ -45,3 +49,15 @@
   display: block
   width: 100%
   text-align: center
+
+.selfMsg
+  // 自己的消息,整个左右翻转
+  transform: scaleX(-1)
+  // 子元素再翻回去
+  > *
+    transform: scaleX(-1)
+
+  .msgContent
+    background-color: #67c23a
+    color: white
+    text-align: right
