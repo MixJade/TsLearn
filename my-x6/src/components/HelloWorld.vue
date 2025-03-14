@@ -1,5 +1,8 @@
 <template>
   <h3>流程图样例</h3>
+  <p>当前选中节点: {{ selectCellId }}
+    <button @click="delSelectCell">删除</button>
+  </p>
   <p>
     <button @click="printData">新增节点</button>
     <button @click="getJson">数据导出</button>
@@ -15,11 +18,11 @@ import {Attr} from "@antv/x6/src/registry";
 // 自定义连接桩颜色
 const portCss: Attr.CellAttrs = {
   circle: {
-    r: 3,
+    r: 7,
     magnet: true,
-    stroke: '#8f8f8f', // 连接桩圈颜色
+    stroke: 'transparent', // 连接桩圈颜色
     strokeWidth: 1,
-    fill: '#fff', // 连接桩填充颜色
+    fill: 'transparent', // 连接桩填充颜色
   }
 }
 
@@ -110,66 +113,6 @@ Graph.registerNode(
     true,)
 
 /**
- * 容器的HTML对象
- */
-const container = ref<HTMLElement>()
-let graph: Graph
-/**
- * 画布初始化
- */
-onMounted(() => {
-  graph = new Graph({
-    container: container.value,
-    width: 1000,
-    height: 500,
-    background: {
-      color: '#F2F7FA', // 设置画布背景颜色
-    },
-    grid: {
-      visible: true,
-      type: 'doubleMesh',
-      args: [
-        {
-          color: '#eee', // 主网格线颜色
-          thickness: 1, // 主网格线宽度
-        },
-        {
-          color: '#ddd', // 次网格线颜色
-          thickness: 1, // 次网格线宽度
-          factor: 4, // 主次网格线间隔
-        },
-      ],
-    },
-    connecting: {
-      connector: 'smooth', // 全局连接配置：平滑连接器
-      allowBlank: false, // 不允许连接空白地方
-      allowEdge: false, // 不允许连接到边
-      allowNode: false, // 不允许连接节点
-      allowLoop: false, // 不允许循环连接
-      allowMulti: true, // 全局允许连接桩创建多条边
-      createEdge() {
-        return this.createEdge!({
-          shape: 'edge',
-          attrs: {
-            line: {
-              stroke: '#8f8f8f',
-              strokeWidth: 1,
-            },
-          },
-        })
-      },
-    },
-  });
-  graph.fromJSON(data)
-  // 使用对齐线组件
-  graph.use(
-      new Snapline({
-        enabled: true,
-      }),
-  )
-})
-
-/**
  * 节点数据
  */
 const data: Model.FromJSONData = {
@@ -214,11 +157,103 @@ const data: Model.FromJSONData = {
   ],
 };
 
+
+/**
+ * 生成节点主键
+ */
+const timeId = () => {
+  const now = new Date();
+  // 获取年份的后两位
+  const year = String(now.getFullYear()).slice(-2);
+  // 获取月份，并保证为两位数字
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  // 获取日期，并保证为两位数字
+  const day = String(now.getDate()).padStart(2, '0');
+  // 获取小时，并保证为两位数字
+  const hours = String(now.getHours()).padStart(2, '0');
+  // 获取分钟，并保证为两位数字
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  // 获取秒数，并保证为两位数字
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+
+  return `${year}${month}${day}${hours}${minutes}${seconds}`;
+}
+
+/**
+ * 容器的HTML对象
+ */
+const container = ref<HTMLElement>()
+let graph: Graph
+let selectCellId = ref<string | null>(null);
+/**
+ * 画布初始化
+ */
+onMounted(() => {
+  graph = new Graph({
+    container: container.value,
+    width: 1000,
+    height: 500,
+    background: {
+      color: '#F2F7FA', // 设置画布背景颜色
+    },
+    grid: {
+      visible: true,
+      type: 'doubleMesh',
+      args: [
+        {
+          color: '#eee', // 主网格线颜色
+          thickness: 1, // 主网格线宽度
+        },
+        {
+          color: '#ddd', // 次网格线颜色
+          thickness: 1, // 次网格线宽度
+          factor: 4, // 主次网格线间隔
+        },
+      ],
+    },
+    connecting: {
+      connector: 'smooth', // 全局连接配置：平滑连接器
+      allowBlank: false, // 不允许连接空白地方
+      allowEdge: false, // 不允许连接到边
+      allowNode: false, // 不允许连接节点
+      allowLoop: false, // 不允许循环连接
+      allowMulti: true, // 全局允许连接桩创建多条边
+      createEdge() {
+        return this.createEdge!({
+          id: timeId(),
+          shape: 'edge',
+          attrs: {
+            line: {
+              stroke: '#8f8f8f',
+              strokeWidth: 1,
+            },
+          },
+        })
+      },
+    },
+  });
+  graph.fromJSON(data)
+  // 使用对齐线组件
+  graph.use(
+      new Snapline({
+        enabled: true,
+      }),
+  )
+  // 设置节点选中，删除
+  graph.on("node:click", (node) => {
+    selectCellId.value = node.cell.id;
+  });
+  graph.on("edge:click", (edge) => {
+    selectCellId.value = edge.cell.id;
+  });
+})
+
 /**
  * 新建一个节点
  */
 const printData = () => {
   graph.addNode({
+    id: timeId(),
     shape: 'custom-node',
     x: 100,
     y: 200,
@@ -228,6 +263,18 @@ const printData = () => {
 
 const getJson = () => {
   console.log("导出的JSON:", graph.toJSON())
+}
+
+/**
+ * 删除选中节点
+ */
+const delSelectCell = () => {
+  const cellId = selectCellId.value;
+  if (cellId != null) {
+    // graph.getCellById :可以根据id获取线或者节点的信息； graph.getCells获取所有节点和边的信息
+    const cell = graph.getCellById(cellId);
+    graph.removeCell(cell);
+  }
 }
 </script>
 
