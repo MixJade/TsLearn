@@ -6,7 +6,6 @@
     "右键菜单-b": "sass 右键菜单/rightMenu.sass:右键菜单/rightMenu.min.css --no-source-map --style=compressed",
     "吐司消息-b": "sass 吐司消息/tus.sass:吐司消息/tus.min.css --no-source-map --style=compressed",
     "密码备忘-b": "sass 密码备忘/pwdBak.sass:密码备忘/pwdBak.min.css --no-source-map --style=compressed",
-    "收支表格-b": "sass 收支表格/payCurl.sass:收支表格/payCurl.min.css --no-source-map --style=compressed",
     "日历-b": "sass 日历/calendar.sass:日历/calendar.min.css --no-source-map --style=compressed",
     "漫画布局-b": "sass 漫画布局/cartoonLayout.sass:漫画布局/cartoonLayout.min.css --no-source-map --style=compressed",
     "登录页面-b": "sass 登录页面/lightLogin.sass:登录页面/lightLogin.min.css --no-source-map --style=compressed",

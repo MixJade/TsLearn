@@ -1,3 +1,0 @@
-JavaLearn/experiment/payment/src/main/resources/static/index.html
-
-这里的css是从“表格样式”中改的，有部分调整
