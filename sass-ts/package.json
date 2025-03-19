@@ -1,0 +1,18 @@
+{
+  "name": "sass-ts",
+  "version": "1.0.0",
+  "description": "编译sass所用",
+  "scripts": {
+    "sass-dev": "sass --no-source-map sassTes/:out-css/",
+    "sass-watch": "sass --no-source-map sassTes/:out-css/ --watch",
+    "sass-build": "sass --no-source-map --style=compressed sassTes/:out-css/",
+    "ts-compile": "tsc",
+    "ts-watch": "tsc --watch"
+  },
+  "author": "MixJade",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.77.3",
+    "typescript": "^5.8.2"
+  }
+}

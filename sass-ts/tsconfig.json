@@ -19,7 +19,7 @@
     // "emitDeclarationOnly": true,                      /* 只输出声明文件 */
     // "sourceMap": true,                                /* 生成sourcemap */
     // "outFile": "./",                                  /* 将所有的文件编译为一个js文件 */
-     "outDir": "../js",                                /* 输出的JS目录 */
+     "outDir": "out-js",                                /* 输出的JS目录 */
      "removeComments": true,                           /* 去除注释 */
      "noEmitOnError": true,                            /* 出错时不编译 */
     // "preserveConstEnums": true,                       /* 保留 const 枚举 */
