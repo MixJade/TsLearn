@@ -1,0 +1,130 @@
+$header-height: 32px
+$nav-btn-color: #409eff
+$nav-btn-txt-color: #ebf5ff
+nav
+  height: $header-height
+  padding: 4px
+  border-bottom: 2px solid #909399
+  z-index: 20
+  //表头导航栏
+  position: fixed
+  top: 0
+  line-height: $header-height
+
+  button
+    border: 2px solid $nav-btn-color
+    padding: 4px
+    border-radius: 8px
+    font-weight: bolder
+    color: $nav-btn-color
+    background-color: $nav-btn-txt-color
+    margin: 2px
+
+    &.selectNav
+      color: $nav-btn-txt-color
+      background-color: $nav-btn-color
+
+#navHr
+  //导航与内容的分割线
+  height: 32px
+
+$table-weight: 90%
+table
+  width: $table-weight
+  margin-left: calc((100% - $table-weight) / 2)
+  //让单元格存在空隙
+  border-collapse: separate
+  border-spacing: 10px
+
+$td-height: 24px
+td
+  height: $td-height
+  box-sizing: border-box
+  padding: 8px
+  border-radius: 8px
+  box-shadow: 0 0 3px #73767a
+  line-height: $td-height
+  position: relative
+  //网页图标
+  img
+    width: 24px
+    height: 24px
+    //竖直居中
+    display: inline-block
+    vertical-align: middle
+  //复制密码按钮
+  button
+    position: absolute
+    right: 0
+    //设置过渡效果
+    transition: all 1s
+    opacity: 0
+    //按钮样式
+    border: 2px solid #b1b3b8
+    border-radius: 8px
+    font-size: smaller
+
+  .btnDot
+    //按钮的提示文本
+    position: absolute
+    top: 0
+    right: 0
+    width: 8px
+    height: 8px
+    background: #e6a23c
+    border-radius: 50%
+    opacity: 1
+    //不影响按钮点击
+    pointer-events: none
+
+  &:hover
+    //鼠标悬浮时按钮出现
+    button
+      opacity: 1
+
+    .btnDot
+      opacity: 0
+
+  &.emptyTd
+    //空单元格(用于占位)
+    opacity: 0
+
+    div
+      width: 120px
+
+a
+  //网页链接
+  text-decoration: none
+  margin-right: 4px
+
+.remark
+  font-size: smaller
+
+caption
+  //表格标题
+  font-size: 24px
+  font-weight: bold
+  margin-bottom: 10px
+  color: #909399
+
+#alertBox
+  // 自带的提示框，过段时间消失
+  display: none
+  position: fixed
+  top: 20px
+  left: 50%
+  transform: translateX(-50%)
+  background-color: #e1f3d8
+  color: #67c23a
+  border: 5px solid #67c23a
+  padding: 8px 24px
+  border-radius: 24px
+  z-index: 100
+
+footer
+  width: 100%
+  color: #909399
+  text-align: center
+  font-weight: bolder
+  font-size: smaller
+  margin-top: 24px

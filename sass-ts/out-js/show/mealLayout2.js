@@ -1,141 +1,141 @@
 "use strict";
 const mealLayout = (() => {
     const myData = [{
-        longNav: "初始教程",
-        mainBox: {
-            name: "参考网站",
-            ul: [{
-                href: "https://cn.vuejs.org/guide/quick-start.html",
-                name: "Vue上手",
-                remark: "一切根基",
-                pwd: "测试复制"
-            }, {
-                href: "https://element-plus.org/zh-CN/",
-                name: "Element-Plus",
-                remark: "项目组件库"
-            }, {
-                href: "https://element-plus.org/zh-CN/component/icon.html",
-                name: "Element的Icon",
-                remark: "美化图标"
-            },]
-        },
-        bigSide: {
-            name: "样式参考",
-            ul: [{
-                href: "https://www.sass.hk/docs/",
-                name: "Sass官网教程",
-                remark: "但不建议看这个"
-            }, {
-                href: "https://www.runoob.com/sass/sass-install.html",
-                name: "Sass菜鸟教程",
-                remark: "这个写的不错"
-            }, {
-                href: "https://www.bootstrap.cn/doc/read/113.html",
-                name: "bootstrap官网",
-                remark: "一些样式要从这里来"
-            },]
-        },
-        bottom1: {
-            name: "框架官网",
-            ul: [{
-                href: "https://www.axios-http.cn/docs/intro", name: "Axios官网", remark: "前端请求"
-            }, {
-                href: "https://zh-hans.eslint.org/docs/latest/use/getting-started",
-                name: "ESLint官网",
-                remark: "格式化工具"
+            longNav: "初始教程",
+            mainBox: {
+                name: "参考网站",
+                ul: [{
+                        href: "https://cn.vuejs.org/guide/quick-start.html",
+                        name: "Vue上手",
+                        remark: "一切根基",
+                        pwd: "测试复制"
+                    }, {
+                        href: "https://element-plus.org/zh-CN/",
+                        name: "Element-Plus",
+                        remark: "项目组件库"
+                    }, {
+                        href: "https://element-plus.org/zh-CN/component/icon.html",
+                        name: "Element的Icon",
+                        remark: "美化图标"
+                    },]
             },
-            ]
-        },
-        bottom2: { name: "", ul: [] },
-        bottom3: { name: "", ul: [] },
-        updateTime: "2024-6-11 16:32"
-    }, {
-        longNav: "补充知识",
-        mainBox: {
-            name: "前端知识", ul: [{
-                href: "https://blog.csdn.net/qq_42231156/article/details/124506627",
-                name: "计算属性传参",
-                remark: ""
-            }, {
-                href: "https://blog.csdn.net/GraySakura/article/details/104821218",
-                name: "div换行设置",
-                remark: ""
-            }, {
-                href: "https://juejin.cn/post/7074448287352225823",
-                name: "Vue3关于路由动画的注意事项",
-                remark: ""
-            }, {
-                href: "https://juejin.cn/post/7137460519497105439",
-                name: "Vue3关于滚动条的细节",
-                remark: "包括flex翻转，用做聊天页面"
-            }, { href: "https://juejin.cn/post/7132656370901336101", name: "Vue3的h函数", remark: "" },]
-        },
-        bigSide: {
-            name: "样式知识",
-            ul: [{
-                href: "https://developer.mozilla.org/zh-CN/docs/Web/CSS/Using_CSS_custom_properties",
-                name: "CSS自定属性",
-                remark: "方便调配色"
-            }, {
-                href: "https://www.jianshu.com/p/d875f680fc6b",
-                name: "CSS波浪加号大于号",
-                remark: "一个有用的语法"
-            }, {
-                href: "https://zhuanlan.zhihu.com/p/96721026",
-                name: "前端尺寸vw|vh|rem|em",
-                remark: "了解即可"
-            },]
-        },
-        bottom1: {
-            name: "后端",
-            ul: [{
-                href: "https://blog.csdn.net/hunt_er/article/details/81427804",
-                name: "无Java环境下运行jar文件",
-                remark: "感觉不如IDE"
-            }]
-        },
-        bottom2: {
-            name: "别人仓库",
-            ul: [{
-                href: "https://gitee.com/haojunchuan/web_every_day/tree/master/parallax_website",
-                name: "别人的仓库",
-                remark: "我会吸收一些东西"
-            }]
-        },
-        bottom3: { name: "", ul: [] },
-        updateTime: "2024-6-11 17:52"
-    }, {
-        longNav: "小小工具",
-        mainBox: {
-            name: "配色", ul: [
-                {
-                    href: "https://element-plus.gitee.io/zh-CN/component/color.html",
-                    name: "ElementPlus配色",
-                    remark: "一个规范"
-                },
-                { href: "https://www.cnblogs.com/5H5H/p/9784015.html", name: "颜色代码", remark: "各种颜色的英文名称" },
-            ]
-        },
-        bigSide: {
-            name: "样式",
-            ul: [
-                { href: "https://uiverse.io/cards", name: "UI_Verse", remark: "不错的css样式库，但代码有冗余，记得清理" },
-                {
-                    href: "https://cdn.bootcdn.net/ajax/libs/bootstrap/5.2.3/css/bootstrap.css",
-                    name: "BootStrap的css",
-                    remark: "老大哥，直接copy"
-                }
-            ]
-        },
-        bottom1: {
-            name: "工具", ul: [
-                { href: "https://tooltt.com/json2typescript/", name: "Json转Ts接口", remark: "在线网站，JSON键要加双引号" }
-            ]
-        },
-        bottom2: { name: "", ul: [] },
-        bottom3: { name: "", ul: [] },
-        updateTime: "2024-6-11 21:26",
-    }];
+            bigSide: {
+                name: "样式参考",
+                ul: [{
+                        href: "https://www.sass.hk/docs/",
+                        name: "Sass官网教程",
+                        remark: "但不建议看这个"
+                    }, {
+                        href: "https://www.runoob.com/sass/sass-install.html",
+                        name: "Sass菜鸟教程",
+                        remark: "这个写的不错"
+                    }, {
+                        href: "https://www.bootstrap.cn/doc/read/113.html",
+                        name: "bootstrap官网",
+                        remark: "一些样式要从这里来"
+                    },]
+            },
+            bottom1: {
+                name: "框架官网",
+                ul: [{
+                        href: "https://www.axios-http.cn/docs/intro", name: "Axios官网", remark: "前端请求"
+                    }, {
+                        href: "https://zh-hans.eslint.org/docs/latest/use/getting-started",
+                        name: "ESLint官网",
+                        remark: "格式化工具"
+                    },
+                ]
+            },
+            bottom2: { name: "", ul: [] },
+            bottom3: { name: "", ul: [] },
+            updateTime: "2024-6-11 16:32"
+        }, {
+            longNav: "补充知识",
+            mainBox: {
+                name: "前端知识", ul: [{
+                        href: "https://blog.csdn.net/qq_42231156/article/details/124506627",
+                        name: "计算属性传参",
+                        remark: ""
+                    }, {
+                        href: "https://blog.csdn.net/GraySakura/article/details/104821218",
+                        name: "div换行设置",
+                        remark: ""
+                    }, {
+                        href: "https://juejin.cn/post/7074448287352225823",
+                        name: "Vue3关于路由动画的注意事项",
+                        remark: ""
+                    }, {
+                        href: "https://juejin.cn/post/7137460519497105439",
+                        name: "Vue3关于滚动条的细节",
+                        remark: "包括flex翻转，用做聊天页面"
+                    }, { href: "https://juejin.cn/post/7132656370901336101", name: "Vue3的h函数", remark: "" },]
+            },
+            bigSide: {
+                name: "样式知识",
+                ul: [{
+                        href: "https://developer.mozilla.org/zh-CN/docs/Web/CSS/Using_CSS_custom_properties",
+                        name: "CSS自定属性",
+                        remark: "方便调配色"
+                    }, {
+                        href: "https://www.jianshu.com/p/d875f680fc6b",
+                        name: "CSS波浪加号大于号",
+                        remark: "一个有用的语法"
+                    }, {
+                        href: "https://zhuanlan.zhihu.com/p/96721026",
+                        name: "前端尺寸vw|vh|rem|em",
+                        remark: "了解即可"
+                    },]
+            },
+            bottom1: {
+                name: "后端",
+                ul: [{
+                        href: "https://blog.csdn.net/hunt_er/article/details/81427804",
+                        name: "无Java环境下运行jar文件",
+                        remark: "感觉不如IDE"
+                    }]
+            },
+            bottom2: {
+                name: "别人仓库",
+                ul: [{
+                        href: "https://gitee.com/haojunchuan/web_every_day/tree/master/parallax_website",
+                        name: "别人的仓库",
+                        remark: "我会吸收一些东西"
+                    }]
+            },
+            bottom3: { name: "", ul: [] },
+            updateTime: "2024-6-11 17:52"
+        }, {
+            longNav: "小小工具",
+            mainBox: {
+                name: "配色", ul: [
+                    {
+                        href: "https://element-plus.gitee.io/zh-CN/component/color.html",
+                        name: "ElementPlus配色",
+                        remark: "一个规范"
+                    },
+                    { href: "https://www.cnblogs.com/5H5H/p/9784015.html", name: "颜色代码", remark: "各种颜色的英文名称" },
+                ]
+            },
+            bigSide: {
+                name: "样式",
+                ul: [
+                    { href: "https://uiverse.io/cards", name: "UI_Verse", remark: "不错的css样式库，但代码有冗余，记得清理" },
+                    {
+                        href: "https://cdn.bootcdn.net/ajax/libs/bootstrap/5.2.3/css/bootstrap.css",
+                        name: "BootStrap的css",
+                        remark: "老大哥，直接copy"
+                    }
+                ]
+            },
+            bottom1: {
+                name: "工具", ul: [
+                    { href: "https://tooltt.com/json2typescript/", name: "Json转Ts接口", remark: "在线网站，JSON键要加双引号" }
+                ]
+            },
+            bottom2: { name: "", ul: [] },
+            bottom3: { name: "", ul: [] },
+            updateTime: "2024-6-11 21:26",
+        }];
     const longNavUl = document.getElementById("long-nav-ul");
     const mainBoxUl = document.getElementById("main-box-ul");
     const bigSideUl = document.getElementById("big-side-ul");
