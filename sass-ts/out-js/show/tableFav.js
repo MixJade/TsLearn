@@ -201,7 +201,7 @@ const loadData = (dataIndex) => {
         if (ulNum % 4 !== 0) {
             const cirNum = 4 - ulNum % 4;
             for (let k = 0; k < cirNum; k++) {
-                groupTxt += `<td class="emptyTd"><div></div></td>`;
+                groupTxt += `<td class="emptyTd">飞雪连天射白鹿笑书神侠倚碧鸳</td>`;
             }
         }
         groupTxt += `</tr> </tbody></table>`;
