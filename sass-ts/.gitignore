@@ -1,7 +1,6 @@
 package-lock.json
 # 忽略Sass的编译输出文件
 out-css/
-show/收支表格/payCurl.min.css
 # 忽略TS的编译输出文件
 out-js/*
 # 但不忽悠要用的文件

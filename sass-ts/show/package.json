@@ -18,7 +18,7 @@
     "表格测试-b": "sass 表格样式/myTable.sass:表格样式/myTable.min.css --no-source-map --style=compressed",
     "表格成品-bw": "sass 表格样式/myCurl.sass:表格样式/myCurl.min.css --no-source-map --style=compressed --watch",
     "遮罩卡片-b": "sass 遮罩卡片/遮罩卡片.sass:遮罩卡片/遮罩卡片.min.css --no-source-map --style=compressed",
-    "颜色卡片-b": "sass 颜色卡片/颜色卡片.sass:颜色卡片/颜色卡片.min.css --no-source-map --style=compressed",
+    "颜色卡片-b": "sass 颜色卡片/ColorCard.sass:颜色卡片/ColorCard.min.css --no-source-map --style=compressed --watch",
     "餐盘布局2-b": "sass 餐盘布局/mealLayout2.sass:餐盘布局/mealLayout2.min.css --no-source-map --style=compressed"
   }
 }
