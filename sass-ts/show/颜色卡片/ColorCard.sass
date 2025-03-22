@@ -1,9 +1,11 @@
-#container
+@use "sass:math"
+
+#container, #container2, #container3
   //自动换行
   display: flex
   flex-wrap: wrap
 
-$card-height: 80px
+$card-height: 96px
 $card-weight: 256px
 .colorCard
   height: $card-height
@@ -13,25 +15,38 @@ $card-weight: 256px
   user-select: none
   //排外
   margin: 12px
-  border-radius: 8px
+  border-radius: 12px
   overflow: hidden
 
 .topDiv
-  height: $card-height * 0.6
+  height: math.round($card-height * 0.6)
   width: $card-weight
   // 文字样式
   box-sizing: border-box
-  padding: 8px
+  padding: 12px
   font-size: smaller
   color: white
 
 .bottomDiv
-  height: $card-height * 0.4
+  height: math.round($card-height * 0.4)
   width: $card-weight
   //6等分的小色卡
   display: grid
   grid-template-columns: repeat(6, 1fr)
 
   div
-    height: $card-height * 0.4
+    height: math.round($card-height * 0.4)
     grid-column: span 1
+
+$bootstrap-card-height: 64px
+.bootstrapCard
+  @extend .colorCard
+  height: $bootstrap-card-height
+  width: 144px
+  text-align: center
+  border-radius: math.round($bootstrap-card-height * 0.5)
+
+  span
+    line-height: $bootstrap-card-height
+    color: white
+    font-weight: bold
