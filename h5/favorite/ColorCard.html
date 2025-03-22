@@ -54,6 +54,57 @@
             font-weight: bold
         }
     </style>
+    <style>.tus {
+        top: -100%;
+        opacity: 0;
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 250px;
+        height: 40px;
+        border-radius: 18px;
+        border: 2px solid #67c23a;
+        color: #67c23a;
+        background: #e1f3d8;
+        box-sizing: border-box;
+        padding-left: 38px;
+        line-height: 36px;
+        -webkit-user-select: none;
+        user-select: none;
+        display: none
+    }
+
+    .tus > svg {
+        position: absolute;
+        top: 6px;
+        left: 8px
+    }
+
+    /*noinspection CssUnusedSymbol*/
+    .visible {
+        display: block;
+        animation: moveAndFade 3s
+    }
+
+    @keyframes moveAndFade {
+        0% {
+            top: -100%;
+            opacity: 0
+        }
+        15% {
+            top: 5vh;
+            opacity: 1
+        }
+        65% {
+            top: 5vh;
+            opacity: 1
+        }
+        100% {
+            top: 10vh;
+            opacity: 0
+        }
+    }
+    </style>
 </head>
 <body>
 <h5>element色卡</h5>
@@ -65,7 +116,39 @@
 <hr>
 <h5>Bootstrap配色</h5>
 <div id="container3"></div>
+<!--隐藏的吐司消息-->
+<div class="tus" id="myTus">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+        <circle cx="12" cy="12" r="11" fill="#67C23A"/>
+        <path d="M7 12 L12 17 L17 7" stroke="#e1f3d8" stroke-width="2" fill="none"/>
+    </svg>
+    <span id="myTusTxt">复制成功</span>
+</div>
 </body>
+<script>
+    "use strict";
+    const baseTus = (() => {
+        const myTus = document.getElementById("myTus");
+        const myTusTxt = document.getElementById("myTusTxt");
+        let tusTimer;
+        const showTus = (msg) => {
+            if (tusTimer) {
+                clearTimeout(tusTimer);
+                myTus.classList.remove('visible');
+                void myTus.offsetWidth;
+            }
+            myTus.classList.add('visible');
+            if (msg !== undefined)
+                myTusTxt.innerText = msg;
+            tusTimer = setTimeout(() => {
+                myTus.classList.remove('visible');
+            }, 3000);
+        };
+        return {
+            showTus
+        };
+    })();
+</script>
 <script>
     // element色卡
     const elementColor = [
@@ -127,7 +210,7 @@
     // 复制函数
     const copyColor = (text) => {
         navigator.clipboard.writeText(text).then(() => {
-            alert("复制成功:" + text);
+            baseTus.showTus("复制成功:" + text);
         });
     };
 </script>

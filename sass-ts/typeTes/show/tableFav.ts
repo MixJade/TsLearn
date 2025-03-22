@@ -181,7 +181,6 @@ const myData: dataGroup[] = [{
 const headNav = document.getElementById("headNav") as HTMLElement
 const tableDiv = document.getElementById("tableDiv") as HTMLElement
 const timeFoot = document.getElementById("timeFoot") as HTMLElement
-const alertBox = document.getElementById("alertBox") as HTMLElement
 
 // 正式初始化
 window.onload = () => {
@@ -270,16 +269,7 @@ const getCopy = (e: HTMLElement) => {
     const text = e.getAttribute("data-text") as string
     if (text !== "") {
         navigator.clipboard.writeText(text).then(() =>
-            showAlert()
+            baseTus.showTus()
         )
     }
-}
-
-const showAlert = (): void => {
-    // 显示提示框
-    alertBox.style.display = 'block';
-    // 设置定时器，3 秒后隐藏提示框
-    setTimeout(() => {
-        alertBox.style.display = 'none';
-    }, 3000);
 }

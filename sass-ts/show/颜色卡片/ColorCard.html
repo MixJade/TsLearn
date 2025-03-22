@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>颜色卡片</title>
     <link href="ColorCard.min.css" rel="stylesheet">
+    <link href="../吐司消息/baseTus.min.css" rel="stylesheet">
 </head>
 <body>
 <h5>element色卡</h5>
@@ -16,6 +17,7 @@
 <h5>Bootstrap配色</h5>
 <div id="container3"></div>
 </body>
+<script src="../../out-js/show/baseTus.js"></script>
 <script>
     // element色卡
     const elementColor = [
@@ -77,7 +79,7 @@
     // 复制函数
     const copyColor = (text) => {
         navigator.clipboard.writeText(text).then(() => {
-            alert("复制成功:" + text);
+            baseTus.showTus("复制成功:" + text);
         });
     };
 </script>

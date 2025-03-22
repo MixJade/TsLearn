@@ -2,6 +2,12 @@
 
 > 2025-03-19 09:54:59
 
+* 更新软件包版本命令
+
+```shell
+npm install sass@latest --save-dev
+```
+
 ## Sass说明
 
 > 2024年5月30日15:15:33

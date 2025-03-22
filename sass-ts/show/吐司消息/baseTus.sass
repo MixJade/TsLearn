@@ -1,0 +1,49 @@
+$tus-weight: 250px
+.tus
+  top: -100%
+  opacity: 0
+  //元素居中
+  position: fixed
+  left: 50%
+  transform: translateX(-50%)
+  //吐司样式
+  width: $tus-weight
+  height: 40px
+  border-radius: 18px
+  //成功样式
+  border: 2px solid #67C23A
+  color: #67C23A
+  background: #e1f3d8
+  //内容空隙
+  box-sizing: border-box
+  padding-left: 38px
+  //文字样式
+  line-height: 36px
+  -webkit-user-select: none
+  user-select: none
+  // 吐司默认隐藏
+  display: none
+
+  > svg
+    position: absolute
+    top: 6px
+    left: 8px
+
+//吐司的显示状态(触发动画)
+.visible
+  display: block
+  animation: moveAndFade 3s
+
+@keyframes moveAndFade
+  0%
+    top: -100%
+    opacity: 0
+  15%
+    top: 5vh
+    opacity: 1
+  65%
+    top: 5vh
+    opacity: 1
+  100%
+    top: 10vh
+    opacity: 0

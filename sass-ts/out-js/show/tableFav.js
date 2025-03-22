@@ -158,7 +158,6 @@ const myData = [{
 const headNav = document.getElementById("headNav");
 const tableDiv = document.getElementById("tableDiv");
 const timeFoot = document.getElementById("timeFoot");
-const alertBox = document.getElementById("alertBox");
 window.onload = () => {
     loadHeadNav();
     loadData(0);
@@ -220,12 +219,6 @@ const getBtnTxt = (defA) => {
 const getCopy = (e) => {
     const text = e.getAttribute("data-text");
     if (text !== "") {
-        navigator.clipboard.writeText(text).then(() => showAlert());
+        navigator.clipboard.writeText(text).then(() => baseTus.showTus());
     }
-};
-const showAlert = () => {
-    alertBox.style.display = 'block';
-    setTimeout(() => {
-        alertBox.style.display = 'none';
-    }, 3000);
 };
