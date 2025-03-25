@@ -3,7 +3,8 @@
     <tbody>
     <tr v-for="monthPayVos in monthPayVoss">
       <td v-for="item in monthPayVos" :key="item.month">
-        <div :class="{ selected: selectedMonth === item.month }" class="monthCard" @click="selectCard(item.month)">
+        <div :class="{ selected: selectedMonth === item.month ,[getSeasonClass(item.month)]:true}" class="monthCard"
+             @click="selectCard(item.month)">
           <span class="monthH">{{ item.month }}月</span>
           <p>
             <MoneyTag :income="item.money>0" :money="item.money" label="盈余"/>
@@ -39,6 +40,18 @@ const selectedMonth = ref<number>(-1)
 const selectCard = (month: number) => {
   selectedMonth.value = month
 }
+// 四季月份
+const getSeasonClass = (month) => {
+  if ([3, 4, 5].includes(month)) {
+    return 'spring';
+  } else if ([6, 7, 8].includes(month)) {
+    return 'summer';
+  } else if ([9, 10, 11].includes(month)) {
+    return 'autumn';
+  } else {
+    return 'winter';
+  }
+};
 </script>
 
 <style lang="sass" scoped>
@@ -54,6 +67,9 @@ const selectCard = (month: number) => {
   border-radius: $monthCard-padding
   position: relative
   padding: $monthCard-padding
+  //背景图片
+  background-repeat: no-repeat
+  background-position: center
   // 设置最小宽度
   box-sizing: border-box
   min-width: 256px
@@ -81,4 +97,21 @@ const selectCard = (month: number) => {
   color: $selected-color
   border-color: $selected-color
   box-shadow: inset 0 0 12px #9fceff
+
+//四季月份
+.spring
+  background-image: url('/icon/spring.svg')
+  background-color: #f0f9eb
+
+.summer
+  background-image: url('/icon/summer.svg')
+  background-color: #fef0f0
+
+.autumn
+  background-image: url('/icon/autumn.svg')
+  //background-color: #fdf6ec
+
+.winter
+  background-image: url('/icon/winter.svg')
+  background-color: #ebf5ff
 </style>
