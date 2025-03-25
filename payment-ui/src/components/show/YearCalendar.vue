@@ -4,9 +4,9 @@
   <ReportBtn type="warning">年度报告</ReportBtn>
   <table class="yearCalendar">
     <caption>
-      <span v-if="selectedYear>2024" class="yearBtn" @click="addYear(false)">&lt;</span>
+      <span v-if="selectedYear>2023" class="yearBtn" @click="addYear(false)">&lt;</span>
       {{ selectedYear }}
-      <span v-if="selectedYear<2025" class="yearBtn" @click="addYear(true)">&gt;</span>
+      <span v-if="selectedYear<2035" class="yearBtn" @click="addYear(true)">&gt;</span>
     </caption>
     <tbody>
     <tr v-for="monthPayVos in monthPayVoss">

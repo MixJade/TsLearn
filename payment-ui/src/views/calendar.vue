@@ -7,7 +7,8 @@
 import YearCalendar from "@/components/show/YearCalendar.vue";
 import {ref} from "vue";
 
-const selectYear = ref<number>(2024);
+// 获取当前年份
+const selectYear = ref<number>(new Date().getFullYear());
 const selectMonth = ref<number>(1);
 
 const upYear = (newYear: number): void => {
