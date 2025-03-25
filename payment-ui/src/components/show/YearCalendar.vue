@@ -1,5 +1,6 @@
 <template>
   <table class="yearCalendar">
+    <caption>{{ year }}</caption>
     <tbody>
     <tr v-for="monthPayVos in monthPayVoss">
       <td class="monthTd" v-for="item in monthPayVos" :key="item.month">
@@ -37,15 +38,23 @@ import {ref} from "vue";
 import MoneyTag from "@/components/tags/MoneyTag.vue";
 import {reqCalendarMonth} from "@/request/chartApi";
 
-let year = 2024;
+const props = defineProps<{
+  year: number;
+  month: number;
+}>()
+const emits = defineEmits<{
+  (e: "upYear", year: number): void;
+  (e: "upMonth", month: number): void;
+}>();
 const monthPayVoss = ref<MonthPayVo[][]>([])
-reqCalendarMonth(year).then(resp => {
+reqCalendarMonth(props.year).then(resp => {
   monthPayVoss.value = resp;
 })
 // 当前选中月份
-const selectedMonth = ref<number>(-1)
+const selectedMonth = ref<number>(props.month)
 const selectCard = (month: number) => {
   selectedMonth.value = month
+  emits('upMonth', month);
 }
 // 四季月份
 const getSeasonClass = (month) => {
@@ -86,7 +95,7 @@ const getSeasonClass = (month) => {
 
   &:hover
     //悬停时播放波纹动画
-    animation: pulse 3s infinite
+    animation: pulse 2s infinite
 
   .monthH
     //标题挂在左上角
@@ -138,6 +147,7 @@ const getSeasonClass = (month) => {
   background-image: url('/icon/winter.svg')
   background-color: #ebf5ff
 
+//==========================================[提示框样式]=====================================
 .monthTd
   //提示框样式
   position: relative
@@ -153,7 +163,7 @@ const getSeasonClass = (month) => {
     transform: translateX(-50%) scale(0.8)
     background: $tooltip-color
     border-radius: 15px
-    padding: 22px
+    padding: 16px
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2)
     opacity: 0
     visibility: hidden

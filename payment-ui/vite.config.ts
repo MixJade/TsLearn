@@ -20,7 +20,7 @@ export default defineConfig({
         port: 5939, // 端口号
         proxy: {  // 跨域代理
             '/api': {
-                target: "http://localhost:23043",
+                target: "http://localhost:23045",
                 changeOrigin: true,
             }
         }
