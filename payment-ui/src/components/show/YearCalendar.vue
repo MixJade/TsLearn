@@ -1,10 +1,18 @@
 <template>
+  <ReportBtn type="primary">消费分析</ReportBtn>
+  <ReportBtn type="success">收支记录</ReportBtn>
+  <ReportBtn type="warning">年度报告</ReportBtn>
   <table class="yearCalendar">
-    <caption>{{ year }}</caption>
+    <caption>
+      <span v-if="selectedYear>2024" class="yearBtn" @click="addYear(false)">&lt;</span>
+      {{ selectedYear }}
+      <span v-if="selectedYear<2025" class="yearBtn" @click="addYear(true)">&gt;</span>
+    </caption>
     <tbody>
     <tr v-for="monthPayVos in monthPayVoss">
       <td class="monthTd" v-for="item in monthPayVos" :key="item.month">
-        <div :class="{ selected: selectedMonth === item.month ,[getSeasonClass(item.month)]:true}" class="monthCard"
+        <div v-if="item.moneyOut > 0"
+             :class="{ selected: selectedMonth === item.month ,[getSeasonClass(item.month)]:true}" class="monthCard"
              @click="selectCard(item.month)">
           <span class="monthH">{{ item.month }}月</span>
           <p>
@@ -18,6 +26,9 @@
               <MoneyTag :income="false" :money="item.moneyOut" label="支"/>
             </li>
           </ul>
+        </div>
+        <div v-else class="monthCard">
+          <span class="monthH">{{ item.month }}月</span>
         </div>
         <div class="tooltip-content">
           <div class="sci-btns">
@@ -37,6 +48,7 @@ import {MonthPayVo} from "@/model/vo/MonthPayVo";
 import {ref} from "vue";
 import MoneyTag from "@/components/tags/MoneyTag.vue";
 import {reqCalendarMonth} from "@/request/chartApi";
+import ReportBtn from "@/components/button/ReportBtn.vue";
 
 const props = defineProps<{
   year: number;
@@ -56,7 +68,18 @@ const selectCard = (month: number) => {
   selectedMonth.value = month
   emits('upMonth', month);
 }
-// 四季月份
+// 当前选中年份
+const selectedYear = ref<number>(props.year)
+const addYear = (isAdd: boolean) => {
+  if (isAdd) selectedYear.value++;
+  else selectedYear.value--
+  emits('upYear', selectedYear.value);
+  // 重新请求
+  reqCalendarMonth(selectedYear.value).then(resp => {
+    monthPayVoss.value = resp;
+  })
+}
+// 四季月份的动态class
 const getSeasonClass = (month) => {
   if ([3, 4, 5].includes(month)) {
     return 'spring';
@@ -72,15 +95,25 @@ const getSeasonClass = (month) => {
 
 <style lang="sass" scoped>
 //表格样式
+$table-color: #73767a
 .yearCalendar
   width: 100%
   cursor: default
 
+  caption
+    margin-bottom: 6px
+    font-weight: bolder
+    color: $table-color
+
+.yearBtn
+  //加减年份按钮
+  padding: 0 16px
+  cursor: pointer
+
 //月份卡片
 .monthCard
   $monthCard-padding: 12px
-  $monthCard-color: #73767a
-  border: $monthCard-color solid 3px
+  border: $table-color solid 2px
   border-radius: $monthCard-padding
   position: relative
   padding: $monthCard-padding
@@ -90,7 +123,8 @@ const getSeasonClass = (month) => {
   // 设置最小宽度
   box-sizing: border-box
   min-width: 256px
-  color: $monthCard-color
+  min-height: 80px
+  color: $table-color
   overflow: hidden
 
   &:hover
