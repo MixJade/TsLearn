@@ -4,7 +4,8 @@
 </template>
 
 <script lang="ts" setup>
-import YearCalendar from "@/components/show/YearCalendar.vue";</script>
+import YearCalendar from "@/components/show/YearCalendar.vue";
+</script>
 
 <style lang="sass" scoped>
 

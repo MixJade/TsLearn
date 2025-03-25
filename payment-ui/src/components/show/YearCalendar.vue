@@ -2,7 +2,7 @@
   <table class="yearCalendar">
     <tbody>
     <tr v-for="monthPayVos in monthPayVoss">
-      <td v-for="item in monthPayVos" :key="item.month">
+      <td class="monthTd" v-for="item in monthPayVos" :key="item.month">
         <div :class="{ selected: selectedMonth === item.month ,[getSeasonClass(item.month)]:true}" class="monthCard"
              @click="selectCard(item.month)">
           <span class="monthH">{{ item.month }}月</span>
@@ -17,6 +17,13 @@
               <MoneyTag :income="false" :money="item.moneyOut" label="支"/>
             </li>
           </ul>
+        </div>
+        <div class="tooltip-content">
+          <div class="sci-btns">
+            <button type="button" class="sci-btn">账单</button>
+            <button type="button" class="sci-btn">分析</button>
+            <button type="button" class="sci-btn">导出</button>
+          </div>
         </div>
       </td>
     </tr>
@@ -58,6 +65,7 @@ const getSeasonClass = (month) => {
 //表格样式
 .yearCalendar
   width: 100%
+  cursor: default
 
 //月份卡片
 .monthCard
@@ -74,12 +82,17 @@ const getSeasonClass = (month) => {
   box-sizing: border-box
   min-width: 256px
   color: $monthCard-color
+  overflow: hidden
+
+  &:hover
+    //悬停时播放波纹动画
+    animation: pulse 3s infinite
 
   .monthH
+    //标题挂在左上角
     font:
       size: large
       weight: bolder
-    //标题挂在左上角
     position: absolute
     top: 4px
     left: 4px
@@ -90,6 +103,16 @@ const getSeasonClass = (month) => {
     right: $monthCard-padding
     top: $monthCard-padding
     font-size: smaller
+
+
+@keyframes pulse
+  //悬停动画
+  0%
+    box-shadow: 0 0 0 0 rgba(110, 142, 251, 0.4)
+  70%
+    box-shadow: 0 0 0 20px rgba(110, 142, 251, 0)
+  100%
+    box-shadow: 0 0 0 0 rgba(110, 142, 251, 0)
 
 .selected
   //选中的卡片
@@ -109,9 +132,76 @@ const getSeasonClass = (month) => {
 
 .autumn
   background-image: url('/icon/autumn.svg')
-  //background-color: #fdf6ec
+  background-color: #fdf6ec
 
 .winter
   background-image: url('/icon/winter.svg')
   background-color: #ebf5ff
+
+.monthTd
+  //提示框样式
+  position: relative
+  overflow: visible
+
+  $tooltip-color: white
+
+  .tooltip-content
+    //提示框
+    position: absolute
+    bottom: 90%
+    left: 50%
+    transform: translateX(-50%) scale(0.8)
+    background: $tooltip-color
+    border-radius: 15px
+    padding: 22px
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2)
+    opacity: 0
+    visibility: hidden
+    transition: opacity 0.5s
+    z-index: 100
+
+    &::before
+      //提示框箭头
+      content: ""
+      position: absolute
+      bottom: -10px
+      left: 50%
+      transform: translateX(-50%)
+      //上右下左
+      border-width: 10px 10px 0 10px
+      border-style: solid
+      border-color: $tooltip-color transparent transparent transparent
+
+  &:hover .tooltip-content
+    opacity: 1
+    visibility: visible
+    transform: translateX(-50%) scale(1)
+
+.sci-btns
+  display: flex
+  justify-content: space-between
+  gap: 12px
+
+  :nth-child(1)
+    background-color: #67c23a
+
+  :nth-child(2)
+    background-color: #409eff
+
+  :nth-child(3)
+    background-color: #909399
+
+  .sci-btn
+    width: 48px
+    height: 48px
+    border-radius: 50%
+    border: none
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+    color: #f0f0f0
+    font-weight: bold
+
+    &:hover
+      transform: translateY(-5px) scale(1.2)
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3)
 </style>
