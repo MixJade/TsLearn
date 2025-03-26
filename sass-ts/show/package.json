@@ -7,7 +7,6 @@
     "吐司消息2-b": "sass 吐司消息/baseTus.sass:吐司消息/baseTus.min.css --no-source-map --style=compressed",
     "密码备忘-b": "sass 密码备忘/pwdBak.sass:密码备忘/pwdBak.min.css --no-source-map --style=compressed",
     "收藏表格-w": "sass 收藏表格/tableFav.sass:收藏表格/tableFav.min.css --no-source-map --style=compressed --watch",
-    "日历-b": "sass 日历/calendar.sass:日历/calendar.min.css --no-source-map --style=compressed",
     "漫画布局-b": "sass 漫画布局/cartoonLayout.sass:漫画布局/cartoonLayout.min.css --no-source-map --style=compressed",
     "登录页面-b": "sass 登录页面/lightLogin.sass:登录页面/lightLogin.min.css --no-source-map --style=compressed",
     "确认框-b": "sass 确认框/确认框.sass:确认框/确认框.min.css --no-source-map --style=compressed",
