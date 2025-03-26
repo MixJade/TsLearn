@@ -34,7 +34,7 @@
           <div class="sci-btns">
             <button type="button" class="sci-btn">账单</button>
             <button type="button" class="sci-btn">分析</button>
-            <button type="button" class="sci-btn">导出</button>
+            <button type="button" class="sci-btn" @click="downInsertSql(item.month)">导出</button>
           </div>
         </div>
       </td>
@@ -49,6 +49,7 @@ import {ref} from "vue";
 import MoneyTag from "@/components/tags/MoneyTag.vue";
 import {reqCalendarMonth} from "@/request/chartApi";
 import ReportBtn from "@/components/button/ReportBtn.vue";
+import {reqDownInsertSql} from "@/request/payRecordApi";
 
 const props = defineProps<{
   year: number;
@@ -91,6 +92,17 @@ const getSeasonClass = (month) => {
     return 'winter';
   }
 };
+
+/**
+ * ==================================[提示框按钮]===============================
+ */
+/**
+ * 导出对应月份的sql文件
+ * @param month 月份
+ */
+const downInsertSql = (month: number): void => {
+  reqDownInsertSql(selectedYear.value, month);
+}
 </script>
 
 <style lang="sass" scoped>
