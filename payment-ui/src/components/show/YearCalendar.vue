@@ -45,7 +45,7 @@
 
 <script lang="ts" setup>
 import {MonthPayVo} from "@/model/vo/MonthPayVo";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import MoneyTag from "@/components/tags/MoneyTag.vue";
 import {reqCalendarMonth} from "@/request/chartApi";
 import ReportBtn from "@/components/button/ReportBtn.vue";
@@ -60,8 +60,8 @@ const emits = defineEmits<{
   (e: "upMonth", month: number): void;
 }>();
 const monthPayVoss = ref<MonthPayVo[][]>([])
-reqCalendarMonth(props.year).then(resp => {
-  monthPayVoss.value = resp;
+onMounted(() => {
+  reqCalendarMonth(props.year).then(resp => monthPayVoss.value = resp)
 })
 // 当前选中月份
 const selectedMonth = ref<number>(props.month)
@@ -110,12 +110,10 @@ const downInsertSql = (month: number): void => {
 $table-color: #73767a
 .yearCalendar
   width: 100%
-  cursor: default
 
   caption
     margin-bottom: 6px
     font-weight: bolder
-    color: $table-color
 
 .yearBtn
   //加减年份按钮
