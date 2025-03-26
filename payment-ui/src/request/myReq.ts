@@ -9,7 +9,7 @@ export const myReq = {
             });
     },
 
-    async down(url: string, fileName: string): void {
+    async down(url: string, fileName: string): Promise<void> {
         try {
             // 发起 fetch 请求
             const response = await fetch(url);

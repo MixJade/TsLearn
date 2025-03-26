@@ -81,7 +81,7 @@ const addYear = (isAdd: boolean) => {
   })
 }
 // 四季月份的动态class
-const getSeasonClass = (month) => {
+const getSeasonClass = (month: number): string => {
   if ([3, 4, 5].includes(month)) {
     return 'spring';
   } else if ([6, 7, 8].includes(month)) {
