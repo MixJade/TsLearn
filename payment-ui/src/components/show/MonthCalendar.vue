@@ -105,9 +105,6 @@ const getSeasonClass = (month: number): string => {
     padding: 4px
     background-color: #409eff
 
-  tr td:nth-last-child(-n + 2) .dayCard
-    background-color: #f0f9eb
-
   tr th:nth-last-child(-n + 2)
     background-color: #67c23a
 
@@ -120,7 +117,6 @@ const getSeasonClass = (month: number): string => {
   position: relative
   min-height: 48px
   min-width: 108px
-  background-color: #ebf5ff
   //子元素右对齐
   display: flex
   justify-content: flex-end

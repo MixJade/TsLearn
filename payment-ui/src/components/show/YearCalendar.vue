@@ -107,7 +107,6 @@ const downInsertSql = (month: number): void => {
 
 <style lang="sass" scoped>
 //表格样式
-$table-color: #73767a
 .yearCalendar
   width: 100%
 
@@ -123,7 +122,7 @@ $table-color: #73767a
 //月份卡片
 .monthCard
   $monthCard-padding: 12px
-  border: $table-color solid 2px
+  border: #73767a solid 2px
   border-radius: $monthCard-padding
   position: relative
   padding: $monthCard-padding
@@ -134,7 +133,6 @@ $table-color: #73767a
   box-sizing: border-box
   min-width: 256px
   min-height: 80px
-  color: $table-color
   overflow: hidden
 
   &:hover
@@ -167,29 +165,38 @@ $table-color: #73767a
   100%
     box-shadow: 0 0 0 0 rgba(110, 142, 251, 0)
 
+@mixin selected-card($color, $shadow-color, $bg-color)
+  color: $color
+  border-color: $color
+  box-shadow: inset 0 0 12px $shadow-color
+  background-color: $bg-color
+
 .selected
   //选中的卡片
-  $selected-color: #409eff
-  color: $selected-color
-  border-color: $selected-color
-  box-shadow: inset 0 0 12px #9fceff
+  &.spring
+    @include selected-card(#67c23a, #b3e19d, #f0f9eb)
+
+  &.summer
+    @include selected-card(#f56c6c, #fab6b6, #fef0f0)
+
+  &.autumn
+    @include selected-card(#e6a23c, #f8e3c5, #fdf6ec)
+
+  &.winter
+    @include selected-card(#409eff, #9fceff, #ebf5ff)
 
 //四季月份
 .spring
   background-image: url('/icon/spring.svg')
-  background-color: #f0f9eb
 
 .summer
   background-image: url('/icon/summer.svg')
-  background-color: #fef0f0
 
 .autumn
   background-image: url('/icon/autumn.svg')
-  background-color: #fdf6ec
 
 .winter
   background-image: url('/icon/winter.svg')
-  background-color: #ebf5ff
 
 //==========================================[提示框样式]=====================================
 .monthTd
