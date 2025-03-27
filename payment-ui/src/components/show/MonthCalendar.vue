@@ -23,12 +23,12 @@
       <td v-for="item in dayPayVos" :key="item.payDate">
         <div v-if="item.currentMonth" class="dayCard" :class="getSeasonClass(selDate.month)" :title="item.payDate">
           <span class="dayH">{{ item.dayNum }}<br></span>
-          <ul :class="{ noShow: item.payCount===0}">
-            <li class="payCount">{{ item.payCount }}条记录</li>
-            <li>
+          <ul>
+            <li class="payCount">{{ item.payCount }}rec</li>
+            <li :class="{ noShow: item.moneyIn===0}">
               <MoneyTag :income="true" :money="item.moneyIn" label="收"/>
             </li>
-            <li>
+            <li :class="{ noShow: item.moneyOut===0}">
               <MoneyTag :income="false" :money="item.moneyOut" label="支"/>
             </li>
           </ul>
@@ -136,18 +136,17 @@ const getSeasonClass = (month: number): string => {
 
 ul
   //收支列表
-  font-size: smaller
   padding: 4px
   margin: 4px
 
   .payCount
+    font-size: smaller
     font-weight: bolder
     color: #e6a23c
 
-  &.noShow
+  .noShow
     // 不展示收入支出
-    li:nth-last-child(-n + 2)
-      opacity: 0
+    opacity: 0
 
 //四季月份
 .spring:hover
