@@ -101,7 +101,10 @@ const getSeasonClass = (month: number): string => {
  * @param month 月份
  */
 const downInsertSql = (month: number): void => {
-  reqDownInsertSql(selectedYear.value, month);
+  const answer = confirm("确认下载？");
+  if (answer) {
+    reqDownInsertSql(selectedYear.value, month);
+  }
 }
 </script>
 
@@ -209,12 +212,12 @@ const downInsertSql = (month: number): void => {
   .tooltip-content
     //提示框
     position: absolute
-    bottom: 90%
+    top: 70%
     left: 50%
     transform: translateX(-50%) scale(0.8)
     background: $tooltip-color
     border-radius: 15px
-    padding: 16px
+    padding: 8px
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2)
     opacity: 0
     visibility: hidden
@@ -225,13 +228,13 @@ const downInsertSql = (month: number): void => {
       //提示框箭头
       content: ""
       position: absolute
-      bottom: -10px
+      top: -8px
       left: 50%
       transform: translateX(-50%)
       //上右下左
-      border-width: 10px 10px 0 10px
+      border-width: 0 10px 10px 10px
       border-style: solid
-      border-color: $tooltip-color transparent transparent transparent
+      border-color: transparent transparent $tooltip-color transparent
 
   &:hover .tooltip-content
     opacity: 1
@@ -241,7 +244,7 @@ const downInsertSql = (month: number): void => {
 .sci-btns
   display: flex
   justify-content: space-between
-  gap: 12px
+  gap: 8px
 
   :nth-child(1)
     background-color: #67c23a
@@ -253,8 +256,8 @@ const downInsertSql = (month: number): void => {
     background-color: #909399
 
   .sci-btn
-    width: 48px
-    height: 48px
+    width: 42px
+    height: 42px
     border-radius: 50%
     border: none
     transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)
