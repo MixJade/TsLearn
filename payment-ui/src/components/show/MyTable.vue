@@ -24,13 +24,14 @@
       <li>
         <span id="addPa" class="pa-btn" @click="addPaNum(true)">&lt;</span>
       </li>
-      <li id="paNum">
+      <li>
+        <span style="width:64px;border-radius:12px">{{ tbPage.current }}/{{ tbPage.pages }}</span>
       </li>
       <li>
         <span id="reducePa" class="pa-btn" @click="addPaNum(false)">&gt;</span>
       </li>
     </ul>
-    <small class="paTxt">共<span id="dataNum">0</span>条数据</small>
+    <small class="paTxt">共{{ tbPage.total }}条数据</small>
   </nav>
 </template>
 
@@ -38,7 +39,18 @@
 defineProps<{
   caption: string;
   thead: string[];
+  tbPage: TbPage;
 }>()
+
+
+/**
+ * ==========================[分页条代码聚合]========================
+ */
+export interface TbPage {
+  total: number;
+  current: number;
+  pages: number;
+}
 
 const addPaNum = (isAdd: boolean) => {
 
@@ -152,6 +164,7 @@ const addPaNum = (isAdd: boolean) => {
   &:nth-of-type(odd) > *
     // 奇数表格行样式
     background-color: #E8E9EA
+
   &:hover > *
     // 所有表格行悬停
     background-color: #C7C9CC
