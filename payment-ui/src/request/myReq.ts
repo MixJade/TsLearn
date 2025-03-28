@@ -9,6 +9,22 @@ export const myReq = {
             });
     },
 
+    post<T>(url: string, data: any): Promise<T> {
+        return fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => {
+                return response.json();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    },
+
     async down(url: string, fileName: string): Promise<void> {
         try {
             // 发起 fetch 请求

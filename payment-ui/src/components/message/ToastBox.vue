@@ -19,7 +19,7 @@ const showToast = (type: "suc" | "err", msg: string): void => {
     ...newToast,
     timer: setTimeout(() => {
       toasts.value.delete(newToast.id);
-    }, 3000)
+    }, 3500)
   });
 };
 
