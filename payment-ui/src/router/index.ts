@@ -5,6 +5,10 @@ const routes: RouteRecordRaw[] = [
         path: '/',
         component: () => import('@/views/calendar.vue')
     },
+    {
+        path: '/payRecords',
+        component: () => import('@/views/payRecords.vue')
+    },
 ]
 export const router = createRouter({
     history: createWebHashHistory(),

@@ -1,6 +1,6 @@
 <template>
   <ReportBtn type="primary">消费分析</ReportBtn>
-  <ReportBtn type="success">收支记录</ReportBtn>
+  <ReportBtn type="success" @click="toPayRecords">收支记录</ReportBtn>
   <ReportBtn type="warning">年度报告</ReportBtn>
   <table class="yearCalendar">
     <caption>
@@ -32,7 +32,7 @@
         </div>
         <div class="tooltip-content">
           <div class="sci-btns">
-            <button type="button" class="sci-btn">账单</button>
+            <button type="button" class="sci-btn" @click="toPayRecords">账单</button>
             <button type="button" class="sci-btn">分析</button>
             <button type="button" class="sci-btn" @click="downInsertSql(item.month)">导出</button>
           </div>
@@ -50,6 +50,7 @@ import MoneyTag from "@/components/tags/MoneyTag.vue";
 import {reqCalendarMonth} from "@/request/chartApi";
 import ReportBtn from "@/components/button/ReportBtn.vue";
 import {reqDownInsertSql} from "@/request/payRecordApi";
+import {useRouter} from "vue-router";
 
 const props = defineProps<{
   year: number;
@@ -92,6 +93,13 @@ const getSeasonClass = (month: number): string => {
     return 'winter';
   }
 };
+/**
+ * ==================================[路由跳转]===============================
+ */
+const router = useRouter();
+const toPayRecords = () => {
+  router.push("/payRecords")
+}
 
 /**
  * ==================================[提示框按钮]===============================
