@@ -1,13 +1,13 @@
 <template>
   <div :class="['tus', `tus-${type}`]">
     <svg v-if="type === 'suc'" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-      <circle cx="12" cy="12" r="11" fill="#67C23A"/>
-      <path d="M7 12 L12 17 L17 7" stroke="#e1f3d8" stroke-width="2" fill="none"/>
+      <circle cx="8" cy="8" r="7" fill="#67C23A"/>
+      <path d="M5 8 L8 11 L11 5" stroke="#e1f3d8" stroke-width="2" fill="none"/>
     </svg>
     <svg v-if="type === 'err'" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-      <circle cx="12" cy="12" r="11" fill="#F56C6C"/>
-      <line x1="17" y1="7" x2="7" y2="17" stroke="#fde2e2" stroke-width="2"/>
-      <line x1="17" y1="17" x2="7" y2="7" stroke="#fde2e2" stroke-width="2"/>
+      <circle cx="8" cy="8" r="7" fill="#F56C6C"/>
+      <line x1="11" y1="5" x2="5" y2="11" stroke="#fde2e2" stroke-width="2"/>
+      <line x1="11" y1="11" x2="5" y2="5" stroke="#fde2e2" stroke-width="2"/>
     </svg>
     <span>{{ msg }}</span>
   </div>
@@ -37,7 +37,7 @@ defineProps<{
   border: 2px solid
   /*内容空隙*/
   box-sizing: border-box
-  padding-left: 38px
+  padding-left: 32px
   /*文字样式*/
   line-height: 36px
   -webkit-user-select: none
@@ -45,8 +45,8 @@ defineProps<{
 
   > svg
     position: absolute
-    top: 6px
-    left: 8px
+    top: 10px
+    left: 10px
 
   &.tus-suc
     color: #67C23A

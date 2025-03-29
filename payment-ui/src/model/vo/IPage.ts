@@ -4,4 +4,5 @@ export interface IPage<T> {
     total: number;
     current: number;
     pages: number;
+    size: number;
 }

@@ -11,37 +11,29 @@
     </tbody>
   </table>
   <!-- 分页条 -->
-  <nav id="pageNav">
-    <label id="paTex1" class="paTxt" for="paSize">
-      <small>页面大小</small>
-      <select id="paSize">
-        <option selected value="10">10</option>
+  <nav class="pageNav">
+    <label class="paTxt">
+      <select v-model="tbPage.size" @change="emits('pageChange')">
+        <option value="10">10</option>
         <option value="13">13</option>
         <option value="16">16</option>
       </select>
+      <small>条/页</small>
     </label>
-    <ul>
-      <li>
-        <span id="addPa" class="pa-btn" @click="addPaNum(true)">&lt;</span>
-      </li>
-      <li>
-        <span style="width:64px;border-radius:12px">{{ tbPage.current }}/{{ tbPage.pages }}</span>
-      </li>
-      <li>
-        <span id="reducePa" class="pa-btn" @click="addPaNum(false)">&gt;</span>
-      </li>
-    </ul>
+    <span class="pa-btn" @click="addPage(false)">&lt;</span>
+    <span>{{ tbPage.current }}/{{ tbPage.pages }}</span>
+    <span class="pa-btn" @click="addPage(true)">&gt;</span>
     <small class="paTxt">共{{ tbPage.total }}条数据</small>
   </nav>
 </template>
 
 <script lang="ts" setup>
-defineProps<{
+
+const props = defineProps<{
   caption: string;
   thead: string[];
   tbPage: TbPage;
 }>()
-
 
 /**
  * ==========================[分页条代码聚合]========================
@@ -50,12 +42,18 @@ export interface TbPage {
   total: number;
   current: number;
   pages: number;
+  size: number;
 }
 
-const addPaNum = (isAdd: boolean) => {
+const emits = defineEmits<{
+  (e: "pageChange"): void;
+}>();
 
+const addPage = (isAdd: boolean) => {
+  if (isAdd) props.tbPage.current++;
+  else props.tbPage.current--;
+  emits('pageChange')
 }
-
 </script>
 
 <style lang="sass" scoped>
@@ -86,79 +84,6 @@ const addPaNum = (isAdd: boolean) => {
     padding-bottom: 0.5rem
     color: #606266
 
-//===============================[分页条样式]=============================
-#pageNav
-  display: flex
-  //设置主轴为水平方向，起点在左端
-  flex-direction: row
-  //在主轴线上的多个项目之间留有空白
-  justify-content: space-between
-  //对齐交叉轴
-  align-items: center
-
-  ul
-    flex: 1
-    //用于元素居中
-    display: flex
-    //对齐主轴
-    align-items: center
-    justify-content: center
-
-    li
-      //移除列表默认样式
-      list-style: none
-      //按钮与页数的空隙
-      margin: 2px
-
-      span
-        //设置span宽高需要先设置display
-        display: inline-block
-        width: 24px
-        height: 24px
-        //文字居中
-        line-height: 24px
-        text-align: center
-        margin: 2px
-        //边框样式
-        border: 2px solid #67C23A
-        border-radius: 50%
-        background-color: white
-        color: #67C23A
-        box-shadow: 0 0 6px rgba(0, 0, 0, 0.5)
-        //鼠标小手
-        cursor: pointer
-
-  .paTxt
-    flex: 1
-    //用于元素居中
-    color: #67C23A
-
-  #paTex1
-    //内容靠右
-    display: flex
-    justify-content: end
-
-
-  span
-    &.pa-btn
-      background-color: #67C23A
-      color: white
-      font-weight: bolder
-
-    &#addPa
-      border-radius: 50% 0 0 50%
-
-
-    &#reducePa
-      border-radius: 0 50% 50% 0
-
-
-    &.active
-      color: white
-      background-color: #67C23A
-      //鼠标禁止
-      cursor: not-allowed
-
 // 处理插槽内样式
 :deep(tr)
   &:nth-of-type(odd) > *
@@ -168,4 +93,50 @@ const addPaNum = (isAdd: boolean) => {
   &:hover > *
     // 所有表格行悬停
     background-color: #C7C9CC
+//===============================[分页条样式]=============================
+.pageNav
+  $page-color: #67C23A
+  text-align: center
+  color: $page-color
+
+  .paTxt
+    margin: 0 16px 0 16px
+
+  select
+    border: none
+    border-bottom: 2px solid $page-color
+    color: $page-color
+    outline: none
+
+  span
+    //设置span宽高需要先设置display
+    display: inline-block
+    width: 24px
+    height: 24px
+    //文字居中
+    line-height: 24px
+    text-align: center
+    margin: 4px
+    //边框样式
+    border: 2px solid $page-color
+    border-radius: 50%
+    background-color: white
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.5)
+    //鼠标小手
+    cursor: pointer
+
+    &.pa-btn
+      background-color: $page-color
+      color: white
+      font-weight: bolder
+
+    &:nth-of-type(1)
+      border-radius: 50% 0 0 50%
+
+    &:nth-of-type(2)
+      width: 64px
+      border-radius: 12px
+
+    &:nth-of-type(3)
+      border-radius: 0 50% 50% 0
 </style>

@@ -3,7 +3,8 @@
   <button @click="tesTus('suc','正确消息')">测试图示</button>
   <button @click="tesTus('err','错误消息')">测试图示2</button>
   <ToastBox ref="childRef"/>
-  <MyTable caption="收支记录" :thead="['类型','金额','备注','付费时间','操作']" :tb-page="tablePage">
+  <MyTable caption="收支记录" :thead="['类型','金额','备注','付费时间','操作']" :tb-page="tablePage"
+           @pageChange="getAll">
     <tr v-for="td in tableData" :key="td.recordId">
       <td style="color: #ccc;font-weight: bolder">{{ td.keyName }}</td>
       <td><span :class="[td.isIncome ? 'in' : 'out']">{{ td.isIncome ? '+' : '-' }}{{ td.money }}</span></td>
@@ -40,17 +41,19 @@ const tesTus = (type: "suc" | "err", msg: string) => {
 
 // 表格数据
 const tableData = ref<PayRecordVo[]>([])
-const tablePage = reactive<TbPage>({current: 0, pages: 0, total: 0}) as TbPage
+const tablePage = reactive<TbPage>({current: 1, pages: 1, total: 0, size: 10}) as TbPage
 // 分页条件请求体
 const reqBody = reactive<PayRecordPageDto>({
   beginDate: "", bigType: 0, endDate: "", paymentType: 0
 })
 const getAll = () => {
-  reqPayRecordPage(1, 10, reqBody).then(resp => {
+  console.log("bbbbb", tablePage.current)
+  reqPayRecordPage(tablePage.current, tablePage.size, reqBody).then(resp => {
     tableData.value = resp.records
     tablePage.current = resp.current;
     tablePage.pages = resp.pages
     tablePage.total = resp.total
+    tablePage.size = resp.size
   })
 }
 </script>
