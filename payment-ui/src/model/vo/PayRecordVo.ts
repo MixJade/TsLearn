@@ -6,5 +6,5 @@ export interface PayRecordVo {
     payDate: string;
     remark: string;
     keyName: string;
-    color: string;
+    bigType: number;
 }

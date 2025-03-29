@@ -6,7 +6,9 @@
   <MyTable caption="收支记录" :thead="['类型','金额','备注','付费时间','操作']" :tb-page="tablePage"
            @pageChange="getAll">
     <tr v-for="td in tableData" :key="td.recordId">
-      <td style="color: #ccc;font-weight: bolder">{{ td.keyName }}</td>
+      <td>
+        <PayTypeTag :big-type="td.bigType" :key-name="td.keyName"/>
+      </td>
       <td><span :class="[td.isIncome ? 'in' : 'out']">{{ td.isIncome ? '+' : '-' }}{{ td.money }}</span></td>
       <td>{{ td.remark }}</td>
       <td>{{ td.payDate }}</td>
@@ -25,6 +27,7 @@ import {reqPayRecordPage} from "@/request/payRecordApi";
 import MyTable, {TbPage} from "@/components/show/MyTable.vue";
 import {PayRecordVo} from "@/model/vo/PayRecordVo";
 import TbBtn from "@/components/button/TbBtn.vue";
+import PayTypeTag from "@/components/tags/PayTypeTag.vue";
 
 onMounted(() => {
   getAll();
@@ -47,7 +50,6 @@ const reqBody = reactive<PayRecordPageDto>({
   beginDate: "", bigType: 0, endDate: "", paymentType: 0
 })
 const getAll = () => {
-  console.log("bbbbb", tablePage.current)
   reqPayRecordPage(tablePage.current, tablePage.size, reqBody).then(resp => {
     tableData.value = resp.records
     tablePage.current = resp.current;

@@ -20,9 +20,9 @@
       </select>
       <small>条/页</small>
     </label>
-    <span class="pa-btn" @click="addPage(false)">&lt;</span>
-    <span>{{ tbPage.current }}/{{ tbPage.pages }}</span>
-    <span class="pa-btn" @click="addPage(true)">&gt;</span>
+    <span v-if="tbPage.current>1" class="pa-btn pa1" @click="addPage(false)">&lt;</span>
+    <span class="pa2" @click="jumpPage">{{ tbPage.current }}/{{ tbPage.pages }}</span>
+    <span v-if="tbPage.current<tbPage.pages" class="pa-btn pa3" @click="addPage(true)">&gt;</span>
     <small class="paTxt">共{{ tbPage.total }}条数据</small>
   </nav>
 </template>
@@ -52,6 +52,16 @@ const emits = defineEmits<{
 const addPage = (isAdd: boolean) => {
   if (isAdd) props.tbPage.current++;
   else props.tbPage.current--;
+  emits('pageChange')
+}
+/**
+ * 点击页码的输入框
+ * @param pageNum 页码最大值
+ */
+const jumpPage = (pageNum) => {
+  let num = prompt(`输入要跳转页码(最大${pageNum})`, "1");
+  if (num == null || num === '0') return;
+  props.tbPage.current = Number(num); // 将输入的字符串转换为数字格式
   emits('pageChange')
 }
 </script>
@@ -130,13 +140,13 @@ const addPage = (isAdd: boolean) => {
       color: white
       font-weight: bolder
 
-    &:nth-of-type(1)
+    &.pa1
       border-radius: 50% 0 0 50%
 
-    &:nth-of-type(2)
+    &.pa2
       width: 64px
       border-radius: 12px
 
-    &:nth-of-type(3)
+    &.pa3
       border-radius: 0 50% 50% 0
 </style>
