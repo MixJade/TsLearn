@@ -21,4 +21,4 @@ export const reqDownInsertSql = (year: number, month: number): void => {
  * @param data 请求体
  */
 export const reqPayRecordPage = (pageNum: number, pageSize: number, data: PayRecordPageDto): Promise<IPage<PayRecordVo>> =>
-    myReq<IPage<PayRecordVo>>.post(`/api/paymentRecord/page?pageNum=${pageNum}&pageSize=${pageSize}`, data)
+    myReq.post<IPage<PayRecordVo>>(`/api/paymentRecord/page?pageNum=${pageNum}&pageSize=${pageSize}`, data)

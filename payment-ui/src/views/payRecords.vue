@@ -30,7 +30,7 @@ onMounted(() => {
 })
 
 // 引用子组件
-const childRef: ToastBox = ref(null);
+const childRef = ref<any>(null);
 // 调用子组件暴露的方法
 const tesTus = (type: "suc" | "err", msg: string) => {
   if (childRef.value) {
