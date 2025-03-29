@@ -56,10 +56,9 @@ const addPage = (isAdd: boolean) => {
 }
 /**
  * 点击页码的输入框
- * @param pageNum 页码最大值
  */
-const jumpPage = (pageNum) => {
-  let num = prompt(`输入要跳转页码(最大${pageNum})`, "1");
+const jumpPage = (): void => {
+  let num = prompt(`输入要跳转页码(最大${props.tbPage.pages})`, "1");
   if (num == null || num === '0') return;
   props.tbPage.current = Number(num); // 将输入的字符串转换为数字格式
   emits('pageChange')
