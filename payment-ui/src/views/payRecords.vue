@@ -17,8 +17,7 @@
     </template>
     <tr v-for="td in tableData" :key="td.recordId">
       <td :style="{color: td.color}" class="weight">{{ td.keyName }}</td>
-      <td><span :class="[td.isIncome ? 'in' : 'out']" class="weight">{{ td.isIncome ? '+' : '-' }}{{ td.money }}</span>
-      </td>
+      <td><MoneyTag :income="td.isIncome" :money="td.money"/></td>
       <td>{{ td.remark }}</td>
       <td>{{ td.payDate }}</td>
       <td>
@@ -89,6 +88,7 @@ import IncomeBtn from "@/components/button/IncomeBtn.vue";
 import {TwoTypeOptVo} from "@/model/vo/TwoTypeOptVo";
 import {Result} from "@/model/vo/Result";
 import SureDelModal from "@/components/message/SureDelModal.vue";
+import MoneyTag from "@/components/tags/MoneyTag.vue";
 
 onMounted(() => {
   setRouteData();
@@ -283,16 +283,6 @@ const submitForm = (): void => {
 <style lang="sass" scoped>
 // ========================[表格样式]===============================
 .weight
-  font-weight: bolder
-
-.in
-  //收入的字体
-  color: #c45656
-  font-weight: bolder
-
-.out
-  //支出的字体
-  color: #17bd17
   font-weight: bolder
 
 .tb-btn:hover
