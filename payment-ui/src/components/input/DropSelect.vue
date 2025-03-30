@@ -3,10 +3,10 @@
     <div class="dropdown" @click="optShow = !optShow">
       <span class="dropInput">{{ inputVal }}</span>
       <ul v-if="optShow" class="dropdown-menu">
-        <li v-if="!disableOne" @click="clickDrop(0,'无',disableOne)">无</li>
+        <li v-if="!disableOne" @click="clickDrop(0,'无')">无</li>
         <li v-for="selectVo in optionData" :key="selectVo.oneKey">
         <span :class="disableOne?'disable':'active'"
-              @click="clickDrop(selectVo.oneKey,selectVo.oneValue,disableOne)">{{ selectVo.oneValue }}</span>
+              @click="clickDrop(selectVo.oneKey,selectVo.oneValue)">{{ selectVo.oneValue }}</span>
           <ul class="submenu">
             <li v-for="twoSel in selectVo.twoList" :key="twoSel.twoKey"
                 @click="clickDrop2(twoSel.twoKey,twoSel.twoValue)">
@@ -20,32 +20,48 @@
 </template>
 
 <script lang="ts" setup>
-import {ref} from "vue";
+import {ref, watch} from "vue";
 import {TypeSelectVo} from "@/model/vo/TypeSelectVo";
 
 // 二级下拉框列表
-defineProps<{
+const props = defineProps<{
   readonly optionData: TypeSelectVo[]; //二级下拉框的数据
   readonly disableOne: boolean; //是否禁用一级下拉框的点击事件
+  readonly showVal?: string | undefined; //(用于传值时反显)
 }>()
 
 const emits = defineEmits<{
   (e: "changeSel", oneKey: number, twoKey: number | null): void;
+  (e: "changeSel2", twoKey: number, twoVal: string): void;
 }>();
 
 const optShow = ref<boolean>(false);
 const inputVal = ref<string>("无");
+// 监听 showVal 属性的变化
+watch(() => props.showVal,
+    (newValue) => {
+      if (props.disableOne && newValue !== undefined) {
+        inputVal.value = newValue
+      }
+    }, {
+      immediate: true // 可选，若设置为 true，会在组件初始化时立即执行一次回调
+    }
+);
 
 // 一级下拉框点击
-const clickDrop = (opKey: number, opVal: string, disableOne: boolean): void => {
-  if (disableOne) return;
+const clickDrop = (opKey: number, opVal: string): void => {
+  if (props.disableOne) return;
   inputVal.value = opVal;
   emits('changeSel', opKey, null)
 };
-// 二级下拉框点击
+// 二级下拉框点击(禁用一级点击事件时返回函数不同)
 const clickDrop2 = (opKey: number, opVal: string): void => {
   inputVal.value = opVal;
-  emits('changeSel', 0, opKey)
+  if (props.disableOne) {
+    emits('changeSel2', opKey, opVal)
+  } else {
+    emits('changeSel', 0, opKey)
+  }
 };
 </script>
 

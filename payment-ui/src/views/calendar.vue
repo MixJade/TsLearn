@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import YearCalendar from "@/components/show/YearCalendar.vue";
 import {ref} from "vue";
-import CheckBtn from "@/components/input/CheckBtn.vue";
+import CheckBtn from "@/components/button/CheckBtn.vue";
 import MonthCalendar from "@/components/show/MonthCalendar.vue";
 
 // 获取当前年份

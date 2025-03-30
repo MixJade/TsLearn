@@ -2,6 +2,8 @@ import {myReq} from "@/request/myReq";
 import {PayRecordPageDto} from "@/model/dto/PayRecordPageDto";
 import {IPage} from "@/model/vo/IPage";
 import {PayRecordVo} from "@/model/vo/PayRecordVo";
+import {Result} from "@/model/vo/Result";
+import {PaymentRecord} from "@/model/entity/PaymentRecord";
 
 /**
  * 下载某个月份的账单
@@ -22,3 +24,16 @@ export const reqDownInsertSql = (year: number, month: number): void => {
  */
 export const reqPayRecordPage = (pageNum: number, pageSize: number, data: PayRecordPageDto): Promise<IPage<PayRecordVo>> =>
     myReq.post<IPage<PayRecordVo>>(`/api/paymentRecord/page?pageNum=${pageNum}&pageSize=${pageSize}`, data)
+
+/**
+ * 向记录表新增
+ * @param data 请求体
+ */
+export const reqAddRecord = (data: PaymentRecord): Promise<Result> =>
+    myReq.post<Result>(`/api/paymentRecord`, data)
+/**
+ * 向记录表修改
+ * @param data 请求体
+ */
+export const reqUpdRecord = (data: PaymentRecord): Promise<Result> =>
+    myReq.put<Result>(`/api/paymentRecord`, data)

@@ -1,19 +1,17 @@
 <template>
-  <button @click="tesTus('suc','正确消息')">测试图示</button>
-  <button @click="tesTus('err','错误消息')">测试图示2</button>
   <!-- 表格 -->
   <MyTable :tb-page="tablePage" :thead="['类型','金额','备注','付费时间','操作']" caption="收支记录"
            @pageChange="getAll">
     <template #searchForm>
       <span class="search-lab">类别</span>
-      <DropSelect :option-data="optionData" :disable-one="false" @changeSel="changeSel"/>
+      <DropSelect :disable-one="false" :option-data="optionData" @changeSel="changeSel"/>
       <label class="search-lab" for="beginDate">起始日</label>
-      <input class="search-inp" id="beginDate" v-model="reqBody.beginDate" type="date" @change="getAll">
+      <input id="beginDate" v-model="reqBody.beginDate" class="search-inp" type="date" @change="getAll">
       <label class="search-lab" for="endDate">终止日</label>
-      <input class="search-inp" id="endDate" v-model="reqBody.endDate" type="date" @change="getAll">
+      <input id="endDate" v-model="reqBody.endDate" class="search-inp" type="date" @change="getAll">
     </template>
     <template #searchBtn>
-      <MyBtn text="添加记录" type="success" @click="openDialog"/>
+      <MyBtn text="添加记录" type="success" @click="openAddForm"/>
       <MyBtn text="收支类型" type="secondary"/>
       <MyBtn text="返回首页" type="primary" @click="toRoute('/')"/>
     </template>
@@ -24,47 +22,44 @@
       <td>{{ td.remark }}</td>
       <td>{{ td.payDate }}</td>
       <td>
-        <TbBtn/>
+        <button class="tb-btn del-btn" type="button"><img alt="del" src="/icon/delBtn.svg"></button>
+        <button class="tb-btn upd-btn" @click="openUpdForm(td)" type="button"><img alt="edit" src="/icon/editBtn.svg">
+        </button>
       </td>
     </tr>
   </MyTable>
   <!--添加修改的对话框-->
   <MyDialog ref="myShow">
-    <form class="myForm" id="addPetForm">
+    <form class="myForm">
       <fieldset>
-        <legend id="dialogTit">添加记录</legend>
-        <div class="form-row">
-          <label>收支</label>
-          <div style="display: inline-block">
-            <input name="sex" id="isIncome_1" type="radio" autocomplete="off">
-            <label for="isIncome_1">收入</label>
-            <input name="sex" id="isIncome_2" type="radio" autocomplete="off"
-                   checked>
-            <label for="isIncome_2">支出</label>
-          </div>
-        </div>
+        <legend>{{ formTit }}</legend>
         <div class="form-row">
           <label>收支类型</label>
-          <DropSelect :option-data="optionData" :disable-one="true" @changeSel="changeSel"/>
+          <IncomeBtn v-model="paymentRecord.isIncome"/>
+          <DropSelect v-if="paymentRecord.isIncome" :disable-one="true" :option-data="optionTwoData.inList"
+                      :show-val="optionShowTxt"
+                      @changeSel2="changeFormSel"/>
+          <DropSelect v-else :disable-one="true" :option-data="optionTwoData.outList" :show-val="optionShowTxt"
+                      @changeSel2="changeFormSel"/>
         </div>
         <div class="form-row">
           <label for="money">金额(绝对值)</label>
-          <input id="money" type="number" step="0.1" min="0.01" max="10000"
-                 value="1">
+          <input id="money" v-model="paymentRecord.money" max="10000" min="0.01" step="0.1"
+                 type="number">
         </div>
         <div class="form-row">
           <label for="remark">备注</label>
-          <input id="remark" type="text">
+          <input id="remark" v-model="paymentRecord.remark" type="text">
         </div>
         <div class="form-row">
           <label for="payDate">付费时间</label>
-          <input id="payDate" type="date">
+          <input id="payDate" v-model="paymentRecord.payDate" type="date">
           <button type="button" @click="dateAddWhenAdd">+1天</button>
         </div>
       </fieldset>
       <div class="form-footer">
         <MyBtn text="关闭" type="secondary" @click="closeDialog"/>
-        <MyBtn text="确认提交" type="primary"/>
+        <MyBtn text="确认提交" type="primary" @click="submitForm"/>
       </div>
     </form>
   </MyDialog>
@@ -76,23 +71,28 @@
 import ToastBox from "@/components/message/ToastBox.vue";
 import {onMounted, reactive, ref} from "vue";
 import {PayRecordPageDto} from "@/model/dto/PayRecordPageDto";
-import {reqPayRecordPage} from "@/request/payRecordApi";
+import {reqAddRecord, reqPayRecordPage, reqUpdRecord} from "@/request/payRecordApi";
 import MyTable, {TbPage} from "@/components/show/MyTable.vue";
 import MyDialog from "@/components/message/MyDialog.vue";
 import {PayRecordVo} from "@/model/vo/PayRecordVo";
-import TbBtn from "@/components/button/TbBtn.vue";
 import DropSelect from "@/components/input/DropSelect.vue";
-import {reqOption} from "@/request/payDictApi";
+import {reqOption, reqTwoOption} from "@/request/payDictApi";
 import {TypeSelectVo} from "@/model/vo/TypeSelectVo";
 import MyBtn from "@/components/button/MyBtn.vue";
 import {useRoute, useRouter} from "vue-router";
 import {PaymentRecord} from "@/model/entity/PaymentRecord";
+import IncomeBtn from "@/components/input/IncomeBtn.vue";
+import {TwoTypeOptVo} from "@/model/vo/TwoTypeOptVo";
+import {Result} from "@/model/vo/Result";
 
 onMounted(() => {
   setRouteData();
   getAll();
   reqOption().then(resp => {
     optionData.value = resp
+  })
+  reqTwoOption().then(resp => {
+    optionTwoData.value = resp
   })
 })
 /**
@@ -161,13 +161,25 @@ const toRoute = (url: string) => {
  * =======================================[吐司消息]=======================================
  */
 // 引用子组件
-const childRef = ref<any>(null);
+const childRef = ref<InstanceType<typeof ToastBox> | null>(null);
 // 调用子组件暴露的方法
 const tesTus = (type: "suc" | "err", msg: string) => {
   if (childRef.value) {
     childRef.value.showToast(type, msg);
   }
 };
+
+// 删改增操作通用解析
+const commonResp = (resp: Result): void => {
+  if (resp.code === 1) {
+    tesTus("suc", resp.msg);
+    getAll();
+  } else if (resp.code === 0) {
+    tesTus("err", resp.msg);
+  } else {
+    tesTus("err", "服务器无响应");
+  }
+}
 
 /**
  * ===================================[表格数据]============================================
@@ -191,11 +203,6 @@ const getAll = () => {
 /**
  * ===================================[表单数据]============================================
  */
-// 公告弹出框
-const myShow = ref<InstanceType<typeof MyDialog> | null>(null)
-const openDialog = () => myShow.value?.showMe();
-const closeDialog = () => myShow.value?.closeMe();
-
 // 添加的实体类
 const paymentRecord: PaymentRecord = reactive<PaymentRecord>({
   isIncome: false,
@@ -205,12 +212,57 @@ const paymentRecord: PaymentRecord = reactive<PaymentRecord>({
   recordId: 0,
   remark: ""
 })
+
+// 表单弹出框
+const myShow = ref<InstanceType<typeof MyDialog> | null>(null)
+const formTit = ref<"添加记录" | "修改记录">("添加记录")
+const openAddForm = () => {
+  formTit.value = "添加记录";
+  paymentRecord.recordId = 0;
+  paymentRecord.remark = "";
+  myShow.value?.showMe();
+}
+const openUpdForm = (data: PayRecordVo) => {
+  formTit.value = "修改记录";
+  // 直接替换 reactive 对象
+  Object.assign(paymentRecord, data);
+  optionShowTxt = data.keyName
+  myShow.value?.showMe();
+}
+const closeDialog = () => myShow.value?.closeMe();
+
+// 下拉框的两个分类
+const optionTwoData = ref<TwoTypeOptVo>({inList: [], outList: []})
+let optionShowTxt = "无"
+const changeFormSel = (opKey: number, opVal: string) => {
+  paymentRecord.paymentType = opKey
+  optionShowTxt = opVal
+}
+
 // 添加时日期加一天
 const dateAddWhenAdd = () => {
   if (paymentRecord.payDate === '') return;
   const date = new Date(paymentRecord.payDate);
   date.setDate(date.getDate() + 1);
   paymentRecord.payDate = date.toISOString().slice(0, 10);
+}
+
+// 提交表单
+const submitForm = (): void => {
+  // 校验
+  if (paymentRecord.paymentType === 0) {
+    tesTus("err", "请选择分类")
+    return;
+  } else if (paymentRecord.payDate === "") {
+    tesTus("err", "请填写日期");
+    return;
+  }
+  // 开始提交
+  closeDialog()
+  if (formTit.value === "修改记录")
+    reqUpdRecord(paymentRecord).then(resp => commonResp(resp))
+  else
+    reqAddRecord(paymentRecord).then(resp => commonResp(resp))
 }
 </script>
 
@@ -228,6 +280,28 @@ const dateAddWhenAdd = () => {
   //支出的字体
   color: #17bd17
   font-weight: bolder
+
+.tb-btn:hover
+  //表中按钮
+  box-shadow: 0 0 8px 0 #73767a
+
+.del-btn
+  //表中删除按钮
+  padding: 3px 5px 3px 8px
+  font-size: small
+  color: white
+  background-color: #F56C6C
+  border: 2px solid #c45656
+  border-radius: 12px 0 0 12px
+
+.upd-btn
+  //表中修改按钮
+  padding: 3px 8px 3px 5px
+  font-size: small
+  color: white
+  background-color: #409EFF
+  border: 2px solid #337ecc
+  border-radius: 0 12px 12px 0
 
 // ========================[搜索框样式]===============================
 .search-inp
