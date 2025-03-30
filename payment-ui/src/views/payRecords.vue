@@ -6,10 +6,9 @@
   <MyTable caption="收支记录" :thead="['类型','金额','备注','付费时间','操作']" :tb-page="tablePage"
            @pageChange="getAll">
     <tr v-for="td in tableData" :key="td.recordId">
-      <td>
-        <PayTypeTag :big-type="td.bigType" :key-name="td.keyName"/>
+      <td :style="{color:  td.color}" class="weight">{{ td.keyName }}</td>
+      <td><span class="weight" :class="[td.isIncome ? 'in' : 'out']">{{ td.isIncome ? '+' : '-' }}{{ td.money }}</span>
       </td>
-      <td><span :class="[td.isIncome ? 'in' : 'out']">{{ td.isIncome ? '+' : '-' }}{{ td.money }}</span></td>
       <td>{{ td.remark }}</td>
       <td>{{ td.payDate }}</td>
       <td>
@@ -27,7 +26,6 @@ import {reqPayRecordPage} from "@/request/payRecordApi";
 import MyTable, {TbPage} from "@/components/show/MyTable.vue";
 import {PayRecordVo} from "@/model/vo/PayRecordVo";
 import TbBtn from "@/components/button/TbBtn.vue";
-import PayTypeTag from "@/components/tags/PayTypeTag.vue";
 
 onMounted(() => {
   getAll();
@@ -62,6 +60,9 @@ const getAll = () => {
 
 <style scoped lang="sass">
 // ========================[表格样式]===============================
+.weight
+  font-weight: bolder
+
 .in
   //收入的字体
   color: #c45656
