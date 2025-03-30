@@ -44,6 +44,9 @@ $on-bg-color: #f56c6c
   display: inline-block
   position: relative
   width: 2*$label-weight
+  //禁止文字选中
+  -webkit-user-select: none
+  user-select: none
 
   label
     display: block
@@ -67,12 +70,7 @@ $on-bg-color: #f56c6c
       font-weight: bolder
       text-align: center
       //动画设置
-      animation-name: toggle-size
-      animation-duration: 0.15s
-      animation-timing-function: ease-out
-      animation-iteration-count: 1
-      animation-play-state: running
-      transition: left 0.15s ease-in-out, background-color 0.2s ease-out, width 0.15s ease-in-out, height 0.15s ease-in-out, opacity 0.15s ease-in-out
+      transition: left 0.2s ease-in-out
       //定位
       position: absolute
       top: 50%
@@ -100,27 +98,11 @@ $on-bg-color: #f56c6c
 
         .toggle-off
           //选中时隐藏关闭按钮
-          width: 0
-          height: 0
           opacity: 0
 
     &:not(:checked) + label .toggle-on
       //未选中时隐藏开启按钮
-      background-color: #f56c6c
-      color: #fef0f0
-      width: 0
-      height: 0
       opacity: 0
-
-
-@keyframes toggle-size
-  0%, 100%
-    width: 26px
-    height: 26px
-
-  50%
-    width: 20px
-    height: 20px
 
 .on-label
   border: 1px solid $on-bg-color

@@ -75,13 +75,13 @@ import {reqAddRecord, reqPayRecordPage, reqUpdRecord} from "@/request/payRecordA
 import MyTable, {TbPage} from "@/components/show/MyTable.vue";
 import MyDialog from "@/components/message/MyDialog.vue";
 import {PayRecordVo} from "@/model/vo/PayRecordVo";
-import DropSelect from "@/components/input/DropSelect.vue";
+import DropSelect from "@/components/button/DropSelect.vue";
 import {reqOption, reqTwoOption} from "@/request/payDictApi";
 import {TypeSelectVo} from "@/model/vo/TypeSelectVo";
 import MyBtn from "@/components/button/MyBtn.vue";
 import {useRoute, useRouter} from "vue-router";
 import {PaymentRecord} from "@/model/entity/PaymentRecord";
-import IncomeBtn from "@/components/input/IncomeBtn.vue";
+import IncomeBtn from "@/components/button/IncomeBtn.vue";
 import {TwoTypeOptVo} from "@/model/vo/TwoTypeOptVo";
 import {Result} from "@/model/vo/Result";
 
