@@ -1,14 +1,18 @@
 export const myReq = {
     get<T>(url: string): Promise<T> {
         return fetch(url)
-            .then(response => {
-                return response.json();
-            })
+            .then(response => response.json())
             .catch((error) => {
                 console.error('Error:', error);
             });
     },
-
+    delete<T>(url: string): Promise<T> {
+        return fetch(url, {method: 'DELETE'})
+            .then(response => response.json())
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    },
     post<T>(url: string, data: any): Promise<T> {
         return fetch(url, {
             method: 'POST',
@@ -17,9 +21,7 @@ export const myReq = {
             },
             body: JSON.stringify(data),
         })
-            .then(response => {
-                return response.json();
-            })
+            .then(response => response.json())
             .catch((error) => {
                 console.error('Error:', error);
             });
@@ -32,9 +34,7 @@ export const myReq = {
             },
             body: JSON.stringify(data),
         })
-            .then(response => {
-                return response.json();
-            })
+            .then(response => response.json())
             .catch((error) => {
                 console.error('Error:', error);
             });

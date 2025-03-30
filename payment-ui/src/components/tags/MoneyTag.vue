@@ -1,5 +1,5 @@
 <template>
-  <span :class="[income ? 'in' : 'out']" class="moneyTag">{{ label }} {{ income ? '+' : '-' }}{{ money }}</span>
+  <span :class="[income ? 'in' : 'out']" class="moneyTag">{{ label }} {{ income ? '+' : '-' }}{{ Math.abs(money) }}</span>
 </template>
 
 <script lang="ts" setup>

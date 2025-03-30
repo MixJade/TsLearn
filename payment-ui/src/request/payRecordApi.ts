@@ -31,9 +31,17 @@ export const reqPayRecordPage = (pageNum: number, pageSize: number, data: PayRec
  */
 export const reqAddRecord = (data: PaymentRecord): Promise<Result> =>
     myReq.post<Result>(`/api/paymentRecord`, data)
+
 /**
  * 向记录表修改
  * @param data 请求体
  */
 export const reqUpdRecord = (data: PaymentRecord): Promise<Result> =>
     myReq.put<Result>(`/api/paymentRecord`, data)
+
+/**
+ * 向记录表删除
+ * @param id 记录主键
+ */
+export const reqDelRecord = (id: number): Promise<Result> =>
+    myReq.delete<Result>(`/api/paymentRecord/${id}`)

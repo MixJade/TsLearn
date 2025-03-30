@@ -22,8 +22,11 @@
       <td>{{ td.remark }}</td>
       <td>{{ td.payDate }}</td>
       <td>
-        <button class="tb-btn del-btn" type="button"><img alt="del" src="/icon/delBtn.svg"></button>
-        <button class="tb-btn upd-btn" @click="openUpdForm(td)" type="button"><img alt="edit" src="/icon/editBtn.svg">
+        <button class="tb-btn del-btn" type="button" @click="deleteById(td.recordId)">
+          <img alt="del" src="/icon/delBtn.svg">
+        </button>
+        <button class="tb-btn upd-btn" @click="openUpdForm(td)" type="button">
+          <img alt="edit" src="/icon/editBtn.svg">
         </button>
       </td>
     </tr>
@@ -65,13 +68,14 @@
   </MyDialog>
   <!-- 吐司组件-->
   <ToastBox ref="childRef"/>
+  <SureDelModal ref="sureDelModal"/>
 </template>
 
 <script lang="ts" setup>
 import ToastBox from "@/components/message/ToastBox.vue";
 import {onMounted, reactive, ref} from "vue";
 import {PayRecordPageDto} from "@/model/dto/PayRecordPageDto";
-import {reqAddRecord, reqPayRecordPage, reqUpdRecord} from "@/request/payRecordApi";
+import {reqAddRecord, reqDelRecord, reqPayRecordPage, reqUpdRecord} from "@/request/payRecordApi";
 import MyTable, {TbPage} from "@/components/show/MyTable.vue";
 import MyDialog from "@/components/message/MyDialog.vue";
 import {PayRecordVo} from "@/model/vo/PayRecordVo";
@@ -84,6 +88,7 @@ import {PaymentRecord} from "@/model/entity/PaymentRecord";
 import IncomeBtn from "@/components/button/IncomeBtn.vue";
 import {TwoTypeOptVo} from "@/model/vo/TwoTypeOptVo";
 import {Result} from "@/model/vo/Result";
+import SureDelModal from "@/components/message/SureDelModal.vue";
 
 onMounted(() => {
   setRouteData();
@@ -200,11 +205,20 @@ const getAll = () => {
     tablePage.size = resp.size
   })
 }
+
+// 确认删除框
+const sureDelModal = ref<any>(null);
+const deleteById = async (id) => {
+  sureDelModal.value?.confirmDel().then((resp: boolean) => {
+    if (resp) reqDelRecord(id).then(resp => commonResp(resp))
+  })
+}
+
 /**
  * ===================================[表单数据]============================================
  */
 // 添加的实体类
-const paymentRecord: PaymentRecord = reactive<PaymentRecord>({
+const paymentRecord = reactive<PaymentRecord>({
   isIncome: false,
   money: 0,
   payDate: "",

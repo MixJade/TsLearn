@@ -12,13 +12,8 @@
 import {ref} from "vue";
 // 新增修改时的弹出框
 const dialog = ref<HTMLDialogElement>()
-const disabled = ref(false)
 const showMe = () => {
   dialog.value?.showModal()
-  disabled.value = true
-  setTimeout(() => {
-    disabled.value = false
-  }, 1500)
 }
 const closeMe = () => dialog.value?.close()
 defineExpose({showMe, closeMe})
