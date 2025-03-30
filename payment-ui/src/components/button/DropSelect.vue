@@ -7,7 +7,8 @@
       <li v-for="selectVo in optionData" :key="selectVo.oneKey">
         <span @click="clickDrop(selectVo.oneKey,selectVo.oneValue)">{{ selectVo.oneValue }}</span>
         <ul class="submenu">
-          <li v-for="twoSel in selectVo.twoList" :key="twoSel.twoKey" @click="clickDrop(twoSel.twoKey,twoSel.twoValue)">
+          <li v-for="twoSel in selectVo.twoList" :key="twoSel.twoKey"
+              @click="clickDrop2(twoSel.twoKey,twoSel.twoValue)">
             {{ twoSel.twoValue }}
           </li>
         </ul>
@@ -25,11 +26,22 @@ defineProps<{
   readonly optionData: TypeSelectVo[];
 }>()
 
+const emits = defineEmits<{
+  (e: "changeSel", oneKey: number, twoKey: number | null): void;
+}>();
+
 const optShow = ref<boolean>(false);
 const inputVal = ref<string>("无");
 
+// 一级下拉框点击
 const clickDrop = (opKey: number, opVal: string): void => {
   inputVal.value = opVal;
+  emits('changeSel', opKey, null)
+};
+// 二级下拉框点击
+const clickDrop2 = (opKey: number, opVal: string): void => {
+  inputVal.value = opVal;
+  emits('changeSel', 0, opKey)
 };
 </script>
 
@@ -97,7 +109,7 @@ $hover-color: #f0f9eb
   padding: 0
   position: absolute
   left: 90%
-  top: 0
+  top: 6px
   background-color: #f9f9f9
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2)
   z-index: 1

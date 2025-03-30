@@ -1,4 +1,15 @@
 <template>
+  <!--搜索框-->
+  <section class="mySearch">
+    <form onsubmit="return false" role="search">
+      <slot name="searchForm"></slot>
+      <button class="btn-line-suc" type="submit" @click="emits('pageChange')">Search</button>
+    </form>
+    <div>
+      <slot name="searchBtn"></slot>
+    </div>
+  </section>
+  <!-- 表格-->
   <table class="my-table">
     <caption>{{ caption }}</caption>
     <thead>
@@ -66,7 +77,33 @@ const jumpPage = (): void => {
 </script>
 
 <style lang="sass" scoped>
-// 强制使用子组件样式
+// =============================[搜索框样式]==============================
+.mySearch
+  /*搜索栏目*/
+  display: flex
+  justify-content: space-between
+  background-color: #F3F3F3
+  border: 2px dashed #909399
+  border-radius: 12px
+  padding: 6px 12px
+
+  > * > *
+    height: 36px
+    box-sizing: border-box
+
+  > form > .btn-line-suc
+    /*搜索按钮*/
+    padding: 3px 10px 3px 5px
+    color: #67C23A
+    background-color: #f0f9eb
+    border: 2px solid #67C23A
+    border-radius: 8px
+
+    &:hover
+      /*搜索按钮*/
+      color: white
+      background-color: #67C23A
+// =============================[表格样式]==============================
 .my-table
   width: 100%
   margin-bottom: 1rem

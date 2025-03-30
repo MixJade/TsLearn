@@ -10,7 +10,7 @@
     </caption>
     <tbody>
     <tr v-for="monthPayVos in monthPayVoss">
-      <td class="monthTd" v-for="item in monthPayVos" :key="item.month">
+      <td v-for="item in monthPayVos" :key="item.month" class="monthTd">
         <div v-if="item.moneyOut > 0"
              :class="{ selected: selectedMonth === item.month ,[getSeasonClass(item.month)]:true}" class="monthCard"
              @click="selectCard(item.month)">
@@ -32,9 +32,9 @@
         </div>
         <div class="tooltip-content">
           <div class="sci-btns">
-            <button type="button" class="sci-btn" @click="toPayRecords">账单</button>
-            <button type="button" class="sci-btn">分析</button>
-            <button type="button" class="sci-btn" @click="downInsertSql(item.month)">导出</button>
+            <button class="sci-btn" type="button" @click="toPayRecords">账单</button>
+            <button class="sci-btn" type="button">分析</button>
+            <button class="sci-btn" type="button" @click="downInsertSql(item.month)">导出</button>
           </div>
         </div>
       </td>
@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts" setup>
-import {MonthPayVo} from "@/model/vo/MonthPayVo";
+import {MonthPayVo} from "@/model/chart/MonthPayVo";
 import {onMounted, ref} from "vue";
 import MoneyTag from "@/components/tags/MoneyTag.vue";
 import {reqCalendarMonth} from "@/request/chartApi";

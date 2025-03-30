@@ -21,7 +21,7 @@
     <tbody>
     <tr v-for="dayPayVos in dayPayVoss">
       <td v-for="item in dayPayVos" :key="item.payDate">
-        <div v-if="item.currentMonth" class="dayCard" :class="getSeasonClass(selDate.month)" :title="item.payDate">
+        <div v-if="item.currentMonth" :class="getSeasonClass(selDate.month)" :title="item.payDate" class="dayCard">
           <span class="dayH">{{ item.dayNum }}<br></span>
           <ul>
             <li class="payCount">{{ item.payCount }}rec</li>
@@ -44,7 +44,7 @@ import {onMounted, reactive, ref} from "vue";
 import MoneyTag from "@/components/tags/MoneyTag.vue";
 import {reqCalendarDay} from "@/request/chartApi";
 import ReportBtn from "@/components/button/ReportBtn.vue";
-import {DayPayVo} from "@/model/vo/DayPayVo";
+import {DayPayVo} from "@/model/chart/DayPayVo";
 
 const props = defineProps<{
   year: number;

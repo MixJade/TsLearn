@@ -1,13 +1,13 @@
 <template>
-  <button class="del-btn" type="button"><img src="/icon/delBtn.svg" alt="del"></button>
-  <button class="upd-btn" type="button"><img src="/icon/editBtn.svg" alt="edit"></button>
+  <button class="del-btn" type="button"><img alt="del" src="/icon/delBtn.svg"></button>
+  <button class="upd-btn" type="button"><img alt="edit" src="/icon/editBtn.svg"></button>
 </template>
 
 <script lang="ts" setup>
 // 表格中的按钮,抽离是为了更好管理样式
 </script>
 
-<style scoped lang="sass">
+<style lang="sass" scoped>
 button:hover
   //表中按钮
   box-shadow: 0 0 8px 0 #73767a

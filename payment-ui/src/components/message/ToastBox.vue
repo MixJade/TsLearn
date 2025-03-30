@@ -1,11 +1,11 @@
 <template>
   <div>
-    <Toast v-for="toast in toasts.values()" :key="toast.id" :type="toast.type" :msg="toast.msg"/>
+    <Toast v-for="toast in toasts.values()" :key="toast.id" :msg="toast.msg" :type="toast.type"/>
   </div>
 </template>
 
 <script lang="ts" setup>
-import {ref, onBeforeUnmount} from 'vue';
+import {onBeforeUnmount, ref} from 'vue';
 import Toast from '@/components/message/Toast.vue';
 
 // 使用 Map 来管理 toasts 和对应的定时器

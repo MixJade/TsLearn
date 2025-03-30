@@ -1,7 +1,7 @@
 <template>
   <CheckBtn left="年" right="月" @upCheck="changeCheck"/>
-  <YearCalendar v-if="checkYear" :year="selectYear" :month="selectMonth" @upYear="upYear" @upMonth="upMonth"/>
-  <MonthCalendar v-else :year="selectYear" :month="selectMonth" @upDate="upDate"/>
+  <YearCalendar v-if="checkYear" :month="selectMonth" :year="selectYear" @upMonth="upMonth" @upYear="upYear"/>
+  <MonthCalendar v-else :month="selectMonth" :year="selectYear" @upDate="upDate"/>
 </template>
 
 <script lang="ts" setup>

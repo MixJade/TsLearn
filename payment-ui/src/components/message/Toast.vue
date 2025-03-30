@@ -1,13 +1,13 @@
 <template>
   <div :class="['tus', `tus-${type}`]">
-    <svg v-if="type === 'suc'" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-      <circle cx="8" cy="8" r="7" fill="#67C23A"/>
-      <path d="M5 8 L8 11 L11 5" stroke="#e1f3d8" stroke-width="2" fill="none"/>
+    <svg v-if="type === 'suc'" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="8" cy="8" fill="#67C23A" r="7"/>
+      <path d="M5 8 L8 11 L11 5" fill="none" stroke="#e1f3d8" stroke-width="2"/>
     </svg>
-    <svg v-if="type === 'err'" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-      <circle cx="8" cy="8" r="7" fill="#F56C6C"/>
-      <line x1="11" y1="5" x2="5" y2="11" stroke="#fde2e2" stroke-width="2"/>
-      <line x1="11" y1="11" x2="5" y2="5" stroke="#fde2e2" stroke-width="2"/>
+    <svg v-if="type === 'err'" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="8" cy="8" fill="#F56C6C" r="7"/>
+      <line stroke="#fde2e2" stroke-width="2" x1="11" x2="5" y1="5" y2="11"/>
+      <line stroke="#fde2e2" stroke-width="2" x1="11" x2="5" y1="11" y2="5"/>
     </svg>
     <span>{{ msg }}</span>
   </div>
@@ -20,7 +20,7 @@ defineProps<{
 }>()
 </script>
 
-<style scoped lang="sass">
+<style lang="sass" scoped>
 .tus
   top: -100%
   opacity: 0

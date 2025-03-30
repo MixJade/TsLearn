@@ -1,5 +1,5 @@
 <template>
-  <span class="moneyTag" :class="[income ? 'in' : 'out']">{{ label }} {{ income ? '+' : '-' }}{{ money }}</span>
+  <span :class="[income ? 'in' : 'out']" class="moneyTag">{{ label }} {{ income ? '+' : '-' }}{{ money }}</span>
 </template>
 
 <script lang="ts" setup>
@@ -11,7 +11,7 @@ defineProps<{
 }>()
 </script>
 
-<style scoped lang="sass">
+<style lang="sass" scoped>
 .moneyTag
   font-weight: bolder
   //文字白边

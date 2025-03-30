@@ -1,6 +1,6 @@
 import {myReq} from "./myReq";
-import {MonthPayVo} from "@/model/vo/MonthPayVo";
-import {DayPayVo} from "@/model/vo/DayPayVo";
+import {MonthPayVo} from "@/model/chart/MonthPayVo";
+import {DayPayVo} from "@/model/chart/DayPayVo";
 
 /**
  * (日历图)获取各月份的收支总结
