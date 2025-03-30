@@ -3,6 +3,7 @@
 </template>
 
 <script lang="ts" setup>
+// 日历图上展示收支样式
 defineProps<{
   readonly money: number,
   readonly income: boolean,

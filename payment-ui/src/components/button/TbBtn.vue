@@ -4,6 +4,7 @@
 </template>
 
 <script lang="ts" setup>
+// 表格中的按钮,抽离是为了更好管理样式
 </script>
 
 <style scoped lang="sass">

@@ -7,6 +7,7 @@
 <script lang="ts" setup>
 import {ref} from "vue";
 
+// 在日历图上方,用来跳转页面的按钮
 const props = defineProps<{
   readonly type: "primary" | "success" | "warning";
 }>()

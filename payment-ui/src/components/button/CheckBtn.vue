@@ -9,6 +9,7 @@
 <script lang="ts" setup>
 import {ref} from "vue";
 
+// 日历图的“年月”开关按钮
 defineProps<{
   readonly left: string;
   readonly right: string;
