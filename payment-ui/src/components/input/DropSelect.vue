@@ -1,19 +1,21 @@
 <template>
-  <div class="dropdown" @click="optShow = !optShow">
-    <span class="dropLabel">类别</span>
-    <span class="dropInput">{{ inputVal }}</span>
-    <ul v-if="optShow" class="dropdown-menu">
-      <li @click="clickDrop(0,'无')">无</li>
-      <li v-for="selectVo in optionData" :key="selectVo.oneKey">
-        <span @click="clickDrop(selectVo.oneKey,selectVo.oneValue)">{{ selectVo.oneValue }}</span>
-        <ul class="submenu">
-          <li v-for="twoSel in selectVo.twoList" :key="twoSel.twoKey"
-              @click="clickDrop2(twoSel.twoKey,twoSel.twoValue)">
-            {{ twoSel.twoValue }}
-          </li>
-        </ul>
-      </li>
-    </ul>
+  <div class="dropSelect">
+    <div class="dropdown" @click="optShow = !optShow">
+      <span class="dropInput">{{ inputVal }}</span>
+      <ul v-if="optShow" class="dropdown-menu">
+        <li v-if="!disableOne" @click="clickDrop(0,'无',disableOne)">无</li>
+        <li v-for="selectVo in optionData" :key="selectVo.oneKey">
+        <span :class="disableOne?'disable':'active'"
+              @click="clickDrop(selectVo.oneKey,selectVo.oneValue,disableOne)">{{ selectVo.oneValue }}</span>
+          <ul class="submenu">
+            <li v-for="twoSel in selectVo.twoList" :key="twoSel.twoKey"
+                @click="clickDrop2(twoSel.twoKey,twoSel.twoValue)">
+              {{ twoSel.twoValue }}
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -23,7 +25,8 @@ import {TypeSelectVo} from "@/model/vo/TypeSelectVo";
 
 // 二级下拉框列表
 defineProps<{
-  readonly optionData: TypeSelectVo[];
+  readonly optionData: TypeSelectVo[]; //二级下拉框的数据
+  readonly disableOne: boolean; //是否禁用一级下拉框的点击事件
 }>()
 
 const emits = defineEmits<{
@@ -34,7 +37,8 @@ const optShow = ref<boolean>(false);
 const inputVal = ref<string>("无");
 
 // 一级下拉框点击
-const clickDrop = (opKey: number, opVal: string): void => {
+const clickDrop = (opKey: number, opVal: string, disableOne: boolean): void => {
+  if (disableOne) return;
   inputVal.value = opVal;
   emits('changeSel', opKey, null)
 };
@@ -47,14 +51,17 @@ const clickDrop2 = (opKey: number, opVal: string): void => {
 
 <style lang="sass" scoped>
 $border-color: #529b2e
+$border-li-color: #95d475
 $hover-color: #f0f9eb
+.dropSelect
+  position: relative
+  display: inline-block
+
 .dropdown
   display: contents
   font-size: smaller
   text-align: center
-
-.dropLabel
-  color: $border-color
+  position: relative
 
 .dropInput
   //下拉框样式
@@ -73,26 +80,27 @@ $hover-color: #f0f9eb
   list-style-type: none
   margin: 0
   padding: 0
-  // 列表定位
+  //列表定位
   position: absolute
-  left: 48px
+  //left: 48px
   //下拉菜单样式
   min-width: 60px
   background-color: #f9f9f9
   box-shadow: 0 8px 16px 0 #909399
   z-index: 1
+  border: $border-li-color solid 2px
   border-radius: 5px
 
   li
     //下拉菜单选项样式
-    padding: 6px 12px
+    padding: 2px 12px
     text-decoration: none
     display: block
     transition: background-color 0.3s ease
     position: relative
 
     &:not(:last-child)
-      border-bottom: #95d475 dashed 2px
+      border-bottom: $border-li-color dashed 2px
 
     &:hover
       //鼠标悬停时显示子菜单
@@ -121,7 +129,17 @@ $hover-color: #f0f9eb
     display: block
     transition: background-color 0.3s ease
     min-width: 60px
+    //鼠标样式
+    cursor: pointer
 
     &:hover
       background-color: $hover-color
+
+.disable
+  //禁用点击
+  cursor: not-allowed
+
+.active
+  //鼠标样式
+  cursor: pointer
 </style>
