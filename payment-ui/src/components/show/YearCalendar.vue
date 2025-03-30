@@ -1,6 +1,6 @@
 <template>
   <ReportBtn type="primary">消费分析</ReportBtn>
-  <ReportBtn type="success" @click="toPayRecords">收支记录</ReportBtn>
+  <ReportBtn type="success" @click="toYearPayRecords">收支记录</ReportBtn>
   <ReportBtn type="warning">年度报告</ReportBtn>
   <table class="yearCalendar">
     <caption>
@@ -32,7 +32,7 @@
         </div>
         <div class="tooltip-content">
           <div class="sci-btns">
-            <button class="sci-btn" type="button" @click="toPayRecords">账单</button>
+            <button class="sci-btn" type="button" @click="toMonthPayRecords((item.month))">账单</button>
             <button class="sci-btn" type="button">分析</button>
             <button class="sci-btn" type="button" @click="downInsertSql(item.month)">导出</button>
           </div>
@@ -97,8 +97,11 @@ const getSeasonClass = (month: number): string => {
  * ==================================[路由跳转]===============================
  */
 const router = useRouter();
-const toPayRecords = () => {
-  router.push("/payRecords")
+const toYearPayRecords = (): void => {
+  router.push({name: "payRecords", query: {month: selectedYear.value}})
+}
+const toMonthPayRecords = (month: number): void => {
+  router.push({name: "payRecords", query: {month: `${selectedYear.value}-${month}`}})
 }
 
 /**

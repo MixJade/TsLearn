@@ -7,6 +7,7 @@ const routes: RouteRecordRaw[] = [
     },
     {
         path: '/payRecords',
+        name: 'payRecords',
         component: () => import('@/views/payRecords.vue')
     },
 ]

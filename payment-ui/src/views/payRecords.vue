@@ -18,7 +18,7 @@
       <MyBtn text="返回首页" type="primary" @click="toRoute('/')"/>
     </template>
     <tr v-for="td in tableData" :key="td.recordId">
-      <td :style="{color:  td.color}" class="weight">{{ td.keyName }}</td>
+      <td :style="{color: td.color}" class="weight">{{ td.keyName }}</td>
       <td><span :class="[td.isIncome ? 'in' : 'out']" class="weight">{{ td.isIncome ? '+' : '-' }}{{ td.money }}</span>
       </td>
       <td>{{ td.remark }}</td>
@@ -85,10 +85,11 @@ import DropSelect from "@/components/input/DropSelect.vue";
 import {reqOption} from "@/request/payDictApi";
 import {TypeSelectVo} from "@/model/vo/TypeSelectVo";
 import MyBtn from "@/components/button/MyBtn.vue";
-import {useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {PaymentRecord} from "@/model/entity/PaymentRecord";
 
 onMounted(() => {
+  setRouteData();
   getAll();
   reqOption().then(resp => {
     optionData.value = resp
@@ -104,6 +105,50 @@ const changeSel = (oneKey: number, twoKey: number | null) => {
   reqBody.bigType = oneKey
   reqBody.paymentType = twoKey
   getAll();
+}
+
+// 如此获取路由传参
+const route = useRoute();
+const setRouteData = (): void => {
+  if (Object.keys(route.query).length > 0)
+    getStartAndEndOfMonth(route.query.month as string)
+}
+
+/**
+ * 设置一月的第一天和最后一天
+ *
+ * @param monthStr 形如 2024、2024-1、2024-1-1
+ */
+const getStartAndEndOfMonth = (monthStr: string): void => {
+  const dateStr: string[] = monthStr.split("-");
+  if (dateStr.length === 1) {
+    // 只有年
+    // 本年第一天
+    const startDateV = new Date(Number(dateStr[0]), 0, 1);
+    startDateV.setHours(8) //东八时区
+    // 本年最后一天
+    const endDateV = new Date(Number(dateStr[0]), 11, 31);
+    endDateV.setHours(8) //东八时区
+    // 设值
+    reqBody.beginDate = startDateV.toISOString().slice(0, 10);
+    reqBody.endDate = endDateV.toISOString().slice(0, 10);
+  } else if (dateStr.length === 2) {
+    // 只有年+月
+    // 本月第一天
+    const startDateV = new Date(Number(dateStr[0]), Number(dateStr[1]) - 1, 1);
+    startDateV.setHours(8) //东八时区
+    // 本月最后一天
+    const endDateV = new Date(Number(dateStr[0]), Number(dateStr[1]), 0);
+    endDateV.setHours(8) //东八时区
+    // 设值
+    reqBody.beginDate = startDateV.toISOString().slice(0, 10);
+    reqBody.endDate = endDateV.toISOString().slice(0, 10);
+  } else {
+    // 有 年+月+日
+    const clickDate = `${dateStr[0]}-${dateStr[1].padStart(2, '0')}-${dateStr[2].padStart(2, '0')}`
+    reqBody.beginDate = clickDate;
+    reqBody.endDate = clickDate;
+  }
 }
 
 const router = useRouter();
