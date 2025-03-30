@@ -1,6 +1,6 @@
 <template>
   <div class="dropdown" @click="optShow = !optShow">
-    <span>类别</span>
+    <span class="dropLabel">类别</span>
     <span class="dropInput">{{ inputVal }}</span>
     <ul v-if="optShow" class="dropdown-menu">
       <li @click="clickDrop(0,'无')">无</li>
@@ -34,13 +34,15 @@ const clickDrop = (opKey: number, opVal: string): void => {
 </script>
 
 <style lang="sass" scoped>
-$border-color: #67c23a
+$border-color: #529b2e
 $hover-color: #f0f9eb
 .dropdown
   display: contents
-  color: $border-color
   font-size: smaller
   text-align: center
+
+.dropLabel
+  color: $border-color
 
 .dropInput
   //下拉框样式
@@ -71,7 +73,6 @@ $hover-color: #f0f9eb
 
   li
     //下拉菜单选项样式
-    color: black
     padding: 6px 12px
     text-decoration: none
     display: block
@@ -103,7 +104,6 @@ $hover-color: #f0f9eb
   border-radius: 5px
 
   li
-    color: black
     padding: 6px 8px
     text-decoration: none
     display: block
