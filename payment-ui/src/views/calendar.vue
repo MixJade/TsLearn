@@ -1,5 +1,5 @@
 <template>
-  <CheckBtn left="年" right="月" @upCheck="changeCheck"/>
+  <CheckBtn left="年" right="月" v-model="checkYear"/>
   <YearCalendar v-if="checkYear" :month="selectMonth" :year="selectYear" @upMonth="upMonth" @upYear="upYear"/>
   <MonthCalendar v-else :month="selectMonth" :year="selectYear" @upDate="upDate"/>
 </template>
@@ -28,9 +28,6 @@ const upDate = (newYear: number, newMonth: number): void => {
 
 // 切换年月的日历
 const checkYear = ref<boolean>(true)
-const changeCheck = (isYear: boolean): void => {
-  checkYear.value = isYear
-}
 </script>
 
 <style lang="sass" scoped>

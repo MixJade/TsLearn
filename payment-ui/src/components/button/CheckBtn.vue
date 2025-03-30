@@ -1,27 +1,19 @@
 <template>
   <label class="rocker">
-    <input v-model="checked" type="checkbox" @change="changeVal">
+    <input v-model="checked" type="checkbox">
     <span class="switch-left">{{ left }}</span>
     <span class="switch-right">{{ right }}</span>
   </label>
 </template>
 
 <script lang="ts" setup>
-import {ref} from "vue";
 
 // 日历图的“年月”开关按钮
 defineProps<{
   readonly left: string;
   readonly right: string;
 }>()
-
-const checked = ref<boolean>(true)
-
-const emits = defineEmits<{
-  (e: "upCheck", checked: boolean): void;
-}>();
-
-const changeVal = () => emits('upCheck', checked.value);
+const checked = defineModel<boolean>()
 </script>
 
 <style lang="sass" scoped>

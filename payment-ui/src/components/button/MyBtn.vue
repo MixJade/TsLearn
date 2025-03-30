@@ -7,8 +7,8 @@
 <script lang="ts" setup>
 // 我的普通button,用于搜索框
 defineProps<{
-  type: "secondary" | "primary" | "danger" | "success";
-  text: string;
+  readonly type: "secondary" | "primary" | "danger" | "success";
+  readonly text: string;
 }>()
 </script>
 

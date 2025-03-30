@@ -1,6 +1,6 @@
 <template>
-  <ReportBtn type="primary">消费分析</ReportBtn>
-  <ReportBtn type="success">收支记录</ReportBtn>
+  <ReportBtn type="primary" text="消费分析"/>
+  <ReportBtn type="success" text="收支记录" @click="toMonthPayRecords"/>
   <table class="monthCalendar">
     <caption>
       <span v-if="selDate.year>2023" class="monthBtn" @click="addMonth(false)">&lt;</span>
@@ -45,6 +45,7 @@ import MoneyTag from "@/components/tags/MoneyTag.vue";
 import {reqCalendarDay} from "@/request/chartApi";
 import ReportBtn from "@/components/button/ReportBtn.vue";
 import {DayPayVo} from "@/model/chart/DayPayVo";
+import {useRouter} from "vue-router";
 
 const props = defineProps<{
   year: number;
@@ -58,7 +59,7 @@ onMounted(() => {
   reqCalendarDay(props.year, props.month).then(resp => dayPayVoss.value = resp)
 })
 // 当前选中年月
-const selDate = reactive<{ year: number; month: number }>({year: props.year, month: props.month})
+const selDate: { year: number; month: number } = reactive({year: props.year, month: props.month})
 
 const addMonth = (isAdd: boolean) => {
   if (isAdd) {
@@ -89,6 +90,14 @@ const getSeasonClass = (month: number): string => {
     return 'winter';
   }
 };
+
+/**
+ * ==================================[路由跳转]===============================
+ */
+const router = useRouter();
+const toMonthPayRecords = (): void => {
+  router.push({name: "payRecords", query: {month: `${selDate.year}-${selDate.month}`}})
+}
 </script>
 
 <style lang="sass" scoped>

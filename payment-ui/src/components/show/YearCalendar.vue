@@ -1,7 +1,7 @@
 <template>
-  <ReportBtn type="primary">消费分析</ReportBtn>
-  <ReportBtn type="success" @click="toYearPayRecords">收支记录</ReportBtn>
-  <ReportBtn type="warning">年度报告</ReportBtn>
+  <ReportBtn type="primary" text="消费分析"/>
+  <ReportBtn type="success" text="收支记录" @click="toYearPayRecords"/>
+  <ReportBtn type="warning" text="年度报告"/>
   <table class="yearCalendar">
     <caption>
       <span v-if="selectedYear>2023" class="yearBtn" @click="addYear(false)">&lt;</span>

@@ -1,7 +1,5 @@
 <template>
-  <button type="button">
-    <slot></slot>
-  </button>
+  <button type="button">{{ text }}</button>
 </template>
 
 <script lang="ts" setup>
@@ -10,6 +8,7 @@ import {ref} from "vue";
 // 在日历图上方,用来跳转页面的按钮
 const props = defineProps<{
   readonly type: "primary" | "success" | "warning";
+  readonly text: string;
 }>()
 
 const myColorTxt = ref<string>("#409eff")

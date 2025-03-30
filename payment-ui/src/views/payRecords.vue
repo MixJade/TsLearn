@@ -17,7 +17,9 @@
     </template>
     <tr v-for="td in tableData" :key="td.recordId">
       <td :style="{color: td.color}" class="weight">{{ td.keyName }}</td>
-      <td><MoneyTag :income="td.isIncome" :money="td.money"/></td>
+      <td>
+        <MoneyTag :income="td.isIncome" :money="td.money"/>
+      </td>
       <td>{{ td.remark }}</td>
       <td>{{ td.payDate }}</td>
       <td>
@@ -37,8 +39,8 @@
         <legend>{{ formTit }}</legend>
         <div class="form-row">
           <label>收支类型</label>
-          <IncomeBtn v-model="paymentRecord.isIncome"/>
-          <DropSelect v-if="paymentRecord.isIncome" :disable-one="true" :option-data="optionTwoData.inList"
+          <IncomeBtn v-model="payRecord.isIncome"/>
+          <DropSelect v-if="payRecord.isIncome" :disable-one="true" :option-data="optionTwoData.inList"
                       :show-val="optionShowTxt"
                       @changeSel2="changeFormSel"/>
           <DropSelect v-else :disable-one="true" :option-data="optionTwoData.outList" :show-val="optionShowTxt"
@@ -46,16 +48,16 @@
         </div>
         <div class="form-row">
           <label for="money">金额(绝对值)</label>
-          <input id="money" v-model="paymentRecord.money" max="10000" min="0.01" step="0.1"
+          <input id="money" v-model="payRecord.money" max="10000" min="0.01" step="0.1"
                  type="number">
         </div>
         <div class="form-row">
           <label for="remark">备注</label>
-          <input id="remark" v-model="paymentRecord.remark" type="text">
+          <input id="remark" v-model="payRecord.remark" type="text">
         </div>
         <div class="form-row">
           <label for="payDate">付费时间</label>
-          <input id="payDate" v-model="paymentRecord.payDate" type="date">
+          <input id="payDate" v-model="payRecord.payDate" type="date">
           <button type="button" @click="dateAddWhenAdd">+1天</button>
         </div>
       </fieldset>
@@ -191,11 +193,11 @@ const commonResp = (resp: Result): void => {
  */
 // 表格数据
 const tableData = ref<PayRecordVo[]>([])
-const tablePage = reactive<TbPage>({current: 1, pages: 1, total: 0, size: 10}) as TbPage
+const tablePage: TbPage = reactive({current: 1, pages: 1, total: 0, size: 10}) as TbPage
 // 分页条件请求体
-const reqBody = reactive<PayRecordPageDto>({
+const reqBody: PayRecordPageDto = reactive({
   beginDate: "", bigType: 0, endDate: "", paymentType: 0
-}) as PayRecordPageDto
+})
 const getAll = () => {
   reqPayRecordPage(tablePage.current, tablePage.size, reqBody).then(resp => {
     tableData.value = resp.records
@@ -208,7 +210,7 @@ const getAll = () => {
 
 // 确认删除框
 const sureDelModal = ref<any>(null);
-const deleteById = async (id) => {
+const deleteById = async (id: number): Promise<void> => {
   sureDelModal.value?.confirmDel().then((resp: boolean) => {
     if (resp) reqDelRecord(id).then(resp => commonResp(resp))
   })
@@ -218,7 +220,7 @@ const deleteById = async (id) => {
  * ===================================[表单数据]============================================
  */
 // 添加的实体类
-const paymentRecord = reactive<PaymentRecord>({
+const payRecord: PaymentRecord = reactive({
   isIncome: false,
   money: 0,
   payDate: "",
@@ -232,14 +234,14 @@ const myShow = ref<InstanceType<typeof MyDialog> | null>(null)
 const formTit = ref<"添加记录" | "修改记录">("添加记录")
 const openAddForm = () => {
   formTit.value = "添加记录";
-  paymentRecord.recordId = 0;
-  paymentRecord.remark = "";
+  payRecord.recordId = 0;
+  payRecord.remark = "";
   myShow.value?.showMe();
 }
 const openUpdForm = (data: PayRecordVo) => {
   formTit.value = "修改记录";
   // 直接替换 reactive 对象
-  Object.assign(paymentRecord, data);
+  Object.assign(payRecord, data);
   optionShowTxt = data.keyName
   myShow.value?.showMe();
 }
@@ -249,34 +251,34 @@ const closeDialog = () => myShow.value?.closeMe();
 const optionTwoData = ref<TwoTypeOptVo>({inList: [], outList: []})
 let optionShowTxt = "无"
 const changeFormSel = (opKey: number, opVal: string) => {
-  paymentRecord.paymentType = opKey
+  payRecord.paymentType = opKey
   optionShowTxt = opVal
 }
 
 // 添加时日期加一天
 const dateAddWhenAdd = () => {
-  if (paymentRecord.payDate === '') return;
-  const date = new Date(paymentRecord.payDate);
+  if (payRecord.payDate === '') return;
+  const date = new Date(payRecord.payDate);
   date.setDate(date.getDate() + 1);
-  paymentRecord.payDate = date.toISOString().slice(0, 10);
+  payRecord.payDate = date.toISOString().slice(0, 10);
 }
 
 // 提交表单
 const submitForm = (): void => {
   // 校验
-  if (paymentRecord.paymentType === 0) {
+  if (payRecord.paymentType === 0) {
     tesTus("err", "请选择分类")
     return;
-  } else if (paymentRecord.payDate === "") {
+  } else if (payRecord.payDate === "") {
     tesTus("err", "请填写日期");
     return;
   }
   // 开始提交
   closeDialog()
   if (formTit.value === "修改记录")
-    reqUpdRecord(paymentRecord).then(resp => commonResp(resp))
+    reqUpdRecord(payRecord).then(resp => commonResp(resp))
   else
-    reqAddRecord(paymentRecord).then(resp => commonResp(resp))
+    reqAddRecord(payRecord).then(resp => commonResp(resp))
 }
 </script>
 

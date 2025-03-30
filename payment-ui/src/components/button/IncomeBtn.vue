@@ -1,7 +1,7 @@
 <template>
   <div class="toggle">
-    <input id="toggle-1" type="checkbox" v-model="checked" @change="changeVal">
-    <label :class="checked?'on-label':'off-label'" for="toggle-1">
+    <input id="toggle-1" type="checkbox" v-model="model">
+    <label :class="model?'on-label':'off-label'" for="toggle-1">
       <span class="toggle-off">支</span>
       <span class="toggle-on">收</span>
     </label>
@@ -9,29 +9,10 @@
 </template>
 
 <script lang="ts" setup>
-import {ref, watch} from 'vue';
 // 新增修改表单的收入、支出选择框
-
-// 定义接收的属性
 // v-model 本质上是 :modelValue 和 @update:modelValue 的组合
-const props = defineProps<{
-  modelValue: boolean; //是否选中
-}>()
-
-const emits = defineEmits<{
-  (e: "update:modelValue", checked: boolean): void;
-}>();
-
-// 监听 showVal 属性的变化
-watch(() => props.modelValue,
-    (newValue) => {
-      checked.value = newValue
-    },
-);
-
-const checked = ref<boolean>(props.modelValue)
-
-const changeVal = () => emits('update:modelValue', checked.value);
+// 从Vue3.4开始，使用defineModel宏
+const model = defineModel<boolean>()
 </script>
 
 <style lang="sass" scoped>
