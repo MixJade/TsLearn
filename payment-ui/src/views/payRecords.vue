@@ -209,7 +209,7 @@ const getAll = () => {
 }
 
 // 确认删除框
-const sureDelModal = ref<any>(null);
+const sureDelModal = ref<InstanceType<typeof SureDelModal>>(null);
 const deleteById = async (id: number): Promise<void> => {
   sureDelModal.value?.confirmDel().then((resp: boolean) => {
     if (resp) reqDelRecord(id).then(resp => commonResp(resp))

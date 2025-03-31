@@ -1,6 +1,6 @@
 <template>
-  <ReportBtn type="primary" text="消费分析"/>
-  <ReportBtn type="success" text="收支记录" @click="toMonthPayRecords"/>
+  <ReportBtn text="消费分析" type="primary"/>
+  <ReportBtn text="收支记录" type="success" @click="toMonthPayRecords"/>
   <table class="monthCalendar">
     <caption>
       <span v-if="selDate.year>2023" class="monthBtn" @click="addMonth(false)">&lt;</span>
@@ -21,7 +21,8 @@
     <tbody>
     <tr v-for="dayPayVos in dayPayVoss">
       <td v-for="item in dayPayVos" :key="item.payDate">
-        <div v-if="item.currentMonth" :class="getSeasonClass(selDate.month)" :title="item.payDate" class="dayCard">
+        <div v-if="item.currentMonth" :class="getSeasonClass(selDate.month)" :title="item.payDate"
+             class="dayCard" @click="toDayPayRecords(item.payDate)">
           <span class="dayH">{{ item.dayNum }}<br></span>
           <ul>
             <li class="payCount">{{ item.payCount }}rec</li>
@@ -97,6 +98,9 @@ const getSeasonClass = (month: number): string => {
 const router = useRouter();
 const toMonthPayRecords = (): void => {
   router.push({name: "payRecords", query: {month: `${selDate.year}-${selDate.month}`}})
+}
+const toDayPayRecords = (day: string): void => {
+  router.push({name: "payRecords", query: {month: day}})
 }
 </script>
 
