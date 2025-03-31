@@ -1,6 +1,6 @@
 <template>
   <dialog ref="dialog" class="sureDelModal">
-    <p>一旦删除，数据无法找回，是否删除</p>
+    <p>{{ showTxt }}</p>
     <div style="text-align: right">
       <MyBtn type="danger" text="确认" @click="confirm"/>
       <MyBtn type="secondary" text="取消" @click="cancel"/>
@@ -16,8 +16,10 @@ import MyBtn from "@/components/button/MyBtn.vue";
 const dialog = ref<HTMLDialogElement>()
 // 组件状态
 const resolvePromise = ref<(value: boolean) => void>();
+const showTxt = ref<string>("一旦删除，数据无法找回，是否删除");
 // 暴露 confirmDel 方法
-const confirmDel = (): Promise<boolean> => {
+const confirmDel = (txt: string): Promise<boolean> => {
+  showTxt.value = txt;
   return new Promise<boolean>((resolve) => {
     dialog.value?.showModal();
     resolvePromise.value = resolve;

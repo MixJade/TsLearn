@@ -64,5 +64,15 @@ export const myReq = {
         } catch (error) {
             console.error('下载文件时出错:', error);
         }
+    },
+    upload<T>(url: string, file: FormData): Promise<T> {
+        return fetch(url, {
+            method: 'POST',
+            body: file,
+        })
+            .then(response => response.json())
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     }
 };
