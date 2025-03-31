@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 // 我的普通button,用于搜索框
 defineProps<{
-  readonly type: "secondary" | "primary" | "danger" | "success";
+  readonly type: "secondary" | "primary" | "danger" | "success" | "warning";
   readonly text: string;
 }>()
 </script>
@@ -41,4 +41,9 @@ defineProps<{
     color: white
     background-color: #67C23A
     border: 2px solid #529b2e
+
+  &.btn-warning
+    color: white
+    background-color: #e6a23c
+    border: 2px solid #b88230
 </style>
