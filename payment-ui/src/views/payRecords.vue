@@ -286,6 +286,7 @@ const submitForm = (): void => {
 </script>
 
 <style lang="sass" scoped>
+@use "../myCss/myForm"
 // ========================[表格样式]===============================
 .weight
   font-weight: bolder
@@ -324,43 +325,4 @@ const submitForm = (): void => {
   //搜索label
   color: #529b2e
   font-size: smaller
-
-
-// ========================[表单样式]===============================
-.myForm
-  > fieldset
-    /*外包装虚线*/
-    border-style: dashed
-    border-width: 2px
-    border-color: #606266
-
-    > legend
-      /*表单标题*/
-      color: #606266
-
-  .form-row
-    /*表单行*/
-    padding-top: 12px
-
-    > label
-      /*表单行的标签*/
-      display: inline-block
-      width: 10ch
-      font-weight: bold
-
-    > input, select
-      /*表单行的输入框*/
-      border: none
-      border-bottom: 2px solid #515151
-      padding: 6px
-
-      &:focus
-        /*输入框聚焦事件*/
-        outline: none
-        border-color: #5b88ea
-
-  > .form-footer
-    /*表单底部按钮组*/
-    padding-top: 8px
-    text-align: right
 </style>
