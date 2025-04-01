@@ -2,6 +2,7 @@
   <ReportBtn type="primary" text="消费分析"/>
   <ReportBtn type="success" text="收支记录" @click="toYearPayRecords"/>
   <ReportBtn type="warning" text="年度报告"/>
+  <ReportBtn type="info" text="页面简化" @click="isShowUl = !isShowUl"/>
   <table class="yearCalendar">
     <caption>
       <span v-if="selectedYear>2023" class="yearBtn" @click="addYear(false)">&lt;</span>
@@ -12,13 +13,13 @@
     <tr v-for="monthPayVos in monthPayVoss">
       <td v-for="item in monthPayVos" :key="item.month" class="monthTd">
         <div v-if="item.moneyOut > 0"
-             :class="{ selected: selectedMonth === item.month ,[getSeasonClass(item.month)]:true}" class="monthCard"
+             :class="{ selected: selectedMonth === item.month ,[getSeasonClass(item.month)]:isShowUl}" class="monthCard"
              @click="selectCard(item.month)">
           <span class="monthH">{{ item.month }}月</span>
           <p>
             <MoneyTag :income="item.money>0" :money="item.money" label="盈余"/>
           </p>
-          <ul class="inOutUl">
+          <ul class="inOutUl" v-if="isShowUl">
             <li>
               <MoneyTag :income="true" :money="item.moneyIn" label="收"/>
             </li>
@@ -93,6 +94,8 @@ const getSeasonClass = (month: number): string => {
     return 'winter';
   }
 };
+// 是否复杂页面
+const isShowUl = ref<boolean>(true)
 /**
  * ==================================[路由跳转]===============================
  */

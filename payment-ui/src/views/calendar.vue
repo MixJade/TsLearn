@@ -1,5 +1,5 @@
 <template>
-  <CheckBtn left="年" right="月" v-model="checkYear"/>
+  <CheckBtn v-model="checkYear" left="年" right="月"/>
   <YearCalendar v-if="checkYear" :month="selectMonth" :year="selectYear" @upMonth="upMonth" @upYear="upYear"/>
   <MonthCalendar v-else :month="selectMonth" :year="selectYear" @upDate="upDate"/>
 </template>
