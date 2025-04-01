@@ -48,6 +48,8 @@ dialog.sureDelModal
   //通用样式
   border-radius: 20px
   box-shadow: 0 0 36px 0 #606266
+  min-width: 320px
+  text-align: center
   //自定义颜色
   border: 3px solid #F56C6C
   background-color: #fef0f0

@@ -1,13 +1,13 @@
 <template>
   <!-- 表格 -->
   <MyTable :tb-page="tablePage"
-           :thead="['付费时间','交易类型','交易对方','商品名称','金额','支付方式','当前状态','是否失效','操作']"
+           :thead="['付费时间','交易类型','交易对方','商品名称','金额','支付方式','当前状态','操作']"
            caption="收支缓存"
            @pageChange="getAll">
     <template #searchBtn>
       <MyBtn text="上传csv" type="success" @click="openForm2"/>
       <MyBtn text="清空缓存" type="danger" @click="deleteAll"/>
-      <MyBtn text="返回首页" type="primary" @click="toRoute('/')"/>
+      <MyBtn text="返回上级" type="primary" @click="toBack"/>
     </template>
     <tr v-for="td in tableData" :key="td.cacheId">
       <td>{{ td.payDate }}</td>
@@ -19,13 +19,12 @@
       </td>
       <td>{{ td.payWay }}</td>
       <td>{{ td.payState }}</td>
-      <td>{{ td.isDel ? "y" : "n" }}</td>
       <td>
-        <button class="tb-btn del-btn" type="button" @click="deleteById(td.cacheId)">
-          <img alt="del" src="/icon/delBtn.svg">
-        </button>
         <button class="tb-btn upd-btn" type="button" @click="openUpdForm(td)">
-          <img alt="edit" src="/icon/editBtn.svg">
+          转正
+        </button>
+        <button class="tb-btn del-btn" type="button" @click="deleteById(td.cacheId)">
+          删除
         </button>
       </td>
     </tr>
@@ -70,7 +69,7 @@
       <fieldset>
         <legend>上传csv</legend>
         <div class="form-row">
-          <input type="file" ref="csvFileRef" accept=".csv" @change="handleFileChange"/>
+          <input type="file" accept=".csv" @change="handleFileChange"/>
           <MyBtn text="上传文件" type="success" @click="uploadFile"/>
         </div>
         <div class="form-row">
@@ -88,21 +87,27 @@
 <script lang="ts" setup>
 import ToastBox from "@/components/message/ToastBox.vue";
 import {onMounted, reactive, ref} from "vue";
-import {reqDelRecord, reqUpdRecord} from "@/request/payRecordApi";
 import MyTable, {TbPage} from "@/components/show/MyTable.vue";
 import MyDialog from "@/components/message/MyDialog.vue";
 import DropSelect from "@/components/button/DropSelect.vue";
 import MyBtn from "@/components/button/MyBtn.vue";
 import {useRouter} from "vue-router";
-import {PaymentRecord} from "@/model/entity/PaymentRecord";
 import IncomeBtn from "@/components/button/IncomeBtn.vue";
 import {TwoTypeOptVo} from "@/model/vo/TwoTypeOptVo";
 import {Result} from "@/model/vo/Result";
 import SureDelModal from "@/components/message/SureDelModal.vue";
-import {reqDelAllCache, reqPayCachePage, reqSampleCsv, reqUploadCsv} from "@/request/payCachesApi";
+import {
+  reqAddCache,
+  reqDelAllCache,
+  reqDelCache,
+  reqPayCachePage,
+  reqSampleCsv,
+  reqUploadCsv
+} from "@/request/payCachesApi";
 import {PaymentCache} from "@/model/entity/PaymentCache";
 import MoneyTag from "@/components/tags/MoneyTag.vue";
 import {reqTwoOption} from "@/request/payDictApi";
+import {CacheToRecordDto} from "@/model/dto/CacheToRecordDto";
 
 onMounted(() => {
   getAll();
@@ -115,8 +120,8 @@ onMounted(() => {
  */
 const router = useRouter();
 // 跳转路由
-const toRoute = (url: string) => {
-  router.push(url)
+const toBack = () => {
+  router.back();
 }
 
 /**
@@ -162,32 +167,32 @@ const getAll = () => {
 // 确认删除框
 const sureDelModal = ref<InstanceType<typeof SureDelModal> | null>(null);
 const deleteAll = async (): Promise<void> => {
-  sureDelModal.value?.confirmDel("警告！警告！确认删除全部记录?").then((resp: boolean) => {
+  sureDelModal.value?.confirmDel("确认删除全部记录?").then((resp: boolean) => {
     if (resp) reqDelAllCache().then(resp => commonResp(resp))
   })
 }
-const deleteById = async (id: number): Promise<void> => {
-  sureDelModal.value?.confirmDel("一旦删除，数据无法找回，是否删除该记录").then((resp: boolean) => {
-    if (resp) reqDelRecord(id).then(resp => commonResp(resp))
-  })
+const deleteById = (id: number): void => {
+  reqDelCache(id).then(resp => commonResp(resp))
 }
 
 /**
  * ===================================[表单数据]============================================
  */
 // 添加的实体类
-const payRecord: PaymentRecord = reactive({
+const payRecord: CacheToRecordDto = reactive({
   isIncome: false,
   money: 0,
   payDate: "",
   paymentType: 0,
   recordId: 0,
-  remark: ""
+  remark: "",
+  cacheId: 0
 })
 
 // 表单弹出框
 const myShow = ref<InstanceType<typeof MyDialog> | null>(null)
 const openUpdForm = (data: PaymentCache) => {
+  payRecord.cacheId = data.cacheId
   payRecord.isIncome = data.isIncome
   payRecord.money = data.money
   payRecord.payDate = data.payDate
@@ -216,7 +221,7 @@ const submitForm = (): void => {
   }
   // 开始提交
   closeDialog()
-  reqUpdRecord(payRecord).then(resp => commonResp(resp))
+  reqAddCache(payRecord).then(resp => commonResp(resp))
 }
 
 /**
@@ -228,7 +233,6 @@ const openForm2 = () => {
   myShow2.value?.showMe();
 }
 
-const csvFileRef = ref<HTMLInputElement | null>(null);
 const file = ref<File | null>(null);
 // 处理文件选择事件
 const handleFileChange = (event: Event) => {
@@ -250,6 +254,7 @@ const uploadFile = async () => {
   const formData = new FormData() as FormData;
   formData.append('file', file.value);
   reqUploadCsv(formData).then(resp => commonResp(resp));
+  file.value = null;
   myShow2.value?.closeMe();
 };
 
@@ -271,7 +276,7 @@ const downSampleCsv = () => {
   color: white
   background-color: #F56C6C
   border: 2px solid #c45656
-  border-radius: 12px 0 0 12px
+  border-radius: 0 12px 12px 0
 
 .upd-btn
   //表中修改按钮
@@ -280,7 +285,7 @@ const downSampleCsv = () => {
   color: white
   background-color: #409EFF
   border: 2px solid #337ecc
-  border-radius: 0 12px 12px 0
+  border-radius: 12px 0 0 12px
 
 // ========================[表单样式]===============================
 .myForm
