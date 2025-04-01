@@ -13,7 +13,7 @@
     <template #searchBtn>
       <MyBtn text="添加记录" type="success" @click="openAddForm"/>
       <MyBtn text="缓存转正" type="warning" @click="toRoute('/payCaches')"/>
-      <MyBtn text="收支类型" type="secondary"/>
+      <MyBtn text="收支类型" type="secondary" @click="toRoute('/payDicts')"/>
       <MyBtn text="返回首页" type="primary" @click="toRoute('/')"/>
     </template>
     <tr v-for="td in tableData" :key="td.recordId">
