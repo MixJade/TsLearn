@@ -3,7 +3,7 @@
   <MyTable :tb-page="tablePage" :thead="['收支','大类','名称','颜色','数量','操作']" caption="收支字典"
            @pageChange="getAll">
     <template #searchForm>
-      <label for="sear-bigType" class="search-lab">类别</label>
+      <label for="sear-bigType" class="search-lab">大类</label>
       <select id="sear-bigType" class="search-inp" aria-label="Search" v-model="reqBody.bigType">
         <option value=""></option>
         <option v-for="bt in bigTypes" :key="bt.typeKey" :value="bt.typeKey" :style="{color:bt.color}">
@@ -48,12 +48,12 @@
         </div>
         <div class="form-row">
           <label for="bigType">大类</label>
-          <select id="bigType" class="search-inp" aria-label="Search" v-model="payDict.bigType">
+          <select id="bigType" class="search-inp" aria-label="Search" v-model="payDict.bigType" @change="changeBigType">
             <option v-for="bt in bigTypes" :key="bt.typeKey" :value="bt.typeKey" :style="{color:bt.color}">
               {{ bt.typeName }}
             </option>
           </select>
-          <span>{{ payDict.color }}</span>
+          <span class="weight" :style="{color:payDict.color}">{{ payDict.color }}</span>
         </div>
         <div class="form-row">
           <label for="keyName">名称</label>
@@ -209,6 +209,10 @@ const submitForm = (): void => {
     reqUpdDict(payDict).then(resp => commonResp(resp))
   else
     reqAddDict(payDict).then(resp => commonResp(resp))
+}
+
+const changeBigType = (): void => {
+  payDict.color = bigTypes.value.find(i => i.typeKey === payDict.bigType).color
 }
 </script>
 
