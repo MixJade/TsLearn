@@ -74,7 +74,8 @@
           <MyBtn text="上传文件" type="success" @click="uploadFile"/>
         </div>
         <div class="form-row">
-          <MyBtn text="样例csv" type="primary"/>
+          csv需为utf-8编码，且遵循样例格式
+          <MyBtn text="样例csv" type="primary" @click="downSampleCsv"/>
         </div>
       </fieldset>
     </form>
@@ -98,7 +99,7 @@ import IncomeBtn from "@/components/button/IncomeBtn.vue";
 import {TwoTypeOptVo} from "@/model/vo/TwoTypeOptVo";
 import {Result} from "@/model/vo/Result";
 import SureDelModal from "@/components/message/SureDelModal.vue";
-import {reqDelAllCache, reqPayCachePage, reqUploadCsv} from "@/request/payCachesApi";
+import {reqDelAllCache, reqPayCachePage, reqSampleCsv, reqUploadCsv} from "@/request/payCachesApi";
 import {PaymentCache} from "@/model/entity/PaymentCache";
 import MoneyTag from "@/components/tags/MoneyTag.vue";
 import {reqTwoOption} from "@/request/payDictApi";
@@ -227,7 +228,6 @@ const openForm2 = () => {
   myShow2.value?.showMe();
 }
 
-
 const csvFileRef = ref<HTMLInputElement | null>(null);
 const file = ref<File | null>(null);
 // 处理文件选择事件
@@ -250,7 +250,12 @@ const uploadFile = async () => {
   const formData = new FormData() as FormData;
   formData.append('file', file.value);
   reqUploadCsv(formData).then(resp => commonResp(resp));
+  myShow2.value?.closeMe();
 };
+
+const downSampleCsv = () => {
+  reqSampleCsv();
+}
 </script>
 
 <style lang="sass" scoped>

@@ -66,6 +66,7 @@ export const myReq = {
         }
     },
     upload<T>(url: string, file: FormData): Promise<T> {
+        // 浏览器会自动为FormData设置正确的Content-Type头，且会包含一个边界字符串
         return fetch(url, {
             method: 'POST',
             body: file,
