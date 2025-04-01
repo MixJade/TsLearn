@@ -197,7 +197,6 @@ const openUpdForm = (data: PaymentCache) => {
   payRecord.money = data.money
   payRecord.payDate = data.payDate
   payRecord.remark = data.wareName
-  optionShowTxt = data.payType
   myShow.value?.showMe();
 }
 const closeDialog = () => myShow.value?.closeMe();
