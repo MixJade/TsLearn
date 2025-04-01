@@ -4,14 +4,14 @@
            @pageChange="getAll">
     <template #searchForm>
       <label for="sear-bigType" class="search-lab">大类</label>
-      <select id="sear-bigType" class="search-inp" aria-label="Search" v-model="reqBody.bigType">
+      <select id="sear-bigType" class="search-inp" aria-label="Search" v-model="reqBody.bigType" @change="getAll">
         <option value=""></option>
         <option v-for="bt in bigTypes" :key="bt.typeKey" :value="bt.typeKey" :style="{color:bt.color}">
           {{ bt.typeName }}
         </option>
       </select>
       <label for="sear-income" class="search-lab">收支</label>
-      <select id="sear-income" class="search-inp" aria-label="Search" v-model="reqBody.isIncome">
+      <select id="sear-income" class="search-inp" aria-label="Search" v-model="reqBody.isIncome" @change="getAll">
         <option :value="null"></option>
         <option :value="0">支出</option>
         <option :value="1">收入</option>
