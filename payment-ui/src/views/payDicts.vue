@@ -212,7 +212,7 @@ const submitForm = (): void => {
 }
 
 const changeBigType = (): void => {
-  payDict.color = bigTypes.value.find(i => i.typeKey === payDict.bigType).color
+  payDict.color = bigTypes.value.find(i => i.typeKey === payDict.bigType)!.color
 }
 </script>
 
