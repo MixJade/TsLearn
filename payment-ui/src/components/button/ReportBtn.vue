@@ -7,7 +7,7 @@ import {ref} from "vue";
 
 // 在日历图上方,用来跳转页面的按钮
 const props = defineProps<{
-  readonly type: "primary" | "success" | "warning" | "info";
+  readonly type: "primary" | "success" | "warning";
   readonly text: string;
 }>()
 
@@ -19,9 +19,6 @@ if (props.type === "success") {
 } else if (props.type === "warning") {
   myColorTxt.value = "#e6a23c"
   myColorBac.value = "#fdf6ec"
-} else if (props.type === "info") {
-  myColorTxt.value = "#909399"
-  myColorBac.value = "#e9e9eb"
 }
 </script>
 

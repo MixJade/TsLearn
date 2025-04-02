@@ -18,6 +18,11 @@ const routes: RouteRecordRaw[] = [
         path: '/payDicts',
         component: () => import('@/views/payDicts.vue')
     },
+    {
+        path: '/yearReport',
+        name: 'yearReport',
+        component: () => import('@/views/ChartComponent.vue')
+    },
 ]
 export const router = createRouter({
     history: createWebHashHistory(),
