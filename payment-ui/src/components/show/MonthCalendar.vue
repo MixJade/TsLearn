@@ -1,6 +1,7 @@
 <template>
-  <ReportBtn text="消费分析" type="primary"/>
   <ReportBtn text="收支记录" type="success" @click="toMonthPayRecords"/>
+  <ReportBtn text="消费分析" type="primary"/>
+  <ReportBtn text="导出sql" type="info" @click="downInsertSql"/>
   <table class="monthCalendar">
     <caption>
       <span v-if="selDate.year>2023" class="monthBtn" @click="addMonth(false)">&lt;</span>
@@ -47,6 +48,7 @@ import {reqCalendarDay} from "@/request/chartApi";
 import ReportBtn from "@/components/button/ReportBtn.vue";
 import {DayPayVo} from "@/model/chart/DayPayVo";
 import {useRouter} from "vue-router";
+import {reqDownInsertSql} from "@/request/payRecordApi";
 
 const props = defineProps<{
   year: number;
@@ -91,6 +93,16 @@ const getSeasonClass = (month: number): string => {
     return 'winter';
   }
 };
+
+/**
+ * 导出对应月份的sql文件
+ */
+const downInsertSql = (): void => {
+  const answer = confirm("确认下载？");
+  if (answer) {
+    reqDownInsertSql(selDate.year, selDate.month);
+  }
+}
 
 /**
  * ==================================[路由跳转]===============================

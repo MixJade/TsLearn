@@ -1,7 +1,8 @@
 <template>
-  <ReportBtn type="warning" text="年度报告" @click="toYearReport"/>
   <ReportBtn type="success" text="收支记录" @click="toYearPayRecords"/>
-  <ReportBtn type="primary" text="页面简化" @click="isShowUl = !isShowUl"/>
+  <ReportBtn type="primary" text="年度报告" @click="toYearReport"/>
+  <ReportBtn type="info" text="导出sql" @click="downInsertSql(0)"/>
+  <ReportBtn type="warning" text="页面简化" @click="isShowUl = !isShowUl"/>
   <table class="yearCalendar">
     <caption>
       <span v-if="selectedYear>2023" class="yearBtn" @click="addYear(false)">&lt;</span>

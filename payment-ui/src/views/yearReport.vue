@@ -51,6 +51,12 @@
       <canvas ref="pieChartRef"></canvas>
     </div>
   </div>
+  <div class="yearReport">
+    <p>{{ bigTypeTit }}组成</p>
+    <div class="dashboard">
+      <canvas ref="pieBigTypeChartRef"></canvas>
+    </div>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -71,7 +77,7 @@ import {
 } from 'chart.js';
 import {ChartType} from "chart.js/dist/types";
 import {useRoute} from "vue-router";
-import {reqYearLine, reqYearPie} from "@/request/chartApi";
+import {reqBigTypePie, reqYearLine, reqYearPie} from "@/request/chartApi";
 import {YearPayDo} from "@/model/vo/YearLineVo";
 import MoneyTag from "@/components/tags/MoneyTag.vue";
 import CheckBtn from "@/components/button/CheckBtn.vue";
@@ -96,6 +102,7 @@ const lineYearChartRef = ref<HTMLCanvasElement | null>(null);
 const barYearChartRef = ref<HTMLCanvasElement | null>(null);
 const barChartRef = ref<HTMLCanvasElement | null>(null);
 const pieChartRef = ref<HTMLCanvasElement | null>(null);
+const pieBigTypeChartRef = ref<HTMLCanvasElement | null>(null);
 // 展示数据
 let year: number = 2025;
 let yearData: YearPayDo = reactive({
@@ -110,7 +117,9 @@ const isIncome = ref<boolean>(false)
 onMounted(() => {
   // 如此获取路由传参
   const route = useRoute();
-  year = route.query.year as number;
+  if (typeof route.query.year === 'string') {
+    year = parseInt(route.query.year, 10);
+  }
   reqYearLine(year).then(resp => {
     Object.assign(yearData, resp.yearMoney);
     drawLine(resp.moneyOut, resp.moneyIn, resp.money)
@@ -119,10 +128,16 @@ onMounted(() => {
   reqYearPie(year, isIncome.value).then(resp => {
     drawChart(resp.bigTypes, resp.labels, resp.colors, resp.moneys)
   })
+
+  // 默认查询餐饮数据
+  reqBigTypePie(year, 1, isIncome.value).then(resp => {
+    drawBigTypePie(resp.labels, resp.moneys)
+  })
 });
 
 let barChart: Chart<ChartType, number[], unknown>;
 let pieChart: Chart<ChartType, number[], unknown>;
+let pieBigTypeChart: Chart<ChartType, number[], unknown>;
 const reqDrawChart = () => {
   reqYearPie(year, isIncome.value).then(resp => {
     barChart.destroy()
@@ -166,7 +181,8 @@ const drawLine = (moneyOut: number[], moneyIn: number[], money: number[]): void 
   // 柱状图
   new Chart(barYearChartRef.value, {
     type: 'bar' as ChartType,
-    data: {labels: labels,
+    data: {
+      labels: labels,
       datasets: [{label: '支出', data: moneyOut, backgroundColor: 'rgb(102,239,56)', fill: false}, {
         label: '收入',
         data: moneyIn,
@@ -179,32 +195,34 @@ const drawLine = (moneyOut: number[], moneyIn: number[], money: number[]): void 
 
 const drawChart = (bigTypes: number[], labels: string[], colors: string[], moneys: number[]): void => {
   if (barChartRef.value === null || pieChartRef.value === null) return;
-  const label = '总' + (isIncome.value ? '收入' : '支出');
+  const chartData = {
+    labels: labels,
+    datasets: [{
+      label: '总' + (isIncome.value ? '收入' : '支出'),
+      data: moneys,
+      backgroundColor: colors,
+      borderColor: colors,
+      borderWidth: 1
+    }]
+  }
   // 柱状图
   barChart = new Chart(barChartRef.value, {
     type: 'bar' as ChartType,
-    data: {
-      labels: labels,
-      datasets: [{
-        label: label,
-        data: moneys,
-        backgroundColor: colors,
-        borderColor: colors,
-        borderWidth: 1
-      }]
-    },
+    data: chartData,
     options: {
-      scales: {
-        y: {
-          beginAtZero: true
+      plugins: {
+        legend: {
+          display: false
         }
       },
-      onClick: function (event, elements) {
+      onClick: function (_, elements) {
         if (elements.length > 0) {
-          const firstElement = elements[0];
-          const index = firstElement.index;
-          const label = this.data.labels[index];
-          alert(`你点击了 ${label} id ${bigTypes[index]}`);
+          const index = elements[0].index;
+          bigTypeTit.value = chartData.labels[index];
+          pieBigTypeChart.destroy();
+          reqBigTypePie(year, bigTypes[index], isIncome.value).then(resp => {
+            drawBigTypePie(resp.labels, resp.moneys)
+          })
         }
       }
     }
@@ -213,13 +231,32 @@ const drawChart = (bigTypes: number[], labels: string[], colors: string[], money
   // 饼状图
   pieChart = new Chart(pieChartRef.value, {
     type: 'pie' as ChartType,
+    data: chartData
+  });
+}
+
+const bigTypeTit = ref<string>("餐饮")
+// 定义颜色数组
+const colors = ['#36a2eb', '#ff6384', '#4bc0c0', '#ff9f40', '#9966ff', '#ffcd56', '#c9cbcf'];
+// 生成循环颜色数组的函数
+const getLoopedColors = (dataLength: number): string[] => {
+  const result = [];
+  for (let i = 0; i < dataLength; i++) {
+    result.push(colors[i % colors.length]);
+  }
+  return result;
+}
+const drawBigTypePie = (labels: string[], moneys: number[]): void => {
+  if (pieBigTypeChartRef.value === null) return;
+  // 饼状图
+  pieBigTypeChart = new Chart(pieBigTypeChartRef.value, {
+    type: 'doughnut' as ChartType,
     data: {
       labels: labels,
       datasets: [{
-        label: label,
+        label: (isIncome.value ? '收入' : '支出'),
         data: moneys,
-        backgroundColor: colors,
-        borderColor: colors,
+        backgroundColor: getLoopedColors(moneys.length),
         borderWidth: 1
       }]
     }

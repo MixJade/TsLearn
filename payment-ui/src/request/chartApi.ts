@@ -35,3 +35,13 @@ export const reqYearLine = (year: number): Promise<YearLineVo> =>
  */
 export const reqYearPie = (year: number, isIncome: boolean): Promise<ChartVo> =>
     myReq.get<ChartVo>(`/api/chart/yearPie?year=${year}&isIncome=${isIncome}`)
+
+/**
+ * 获取一年中不同大类收/支情况(用于饼、柱图)
+ *
+ * @param year 年份 2024
+ * @param bigType 大类id
+ * @param isIncome 收/支
+ */
+export const reqBigTypePie = (year: number, bigType: number, isIncome: boolean): Promise<ChartVo> =>
+    myReq.get<ChartVo>(`/api/chart/bigTypePie?year=${year}&bigType=${bigType}&isIncome=${isIncome}`)

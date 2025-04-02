@@ -11,7 +11,9 @@ import {PaymentRecord} from "@/model/entity/PaymentRecord";
  * @param month 月份
  */
 export const reqDownInsertSql = (year: number, month: number): void => {
-    const fileName = `paymentRecord(${year}-${month}).sql`
+    let fileName;
+    if (month === 0) fileName = `paymentRecord(${year}).sql`
+    else fileName = `paymentRecord(${year}-${month}).sql`
     // noinspection JSIgnoredPromiseFromCall
     myReq.down(`/api/paymentRecord/downInsertSql?year=${year}&month=${month}`, fileName)
 }
