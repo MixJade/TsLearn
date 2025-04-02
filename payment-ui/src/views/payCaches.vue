@@ -203,10 +203,10 @@ const closeDialog = () => myShow.value?.closeMe();
 
 // 下拉框的两个分类
 const optionTwoData = ref<TwoTypeOptVo>({inList: [], outList: []})
-let optionShowTxt = "无"
+const optionShowTxt = ref<string>("无")
 const changeFormSel = (opKey: number, opVal: string) => {
   payRecord.paymentType = opKey
-  optionShowTxt = opVal
+  optionShowTxt.value = opVal
 }
 // 提交表单
 const submitForm = (): void => {

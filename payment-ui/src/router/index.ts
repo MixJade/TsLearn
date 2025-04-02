@@ -21,7 +21,7 @@ const routes: RouteRecordRaw[] = [
     {
         path: '/yearReport',
         name: 'yearReport',
-        component: () => import('@/views/ChartComponent.vue')
+        component: () => import('@/views/yearReport.vue')
     },
 ]
 export const router = createRouter({

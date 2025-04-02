@@ -3,3 +3,6 @@ body {
     -webkit-user-select: none;
     user-select: none;
 }
+.weight {
+    font-weight: bolder;
+}

@@ -219,9 +219,6 @@ const changeBigType = (): void => {
 <style lang="sass" scoped>
 @use "../myCss/myForm"
 // ========================[表格样式]===============================
-.weight
-  font-weight: bolder
-
 .in
   //收入的字体
   color: #c45656

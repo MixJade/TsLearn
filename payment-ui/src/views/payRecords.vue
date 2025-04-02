@@ -245,17 +245,17 @@ const openUpdForm = (data: PayRecordVo) => {
   formTit.value = "修改记录";
   // 直接替换 reactive 对象
   Object.assign(payRecord, data);
-  optionShowTxt = data.keyName
+  optionShowTxt.value = data.keyName
   myShow.value?.showMe();
 }
 const closeDialog = () => myShow.value?.closeMe();
 
 // 下拉框的两个分类
 const optionTwoData = ref<TwoTypeOptVo>({inList: [], outList: []})
-let optionShowTxt = "无"
+const optionShowTxt = ref<string>("无")
 const changeFormSel = (opKey: number, opVal: string) => {
   payRecord.paymentType = opKey
-  optionShowTxt = opVal
+  optionShowTxt.value = opVal
 }
 
 // 添加时日期加一天
@@ -288,9 +288,6 @@ const submitForm = (): void => {
 <style lang="sass" scoped>
 @use "../myCss/myForm"
 // ========================[表格样式]===============================
-.weight
-  font-weight: bolder
-
 .tb-btn:hover
   //表中按钮
   box-shadow: 0 0 8px 0 #73767a
