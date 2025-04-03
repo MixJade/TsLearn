@@ -272,6 +272,7 @@ const drawBigTypePie = (labels: string[], moneys: number[]): void => {
 
 .yearTable
   border-collapse: collapse
+  margin: 8px 32px
 
   tr
     text-align: center
