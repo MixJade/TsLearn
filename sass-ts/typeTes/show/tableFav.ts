@@ -229,11 +229,10 @@ const loadData = (dataIndex: number) => {
         let ulNum = 0; // 元素计数器
         i.ul.forEach(j => {
             // 正常内容
-            groupTxt += `<td>
-                <img src="icoLogo/${j.img}" alt="ico">
+            groupTxt += `<td><div title="${j.remark}"><img src="icoLogo/${j.img}" alt="ico">
                 <a href="${j.href}">${j.name}</a>
-                <span class="remark">${j.remark}</span>
-                ${getBtnTxt(j)}
+                ${j.remark === "" ? "" : '<span class="remark">...</span>'}
+                ${getBtnTxt(j)}</div>
             </td>`
             // 四个一行
             ulNum += 1
@@ -244,10 +243,10 @@ const loadData = (dataIndex: number) => {
         if (ulNum % 4 !== 0) {
             const cirNum = 4 - ulNum % 4;
             for (let k = 0; k < cirNum; k++) {
-                groupTxt += `<td class="emptyTd">飞雪连天射白鹿笑书神侠倚碧鸳</td>`
+                groupTxt += `<td class="emptyTd"><div></div></td>`
             }
         }
-        groupTxt += `</tr> </tbody></table>`
+        groupTxt += `</tr></tbody></table>`
         tableDiv.innerHTML += groupTxt;
     })
     // 更新时间
@@ -256,7 +255,7 @@ const loadData = (dataIndex: number) => {
 
 const getBtnTxt = (defA: defA): string => {
     if (defA.pwd !== undefined && defA.pwd !== "") {
-        return `<button type="button" onclick="getCopy(this)" data-text="${defA.pwd}">复制密码</button>
+        return `<button type="button" onclick="getCopy(this)" data-text="${defA.pwd}">复密</button>
         <span class="btnDot"></span>`
     } else return "";
 }
@@ -269,7 +268,7 @@ const getCopy = (e: HTMLElement) => {
     const text = e.getAttribute("data-text") as string
     if (text !== "") {
         navigator.clipboard.writeText(text).then(() =>
-            baseTus.showTus()
+            alert("复制成功")
         )
     }
 }

@@ -1,10 +1,10 @@
 $header-height: 32px
-$nav-btn-color: #409eff
-$nav-btn-txt-color: #ebf5ff
+$table-color: #909399
 nav
   height: $header-height
   padding: 4px
-  border-bottom: 2px solid #909399
+  border-bottom: 2px solid $table-color
+  background-color: white
   z-index: 20
   //表头导航栏
   position: fixed
@@ -12,17 +12,17 @@ nav
   line-height: $header-height
 
   button
-    border: 2px solid $nav-btn-color
     padding: 8px
-    border-radius: 24px
+    border: none
+    color: $table-color
+    background-color: transparent
     font-weight: bolder
-    color: $nav-btn-color
-    background-color: $nav-btn-txt-color
     margin: 2px
 
     &.selectNav
-      color: $nav-btn-txt-color
-      background-color: $nav-btn-color
+      color: #409eff
+      background-color: #ebf5ff
+      border-bottom: #409eff solid 4px
 
 #navHr
   //导航与内容的分割线
@@ -32,19 +32,21 @@ $table-weight: 90%
 table
   width: $table-weight
   margin-left: calc((100% - $table-weight) / 2)
-  //让单元格存在空隙
-  border-collapse: separate
-  border-spacing: 10px
+  margin-top: 24px
+  //让单元格不存在空隙
+  border-collapse: collapse
+
 
 $td-height: 24px
 td
-  height: $td-height
+  border: $table-color solid 2px
   box-sizing: border-box
   padding: 8px
-  border-radius: 16px
-  box-shadow: 0 0 3px #73767a
-  line-height: $td-height
   position: relative
+  //内容物
+  > div
+    min-height: $td-height
+    min-width: 220px
   //网页图标
   img
     width: 24px
@@ -87,26 +89,23 @@ td
 
   &.emptyTd
     //空单元格(用于占位)
-    opacity: 0
+    border: none
 
 a
   //网页链接
   text-decoration: none
   margin-right: 4px
 
-.remark
-  font-size: smaller
-
 caption
   //表格标题
-  font-size: 24px
+  font-size: 20px
   font-weight: bold
   margin-bottom: 10px
-  color: #909399
+  color: $table-color
 
 footer
   width: 100%
-  color: #909399
+  color: $table-color
   text-align: center
   font-weight: bolder
   font-size: smaller
