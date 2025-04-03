@@ -33,8 +33,8 @@
         </div>
         <div class="tooltip-content">
           <div class="sci-btns">
-            <button class="sci-btn" type="button" @click="toMonthPayRecords((item.month))">账单</button>
-            <button class="sci-btn" type="button">分析</button>
+            <button class="sci-btn" type="button" @click="toMonthPayRecords(item.month)">账单</button>
+            <button class="sci-btn" type="button" @click="toMonthReport(item.month)">分析</button>
             <button class="sci-btn" type="button" @click="downInsertSql(item.month)">导出</button>
           </div>
         </div>
@@ -107,7 +107,10 @@ const toMonthPayRecords = (month: number): void => {
   router.push({name: "payRecords", query: {month: `${selectedYear.value}-${month}`}})
 }
 const toYearReport = (): void => {
-  router.push({name: "yearReport", query: {year: `${selectedYear.value}`}})
+  router.push({name: "yearReport", query: {year: selectedYear.value}})
+}
+const toMonthReport = (month: number): void => {
+  router.push({name: "monthReport", query: {year: selectedYear.value, month}})
 }
 
 /**

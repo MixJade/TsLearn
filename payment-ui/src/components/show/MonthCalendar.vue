@@ -1,6 +1,6 @@
 <template>
   <ReportBtn text="收支记录" type="success" @click="toMonthPayRecords"/>
-  <ReportBtn text="消费分析" type="primary"/>
+  <ReportBtn text="消费分析" type="primary" @click="toMonthReport"/>
   <ReportBtn text="导出sql" type="info" @click="downInsertSql"/>
   <table class="monthCalendar">
     <caption>
@@ -113,6 +113,9 @@ const toMonthPayRecords = (): void => {
 }
 const toDayPayRecords = (day: string): void => {
   router.push({name: "payRecords", query: {month: day}})
+}
+const toMonthReport = (): void => {
+  router.push({name: "monthReport", query: {year: selDate.year, month: selDate.month}})
 }
 </script>
 
