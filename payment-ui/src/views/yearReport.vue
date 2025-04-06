@@ -30,6 +30,7 @@
     </tr>
     </tbody>
   </table>
+  <hr>
   <h3>收支分析</h3>
   <div class="yearReport">
     <!-- 年度柱状图-->
@@ -41,6 +42,7 @@
       <canvas ref="lineYearChartRef"></canvas>
     </div>
   </div>
+  <hr>
   <CheckBtn v-model="isIncome" left="收" right="支" @change="reqDrawChart"/>
   <h3>消费分析</h3>
   <div class="yearReport">
@@ -73,7 +75,8 @@ import {
   LineElement,
   PieController,
   PointElement,
-  Tooltip
+  Tooltip,
+  TooltipItem
 } from 'chart.js';
 import {ChartType} from "chart.js/dist/types";
 import {useRoute} from "vue-router";
@@ -215,7 +218,7 @@ const drawChart = (bigTypes: number[], labels: string[], colors: string[], money
           display: false
         }
       },
-      onClick: function (_, elements) {
+      onClick: (_, elements) => {
         if (elements.length > 0) {
           const index = elements[0].index;
           bigTypeTit.value = chartData.labels[index];
@@ -231,7 +234,39 @@ const drawChart = (bigTypes: number[], labels: string[], colors: string[], money
   // 饼状图
   pieChart = new Chart(pieChartRef.value, {
     type: 'pie' as ChartType,
-    data: chartData
+    data: chartData,
+    options: {
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: (tooltipItem: TooltipItem<'pie'>) => {
+              // 获取当前数据点的值
+              let label = tooltipItem.label || '';
+              if (label) {
+                label += ': ';
+              }
+              // 计算当前数据点的百分比
+              const total = tooltipItem.dataset.data.reduce((sum, value) => {
+                return sum + value;
+              }, 0);
+              const percentage = ((Number(tooltipItem.parsed) / total) * 100).toFixed(2);
+              label += `${tooltipItem.parsed} (${percentage}%)`;
+              return label;
+            }
+          }
+        }
+      },
+      onClick: (_, elements) => {
+        if (elements.length > 0) {
+          const index = elements[0].index;
+          bigTypeTit.value = chartData.labels[index];
+          pieBigTypeChart.destroy();
+          reqBigTypePie(year, bigTypes[index], isIncome.value).then(resp => {
+            drawBigTypePie(resp.labels, resp.moneys)
+          })
+        }
+      }
+    }
   });
 }
 
@@ -259,6 +294,28 @@ const drawBigTypePie = (labels: string[], moneys: number[]): void => {
         backgroundColor: getLoopedColors(moneys.length),
         borderWidth: 1
       }]
+    },
+    options: {
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: (tooltipItem: TooltipItem<'doughnut'>) => {
+              // 获取当前数据点的值
+              let label = tooltipItem.label || '';
+              if (label) {
+                label += ': ';
+              }
+              // 计算当前数据点的百分比
+              const total = tooltipItem.dataset.data.reduce((sum, value) => {
+                return sum + value;
+              }, 0);
+              const percentage = ((Number(tooltipItem.parsed) / total) * 100).toFixed(2);
+              label += `${tooltipItem.parsed} (${percentage}%)`;
+              return label;
+            }
+          }
+        }
+      }
     }
   });
 }
