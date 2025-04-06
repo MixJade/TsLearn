@@ -2,8 +2,8 @@
   <dialog ref="dialog" class="sureDelModal">
     <p>{{ showTxt }}</p>
     <div style="text-align: right">
-      <MyBtn type="danger" text="确认" @click="confirm"/>
-      <MyBtn type="secondary" text="取消" @click="cancel"/>
+      <MyBtn text="确认" type="danger" @click="confirm"/>
+      <MyBtn text="取消" type="secondary" @click="cancel"/>
     </div>
   </dialog>
 </template>

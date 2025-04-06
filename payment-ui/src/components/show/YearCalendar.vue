@@ -1,8 +1,8 @@
 <template>
-  <ReportBtn type="success" text="收支记录" @click="toYearPayRecords"/>
-  <ReportBtn type="primary" text="年度报告" @click="toYearReport"/>
-  <ReportBtn type="info" text="导出sql" @click="downInsertSql(0)"/>
-  <ReportBtn type="warning" text="页面简化" @click="isShowUl = !isShowUl"/>
+  <ReportBtn text="收支记录" type="success" @click="toYearPayRecords"/>
+  <ReportBtn text="年度报告" type="primary" @click="toYearReport"/>
+  <ReportBtn text="导出sql" type="info" @click="downInsertSql(0)"/>
+  <ReportBtn text="页面简化" type="warning" @click="isShowUl = !isShowUl"/>
   <table class="yearCalendar">
     <caption>
       <span v-if="selectedYear>2023" class="yearBtn" @click="addYear(false)">&lt;</span>
@@ -19,7 +19,7 @@
           <p>
             <MoneyTag :income="item.money>0" :money="item.money" label="盈余"/>
           </p>
-          <ul class="inOutUl" v-if="isShowUl">
+          <ul v-if="isShowUl" class="inOutUl">
             <li>
               <MoneyTag :income="true" :money="item.moneyIn" label="收"/>
             </li>

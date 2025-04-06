@@ -1,6 +1,6 @@
 <template>
   <div class="toggle">
-    <input id="toggle-1" type="checkbox" v-model="model">
+    <input id="toggle-1" v-model="model" type="checkbox">
     <label :class="model?'on-label':'off-label'" for="toggle-1">
       <span class="toggle-off">支</span>
       <span class="toggle-on">收</span>

@@ -1,32 +1,32 @@
 <template>
-  <ReportBtn type="info" text="返回首页" @click="toCalendar"/>
+  <ReportBtn style="float: right" text="返回首页" type="info" @click="toCalendar"/>
   <table class="yearTable">
     <caption class="weight">{{ year }}</caption>
     <tbody>
     <tr>
       <td colspan="2">
-        <MoneyTag label="当年盈余" :income="yearData.money>0" :money="yearData.money"/>
+        <MoneyTag :income="yearData.money>0" :money="yearData.money" label="当年盈余"/>
       </td>
     </tr>
     <tr>
       <td>
-        <MoneyTag label="总收入" :income="true" :money="yearData.moneyIn"/>
+        <MoneyTag :income="true" :money="yearData.moneyIn" label="总收入"/>
       </td>
       <td>
-        <MoneyTag label="总支出" :income="false" :money="yearData.moneyOut"/>
+        <MoneyTag :income="false" :money="yearData.moneyOut" label="总支出"/>
       </td>
     </tr>
     <tr>
       <td colspan="2">
-        <MoneyTag label="月均盈余" :income="yearData.monthAvgMoney>0" :money="yearData.monthAvgMoney"/>
+        <MoneyTag :income="yearData.monthAvgMoney>0" :money="yearData.monthAvgMoney" label="月均盈余"/>
       </td>
     </tr>
     <tr>
       <td>
-        <MoneyTag label="月均收入" :income="true" :money="yearData.monthAvgMoneyIn"/>
+        <MoneyTag :income="true" :money="yearData.monthAvgMoneyIn" label="月均收入"/>
       </td>
       <td>
-        <MoneyTag label="月均支出" :income="false" :money="yearData.monthAvgMoneyOut"/>
+        <MoneyTag :income="false" :money="yearData.monthAvgMoneyOut" label="月均支出"/>
       </td>
     </tr>
     </tbody>

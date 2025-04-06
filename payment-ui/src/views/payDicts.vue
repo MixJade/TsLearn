@@ -3,15 +3,15 @@
   <MyTable :tb-page="tablePage" :thead="['收支','大类','名称','颜色','数量','操作']" caption="收支字典"
            @pageChange="getAll">
     <template #searchForm>
-      <label for="sear-bigType" class="search-lab">大类</label>
-      <select id="sear-bigType" class="search-inp" aria-label="Search" v-model="reqBody.bigType" @change="getAll">
+      <label class="search-lab" for="sear-bigType">大类</label>
+      <select id="sear-bigType" v-model="reqBody.bigType" aria-label="Search" class="search-inp" @change="getAll">
         <option value=""></option>
-        <option v-for="bt in bigTypes" :key="bt.typeKey" :value="bt.typeKey" :style="{color:bt.color}">
+        <option v-for="bt in bigTypes" :key="bt.typeKey" :style="{color:bt.color}" :value="bt.typeKey">
           {{ bt.typeName }}
         </option>
       </select>
-      <label for="sear-income" class="search-lab">收支</label>
-      <select id="sear-income" class="search-inp" aria-label="Search" v-model="reqBody.isIncome" @change="getAll">
+      <label class="search-lab" for="sear-income">收支</label>
+      <select id="sear-income" v-model="reqBody.isIncome" aria-label="Search" class="search-inp" @change="getAll">
         <option :value="null"></option>
         <option :value="0">支出</option>
         <option :value="1">收入</option>
@@ -22,7 +22,7 @@
       <MyBtn text="返回上级" type="primary" @click="toBack"/>
     </template>
     <tr v-for="td in tableData" :key="td.paymentType">
-      <td class="weight" :class="[td.isIncome ? 'in' : 'out']">{{ td.isIncome ? "收入" : "支出" }}</td>
+      <td :class="[td.isIncome ? 'in' : 'out']" class="weight">{{ td.isIncome ? "收入" : "支出" }}</td>
       <td :style="{color: td.bigTypeColor}" class="weight">{{ td.bigTypeName }}</td>
       <td :style="{color: td.color}" class="weight">{{ td.keyName }}</td>
       <td :style="{color: td.color}" class="weight">{{ td.color }}</td>
@@ -48,20 +48,20 @@
         </div>
         <div class="form-row">
           <label for="bigType">大类</label>
-          <select id="bigType" class="search-inp" aria-label="Search" v-model="payDict.bigType" @change="changeBigType">
-            <option v-for="bt in bigTypes" :key="bt.typeKey" :value="bt.typeKey" :style="{color:bt.color}">
+          <select id="bigType" v-model="payDict.bigType" aria-label="Search" class="search-inp" @change="changeBigType">
+            <option v-for="bt in bigTypes" :key="bt.typeKey" :style="{color:bt.color}" :value="bt.typeKey">
               {{ bt.typeName }}
             </option>
           </select>
-          <span class="weight" :style="{color:payDict.color}">{{ payDict.color }}</span>
+          <span :style="{color:payDict.color}" class="weight">{{ payDict.color }}</span>
         </div>
         <div class="form-row">
           <label for="keyName">名称</label>
-          <input id="keyName" type="text" v-model="payDict.keyName">
+          <input id="keyName" v-model="payDict.keyName" type="text">
         </div>
         <div class="form-row">
           <label for="color">颜色</label>
-          <input id="color" type="color" v-model="payDict.color">
+          <input id="color" v-model="payDict.color" type="color">
         </div>
       </fieldset>
       <div class="form-footer">

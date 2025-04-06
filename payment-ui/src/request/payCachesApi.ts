@@ -44,7 +44,7 @@ export const reqUploadCsv = (file: FormData): Promise<Result> =>
 /**
  * 下载一个样例csv
  */
-export const reqSampleCsv = ( ): void => {
+export const reqSampleCsv = (): void => {
     const fileName = `样例csv(微信导出账单).csv`
     // noinspection JSIgnoredPromiseFromCall
     myReq.down("/api/paymentCache/sample-csv", fileName)

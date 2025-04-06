@@ -69,7 +69,7 @@
       <fieldset>
         <legend>上传csv</legend>
         <div class="form-row">
-          <input type="file" accept=".csv" @change="handleFileChange"/>
+          <input accept=".csv" type="file" @change="handleFileChange"/>
           <MyBtn text="上传文件" type="success" @click="uploadFile"/>
         </div>
         <div class="form-row">
