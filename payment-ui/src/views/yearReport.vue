@@ -1,4 +1,5 @@
 <template>
+  <ReportBtn type="info" text="返回首页" @click="toCalendar"/>
   <table class="yearTable">
     <caption class="weight">{{ year }}</caption>
     <tbody>
@@ -79,11 +80,12 @@ import {
   TooltipItem
 } from 'chart.js';
 import {ChartType} from "chart.js/dist/types";
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {reqBigTypePie, reqYearLine, reqYearPie} from "@/request/chartApi";
 import {YearPayDo} from "@/model/vo/YearLineVo";
 import MoneyTag from "@/components/tags/MoneyTag.vue";
 import CheckBtn from "@/components/button/CheckBtn.vue";
+import ReportBtn from "@/components/button/ReportBtn.vue";
 
 // 注册所需的元素、控制器和比例尺
 Chart.register(
@@ -318,6 +320,11 @@ const drawBigTypePie = (labels: string[], moneys: number[]): void => {
       }
     }
   });
+}
+
+const router = useRouter();
+const toCalendar = (): void => {
+  router.push({name: "calendar", query: {date: year}})
 }
 </script>
 <style lang="sass" scoped>

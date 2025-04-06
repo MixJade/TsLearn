@@ -1,6 +1,6 @@
 <template>
   <label class="rocker">
-    <input v-model="checked" type="checkbox">
+    <input id="rockerBtn" v-model="checked" type="checkbox">
     <span class="switch-left">{{ left }}</span>
     <span class="switch-right">{{ right }}</span>
   </label>

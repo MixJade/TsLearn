@@ -5,10 +5,25 @@
 </template>
 
 <script lang="ts" setup>
-import YearCalendar from "@/components/show/YearCalendar.vue";
-import {ref} from "vue";
+import {defineAsyncComponent, onMounted, ref} from "vue";
 import CheckBtn from "@/components/button/CheckBtn.vue";
+import {useRoute} from "vue-router";
 import MonthCalendar from "@/components/show/MonthCalendar.vue";
+// 延迟加载组件
+const YearCalendar = defineAsyncComponent(() => import("@/components/show/YearCalendar.vue"));
+
+onMounted(() => {
+  // 如此获取路由传参
+  const route = useRoute();
+  if (typeof route.query.date === 'string') {
+    selectYear.value = parseInt(route.query.date, 10);
+    const dateStr: string[] = route.query.date.split("-");
+    if (dateStr.length === 2) {
+      // 有年+月
+      selectMonth.value = parseInt(dateStr[1])
+    }
+  }
+})
 
 // 获取当前年份
 const selectYear = ref<number>(new Date().getFullYear());
