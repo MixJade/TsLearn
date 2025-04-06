@@ -21,6 +21,10 @@ onMounted(() => {
     if (dateStr.length === 2) {
       // 有年+月
       selectMonth.value = parseInt(dateStr[1])
+    } else if (dateStr.length === 3) {
+      // 有年+月+日
+      selectMonth.value = parseInt(dateStr[1])
+      checkYear.value = false;
     }
   }
 })
