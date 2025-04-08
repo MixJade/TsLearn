@@ -327,25 +327,5 @@ const toCalendar = (): void => {
   router.push({name: "calendar", query: {date: year}})
 }
 </script>
-<style lang="sass" scoped>
-.yearReport
-  display: flex
-  padding: 12px
-  //子元素间隙
-  gap: 48px
-
-.yearTable
-  border-collapse: collapse
-  margin: 8px 32px
-
-  tr
-    text-align: center
-
-  td
-    border: 2px solid #909399
-    padding: 8px
-
-.dashboard
-  width: 600px
-  height: 300px
+<style lang="sass" scoped src="../myCss/myReport.sass">
 </style>
