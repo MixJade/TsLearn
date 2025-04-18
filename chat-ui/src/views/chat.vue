@@ -1,7 +1,7 @@
 <template>
   <div id="chatMain">
     <header>
-      <button class="header1" type="button" @click="toBack">返回</button>
+      <button class="header1" type="button" @click="$router.push('/')">返回</button>
       <h3 class="header2">聊天页面</h3>
       <button class="header3" type="button">在线人员</button>
     </header>
@@ -12,24 +12,17 @@
       <label for="msgTextArea">
         消息
       </label>
-      <textarea id="msgTextArea" placeholder="请输入待发送的消息" rows="6" cols="70"></textarea>
+      <textarea id="msgTextArea" cols="70" placeholder="请输入待发送的消息" rows="6"></textarea>
       <button type="button">发送</button>
     </footer>
   </div>
 </template>
 
-<script setup lang="ts">
-
+<script lang="ts" setup>
 import {ref} from "vue";
 import {Message} from "@/model/Message";
 import Msg from "@/components/Msg.vue";
-import {useRouter} from "vue-router";
 
-const router = useRouter();
-// 跳转路由
-const toBack = () => {
-  router.back()
-}
 const username = ref<string>("活阎罗阮小七")
 const myMsg = ref<Message[]>([
   {
@@ -67,9 +60,6 @@ const myMsg = ref<Message[]>([
   right: 0
   width: 100%
   height: 100%
-  //禁止文字选中
-  -webkit-user-select: none
-  user-select: none
   //主题颜色
   $backColor: #5b88ea
   //子元素高度

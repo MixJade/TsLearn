@@ -1,7 +1,7 @@
 <template>
   <h3>文件上传</h3>
-  <input type="file" id="fileInput">
-  <button type="button" id="uploadBtn">确认上传</button>
+  <input id="fileInput" type="file">
+  <button id="uploadBtn" type="button">确认上传</button>
   <div id="progressDiv" style="display: none;">
     <progress id="progressBar" max="100" value="0">0%</progress>
     <span id="progressTxt">上传进度</span>kb
@@ -21,13 +21,13 @@
   </ul>
   <MyDialog ref="myShow">
     <figure>
-      <img id="qrCode" src="http://localhost:9527/public/avatar/touhou/touhou025.png" alt="qrCode">
+      <img id="qrCode" alt="qrCode" src="http://localhost:9527/public/avatar/touhou/touhou025.png">
       <figcaption>下载链接二维码</figcaption>
     </figure>
   </MyDialog>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import MyDialog from "@/components/MyDialog.vue";
 import {ref} from "vue";
 
@@ -38,5 +38,30 @@ const showDialog = () => {
 </script>
 
 <style lang="sass" scoped>
+#downUl
+  font-size: larger
 
+  li
+    padding: 6px
+
+    a
+      text-decoration: none
+
+    button
+      opacity: 0
+      //设置过渡效果
+      transition: all 1s
+
+    &:hover button
+      //鼠标悬浮时按钮出现
+      opacity: 1
+
+figcaption
+  text-align: center
+
+footer
+  position: absolute
+  bottom: 0
+  width: 100%
+  overflow: auto
 </style>

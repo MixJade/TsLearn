@@ -1,13 +1,13 @@
 <template>
   <span v-if="ms.isSystem" class="noticeMsg">{{ ms.message }}</span>
-  <div v-else class="msgDiv" :class="isMe?'selfMsg':''">
+  <div v-else :class="isMe?'selfMsg':''" class="msgDiv">
     <span class="msgUser">{{ ms.userVo.username }}{{ ms.sendTime }}</span>
     <div class="msgImg">{{ ms.userVo.simpleNm }}</div>
     <div class="msgContent">{{ ms.message }}</div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import {Message} from "@/model/Message";
 
 defineProps<{
