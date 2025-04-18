@@ -84,7 +84,8 @@ import {
   School,
   Tickets,
   User,
-} from '@element-plus/icons-vue'</script>
+} from '@element-plus/icons-vue';
+</script>
 
 <style lang="scss" scoped>
 .backstage {

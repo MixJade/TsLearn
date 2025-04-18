@@ -61,10 +61,10 @@ const state = reactive({
   score: 404 // 分数
 })
 
-let timer: NodeJS.Timer, // 小球定时器
+let timer: ReturnType<typeof setInterval>, // 小球定时器
     speed = 3,// 小球速度
     map = {x: 10, y: 10},
-    timer2: NodeJS.Timer, // 挑战成功字眼显示定时器
+    timer2: ReturnType<typeof setInterval>, // 挑战成功字眼显示定时器
     index = 0 // 挑战成功字眼显示的索引值
 
 // 挑战成功字眼续个显示的方法
