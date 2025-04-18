@@ -4,3 +4,8 @@ node_modules
 .cache
 dist
 pnpm-lock.yaml
+*.local
+*.tsbuildinfo
+vite.config.d.ts
+vite.config.js
+package-lock.json
