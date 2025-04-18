@@ -2,52 +2,89 @@
   <div id="chatMain">
     <header>
       <button class="header1" type="button" @click="$router.push('/')">返回</button>
-      <h3 class="header2">聊天页面</h3>
-      <button class="header3" type="button">在线人员</button>
+      <h3 class="header2">当前账号: {{ username }}({{ isOn ? "在线" : "离线" }})</h3>
+      <button class="header3" type="button" @click="clickLoginUser">在线人员</button>
     </header>
-    <main>
-      <Msg v-for="ms in myMsg" :is-me="username===ms.userVo.username" :ms="ms"/>
+    <main ref="chatContent">
+      <Msg v-for="ms in myMsg" :is-me="!ms.isSystem && username===ms.userVo.username" :ms="ms"/>
     </main>
     <footer>
       <label for="msgTextArea">
         消息
       </label>
-      <textarea id="msgTextArea" cols="70" placeholder="请输入待发送的消息" rows="6"></textarea>
-      <button type="button">发送</button>
+      <textarea id="msgTextArea" v-model="sendMsg" cols="70" placeholder="请输入待发送的消息" rows="6"></textarea>
+      <button type="button" @click="clickSend">发送</button>
     </footer>
   </div>
 </template>
 
 <script lang="ts" setup>
-import {ref} from "vue";
+import {onBeforeUnmount, onMounted, ref} from "vue";
 import {Message} from "@/model/Message";
 import Msg from "@/components/Msg.vue";
+import {reqLoginUserList, reqSyncHistoryMsg, reqUsername} from "@/request/chatApi";
 
-const username = ref<string>("活阎罗阮小七")
-const myMsg = ref<Message[]>([
-  {
-    isSystem: true,
-    userVo: {username: "没面目焦挺", imgColor: "#576842", simpleNm: "挺"},
-    message: "没面目焦挺上线",
-    sendTime: "16:38:24"
-  }, {
-    isSystem: false,
-    userVo: {username: "没面目焦挺", imgColor: "#576842", simpleNm: "挺"},
-    message: "顶顶顶顶",
-    sendTime: "16:38:24"
-  }, {
-    isSystem: true,
-    userVo: {username: "活阎罗阮小七", imgColor: "#5b3c02", simpleNm: "七"},
-    message: "活阎罗阮小七上线",
-    sendTime: "16:38:24"
-  },
-  {
-    isSystem: false,
-    userVo: {username: "活阎罗阮小七", imgColor: "#5b3c02", simpleNm: "七"},
-    message: "京口瓜洲一水间，\n钟山只隔数重山。\n春风又绿江南岸，\n明月何时照我还。",
-    sendTime: "16:39:13"
-  }
-])
+onMounted(() => {
+  reqUsername().then(res => {
+    username.value = res
+  })
+  reqSyncHistoryMsg().then(res => {
+    res.forEach(i => myMsg.value.push(JSON.parse(i) as Message))
+    rollBottom()
+  })
+})
+const username = ref<string>("")
+const isOn = ref<boolean>(false)
+const myMsg = ref<Message[]>([])
+const chatContent = ref<HTMLDivElement>()
+// 向下滑动
+const rollBottom = () => {
+  setTimeout(() => {
+    chatContent.value!.scrollTop = chatContent.value!.scrollHeight
+  }, 500)
+}
+
+// 链接webSocket
+const ws = new WebSocket("ws://" + window.location.host + "/ws/chat");  // 建立WebSocket对象
+if (typeof (ws) === "undefined") {
+  alert("您的浏览器不支持socket")
+}
+ws.onopen = () => { // 通过对象建立ws链接
+  isOn.value = true;
+}
+//接受消息
+ws.onmessage = (ev) => {
+  myMsg.value.push(JSON.parse(ev.data) as Message)
+  rollBottom()
+}
+// 关闭链接
+ws.onclose = () => {
+  isOn.value = false;
+}
+//发送消息
+const sendMsg = ref<string>("")
+const clickSend = () => {
+  if (sendMsg.value === "") return;
+  ws.send(sendMsg.value);
+  sendMsg.value = ""
+}
+
+//获取登录人列表
+const clickLoginUser = () => {
+  reqLoginUserList().then(res => {
+    if (res.length === 0) alert("无人在线")
+    else alert(res)
+  })
+}
+/**
+ ┌───────────────────────────────────┐
+ │=============退出时的操作============│
+ └───────────────────────────────────┘
+ */
+onBeforeUnmount(() => {
+  // 1000是关闭代码，表示正常关闭连接，'正常关闭连接'是一个可选的文字描述
+  ws.close(1000, '正常关闭连接');
+})
 </script>
 
 <style lang="sass" scoped>

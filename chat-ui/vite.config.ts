@@ -22,6 +22,11 @@ export default defineConfig({
             '/api': {
                 target: "http://localhost:23042",
                 changeOrigin: true,
+            },
+            '/ws/chat': {
+                target: 'ws://localhost:23042',
+                changeOrigin: true,
+                ws: true // 开启 WebSocket 代理
             }
         }
     },

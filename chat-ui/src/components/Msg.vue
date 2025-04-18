@@ -1,7 +1,7 @@
 <template>
   <span v-if="ms.isSystem" class="noticeMsg">{{ ms.message }}</span>
   <div v-else :class="isMe?'selfMsg':''" class="msgDiv">
-    <span class="msgUser">{{ ms.userVo.username }}{{ ms.sendTime }}</span>
+    <span class="msgUser">{{ ms.userVo.username }} {{ ms.sendTime }}</span>
     <div class="msgImg">{{ ms.userVo.simpleNm }}</div>
     <div class="msgContent">{{ ms.message }}</div>
   </div>
@@ -79,5 +79,4 @@ defineProps<{
   .msgContent
     background-color: #67c23a
     color: white
-    text-align: right
 </style>

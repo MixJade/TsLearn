@@ -1,4 +1,8 @@
 export const myReq = {
+    text(url: string): Promise<string> {
+        return fetch(url)
+            .then(response => response.text())
+    },
     get<T>(url: string): Promise<T> {
         return fetch(url)
             .then(response => response.json())
