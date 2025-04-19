@@ -1,9 +1,9 @@
 <template>
   <div id="chatMain">
     <header>
-      <button class="header1" type="button" @click="$router.push('/')">返回</button>
-      <h3 class="header2">当前账号: {{ username }}({{ isOn ? "在线" : "离线" }})</h3>
-      <button class="header3" type="button" @click="clickLoginUser">在线人员</button>
+      <a href="#/">返回</a>
+      <span>{{ username }}({{ isOn ? "在线" : "离线" }})</span>
+      <button type="button" @click="clickLoginUser">在线人员</button>
     </header>
     <main ref="chatContent">
       <Msg v-for="ms in myMsg" :is-me="!ms.isSystem && username===ms.userVo.username" :ms="ms"/>
@@ -98,10 +98,10 @@ onBeforeUnmount(() => {
   width: 100%
   height: 100%
   //主题颜色
-  $backColor: #5b88ea
+  $backColor: #409eff
   //子元素高度
   $headerHeight: 6%
-  $footerHeight: 20%
+  $footerHeight: 12%
 
   header
     width: 100%
@@ -118,15 +118,11 @@ onBeforeUnmount(() => {
     justify-content: space-between
     align-items: center
 
-    .header1
-      align-self: flex-start
-
-    .header2
-      align-self: center
+    a, span
+      //字体颜色
+      font-size: smaller
       color: white
-
-    .header3
-      align-self: flex-end
+      font-weight: bolder
 
   main
     width: 90%
@@ -155,21 +151,23 @@ onBeforeUnmount(() => {
     border-top: 2px solid #3c3c3c
     //内部样式
     box-sizing: border-box
-    padding: 12px
+    padding: 4px 6px
     display: flex
     justify-content: center
 
-    > *
-      //文字样式
-      font-size: 20px
+    label
+      font-weight: bolder
+      color: white
 
+    textarea
+      margin: 0 4px
 
 button
-  padding: 6px 16px 6px 16px
+  padding: 2px 6px
   color: white
   background-color: #67C23A
   border: 2px solid #529b2e
-  border-radius: 12px
+  border-radius: 6px
   font-weight: bolder
 
   &:hover

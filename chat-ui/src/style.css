@@ -4,6 +4,6 @@ body {
     user-select: none;
 }
 
-.weight {
-    font-weight: bolder;
+a {
+    text-decoration: none;
 }

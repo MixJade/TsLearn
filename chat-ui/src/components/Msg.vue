@@ -19,38 +19,38 @@ defineProps<{
 <style lang="sass" scoped>
 .msgDiv
   //聊天消息的样式
-  padding: 12px
+  padding: 4px
 
 .msgUser
-  height: 24px
+  $text-height: 8px
+  height: $text-height
   display: inline-block
   //文字样式
-  font-size: small
-  font-weight: bold
+  font-size: $text-height
   color: #909399
 
 .msgImg
-  $msgImgHeight: 46px
+  $msgImgHeight: 36px
   height: $msgImgHeight
   width: $msgImgHeight
   //大致样式
   background-color: #8047b2
-  border-radius: 12px
+  border-radius: 50%
   //字体样式
   text-align: center
   font-weight: bolder
   color: white
-  font-size: larger
+  font-size: large
   line-height: $msgImgHeight
 
 .msgContent
   //定位
-  margin-left: 64px
+  margin-left: 42px
   margin-top: -32px
   //大体样式
   padding: 8px
-  border-radius: 12px
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.7)
+  border-radius: 4px
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5)
   // 为内部文本宽度
   display: table
   max-width: 70%

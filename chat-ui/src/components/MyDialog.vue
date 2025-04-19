@@ -16,7 +16,7 @@ const showMe = () => {
   dialog.value?.showModal()
 }
 const closeMe = () => dialog.value?.close()
-defineExpose({showMe, closeMe})
+defineExpose({showMe})
 
 </script>
 

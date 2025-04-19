@@ -1,8 +1,9 @@
 <template>
+  <Header/>
   <h3>上传二维码进行解析</h3>
   <input id="fileInput" accept="image/*" type="file" @change="handleFileChange">
   <button type="button" @click="uploadFile">确认上传</button>
-  <section id="parseQRCodeText">{{ parseQRCodeText }}</section>
+  <section class="parseText">{{ parseQRCodeText }}</section>
   <hr>
   <h3>生成二维码</h3>
   <label for="qrCodeText">输入内容</label>
@@ -15,6 +16,7 @@
 
 <script lang="ts" setup>
 import {onMounted, ref} from "vue";
+import Header from "@/components/Header.vue";
 
 const qrCodeText = ref<string>("") // 二维码值的输入框
 const qrCodeImgSrc = ref<string>("") // 二维码图片
@@ -60,8 +62,9 @@ const uploadFile = async () => {
 </script>
 
 <style lang="sass" scoped>
-#parseQRCodeText
-  border: 3px solid #008a5b
+.parseText
+  background-color: #f0f9eb
   padding: 8px
-  width: 375px
+  margin: 6px 16px
+  min-height: 24px
 </style>
