@@ -47,3 +47,10 @@ export const reqUpdRecord = (data: PaymentRecord): Promise<Result> =>
  */
 export const reqDelRecord = (id: number): Promise<Result> =>
     myReq.delete<Result>(`/api/paymentRecord/${id}`)
+
+/**
+ * 上传导出的sql文件
+ * @param file sql文件数据
+ */
+export const reqUploadSql = (file: FormData): Promise<Result> =>
+    myReq.upload<Result>("/api/paymentRecord/upload-sql", file)
