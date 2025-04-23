@@ -179,7 +179,6 @@ const uploadFile = async () => {
 </script>
 
 <style lang="sass" scoped>
-@use "../../myCss/myForm"
 //表格样式
 .yearCalendar
   width: 100%
