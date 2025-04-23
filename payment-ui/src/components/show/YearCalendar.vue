@@ -2,6 +2,7 @@
   <ReportBtn text="收支记录" type="success" @click="toYearPayRecords"/>
   <ReportBtn text="年度报告" type="primary" @click="toYearReport"/>
   <ReportBtn text="导出sql" type="info" @click="downInsertSql(0)"/>
+  <ReportBtn text="导入sql" type="danger" @click="downInsertSql(0)"/>
   <ReportBtn text="页面简化" type="warning" @click="isShowUl = !isShowUl"/>
   <table class="yearCalendar">
     <caption>

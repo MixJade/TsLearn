@@ -125,10 +125,10 @@ const toMonthReport = (): void => {
   border-collapse: collapse
 
   td
-    border: 2px solid #409eff
+    border: 2px solid #909399
 
   th
-    border: 2px solid #337ecc
+    border: 2px solid #909399
     color: #f8f9fa
     padding: 4px
     background-color: #409eff
