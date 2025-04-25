@@ -9,6 +9,8 @@ h1
   // 给文字添加阴影效果
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)
 
+h2
+  color: #c8c9cc
 
 .my-row
   // 卡片专属的行布局
@@ -24,13 +26,6 @@ h1
   height: 420px
   transition: 0.5s
   cursor: pointer
-  // 卡片阴影
-  &::after
-    content: ''
-    position: absolute
-    inset: 0
-    background: linear-gradient(45deg, #eebe77, #f89898)
-    filter: blur(30px)
 
   &:hover
     transform: translateY(-20px)
@@ -42,20 +37,33 @@ h1
     position: absolute
     top: 0
     left: 0
-    background: linear-gradient(45deg, #eebe77, #f89898)
     border-radius: 1.2em
+    //背景图案
+    $s: 200px
+    $c1: #1d1d1d
+    $c2: #4e4f51
+    $c3: #3c3c3c
+    $background1: repeating-conic-gradient(from 30deg, #0000 0 120deg, $c3 0 180deg)
+    $background2: calc(0.5 * $s) calc(0.5 * $s * 0.577)
+    $background3: repeating-conic-gradient(from 30deg, $c1 0 60deg, $c2 0 120deg, $c3 0 180deg)
+    background: $background1 $background2, $background3
+    background-size: $s calc($s * 0.577)
 
   span
     position: absolute
-    inset: 6px
-    background-color: rgba(0, 0, 0, 0.1)
+    inset: 10px
+    background-color: rgba(200, 201, 204, 0.1)
     z-index: 2
     border-radius: 1em
+    //毛玻璃效果
+    -webkit-backdrop-filter: blur(3px)
+    backdrop-filter: blur(3px)
 
   .content
     position: relative
     z-index: 10
     inset: 6px
+    font-size: large
 
 
 ul
@@ -63,6 +71,8 @@ ul
   list-style: none
   // 设置文字靠左
   text-align: start
+  //文字白边
+  text-shadow: -2px -2px 2px white, 2px -2px 2px white, -2px 2px 2px white, 2px 2px 2px white
 
 
 a

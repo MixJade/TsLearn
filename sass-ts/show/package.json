@@ -10,7 +10,6 @@
     "漫画布局-b": "sass 漫画布局/cartoonLayout.sass:漫画布局/cartoonLayout.min.css --no-source-map --style=compressed",
     "登录页面-b": "sass 登录页面/lightLogin.sass:登录页面/lightLogin.min.css --no-source-map --style=compressed",
     "确认框-b": "sass 确认框/确认框.sass:确认框/确认框.min.css --no-source-map --style=compressed",
-    "背景样式-b": "sass 背景样式/backTes.sass:背景样式/backTes.min.css --no-source-map --style=compressed",
     "表单测试-b": "sass 表格样式/表单测试.sass:表格样式/表单测试.min.css --no-source-map --style=compressed",
     "表格测试-b": "sass 表格样式/myTable.sass:表格样式/myTable.min.css --no-source-map --style=compressed",
     "表格成品-bw": "sass 表格样式/myCurl.sass:表格样式/myCurl.min.css --no-source-map --style=compressed --watch",
