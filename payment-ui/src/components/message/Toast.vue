@@ -27,7 +27,7 @@ defineProps<{
   /*动画持续时间3秒*/
   animation: moveAndFade 3s
   /*元素居中*/
-  position: absolute
+  position: fixed
   left: 50%
   transform: translateX(-50%)
   /*吐司样式*/
@@ -35,6 +35,7 @@ defineProps<{
   height: 40px
   border-radius: 6px
   border: 2px solid
+  box-shadow: 0 8px 28px #909399
   /*内容空隙*/
   box-sizing: border-box
   padding-left: 32px
