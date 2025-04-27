@@ -1,16 +1,15 @@
 <template>
   <dialog ref="dialog" class="sureDelModal">
-    <p>{{ showTxt }}</p>
+    <p class="content">{{ showTxt }}</p>
     <div style="text-align: right">
-      <MyBtn text="确认" type="danger" @click="confirm"/>
-      <MyBtn text="取消" type="secondary" @click="cancel"/>
+      <button class="sure-btn btn-confirm" type="button" @click="confirm">确认</button>
+      <button class="sure-btn btn-cancel" type="button" @click="cancel">取消</button>
     </div>
   </dialog>
 </template>
 
 <script lang="ts" setup>
 import {ref} from "vue";
-import MyBtn from "@/components/button/MyBtn.vue";
 // 删除确认时的弹出框
 // 定义模态框和确定按钮的引用
 const dialog = ref<HTMLDialogElement>()
@@ -54,4 +53,39 @@ dialog.sureDelModal
   border: 3px solid #F56C6C
   background-color: #fef0f0
   color: #F56C6C
+  //入场动画
+  animation: slide-down 0.3s ease-out
+
+  .content
+    padding: 16px
+
+@keyframes slide-down
+  0%
+    margin-top: 0
+    opacity: 0
+  100%
+    margin-top: 5vh
+    opacity: 1
+
+.sure-btn
+  padding: 6px 12px
+  margin-right: 6px
+  font-weight: bolder
+  border-radius: 6px
+  transition: 0.5s
+  cursor: pointer
+
+  &.btn-confirm
+    color: white
+    background-color: #F56C6C
+    border: 2px solid #c45656
+
+  &.btn-cancel
+    color: #909399
+    background-color: #e9e9eb
+    border: 2px solid #73767a
+
+    &:hover
+      color: white
+      background-color: #909399
 </style>
