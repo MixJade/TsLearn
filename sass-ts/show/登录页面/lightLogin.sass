@@ -1,8 +1,3 @@
-*
-  margin: 0
-  padding: 0
-  box-sizing: border-box
-
 body
   min-height: 100vh
   background-color: #111
@@ -61,18 +56,23 @@ body
     position: relative
     width: 100%
 
-    button
+    .ipt-btn
       position: relative
       width: 100%
       padding: 8px
       margin-bottom: 3px
-      border: 2px solid #fff
-      border-radius: 40px
-      font-size: 18px
-      color: #fff
-      outline: none
-      background: linear-gradient(45deg, #ff357a, #fff172)
-      cursor: pointer
+      text-align: center
+
+      &:hover
+        background: linear-gradient(to right, rgba(255, 53, 122, 0) 0%, rgba(255, 53, 122, 1) 30%, rgba(255, 241, 114, 1) 70%, rgba(255, 241, 114, 0) 100%)
+
+    a
+      text-decoration: none
+      font-size: larger
+      font-weight: bolder
+      color: white
+      //文字阴影
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)
 
 @keyframes animate
   0%
