@@ -1,9 +1,16 @@
 @use "myCss/myForm"
 @use "myCss/tableBtn"
+@use "myCss/mySearch"
 body
   background: #f8f9fa
+  //禁止文字选中
   -webkit-user-select: none
   user-select: none
+
+.canCopy
+  //允许文字选中
+  -webkit-user-select: text
+  user-select: text
 
 .weight
   font-weight: bolder

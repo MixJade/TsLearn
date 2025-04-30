@@ -21,7 +21,7 @@
       <td>
         <MoneyTag :income="td.isIncome" :money="td.money"/>
       </td>
-      <td>{{ td.remark }}</td>
+      <td class="canCopy">{{ td.remark }}</td>
       <td>{{ td.payDate }}</td>
       <td>
         <button class="tb-btn upd-btn" type="button" @click="openUpdForm(td)">
@@ -292,16 +292,4 @@ const submitForm = (): void => {
 </script>
 
 <style lang="sass" scoped>
-// ========================[搜索框样式]===============================
-.search-inp
-  /*搜索框*/
-  padding: 8px
-  border: 2px solid #67C23A
-  border-radius: 8px
-  margin: 0 4px 0 4px
-
-.search-lab
-  //搜索label
-  color: #529b2e
-  font-size: smaller
 </style>

@@ -4,6 +4,12 @@
            :thead="['日期','时间','交易类型','交易对方','商品名称','金额','支付方式','当前状态','操作']"
            caption="收支缓存"
            @pageChange="getAll">
+    <template #searchForm>
+      <label class="search-lab" for="wareName">交易对方</label>
+      <input id="wareName" v-model="reqBody.payMan" class="search-inp" type="text">
+      <label class="search-lab" for="wareName">商品名称</label>
+      <input id="wareName" v-model="reqBody.wareName" class="search-inp" type="text">
+    </template>
     <template #searchBtn>
       <MyBtn text="上传csv" type="success" @click="openForm2"/>
       <MyBtn text="清空缓存" type="danger" @click="deleteAll"/>
@@ -12,8 +18,8 @@
     <tr v-for="td in tableData" :key="td.cacheId">
       <td>{{ td.payDate }}</td>
       <td>{{ td.payTime }}</td>
-      <td>{{ td.payType }}</td>
-      <td>{{ td.payMan }}</td>
+      <td class="canCopy">{{ td.payType }}</td>
+      <td class="canCopy">{{ td.payMan }}</td>
       <td>{{ td.wareName }}</td>
       <td>
         <MoneyTag :income="td.isIncome" :money="td.money"/>
@@ -98,7 +104,7 @@ import {TwoTypeOptVo} from "@/model/vo/TwoTypeOptVo";
 import {Result} from "@/model/vo/Result";
 import SureDelModal from "@/components/message/SureDelModal.vue";
 import {
-  reqAddCache,
+  reqAddRec,
   reqDelAllCache,
   reqDelCache,
   reqPayCachePage,
@@ -109,6 +115,7 @@ import {PaymentCache} from "@/model/entity/PaymentCache";
 import MoneyTag from "@/components/tags/MoneyTag.vue";
 import {reqTwoOption} from "@/request/payDictApi";
 import {CacheToRecordDto} from "@/model/dto/CacheToRecordDto";
+import {PayCachePageDto} from "@/model/dto/PayCachePageDto";
 
 onMounted(() => {
   getAll();
@@ -155,8 +162,12 @@ const commonResp = (resp: Result): void => {
 // 表格数据
 const tableData = ref<PaymentCache[]>([])
 const tablePage: TbPage = reactive({current: 1, pages: 1, total: 0, size: 10}) as TbPage
+// 分页条件请求体
+const reqBody: PayCachePageDto = reactive({
+  payMan: "", wareName: ""
+})
 const getAll = () => {
-  reqPayCachePage(tablePage.current, tablePage.size).then(resp => {
+  reqPayCachePage(tablePage.current, tablePage.size, reqBody).then(resp => {
     tableData.value = resp.records
     tablePage.current = resp.current;
     tablePage.pages = resp.pages
@@ -221,7 +232,7 @@ const submitForm = (): void => {
   }
   // 开始提交
   closeDialog()
-  reqAddCache(payRecord).then(resp => commonResp(resp))
+  reqAddRec(payRecord).then(resp => commonResp(resp))
 }
 
 /**

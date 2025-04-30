@@ -25,7 +25,7 @@
       <td :class="[td.isIncome ? 'in' : 'out']" class="weight">{{ td.isIncome ? "收入" : "支出" }}</td>
       <td :style="{color: td.bigTypeColor}" class="weight">{{ td.bigTypeName }}</td>
       <td :style="{color: td.color}" class="weight">{{ td.keyName }}</td>
-      <td :style="{color: td.color}" class="weight">{{ td.color }}</td>
+      <td :style="{color: td.color}" class="weight canCopy">{{ td.color }}</td>
       <td :style="{color: td.color}" class="weight">{{ td.recordNum }}</td>
       <td>
         <button class="tb-btn upd-btn" type="button" @click="openUpdForm(td)">
@@ -225,17 +225,4 @@ const changeBigType = (): void => {
 .out
   //支出的字体
   color: #17bd17
-
-// ========================[搜索框样式]===============================
-.search-inp
-  /*搜索框*/
-  padding: 8px
-  border: 2px solid #67C23A
-  border-radius: 8px
-  margin: 0 4px 0 4px
-
-.search-lab
-  //搜索label
-  color: #529b2e
-  font-size: smaller
 </style>
