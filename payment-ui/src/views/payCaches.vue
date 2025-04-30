@@ -185,7 +185,9 @@ const deleteAll = async (): Promise<void> => {
   })
 }
 const deleteById = (id: number): void => {
-  reqDelCache(id).then(resp => commonResp(resp))
+  sureDelModal.value?.confirmDel("确定删除？删除后数据需手动找回").then((resp: boolean) => {
+    if (resp) reqDelCache(id).then(resp => commonResp(resp))
+  })
 }
 
 /**
