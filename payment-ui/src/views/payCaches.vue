@@ -58,6 +58,7 @@
         <div class="form-row">
           <label for="remark">备注</label>
           <input id="remark" v-model="payRecord.remark" type="text">
+          <button type="button" title="同步上一次的备注" @click="remarkLast">同上</button>
         </div>
         <div class="form-row">
           <label for="payDate">付费时间</label>
@@ -212,6 +213,8 @@ const openUpdForm = (data: PaymentCache) => {
   myShow.value?.showMe();
 }
 const closeDialog = () => myShow.value?.closeMe();
+// “同上”文本
+const lastRemark = ref<string>("");
 
 // 下拉框的两个分类
 const optionTwoData = ref<TwoTypeOptVo>({inList: [], outList: []})
@@ -232,7 +235,15 @@ const submitForm = (): void => {
   }
   // 开始提交
   closeDialog()
+  lastRemark.value = payRecord.remark
   reqAddRec(payRecord).then(resp => commonResp(resp))
+}
+
+/**
+ * 设置上一次的备注
+ */
+const remarkLast = () => {
+  payRecord.remark = lastRemark.value
 }
 
 /**
