@@ -18,9 +18,9 @@
     <tr v-for="td in tableData" :key="td.cacheId">
       <td>{{ td.payDate }}</td>
       <td>{{ td.payTime }}</td>
-      <td class="canCopy">{{ td.payType }}</td>
+      <td>{{ td.payType }}</td>
       <td class="canCopy">{{ td.payMan }}</td>
-      <td>{{ td.wareName }}</td>
+      <td class="canCopy">{{ td.wareName }}</td>
       <td>
         <MoneyTag :income="td.isIncome" :money="td.money"/>
       </td>
