@@ -1,6 +1,7 @@
 export interface PaymentCache {
     cacheId: number;
     payDate: string;
+    payTime: string;
     payType: string;
     payMan: string;
     wareName: string;

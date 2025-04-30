@@ -1,7 +1,7 @@
 <template>
   <!-- 表格 -->
   <MyTable :tb-page="tablePage"
-           :thead="['付费时间','交易类型','交易对方','商品名称','金额','支付方式','当前状态','操作']"
+           :thead="['日期','时间','交易类型','交易对方','商品名称','金额','支付方式','当前状态','操作']"
            caption="收支缓存"
            @pageChange="getAll">
     <template #searchBtn>
@@ -11,6 +11,7 @@
     </template>
     <tr v-for="td in tableData" :key="td.cacheId">
       <td>{{ td.payDate }}</td>
+      <td>{{ td.payTime }}</td>
       <td>{{ td.payType }}</td>
       <td>{{ td.payMan }}</td>
       <td>{{ td.wareName }}</td>
