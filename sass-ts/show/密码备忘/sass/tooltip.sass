@@ -1,25 +1,37 @@
 .tooltip
   position: relative
+  display: inline-block
 
-  .tip-text
-    visibility: hidden
-    background-color: #555
-    color: #fff
-    text-align: center
-    padding: 5px
-    border-radius: 6px
-    /*定位*/
+  &:hover
+    .tip-text
+      opacity: 1
+      visibility: visible
+      transform: translateX(-50%) translateY(0)
+
+.tip-text
+  position: absolute
+  bottom: calc(100% + 15px)
+  left: 50%
+  transform: translateX(-50%) translateY(10px)
+  padding: 12px
+  background: linear-gradient(135deg, #ffffff, #f8f9fa)
+  border-radius: 10px
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1)
+  color: #1f2937
+  font-size: 14px
+  white-space: nowrap
+  opacity: 0
+  visibility: hidden
+  transition: all 0.3s ease
+  border: 1px solid rgba(229, 231, 235, 1)
+
+  &::after
+    //下箭头
+    content: ""
     position: absolute
-    z-index: 1
-    /*悬停在a标签上*/
-    bottom: 100%
-    /*居中显示*/
+    top: 100%
     left: 50%
-    margin-left: -80px
-    /*显示动画*/
-    opacity: 0
-    transition: opacity 0.5s
-
-  &:hover .tip-text
-    visibility: visible
-    opacity: 1
+    transform: translateX(-50%)
+    border-width: 8px
+    border-style: solid
+    border-color: #ffffff transparent transparent transparent

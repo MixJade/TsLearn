@@ -1,11 +1,11 @@
 "use strict";
 const pwdBak = (() => {
     const softMagList = [
-        { href: "#", name: "少时诵诗书", remark: "每日签到送1个小时" },
-        { href: "#", name: "少时诵诗书", remark: "每日签到送1个小时" },
-        { href: "#", name: "少时诵诗书", remark: "每日签到送1个小时" },
-        { href: "#", name: "少时诵诗书", remark: "每日签到送1个小时" },
-        { href: "#", name: "少时诵诗书", remark: "每日签到送1个小时" },
+        { name: "少时诵诗书", remark: "每日签到送1个小时" },
+        { name: "少时诵诗书", remark: "每日签到送1个小时" },
+        { name: "少时诵诗书", remark: "每日签到送1个小时" },
+        { name: "少时诵诗书", remark: "每日签到送1个小时" },
+        { name: "少时诵诗书", remark: "每日签到送1个小时" },
     ];
     const pwdMagList = [
         { href: "#", name: "少时诵诗1", remark: "每日签到送1个小时", pwd: "撒阿达大大" },
@@ -30,12 +30,7 @@ const pwdBak = (() => {
         const softUl = document.getElementById("soft-ul");
         if (softUl !== null) {
             softMagList.forEach(item => {
-                if (item.remark === "") {
-                    softUl.innerHTML += `<li><a href="${item.href}">${item.name}</a></li>`;
-                }
-                else {
-                    softUl.innerHTML += `<li><a href="${item.href}" class="tooltip">${item.name}<span class="tip-text">${item.remark}</span></a></li>`;
-                }
+                softUl.innerHTML += `<li class="tooltip"><span>${item.name}</span> <div class="tip-text">✨ ${item.remark}</div></li>`;
             });
         }
         firstLoadPa(pwdMagList.length);
