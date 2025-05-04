@@ -54,30 +54,31 @@
             font-weight: bold
         }
     </style>
-    <style>.tus {
+    <style>.baseTus {
         top: -100%;
         opacity: 0;
         position: fixed;
         left: 50%;
         transform: translateX(-50%);
         width: 250px;
-        height: 40px;
-        border-radius: 18px;
-        border: 2px solid #67c23a;
+        height: 38px;
+        border-radius: 6px;
+        box-shadow: 0 8px 28px #909399;
+        border: 1px solid #67c23a;
         color: #67c23a;
         background: #e1f3d8;
         box-sizing: border-box;
-        padding-left: 38px;
+        padding-left: 36px;
         line-height: 36px;
         -webkit-user-select: none;
         user-select: none;
         display: none
     }
 
-    .tus > svg {
+    .baseTus > svg {
         position: absolute;
-        top: 6px;
-        left: 8px
+        top: 9px;
+        left: 9px
     }
 
     /*noinspection CssUnusedSymbol*/
@@ -117,10 +118,10 @@
 <h5>Bootstrap配色</h5>
 <div id="container3"></div>
 <!--隐藏的吐司消息-->
-<div class="tus" id="myTus">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-        <circle cx="12" cy="12" r="11" fill="#67C23A"/>
-        <path d="M7 12 L12 17 L17 7" stroke="#e1f3d8" stroke-width="2" fill="none"/>
+<div class="baseTus" id="myTus">
+    <svg height="18" width="18" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="9" cy="9" fill="#67C23A" r="9"/>
+        <path d="M5 9 L9 13 L13 5" fill="none" stroke="#e1f3d8" stroke-width="2"/>
     </svg>
     <span id="myTusTxt">复制成功</span>
 </div>
@@ -210,7 +211,7 @@
     // 复制函数
     const copyColor = (text) => {
         navigator.clipboard.writeText(text).then(() => {
-            baseTus.showTus("复制成功:" + text);
+            baseTus.showTus("复制成功: " + text);
         });
     };
 </script>

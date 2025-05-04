@@ -1,4 +1,8 @@
-.tus
+.baseTus
+  $tus-height: 38px
+  $border-weight: 1px
+  $svg-height: 18px
+  $svg-margin: calc(($tus-height - 2 * $border-weight - $svg-height) / 2)
   top: -100%
   opacity: 0
   //元素居中
@@ -7,17 +11,18 @@
   transform: translateX(-50%)
   //吐司样式
   width: 250px
-  height: 40px
-  border-radius: 18px
+  height: $tus-height
+  border-radius: 6px
+  box-shadow: 0 8px 28px #909399
   //成功样式
-  border: 2px solid #67C23A
+  border: $border-weight solid #67C23A
   color: #67C23A
   background: #e1f3d8
   //内容空隙
   box-sizing: border-box
-  padding-left: 38px
+  padding-left: calc($svg-margin * 2 + $svg-height)
   //文字样式
-  line-height: 36px
+  line-height: calc($tus-height - 2 * $border-weight)
   -webkit-user-select: none
   user-select: none
   // 吐司默认隐藏
@@ -25,8 +30,8 @@
 
   > svg
     position: absolute
-    top: 6px
-    left: 8px
+    top: $svg-margin
+    left: $svg-margin
 
 //吐司的显示状态(触发动画)
 .visible

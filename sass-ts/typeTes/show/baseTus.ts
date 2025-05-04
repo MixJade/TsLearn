@@ -1,13 +1,13 @@
 // noinspection JSUnusedGlobalSymbols
 const baseTus = (() => {
     // 将新元素添加到 body 元素的末尾
-    document.body.innerHTML += `<div class="tus" id="myTus">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-                <circle cx="12" cy="12" r="11" fill="#67C23A"/>
-                <path d="M7 12 L12 17 L17 7" stroke="#e1f3d8" stroke-width="2" fill="none"/>
-            </svg>
-            <span id="myTusTxt">复制成功</span>
-        </div>`;
+    document.body.innerHTML += `<div class="baseTus" id="myTus">
+        <svg height="18" width="18" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="9" cy="9" fill="#67C23A" r="9"/>
+          <path d="M5 9 L9 13 L13 5" fill="none" stroke="#e1f3d8" stroke-width="2"/>
+        </svg>
+        <span id="myTusTxt">复制成功</span>
+    </div>`;
     // 获得对象
     const myTus = document.getElementById("myTus") as HTMLDivElement;
     const myTusTxt = document.getElementById("myTusTxt") as HTMLSpanElement;
