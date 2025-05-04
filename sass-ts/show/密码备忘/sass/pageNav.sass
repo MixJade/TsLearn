@@ -1,4 +1,5 @@
 #pageNav
+  $page-color: #67C23A
   display: flex
   /*设置主轴为水平方向，起点在左端*/
   flex-direction: row
@@ -9,6 +10,12 @@
   /*禁止文字选中*/
   -webkit-user-select: none
   user-select: none
+
+  select
+    border: none
+    border-bottom: 2px solid $page-color
+    color: $page-color
+    outline: none
 
   ul
     flex: 1
@@ -34,10 +41,10 @@
         text-align: center
         margin: 2px
         /*边框样式*/
-        border: 2px solid #67C23A
+        border: 2px solid $page-color
         border-radius: 50%
         background-color: white
-        color: #67C23A
+        color: $page-color
         box-shadow: 0 0 6px rgba(0, 0, 0, 0.5)
         /*鼠标小手*/
         cursor: pointer
@@ -48,8 +55,7 @@
 
   .paTxt
     flex: 1
-    /*用于元素居中*/
-    color: #67C23A
+    color: $page-color
 
   #paTex1
     /*内容靠右*/
@@ -59,7 +65,7 @@
 
   span
     &.pa-btn
-      background-color: #67C23A
+      background-color: $page-color
       color: white
       font-weight: bolder
 
@@ -73,7 +79,7 @@
 
     &.active
       color: white
-      background-color: #67C23A
+      background-color: $page-color
       /*鼠标禁止*/
       cursor: not-allowed
 
