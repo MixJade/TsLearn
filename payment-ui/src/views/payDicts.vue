@@ -73,12 +73,10 @@
   <!-- 吐司组件-->
   <ToastBox ref="childRef"/>
   <SureDelModal ref="sureDelModal"/>
-  <DragBall @click="openAddForm"/>
 </template>
 
 <script lang="ts" setup>
 import ToastBox from "@/components/message/ToastBox.vue";
-import DragBall from "@/components/button/DragBall.vue";
 import {onMounted, reactive, ref} from "vue";
 import MyTable, {TbPage} from "@/components/show/MyTable.vue";
 import MyDialog from "@/components/message/MyDialog.vue";
