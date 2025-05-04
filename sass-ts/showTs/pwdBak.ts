@@ -1,18 +1,18 @@
 const pwdBak = (() => {
     // 待下载软件的对象
-    interface SoftMag {
+    interface MemoMag {
         name: string;
         remark: string;
     }
 
     // 密码备份对象
-    interface PwdMag extends SoftMag {
+    interface PwdMag extends MemoMag {
         href: string;
         pwd: string;
     }
 
     // 数据：待下载软件列表
-    const softMagList: SoftMag[] = [
+    const memoMagList: MemoMag[] = [
         {name: "少时诵诗书", remark: "每日签到送1个小时"},
         {name: "少时诵诗书", remark: "每日签到送1个小时"},
         {name: "少时诵诗书", remark: "每日签到送1个小时"},
@@ -48,10 +48,10 @@ const pwdBak = (() => {
      */
     const firstDataLoad = () => {
         // 向软件列表中写入
-        const softUl = document.getElementById("soft-ul");
-        if (softUl !== null) {
-            softMagList.forEach(item => {
-                softUl.innerHTML += `<li class="tooltip"><span>${item.name}</span> <div class="tip-text">${item.remark}</div></li>`
+        const memoUl = document.getElementById("memo-ul");
+        if (memoUl !== null) {
+            memoMagList.forEach(item => {
+                memoUl.innerHTML += `<li class="tooltip"><span>${item.name}</span> <div class="tip-text">${item.remark}</div></li>`
             })
         }
         // 向密码备份列表中写入
