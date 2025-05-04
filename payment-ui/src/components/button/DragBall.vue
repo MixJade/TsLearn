@@ -26,7 +26,7 @@ const dragend = (e: DragEvent): void => {
 };
 </script>
 <style lang="sass" scoped>
-$ball-weight: 64px
+$ball-weight: 48px
 .drag-ball
   cursor: pointer
   position: absolute
@@ -38,7 +38,7 @@ $ball-weight: 64px
   //文字样式
   line-height: $ball-weight
   font-weight: bolder
-  font-size: larger
+  font-size: smaller
   text-align: center
   color: #f0f9eb
 </style>

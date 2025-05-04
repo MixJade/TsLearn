@@ -71,10 +71,12 @@
   <!-- 吐司组件-->
   <ToastBox ref="childRef"/>
   <SureDelModal ref="sureDelModal"/>
+  <DragBall @click="openAddForm"/>
 </template>
 
 <script lang="ts" setup>
 import ToastBox from "@/components/message/ToastBox.vue";
+import DragBall from "@/components/button/DragBall.vue";
 import {onMounted, reactive, ref} from "vue";
 import {PayRecordPageDto} from "@/model/dto/PayRecordPageDto";
 import {reqAddRecord, reqDelRecord, reqPayRecordPage, reqUpdRecord} from "@/request/payRecordApi";
