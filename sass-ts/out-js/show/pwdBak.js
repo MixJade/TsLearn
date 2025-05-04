@@ -30,7 +30,7 @@ const pwdBak = (() => {
         const softUl = document.getElementById("soft-ul");
         if (softUl !== null) {
             softMagList.forEach(item => {
-                softUl.innerHTML += `<li class="tooltip"><span>${item.name}</span> <div class="tip-text">✨ ${item.remark}</div></li>`;
+                softUl.innerHTML += `<li class="tooltip"><span>${item.name}</span> <div class="tip-text">${item.remark}</div></li>`;
             });
         }
         firstLoadPa(pwdMagList.length);
