@@ -1,41 +1,42 @@
 {
   "compilerOptions": {
     /* Language and Environment */
-    "target": "es2022",                                  /* 编译目标JS版本 */
+    "target": "es2022",                              /* 编译目标JS版本 */
     /* Modules */
-    "module": "commonjs",                                /* 指定使用模块: 'commonjs' */
-    // "baseUrl": "./",                                  /* 指定基础目录 */
-    // "paths": {},                                      /* 指定模块路径别名 */
-    // "typeRoots": [],                                  /* 指定类型声明文件的根目录 */
+    "module": "commonjs",                            /* 指定使用模块: 'commonjs' */
+    // "baseUrl": "./",                              /* 指定基础目录 */
+    // "paths": {},                                  /* 指定模块路径别名 */
+    // "typeRoots": [],                              /* 指定类型声明文件的根目录 */
 
     /* JavaScript Support */
-    // "allowJs": true,                                  /* 是否允许编译 JavaScript 文件 */
-    // "checkJs": true,                                  /* 是否检查 JavaScript 文件。 */
+    // "allowJs": true,                              /* 是否允许编译 JavaScript 文件 */
+    // "checkJs": true,                              /* 是否检查 JavaScript 文件。 */
 
     /* Emit */
-    // "watch": true,                                     /* 监视文件变化，然后重新编译 */
-    // "declaration": true,                              /* 是否生成声明文件 */
-    // "declarationMap": true,                           /* 是否生成声明文件的 sourcemap */
-    // "emitDeclarationOnly": true,                      /* 只输出声明文件 */
-    // "sourceMap": true,                                /* 生成sourcemap */
-    // "outFile": "./",                                  /* 将所有的文件编译为一个js文件 */
-     "outDir": "out-js",                                /* 输出的JS目录 */
-     "removeComments": true,                           /* 去除注释 */
-     "noEmitOnError": true,                            /* 出错时不编译 */
-    // "preserveConstEnums": true,                       /* 保留 const 枚举 */
-    // "declarationDir": "./",                           /* 声明文件输出目录 */
+    // "watch": true,                                /* 监视文件变化，然后重新编译 */
+    // "declaration": true,                          /* 是否生成声明文件 */
+    // "declarationMap": true,                       /* 是否生成声明文件的 sourcemap */
+    // "emitDeclarationOnly": true,                  /* 只输出声明文件 */
+    // "sourceMap": true,                            /* 生成sourcemap */
+    // "outFile": "./",                              /* 将所有的文件编译为一个js文件 */
+     "outDir": "out-js",                             /* 输出的JS目录 */
+     "removeComments": true,                         /* 去除注释 */
+     "noEmitOnError": true,                          /* 出错时不编译 */
+    // "preserveConstEnums": true,                   /* 保留 const 枚举 */
+    // "declarationDir": "./",                       /* 声明文件输出目录 */
 
     /* Interop Constraints */
-    // "esModuleInterop": true,                           /* 用于在不支持Import语法时强行兼容 */
-    // "forceConsistentCasingInFileNames": true,          /* 强制代码中使用的模块文件名和文件系统中的文件名保持大小写一致 */
+    // "esModuleInterop": true,                      /* 用于在不支持Import语法时强行兼容 */
+    // "forceConsistentCasingInFileNames": true,     /* 强制代码中使用的模块文件名和文件系统中的文件名保持大小写一致 */
 
     /* Type Checking */
-    "strict": true,                                    /* 开启严格检查 */
+    "strict": true,                                   /* 开启严格检查 */
     "noImplicitAny": true,                            /* 是否禁止隐式any类型 */
-    // "strictNullChecks": true,                         /* 检查null和undefined */
-    // "noUnusedLocals": true,                           /* 检查未使用的局部变量 */
+    // "strictNullChecks": true,                      /* 检查null和undefined */
+    // "noUnusedLocals": true,                        /* 检查未使用的局部变量 */
     "alwaysStrict": true,                             /* 总是严格 */
     /* Completeness */
-    "skipLibCheck": true                               /* 是否跳过检查库文件 .d.ts files. */
-  }
+    "skipLibCheck": true                              /* 是否跳过检查库文件 .d.ts files. */
+  },
+  "include": ["typeTes"]                              /* 特别指定编译的Ts文件夹(去掉则为所有ts文件) */
 }

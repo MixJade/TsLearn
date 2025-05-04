@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    // 编译目标JS版本
+    "target": "es2022",
+    // 指定使用模块: 'commonjs'
+    "module": "commonjs",
+    // 输出的JS目录
+    // "outDir": "",
+    // 去除注释
+    "removeComments": true,
+    // 出错时不编译
+    "noEmitOnError": true,
+    // 开启严格检查
+    "strict": true,
+    // 是否禁止隐式any类型
+    "noImplicitAny": true,
+    // 总是严格
+    "alwaysStrict": true,
+    // 是否跳过检查库文件 .d.ts files.
+    "skipLibCheck": true
+  }
+}
