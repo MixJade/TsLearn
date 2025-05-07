@@ -1,5 +1,6 @@
 <template>
   <ReportBtn style="float: right" text="返回首页" type="info" @click="toCalendar"/>
+  <h3>消费总结</h3>
   <table class="yearTable">
     <caption class="weight">{{ year }}</caption>
     <tbody>
@@ -31,7 +32,6 @@
     </tr>
     </tbody>
   </table>
-  <hr>
   <h3>收支分析</h3>
   <div class="yearReport">
     <!-- 年度柱状图-->
@@ -43,7 +43,6 @@
       <canvas ref="lineYearChartRef"></canvas>
     </div>
   </div>
-  <hr>
   <CheckBtn v-model="isIncome" left="收" right="支" @change="reqDrawChart"/>
   <h3>消费分析</h3>
   <div class="yearReport">
@@ -54,8 +53,8 @@
       <canvas ref="pieChartRef"></canvas>
     </div>
   </div>
+  <h3>消费构成({{ bigTypeTit }})</h3>
   <div class="yearReport">
-    <p>{{ bigTypeTit }}组成</p>
     <div class="dashboard">
       <canvas ref="pieBigTypeChartRef"></canvas>
     </div>

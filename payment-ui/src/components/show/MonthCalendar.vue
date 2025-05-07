@@ -28,10 +28,10 @@
           <ul>
             <li class="payCount">{{ item.payCount }}rec</li>
             <li :class="{ noShow: item.moneyIn===0}">
-              <MoneyTag :income="true" :money="item.moneyIn" label="收"/>
+              <MoneyTag :income="true" :money="item.moneyIn"/>
             </li>
             <li :class="{ noShow: item.moneyOut===0}">
-              <MoneyTag :income="false" :money="item.moneyOut" label="支"/>
+              <MoneyTag :income="false" :money="item.moneyOut"/>
             </li>
           </ul>
         </div>
@@ -166,6 +166,8 @@ ul
   //收支列表
   padding: 4px
   margin: 4px
+  list-style: none
+  text-align: right
 
   .payCount
     font-size: smaller
