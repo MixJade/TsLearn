@@ -36,7 +36,7 @@
           <div class="sci-btns">
             <button class="sci-btn" type="button" @click="toMonthPayRecords(item.month)">账单</button>
             <button class="sci-btn" type="button" @click="toMonthReport(item.month)">分析</button>
-            <button class="sci-btn" type="button" @click="toMonthBarRep(item.month)">时序</button>
+            <button class="sci-btn" type="button" @click="downInsertSql(item.month)">导出</button>
           </div>
         </div>
       </td>
@@ -126,9 +126,6 @@ const toYearReport = (): void => {
 }
 const toMonthReport = (month: number): void => {
   router.push({name: "monthReport", query: {year: selectedYear.value, month}})
-}
-const toMonthBarRep = (month: number): void => {
-  router.push({name: "monthBarRep", query: {year: selectedYear.value, month}})
 }
 
 /**
@@ -326,7 +323,7 @@ const uploadFile = async () => {
     background-color: #409eff
 
   :nth-child(3)
-    background-color: #e6a23c
+    background-color: #909399
 
   .sci-btn
     width: 42px
