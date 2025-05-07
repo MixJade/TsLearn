@@ -29,6 +29,11 @@ const routes: RouteRecordRaw[] = [
         name: 'monthReport',
         component: () => import('@/views/monthReport.vue')
     },
+    {
+        path: '/monthBarRep',
+        name: 'monthBarRep',
+        component: () => import('@/views/monthBarRep.vue')
+    },
 ]
 export const router = createRouter({
     history: createWebHashHistory(),

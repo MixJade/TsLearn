@@ -3,6 +3,7 @@ import {MonthPayVo} from "@/model/chart/MonthPayVo";
 import {DayPayVo} from "@/model/chart/DayPayVo";
 import {YearLineVo, YearPayDo} from "@/model/vo/YearLineVo";
 import {ChartVo} from "@/model/vo/ChartVo";
+import {DayPayBarVo} from "@/model/chart/DayPayBarVo";
 
 /**
  * (日历图)获取各月份的收支总结
@@ -18,6 +19,14 @@ export const reqCalendarMonth = (year: number): Promise<MonthPayVo[][]> =>
  */
 export const reqCalendarDay = (year: number, month: number): Promise<DayPayVo[][]> =>
     myReq.get<DayPayVo[][]>(`/api/chart/calendarDay?year=${year}&month=${month}`)
+
+/**
+ * (柱状图)获取一月每天的收支总结
+ * @param year  年份 2024
+ * @param month 月份 01
+ */
+export const reqBarDay = (year: number, month: number): Promise<DayPayBarVo> =>
+    myReq.get<DayPayBarVo>(`/api/chart/barDay?year=${year}&month=${month}`)
 
 /**
  * 获取一年中各个月份的收支总结(用于线形图)
