@@ -22,7 +22,9 @@
     <tbody>
     <tr v-for="dayPayVos in dayPayVoss">
       <td v-for="item in dayPayVos" :key="item.payDate">
-        <div v-if="item.currentMonth" :class="getSeasonClass(selDate.month)" :title="item.payDate"
+        <div v-if="item.currentMonth" :class="getSeasonClass(selDate.month)"
+             :style="{ backgroundColor: calcOutBgColor(item.moneyOut) }"
+             :title="item.payDate"
              class="dayCard" @click="toDayPayRecords(item.payDate)">
           <span class="dayH">{{ item.dayNum }}<br></span>
           <ul>
@@ -34,6 +36,10 @@
               <MoneyTag :income="false" :money="item.moneyOut"/>
             </li>
           </ul>
+          <svg v-if="item.moneyIn!==0" :style="{ opacity: calcInOpacity(item.moneyIn) }" class="in-angle" height="28"
+               width="28" xmlns="http://www.w3.org/2000/svg">
+            <polygon fill="#c45656" points="2,2 26,26 2,26" stroke="#c45656" stroke-width="2"/>
+          </svg>
         </div>
       </td>
     </tr>
@@ -93,6 +99,25 @@ const getSeasonClass = (month: number): string => {
     return 'winter';
   }
 };
+
+/**
+ * 动态设置背景颜色深浅
+ * @param money 支出的钱(绝对值)
+ */
+const calcOutBgColor = (money: number): string => {
+  // 如果数字超过 600，将其设为 600
+  const cappedNum = Math.min(money, 600);
+  // 保留两位小数
+  const factor = parseFloat((cappedNum / 600).toFixed(2));
+  return `rgb(115, 118, 122, ${factor})`;
+}
+/**
+ * 动态设置透明度
+ * @param money 收入的钱
+ */
+const calcInOpacity = (money: number): number => {
+  return parseFloat((Math.min(money, 2000) / 2000).toFixed(2));
+}
 
 /**
  * 导出对应月份的sql文件
@@ -190,4 +215,10 @@ ul
 
 .winter:hover
   background-image: url('/icon/winter.svg')
+
+.in-angle
+  //收入指示器定位
+  position: absolute
+  bottom: 0
+  left: 0
 </style>

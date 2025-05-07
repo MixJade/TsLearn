@@ -17,7 +17,8 @@ defineProps<{
 .moneyTag
   font-weight: bolder
   //文字白边
-  text-shadow: -2px -2px 2px white, 2px -2px 2px white, -2px 2px 2px white, 2px 2px 2px white
+  $replace-shadow: 0 0 2px white
+  text-shadow: $replace-shadow, $replace-shadow, $replace-shadow, $replace-shadow
 
 .in
   //收入的字体
