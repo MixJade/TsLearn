@@ -1,6 +1,6 @@
 <template>
   <h2>Js代码</h2>
-  <pre class="line-numbers">
+  <pre class="line-numbers" contenteditable="true">
     <code class='language-js'>
       function curry(func) {
         return function curried(...args) {
@@ -16,7 +16,7 @@
     </code>
   </pre>
   <h2>Sql代码</h2>
-  <pre class="line-numbers">
+  <pre class="line-numbers" contenteditable="true">
     <code class='language-sql'>
       SELECT * FROM good;
     </code>
