@@ -65,6 +65,8 @@ ul
 
   li
     padding: 6px
+    word-wrap: break-word
+    overflow-wrap: break-word
 
     button
       opacity: 0
