@@ -12,7 +12,7 @@
       <label for="msgTextArea">
         消息
       </label>
-      <textarea id="msgTextArea" v-model="sendMsg" cols="70" placeholder="输入消息或图片" rows="6"
+      <textarea id="msgTextArea" v-model="sendMsg" cols="70" placeholder="输入消息或粘贴图片" rows="6"
                 @paste="handlePaste"></textarea>
       <button type="button" @click="clickSend">发送</button>
     </footer>
@@ -92,11 +92,9 @@ onBeforeUnmount(() => {
  │=============图片粘贴操作============│
  └───────────────────────────────────┘
  */
-const handlePaste = async (e) => {
+const handlePaste = async (e: ClipboardEvent) => {
   // 检查剪贴板是否有文件
-  const clipboardData = e.clipboardData;
-  const items = clipboardData.items;
-
+  const items = e.clipboardData?.items;
   if (!items) return;
 
   for (const item of items) {
