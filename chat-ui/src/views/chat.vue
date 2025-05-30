@@ -12,7 +12,8 @@
       <label for="msgTextArea">
         消息
       </label>
-      <textarea id="msgTextArea" v-model="sendMsg" cols="70" placeholder="请输入待发送的消息" rows="6"></textarea>
+      <textarea id="msgTextArea" v-model="sendMsg" cols="70" placeholder="输入消息或图片" rows="6"
+                @paste="handlePaste"></textarea>
       <button type="button" @click="clickSend">发送</button>
     </footer>
   </div>
@@ -23,6 +24,7 @@ import {onBeforeUnmount, onMounted, ref} from "vue";
 import {Message} from "@/model/Message";
 import Msg from "@/components/Msg.vue";
 import {reqLoginUserList, reqSyncHistoryMsg, reqUsername} from "@/request/chatApi";
+import {reqUpPasteImg} from "@/request/fileApi";
 
 onMounted(() => {
   reqUsername().then(res => {
@@ -85,6 +87,44 @@ onBeforeUnmount(() => {
   // 1000是关闭代码，表示正常关闭连接，'正常关闭连接'是一个可选的文字描述
   ws.close(1000, '正常关闭连接');
 })
+/**
+ ┌───────────────────────────────────┐
+ │=============图片粘贴操作============│
+ └───────────────────────────────────┘
+ */
+const handlePaste = async (e) => {
+  // 检查剪贴板是否有文件
+  const clipboardData = e.clipboardData;
+  const items = clipboardData.items;
+
+  if (!items) return;
+
+  for (const item of items) {
+    // 检查是否为图片
+    if (item.type.indexOf('image') !== -1) {
+      e.preventDefault(); // 阻止默认粘贴行为
+      const blob = item.getAsFile();
+      if (blob) {
+        try {
+          // 上传图片
+          const formData = new FormData() as FormData;
+          formData.append('file', blob);
+          reqUpPasteImg(formData).then(resp => {
+            if (resp.flag) {
+              ws.send("我上传了图片：" + resp.msg);
+            } else {
+              alert("图片上传失败")
+            }
+          });
+        } catch (error) {
+          console.error('图片上传失败:', error);
+          alert('图片上传失败');
+        }
+      }
+      break; // 只处理第一个图片
+    }
+  }
+};
 </script>
 
 <style lang="sass" scoped>
