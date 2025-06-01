@@ -45,6 +45,8 @@ defineProps<{
   padding-left: calc($svg-margin * 2 + $svg-height)
   //文字样式
   line-height: calc($tus-height - 2 * $border-weight)
+  font-size: small
+  font-weight: bold
   -webkit-user-select: none
   user-select: none
 
