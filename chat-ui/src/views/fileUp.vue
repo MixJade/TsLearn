@@ -4,6 +4,7 @@
   <ProgressFile url="/api/file/upload" @upSuc="getFileList"/>
   <hr>
   <h3>文件下载</h3>
+  <span class="small-txt">按创建时间从新到旧</span>
   <ul v-if="fileList.length>0">
     <li v-for="fi in fileList" :key="fi.fileName"><a :href="'/api/file/down/'+fi.fileName">{{ fi.fileName }}</a>
       ({{ fi.fileSize }})
@@ -16,8 +17,9 @@
   <!--文件提示-->
   <footer>
     <h3>文件提示</h3>
-    <ul>
-      <li>电脑端可展示文件的下载二维码</li>
+    <ul class="small-txt">
+      <li>PC端可展示文件的下载二维码</li>
+      <li>PC端在聊天页面粘贴图片会默认上传到这里</li>
       <li>手机QQ接收文件：Android\data\com.tencent.mobileqq\Tencent\QQfile_recv</li>
     </ul>
   </footer>
@@ -60,6 +62,11 @@ const showDialog = (url: string) => {
 </script>
 
 <style lang="sass" scoped>
+.small-txt
+  font-size: smaller
+  //斜体
+  font-style: italic
+
 ul
   font-size: larger
 
