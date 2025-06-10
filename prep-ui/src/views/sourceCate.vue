@@ -13,12 +13,9 @@
       <td>{{ td.remark }}</td>
       <td>{{ formatDateTime(td.createTime) }}</td>
       <td>
-        <button class="tb-btn upd-btn" type="button" @click="openUpdForm(td)">
-          修改
-        </button>
-        <button class="tb-btn del-btn" type="button" @click="deleteById(td.categoryId)">
-          删除
-        </button>
+        <TbBtn type="ent" text="进入"/>
+        <TbBtn type="upd" text="修改" @click="openUpdForm(td)"/>
+        <TbBtn type="del" text="删除" @click="deleteById(td.categoryId)"/>
       </td>
     </tr>
   </MyTable>
@@ -62,6 +59,7 @@ import SureDelModal from "@/components/message/SureDelModal.vue";
 import {SourceCategory} from "@/model/entity/SourceCategory";
 import {reqAddCate, reqDelCate, reqSourceCatePage, reqUpdCate} from "@/request/sourceCateApi";
 import {formatDateTime} from "@/utils/TimeUtil";
+import TbBtn from "@/components/button/TbBtn.vue";
 
 onMounted(() => {
   getAll();
