@@ -20,7 +20,7 @@ export const reqAddCate = (data: SourceCategory): Promise<Result> =>
     myReq.post<Result>(`/api/sourceCategory`, data)
 
 /**
- * 向文件夹表新增
+ * 向文件夹表修改
  * @param data 请求体
  */
 export const reqUpdCate = (data: SourceCategory): Promise<Result> =>

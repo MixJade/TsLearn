@@ -25,8 +25,8 @@
       <fieldset>
         <legend>{{ formTit }}</legend>
         <div class="form-row">
-          <label for="remark">图片</label>
-          <input id="remark" v-model="imageSource.fileName" type="text">
+          <input accept="image/*" type="file" @change="handleFileChange"/>
+          <MyBtn text="上传文件" type="success" @click="uploadFile"/>
         </div>
         <div class="form-row">
           <label for="remark">备注</label>
@@ -53,13 +53,22 @@ import MyBtn from "@/components/button/MyBtn.vue";
 import {Result} from "@/model/vo/Result";
 import SureDelModal from "@/components/message/SureDelModal.vue";
 import {ImageSource} from "@/model/entity/ImageSource";
-import {reqAddImg, reqDelImg, reqImgSourcePage, reqUpdImg} from "@/request/imgSourceApi";
+import {reqAddImg, reqDelImg, reqImgSourcePage, reqUpdImg, reqUploadImg} from "@/request/imgSourceApi";
 import {formatDateTime} from "@/utils/TimeUtil";
 import TbBtn from "@/components/button/TbBtn.vue";
+import {useRoute} from "vue-router";
 
+let cateId = 0;
 onMounted(() => {
+  setRouteData()
   getAll();
 })
+// 如此获取路由传参
+const route = useRoute();
+const setRouteData = (): void => {
+  if (Object.keys(route.query).length > 0)
+    cateId = parseInt(route.query.cateId as string)
+}
 
 /**
  * =======================================[吐司消息]=======================================
@@ -150,6 +159,31 @@ const submitForm = (): void => {
   else
     reqAddImg(imageSource).then(resp => commonResp(resp))
 }
+
+const file = ref<File | null>(null);
+// 处理文件选择事件
+const handleFileChange = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  const selectedFile = target.files![0];
+  if (selectedFile) {
+    file.value = selectedFile;
+  } else {
+    file.value = null;
+  }
+};
+
+// 上传文件
+const uploadFile = async () => {
+  if (!file.value) {
+    tesTus("err", '请选择一个图片');
+    return;
+  }
+  const formData = new FormData() as FormData;
+  formData.append('file', file.value);
+  reqUploadImg(formData, cateId).then(resp => commonResp(resp));
+  file.value = null;
+};
+
 </script>
 
 <style lang="sass" scoped>

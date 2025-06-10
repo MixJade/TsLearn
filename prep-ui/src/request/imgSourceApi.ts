@@ -20,7 +20,7 @@ export const reqAddImg = (data: ImageSource): Promise<Result> =>
     myReq.post<Result>(`/api/imageSource`, data)
 
 /**
- * 向图源表新增
+ * 向图源表修改
  * @param data 请求体
  */
 export const reqUpdImg = (data: ImageSource): Promise<Result> =>
@@ -32,3 +32,11 @@ export const reqUpdImg = (data: ImageSource): Promise<Result> =>
  */
 export const reqDelImg = (id: number): Promise<Result> =>
     myReq.delete<Result>(`/api/imageSource/${id}`)
+
+/**
+ * 上传图片
+ * @param file 图片数据
+ * @param cateId 文件夹主键
+ */
+export const reqUploadImg = (file: FormData, cateId: number): Promise<Result> =>
+    myReq.upload<Result>(`/api/imageSource/uploadImg?cateId=${cateId}`, file)
