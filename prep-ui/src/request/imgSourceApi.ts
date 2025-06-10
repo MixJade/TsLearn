@@ -1,0 +1,34 @@
+import {myReq} from "@/request/myReq";
+import {Result} from "@/model/vo/Result";
+import {IPage} from "@/model/vo/IPage";
+import {ImageSource} from "@/model/entity/ImageSource";
+
+
+/**
+ * 查询图源表
+ * @param pageNum 页码
+ * @param pageSize 页面大小
+ */
+export const reqImgSourcePage = (pageNum: number, pageSize: number): Promise<IPage<ImageSource>> =>
+    myReq.get<IPage<ImageSource>>(`/api/imageSource/page?pageNum=${pageNum}&pageSize=${pageSize}`)
+
+/**
+ * 向图源表新增
+ * @param data 请求体
+ */
+export const reqAddImg = (data: ImageSource): Promise<Result> =>
+    myReq.post<Result>(`/api/imageSource`, data)
+
+/**
+ * 向图源表新增
+ * @param data 请求体
+ */
+export const reqUpdImg = (data: ImageSource): Promise<Result> =>
+    myReq.put<Result>(`/api/imageSource`, data)
+
+/**
+ * 向图源表删除
+ * @param id 记录主键
+ */
+export const reqDelImg = (id: number): Promise<Result> =>
+    myReq.delete<Result>(`/api/imageSource/${id}`)

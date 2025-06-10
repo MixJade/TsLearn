@@ -1,21 +1,21 @@
 <template>
   <!-- 表格 -->
   <MyTable :tb-page="tablePage"
-           :thead="['分类名称','文件夹名称','备注','创建时间','操作']"
-           caption="题源分类表"
+           :thead="['文件名','备注','上传时间','识别时间','操作']"
+           caption="题源图片表"
            @pageChange="getAll">
     <template #searchBtn>
-      <MyBtn text="添加分类" type="success" @click="openAddForm"/>
+      <MyBtn text="添加图片" type="success" @click="openAddForm"/>
     </template>
-    <tr v-for="td in tableData" :key="td.categoryId">
-      <td>{{ td.categoryName }}</td>
-      <td>{{ td.folderName }}</td>
+    <tr v-for="td in tableData" :key="td.sourceId">
+      <td>{{ td.fileName }}</td>
       <td>{{ td.remark }}</td>
-      <td>{{ formatDateTime(td.createTime) }}</td>
+      <td>{{ formatDateTime(td.uploadTime) }}</td>
+      <td>{{ formatDateTime(td.ocrTime) }}</td>
       <td>
-        <TbBtn type="ent" text="进入" @click="toImg(td.categoryId)"/>
-        <TbBtn type="upd" text="修改" @click="openUpdForm(td)"/>
-        <TbBtn type="del" text="删除" @click="deleteById(td.categoryId)"/>
+        <TbBtn text="编辑" type="ent"/>
+        <TbBtn text="修改" type="upd" @click="openUpdForm(td)"/>
+        <TbBtn text="删除" type="del" @click="deleteById(td.categoryId)"/>
       </td>
     </tr>
   </MyTable>
@@ -25,16 +25,12 @@
       <fieldset>
         <legend>{{ formTit }}</legend>
         <div class="form-row">
-          <label for="remark">分类名</label>
-          <input id="remark" v-model="sourceCategory.categoryName" type="text">
-        </div>
-        <div class="form-row">
-          <label for="remark">文件夹</label>
-          <input id="remark" v-model="sourceCategory.folderName" type="text">
+          <label for="remark">图片</label>
+          <input id="remark" v-model="imageSource.fileName" type="text">
         </div>
         <div class="form-row">
           <label for="remark">备注</label>
-          <input id="remark" v-model="sourceCategory.remark" type="text">
+          <input id="remark" v-model="imageSource.remark" type="text">
         </div>
       </fieldset>
       <div class="form-footer">
@@ -56,11 +52,10 @@ import MyDialog from "@/components/message/MyDialog.vue";
 import MyBtn from "@/components/button/MyBtn.vue";
 import {Result} from "@/model/vo/Result";
 import SureDelModal from "@/components/message/SureDelModal.vue";
-import {SourceCategory} from "@/model/entity/SourceCategory";
-import {reqAddCate, reqDelCate, reqSourceCatePage, reqUpdCate} from "@/request/sourceCateApi";
+import {ImageSource} from "@/model/entity/ImageSource";
+import {reqAddImg, reqDelImg, reqImgSourcePage, reqUpdImg} from "@/request/imgSourceApi";
 import {formatDateTime} from "@/utils/TimeUtil";
 import TbBtn from "@/components/button/TbBtn.vue";
-import {useRouter} from "vue-router";
 
 onMounted(() => {
   getAll();
@@ -94,10 +89,10 @@ const commonResp = (resp: Result): void => {
  * ===================================[表格数据]============================================
  */
 // 表格数据
-const tableData = ref<SourceCategory[]>([])
+const tableData = ref<ImageSource[]>([])
 const tablePage: TbPage = reactive({current: 1, pages: 1, total: 0, size: 10}) as TbPage
 const getAll = () => {
-  reqSourceCatePage(tablePage.current, tablePage.size).then(resp => {
+  reqImgSourcePage(tablePage.current, tablePage.size).then(resp => {
     tableData.value = resp.records
     tablePage.current = resp.current;
     tablePage.pages = resp.pages
@@ -110,7 +105,7 @@ const getAll = () => {
 const sureDelModal = ref<InstanceType<typeof SureDelModal> | null>(null);
 const deleteById = (id: number): void => {
   sureDelModal.value?.confirmDel("确定删除？删除后数据无法找回").then((resp: boolean) => {
-    if (resp) reqDelCate(id).then(resp => commonResp(resp))
+    if (resp) reqDelImg(id).then(resp => commonResp(resp))
   })
 }
 
@@ -118,27 +113,25 @@ const deleteById = (id: number): void => {
  * ===================================[表单数据]============================================
  */
 // 添加的实体类
-const sourceCategory: SourceCategory = reactive({
-  categoryId: 0, categoryName: "", createTime: "", folderName: "", remark: ""
+const imageSource: ImageSource = reactive({
+  categoryId: 0, fileName: "", ocrResult: "", ocrTime: "", remark: "", sourceId: 0, uploadTime: ""
 })
 
 // 表单弹出框
 const myShow = ref<InstanceType<typeof MyDialog> | null>(null)
-const formTit = ref<"添加分类" | "修改分类">("添加分类")
+const formTit = ref<"添加图片" | "修改图片">("添加图片")
 const openAddForm = () => {
-  formTit.value = "添加分类";
-  sourceCategory.categoryId = 0
-  sourceCategory.categoryName = ""
-  sourceCategory.folderName = ""
-  sourceCategory.remark = ""
+  formTit.value = "添加图片";
+  imageSource.sourceId = 0
+  imageSource.fileName = ""
+  imageSource.remark = ""
   myShow.value?.showMe();
 }
-const openUpdForm = (data: SourceCategory) => {
-  formTit.value = "修改分类";
-  sourceCategory.categoryId = data.categoryId
-  sourceCategory.categoryName = data.categoryName
-  sourceCategory.folderName = data.folderName
-  sourceCategory.remark = data.remark
+const openUpdForm = (data: ImageSource) => {
+  formTit.value = "修改图片";
+  imageSource.sourceId = data.sourceId
+  imageSource.fileName = data.fileName
+  imageSource.remark = data.remark
   myShow.value?.showMe();
 }
 const closeDialog = () => myShow.value?.closeMe();
@@ -146,27 +139,16 @@ const closeDialog = () => myShow.value?.closeMe();
 // 提交表单
 const submitForm = (): void => {
   // 校验
-  if (sourceCategory.categoryName === "") {
-    tesTus("err", "请填写名称");
-    return;
-  } else if (sourceCategory.folderName === "") {
-    tesTus("err", "请填写文件夹名称");
+  if (imageSource.fileName === "") {
+    tesTus("err", "请选择文件");
     return;
   }
   // 开始提交
   closeDialog()
-  if (formTit.value === "修改分类")
-    reqUpdCate(sourceCategory).then(resp => commonResp(resp))
+  if (formTit.value === "修改图片")
+    reqUpdImg(imageSource).then(resp => commonResp(resp))
   else
-    reqAddCate(sourceCategory).then(resp => commonResp(resp))
-}
-/**
- * ===================================[路由跳转]============================================
- */
-const router = useRouter();
-// 跳转路由
-const toImg = (id: string) => {
-  router.push({path: '/imgSource', query: {souId: id}})
+    reqAddImg(imageSource).then(resp => commonResp(resp))
 }
 </script>
 

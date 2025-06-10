@@ -4,6 +4,9 @@ const routes: RouteRecordRaw[] = [
     {
         path: '/',
         component: () => import('@/views/sourceCate.vue')
+    }, {
+        path: '/imgSource',
+        component: () => import('@/views/imgSource.vue')
     },
 ]
 export const router = createRouter({

@@ -127,6 +127,7 @@ const jumpPage = (): void => {
     //表标题
     padding-top: 0.5rem
     padding-bottom: 0.5rem
+    font-size: small
     color: #606266
 
 // 处理插槽内样式
