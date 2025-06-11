@@ -15,8 +15,7 @@
       <td>{{ formatDateTime(td.uploadTime) }}</td>
       <td>{{ formatDateTime(td.ocrTime) }}</td>
       <td>
-        <TbBtn text="识别" type="ent" @click="ocrImg(td.sourceId)"/>
-        <TbBtn text="修改" type="upd" @click="openUpdForm(td)"/>
+        <TbBtn text="编辑" type="upd" @click="openUpdForm(td.sourceId)"/>
         <TbBtn text="删除" type="del" @click="deleteById(td.sourceId)"/>
       </td>
     </tr>
@@ -25,8 +24,8 @@
   <MyDialog ref="myShow">
     <form class="myForm">
       <fieldset>
-        <legend>{{ isAddForm ? "添加" : "修改" }}图片</legend>
-        <div v-if="isAddForm" class="form-row">
+        <legend>添加图片</legend>
+        <div class="form-row">
           <label for="myImg">文件</label>
           <input id="myImg" accept="image/*" type="file" @change="handleFileChange"/>
         </div>
@@ -42,6 +41,22 @@
       </div>
     </form>
   </MyDialog>
+  <!--识别结果弹窗-->
+  <MyDialog ref="myShow2">
+    <label for="remark2"><strong>{{ imageSource2.fileName }}</strong></label>
+    <input id="remark2" v-model="imageSource2.remark" placeholder="备注" type="text">
+    <div class="parent">
+      <label for="ocrResult2" class="child-img">
+        <img class="ocr-img" :src="'/api/imageSource/img/'+imageSource2.sourceId" alt="题目图片">
+      </label>
+      <textarea id="ocrResult2" class="ocr-res" v-model="imageSource2.ocrResult"/>
+    </div>
+    <div class="ocr-foot">
+      <MyBtn text="关闭" type="secondary" @click="closeDialog2"/>
+      <MyBtn text="图片识别" type="success" @click="handleOcrImg"/>
+      <MyBtn text="确认提交" type="primary" @click="submitForm2"/>
+    </div>
+  </MyDialog>
   <!-- 吐司组件-->
   <ToastBox ref="childRef"/>
   <SureDelModal ref="sureDelModal"/>
@@ -56,7 +71,15 @@ import MyBtn from "@/components/button/MyBtn.vue";
 import {Result} from "@/model/vo/Result";
 import SureDelModal from "@/components/message/SureDelModal.vue";
 import {ImageSource} from "@/model/entity/ImageSource";
-import {reqAddImg, reqDelImg, reqImgSourcePage, reqOcrImg, reqUpdImg, reqUploadImg} from "@/request/imgSourceApi";
+import {
+  reqAddImg,
+  reqDelImg,
+  reqImgSourcePage,
+  reqOcrImg,
+  reqOneImg,
+  reqUpdImg,
+  reqUploadImg
+} from "@/request/imgSourceApi";
 import {formatDateTime} from "@/utils/TimeUtil";
 import TbBtn from "@/components/button/TbBtn.vue";
 import {useRoute, useRouter} from "vue-router";
@@ -79,6 +102,7 @@ const setRouteData = (): void => {
     cateId = parseInt(route.query.cateId as string)
   // 给增删实体类设置值
   imageSource.categoryId = cateId;
+  imageSource2.categoryId = cateId;
   paData.categoryId = cateId;
 }
 const router = useRouter();
@@ -146,19 +170,10 @@ const imageSource: ImageSource = reactive({
 
 // 表单弹出框
 const myShow = ref<InstanceType<typeof MyDialog> | null>(null)
-const isAddForm = ref<boolean>(false)
 const openAddForm = () => {
-  isAddForm.value = true
   imageSource.sourceId = 0
   imageSource.fileName = ""
   imageSource.remark = ""
-  myShow.value?.showMe();
-}
-const openUpdForm = (data: ImageSource) => {
-  isAddForm.value = false
-  imageSource.sourceId = data.sourceId
-  imageSource.fileName = data.fileName
-  imageSource.remark = data.remark
   myShow.value?.showMe();
 }
 const closeDialog = () => myShow.value?.closeMe();
@@ -167,12 +182,7 @@ const closeDialog = () => myShow.value?.closeMe();
 const submitForm = (): void => {
   // 开始提交
   closeDialog()
-  if (isAddForm.value) {
-    uploadFile()
-  } else {
-    // 修改(只能修改备注)
-    reqUpdImg(imageSource).then(resp => commonResp(resp))
-  }
+  uploadFile()
 }
 
 const file = ref<File | null>(null);
@@ -208,15 +218,92 @@ const uploadFile = (): void => {
   file.value = null;
 };
 
-const ocrImg = (id: number): void => {
-  reqOcrImg(id).then(resp => commonResp(resp))
+/**
+ * ===================================[识别结果数据]============================================
+ */
+// 添加的实体类
+const imageSource2: ImageSource = reactive({
+  categoryId: 0, fileName: "", ocrResult: "", ocrTime: "", remark: "", sourceId: 0, uploadTime: ""
+})
+
+// 表单弹出框
+const myShow2 = ref<InstanceType<typeof MyDialog> | null>(null)
+const openUpdForm = (id: number) => {
+  reqOneImg(id).then(resp => {
+    imageSource2.sourceId = resp.sourceId
+    imageSource2.ocrResult = resp.ocrResult
+    imageSource2.remark = resp.remark
+    imageSource2.fileName = resp.fileName
+  })
+  myShow2.value?.showMe();
+}
+const closeDialog2 = () => myShow2.value?.closeMe();
+
+const handleOcrImg = (): void => {
+  if (imageSource2.ocrResult.length > 6) {
+    sureDelModal.value?.confirmDel("识别后现有结果将丢失").then((resp: boolean) => {
+      if (resp) {
+        ocrImg()
+      }
+    })
+  } else ocrImg();
 }
 
+const ocrImg = (): void => {
+  reqOcrImg(imageSource2.sourceId).then(resp => {
+    if (resp.code === 1) {
+      tesTus("suc", "识别成功");
+      imageSource2.ocrResult = resp.msg
+    } else if (resp.code === 0) {
+      tesTus("err", resp.msg);
+    } else {
+      tesTus("err", "服务器无响应");
+    }
+  })
+}
+
+// 提交表单
+const submitForm2 = (): void => {
+  // 开始提交
+  closeDialog2()
+  // 修改
+  reqUpdImg(imageSource2).then(resp => commonResp(resp))
+}
 </script>
 
 <style lang="sass" scoped>
 .form-info
+  // 表单中的介绍文本
   color: #909399
   margin-left: 10ch
   font-size: small
+
+.parent
+  display: flex
+  //子元素间距
+  gap: 10px
+  margin: 10px 0
+  border: 1px solid #ddd
+  padding: 10px
+
+.ocr-img
+  width: 400px
+  flex: 1
+
+.ocr-res
+  background-color: #f8f9fa
+  padding: 4px
+  //结果换行
+  white-space: pre-wrap
+  word-break: break-all
+  max-height: 70vh
+  width: 650px
+  overflow-y: auto
+  //flex布局的子元素
+  flex: 1
+
+.ocr-foot
+  //表单底部按钮组
+  padding-top: 8px
+  text-align: right
 </style>

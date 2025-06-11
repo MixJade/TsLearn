@@ -138,7 +138,7 @@ const jumpPage = (): void => {
 
   &:hover > *
     // 所有表格行悬停
-    background-color: #b3e19d
+    background-color: #d1edc4
 //===============================[分页条样式]=============================
 .pageNav
   $page-color: #67C23A

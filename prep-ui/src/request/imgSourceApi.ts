@@ -13,6 +13,13 @@ export const reqImgSourcePage = (pageNum: number, pageSize: number, data: ImgSou
     myReq.post<IPage<ImgSourceVo>>(`/api/imageSource/page?pageNum=${pageNum}&pageSize=${pageSize}`, data)
 
 /**
+ * 查询单个图片
+ * @param id 记录主键
+ */
+export const reqOneImg = (id: number): Promise<ImageSource> =>
+    myReq.get<ImageSource>(`/api/imageSource/${id}`)
+
+/**
  * 向图源表新增
  * @param data 请求体
  */
