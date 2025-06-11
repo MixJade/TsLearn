@@ -39,3 +39,10 @@ export const reqDelImg = (id: number): Promise<Result> =>
  */
 export const reqUploadImg = (file: FormData, cateId: number): Promise<Result> =>
     myReq.upload<Result>(`/api/imageSource/uploadImg?cateId=${cateId}`, file)
+
+/**
+ * ocr识别
+ * @param id 记录主键
+ */
+export const reqOcrImg = (id: number): Promise<Result> =>
+    myReq.get<Result>(`/api/imageSource/ocr/${id}`)

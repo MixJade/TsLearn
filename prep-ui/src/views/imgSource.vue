@@ -13,7 +13,7 @@
       <td>{{ formatDateTime(td.uploadTime) }}</td>
       <td>{{ formatDateTime(td.ocrTime) }}</td>
       <td>
-        <TbBtn text="编辑" type="ent"/>
+        <TbBtn text="识别" type="ent" @click="ocrImg(td.sourceId)"/>
         <TbBtn text="修改" type="upd" @click="openUpdForm(td)"/>
         <TbBtn text="删除" type="del" @click="deleteById(td.sourceId)"/>
       </td>
@@ -54,7 +54,7 @@ import MyBtn from "@/components/button/MyBtn.vue";
 import {Result} from "@/model/vo/Result";
 import SureDelModal from "@/components/message/SureDelModal.vue";
 import {ImageSource} from "@/model/entity/ImageSource";
-import {reqAddImg, reqDelImg, reqImgSourcePage, reqUpdImg, reqUploadImg} from "@/request/imgSourceApi";
+import {reqAddImg, reqDelImg, reqImgSourcePage, reqOcrImg, reqUpdImg, reqUploadImg} from "@/request/imgSourceApi";
 import {formatDateTime} from "@/utils/TimeUtil";
 import TbBtn from "@/components/button/TbBtn.vue";
 import {useRoute} from "vue-router";
@@ -199,6 +199,10 @@ const uploadFile = (): void => {
   });
   file.value = null;
 };
+
+const ocrImg = (id: number): void => {
+  reqOcrImg(id).then(resp => commonResp(resp))
+}
 
 </script>
 
