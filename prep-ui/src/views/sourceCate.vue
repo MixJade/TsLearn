@@ -1,7 +1,7 @@
 <template>
   <!-- 表格 -->
   <MyTable :tb-page="tablePage"
-           :thead="['分类名称','文件夹名称','备注','创建时间','操作']"
+           :thead="['分类名','文件夹','文件数','备注','创建时间','操作']"
            caption="题源分类表"
            @pageChange="getAll">
     <template #searchBtn>
@@ -10,6 +10,7 @@
     <tr v-for="td in tableData" :key="td.categoryId">
       <td>{{ td.categoryName }}</td>
       <td>{{ td.folderName }}</td>
+      <td>{{ td.recordNum }}</td>
       <td>{{ td.remark }}</td>
       <td>{{ formatDateTime(td.createTime) }}</td>
       <td>
@@ -23,7 +24,7 @@
   <MyDialog ref="myShow">
     <form class="myForm">
       <fieldset>
-        <legend>{{ formTit }}</legend>
+        <legend>{{ isAddForm ? "新增" : "修改" }}分类</legend>
         <div class="form-row">
           <label for="remark">分类名</label>
           <input id="remark" v-model="sourceCategory.categoryName" type="text">
@@ -61,6 +62,7 @@ import {reqAddCate, reqDelCate, reqSourceCatePage, reqUpdCate} from "@/request/s
 import {formatDateTime} from "@/utils/TimeUtil";
 import TbBtn from "@/components/button/TbBtn.vue";
 import {useRouter} from "vue-router";
+import {SourceCateVo} from "@/model/vo/SourceCateVo";
 
 onMounted(() => {
   getAll();
@@ -94,7 +96,7 @@ const commonResp = (resp: Result): void => {
  * ===================================[表格数据]============================================
  */
 // 表格数据
-const tableData = ref<SourceCategory[]>([])
+const tableData = ref<SourceCateVo[]>([])
 const tablePage: TbPage = reactive({current: 1, pages: 1, total: 0, size: 10}) as TbPage
 const getAll = () => {
   reqSourceCatePage(tablePage.current, tablePage.size).then(resp => {
@@ -124,9 +126,9 @@ const sourceCategory: SourceCategory = reactive({
 
 // 表单弹出框
 const myShow = ref<InstanceType<typeof MyDialog> | null>(null)
-const formTit = ref<"添加分类" | "修改分类">("添加分类")
+const isAddForm = ref<boolean>(false)
 const openAddForm = () => {
-  formTit.value = "添加分类";
+  isAddForm.value = true;
   sourceCategory.categoryId = 0
   sourceCategory.categoryName = ""
   sourceCategory.folderName = ""
@@ -134,7 +136,7 @@ const openAddForm = () => {
   myShow.value?.showMe();
 }
 const openUpdForm = (data: SourceCategory) => {
-  formTit.value = "修改分类";
+  isAddForm.value = false;
   sourceCategory.categoryId = data.categoryId
   sourceCategory.categoryName = data.categoryName
   sourceCategory.folderName = data.folderName
@@ -155,10 +157,10 @@ const submitForm = (): void => {
   }
   // 开始提交
   closeDialog()
-  if (formTit.value === "修改分类")
-    reqUpdCate(sourceCategory).then(resp => commonResp(resp))
-  else
+  if (isAddForm.value)
     reqAddCate(sourceCategory).then(resp => commonResp(resp))
+  else
+    reqUpdCate(sourceCategory).then(resp => commonResp(resp))
 }
 /**
  * ===================================[路由跳转]============================================

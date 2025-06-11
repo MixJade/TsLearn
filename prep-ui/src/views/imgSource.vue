@@ -1,14 +1,16 @@
 <template>
   <!-- 表格 -->
   <MyTable :tb-page="tablePage"
-           :thead="['文件名','备注','上传时间','识别时间','操作']"
+           :thead="['文件名','文件夹','备注','上传时间','识别时间','操作']"
            caption="题源图片表"
            @pageChange="getAll">
     <template #searchBtn>
       <MyBtn text="添加图片" type="success" @click="openAddForm"/>
+      <MyBtn text="返回上级" type="secondary" @click="toUp"/>
     </template>
     <tr v-for="td in tableData" :key="td.sourceId">
       <td>{{ td.fileName }}</td>
+      <td>{{ td.folderName }}</td>
       <td>{{ td.remark }}</td>
       <td>{{ formatDateTime(td.uploadTime) }}</td>
       <td>{{ formatDateTime(td.ocrTime) }}</td>
@@ -23,8 +25,8 @@
   <MyDialog ref="myShow">
     <form class="myForm">
       <fieldset>
-        <legend>{{ formTit }}</legend>
-        <div class="form-row">
+        <legend>{{ isAddForm ? "添加" : "修改" }}图片</legend>
+        <div v-if="isAddForm" class="form-row">
           <label for="myImg">文件</label>
           <input id="myImg" accept="image/*" type="file" @change="handleFileChange"/>
         </div>
@@ -57,14 +59,19 @@ import {ImageSource} from "@/model/entity/ImageSource";
 import {reqAddImg, reqDelImg, reqImgSourcePage, reqOcrImg, reqUpdImg, reqUploadImg} from "@/request/imgSourceApi";
 import {formatDateTime} from "@/utils/TimeUtil";
 import TbBtn from "@/components/button/TbBtn.vue";
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {ImgSourceDto} from "@/model/dto/ImgSourceDto";
+import {ImgSourceVo} from "@/model/vo/ImgSourceVo";
 
 let cateId = 0;
 onMounted(() => {
   setRouteData()
   getAll();
 })
+
+/**
+ * ===================================[路由跳转]============================================
+ */
 // 如此获取路由传参
 const route = useRoute();
 const setRouteData = (): void => {
@@ -73,6 +80,11 @@ const setRouteData = (): void => {
   // 给增删实体类设置值
   imageSource.categoryId = cateId;
   paData.categoryId = cateId;
+}
+const router = useRouter();
+// 返回上级页面
+const toUp = () => {
+  router.push('/')
 }
 
 /**
@@ -103,7 +115,7 @@ const commonResp = (resp: Result): void => {
  * ===================================[表格数据]============================================
  */
 // 表格数据
-const tableData = ref<ImageSource[]>([])
+const tableData = ref<ImgSourceVo[]>([])
 const tablePage: TbPage = reactive({current: 1, pages: 1, total: 0, size: 10}) as TbPage
 const paData: ImgSourceDto = {categoryId: 0}
 const getAll = () => {
@@ -134,16 +146,16 @@ const imageSource: ImageSource = reactive({
 
 // 表单弹出框
 const myShow = ref<InstanceType<typeof MyDialog> | null>(null)
-const formTit = ref<"添加图片" | "修改图片">("添加图片")
+const isAddForm = ref<boolean>(false)
 const openAddForm = () => {
-  formTit.value = "添加图片";
+  isAddForm.value = true
   imageSource.sourceId = 0
   imageSource.fileName = ""
   imageSource.remark = ""
   myShow.value?.showMe();
 }
 const openUpdForm = (data: ImageSource) => {
-  formTit.value = "修改图片";
+  isAddForm.value = false
   imageSource.sourceId = data.sourceId
   imageSource.fileName = data.fileName
   imageSource.remark = data.remark
@@ -155,15 +167,11 @@ const closeDialog = () => myShow.value?.closeMe();
 const submitForm = (): void => {
   // 开始提交
   closeDialog()
-  if (formTit.value === "修改图片") {
-    // 校验
-    if (imageSource.fileName === "") {
-      tesTus("err", "请填写文件名");
-      return;
-    }
-    reqUpdImg(imageSource).then(resp => commonResp(resp))
-  } else {
+  if (isAddForm.value) {
     uploadFile()
+  } else {
+    // 修改(只能修改备注)
+    reqUpdImg(imageSource).then(resp => commonResp(resp))
   }
 }
 

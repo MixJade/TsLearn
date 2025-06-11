@@ -2,6 +2,7 @@ import {myReq} from "@/request/myReq";
 import {Result} from "@/model/vo/Result";
 import {IPage} from "@/model/vo/IPage";
 import {SourceCategory} from "@/model/entity/SourceCategory";
+import {SourceCateVo} from "@/model/vo/SourceCateVo";
 
 
 /**
@@ -9,8 +10,8 @@ import {SourceCategory} from "@/model/entity/SourceCategory";
  * @param pageNum 页码
  * @param pageSize 页面大小
  */
-export const reqSourceCatePage = (pageNum: number, pageSize: number): Promise<IPage<SourceCategory>> =>
-    myReq.get<IPage<SourceCategory>>(`/api/sourceCategory/page?pageNum=${pageNum}&pageSize=${pageSize}`)
+export const reqSourceCatePage = (pageNum: number, pageSize: number): Promise<IPage<SourceCateVo>> =>
+    myReq.get<IPage<SourceCateVo>>(`/api/sourceCategory/page?pageNum=${pageNum}&pageSize=${pageSize}`)
 
 /**
  * 向文件夹表新增
