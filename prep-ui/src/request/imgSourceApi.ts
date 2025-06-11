@@ -2,15 +2,14 @@ import {myReq} from "@/request/myReq";
 import {Result} from "@/model/vo/Result";
 import {IPage} from "@/model/vo/IPage";
 import {ImageSource} from "@/model/entity/ImageSource";
+import {ImgSourceDto} from "@/model/dto/ImgSourceDto";
 
 
 /**
  * 查询图源表
- * @param pageNum 页码
- * @param pageSize 页面大小
  */
-export const reqImgSourcePage = (pageNum: number, pageSize: number): Promise<IPage<ImageSource>> =>
-    myReq.get<IPage<ImageSource>>(`/api/imageSource/page?pageNum=${pageNum}&pageSize=${pageSize}`)
+export const reqImgSourcePage = (pageNum: number, pageSize: number, data: ImgSourceDto): Promise<IPage<ImageSource>> =>
+    myReq.post<IPage<ImageSource>>(`/api/imageSource/page?pageNum=${pageNum}&pageSize=${pageSize}`, data)
 
 /**
  * 向图源表新增

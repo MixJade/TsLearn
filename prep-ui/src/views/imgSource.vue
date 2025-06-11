@@ -15,7 +15,7 @@
       <td>
         <TbBtn text="编辑" type="ent"/>
         <TbBtn text="修改" type="upd" @click="openUpdForm(td)"/>
-        <TbBtn text="删除" type="del" @click="deleteById(td.categoryId)"/>
+        <TbBtn text="删除" type="del" @click="deleteById(td.sourceId)"/>
       </td>
     </tr>
   </MyTable>
@@ -25,9 +25,10 @@
       <fieldset>
         <legend>{{ formTit }}</legend>
         <div class="form-row">
-          <input accept="image/*" type="file" @change="handleFileChange"/>
-          <MyBtn text="上传文件" type="success" @click="uploadFile"/>
+          <label for="myImg">文件</label>
+          <input id="myImg" accept="image/*" type="file" @change="handleFileChange"/>
         </div>
+        <span class="form-info">{{ imageSource.fileName }}</span>
         <div class="form-row">
           <label for="remark">备注</label>
           <input id="remark" v-model="imageSource.remark" type="text">
@@ -57,6 +58,7 @@ import {reqAddImg, reqDelImg, reqImgSourcePage, reqUpdImg, reqUploadImg} from "@
 import {formatDateTime} from "@/utils/TimeUtil";
 import TbBtn from "@/components/button/TbBtn.vue";
 import {useRoute} from "vue-router";
+import {ImgSourceDto} from "@/model/dto/ImgSourceDto";
 
 let cateId = 0;
 onMounted(() => {
@@ -68,6 +70,9 @@ const route = useRoute();
 const setRouteData = (): void => {
   if (Object.keys(route.query).length > 0)
     cateId = parseInt(route.query.cateId as string)
+  // 给增删实体类设置值
+  imageSource.categoryId = cateId;
+  paData.categoryId = cateId;
 }
 
 /**
@@ -100,8 +105,9 @@ const commonResp = (resp: Result): void => {
 // 表格数据
 const tableData = ref<ImageSource[]>([])
 const tablePage: TbPage = reactive({current: 1, pages: 1, total: 0, size: 10}) as TbPage
+const paData: ImgSourceDto = {categoryId: 0}
 const getAll = () => {
-  reqImgSourcePage(tablePage.current, tablePage.size).then(resp => {
+  reqImgSourcePage(tablePage.current, tablePage.size, paData).then(resp => {
     tableData.value = resp.records
     tablePage.current = resp.current;
     tablePage.pages = resp.pages
@@ -147,17 +153,18 @@ const closeDialog = () => myShow.value?.closeMe();
 
 // 提交表单
 const submitForm = (): void => {
-  // 校验
-  if (imageSource.fileName === "") {
-    tesTus("err", "请选择文件");
-    return;
-  }
   // 开始提交
   closeDialog()
-  if (formTit.value === "修改图片")
+  if (formTit.value === "修改图片") {
+    // 校验
+    if (imageSource.fileName === "") {
+      tesTus("err", "请填写文件名");
+      return;
+    }
     reqUpdImg(imageSource).then(resp => commonResp(resp))
-  else
-    reqAddImg(imageSource).then(resp => commonResp(resp))
+  } else {
+    uploadFile()
+  }
 }
 
 const file = ref<File | null>(null);
@@ -173,18 +180,31 @@ const handleFileChange = (event: Event) => {
 };
 
 // 上传文件
-const uploadFile = async () => {
+const uploadFile = (): void => {
   if (!file.value) {
     tesTus("err", '请选择一个图片');
     return;
   }
   const formData = new FormData() as FormData;
   formData.append('file', file.value);
-  reqUploadImg(formData, cateId).then(resp => commonResp(resp));
+  reqUploadImg(formData, cateId).then(resp => {
+    if (resp.code === 1) {
+      imageSource.fileName = resp.msg
+      reqAddImg(imageSource).then(resp => commonResp(resp))
+    } else if (resp.code === 0) {
+      tesTus("err", resp.msg);
+    } else {
+      tesTus("err", "服务器无响应");
+    }
+  });
   file.value = null;
 };
 
 </script>
 
 <style lang="sass" scoped>
+.form-info
+  color: #909399
+  margin-left: 10ch
+  font-size: small
 </style>
