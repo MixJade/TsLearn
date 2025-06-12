@@ -297,6 +297,7 @@ const submitForm2 = (): void => {
   white-space: pre-wrap
   word-break: break-all
   max-height: 70vh
+  min-height: 200px
   width: 650px
   overflow-y: auto
   //flex布局的子元素
