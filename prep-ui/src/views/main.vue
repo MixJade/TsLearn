@@ -10,7 +10,9 @@
           <div class="ipt-btn">
             <router-link to="/sourceCate">图片识别</router-link>
           </div>
-          <div class="ipt-btn"><a href="#">试卷编辑</a></div>
+          <div class="ipt-btn">
+            <router-link to="/examSubject">试卷编辑</router-link>
+          </div>
         </div>
       </div>
     </div>
