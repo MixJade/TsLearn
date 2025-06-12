@@ -83,8 +83,6 @@ const jumpPage = (): void => {
   display: flex
   justify-content: space-between
   background-color: #F3F3F3
-  border: 2px dashed #909399
-  border-radius: 12px
   padding: 6px 12px
 
   > * > *

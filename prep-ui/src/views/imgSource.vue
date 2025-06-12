@@ -108,7 +108,7 @@ const setRouteData = (): void => {
 const router = useRouter();
 // 返回上级页面
 const toUp = () => {
-  router.push('/')
+  router.push('/sourceCate')
 }
 
 /**

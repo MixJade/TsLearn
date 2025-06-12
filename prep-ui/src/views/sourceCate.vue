@@ -6,6 +6,7 @@
            @pageChange="getAll">
     <template #searchBtn>
       <MyBtn text="添加分类" type="success" @click="openAddForm"/>
+      <MyBtn text="返回上级" type="secondary" @click="toUp"/>
     </template>
     <tr v-for="td in tableData" :key="td.categoryId">
       <td>{{ td.categoryName }}</td>
@@ -169,6 +170,10 @@ const router = useRouter();
 // 跳转路由
 const toImg = (id: string) => {
   router.push({path: '/imgSource', query: {cateId: id}})
+}
+// 返回上级页面
+const toUp = () => {
+  router.push('/')
 }
 </script>
 
