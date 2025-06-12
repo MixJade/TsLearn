@@ -3,5 +3,5 @@ export interface SourceCategory {
     categoryName: string;
     folderName: string;
     remark: string;
-    createTime: string;
+    createDate: string;
 }

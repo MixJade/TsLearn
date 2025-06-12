@@ -1,22 +1,21 @@
 <template>
   <!-- 表格 -->
   <MyTable :tb-page="tablePage"
-           :thead="['文件名','文件夹','备注','上传时间','识别时间','操作']"
+           :thead="['文件名','文件夹','备注','识别时间','操作']"
            caption="题源图片表"
            @pageChange="getAll">
     <template #searchBtn>
       <MyBtn text="添加图片" type="success" @click="openAddForm"/>
       <MyBtn text="返回上级" type="secondary" @click="toUp"/>
     </template>
-    <tr v-for="td in tableData" :key="td.sourceId">
+    <tr v-for="td in tableData" :key="td.imageId">
       <td>{{ td.fileName }}</td>
       <td>{{ td.folderName }}</td>
       <td>{{ td.remark }}</td>
-      <td>{{ formatDateTime(td.uploadTime) }}</td>
-      <td>{{ formatDateTime(td.ocrTime) }}</td>
+      <td>{{ td.ocrTime }}</td>
       <td>
-        <TbBtn text="编辑" type="upd" @click="openUpdForm(td.sourceId)"/>
-        <TbBtn text="删除" type="del" @click="deleteById(td.sourceId)"/>
+        <TbBtn text="编辑" type="upd" @click="openUpdForm(td.imageId)"/>
+        <TbBtn text="删除" type="del" @click="deleteById(td.imageId)"/>
       </td>
     </tr>
   </MyTable>
@@ -29,10 +28,10 @@
           <label for="myImg">文件</label>
           <input id="myImg" accept="image/*" type="file" @change="handleFileChange"/>
         </div>
-        <span class="form-info">{{ imageSource.fileName }}</span>
+        <span class="form-info">{{ sourceImg.fileName }}</span>
         <div class="form-row">
           <label for="remark">备注</label>
-          <input id="remark" v-model="imageSource.remark" type="text">
+          <input id="remark" v-model="sourceImg.remark" type="text">
         </div>
       </fieldset>
       <div class="form-footer">
@@ -43,13 +42,13 @@
   </MyDialog>
   <!--识别结果弹窗-->
   <MyDialog ref="myShow2">
-    <label for="remark2"><strong>{{ imageSource2.fileName }}</strong></label>
-    <input id="remark2" v-model="imageSource2.remark" placeholder="备注" type="text">
+    <label for="remark2"><strong>{{ sourceImg2.fileName }}</strong></label>
+    <input id="remark2" v-model="sourceImg2.remark" placeholder="备注" type="text">
     <div class="parent">
       <label for="ocrResult2" class="child-img">
-        <img class="ocr-img" :src="'/api/imageSource/img/'+imageSource2.sourceId" alt="题目图片">
+        <img class="ocr-img" :src="'/api/sourceImage/img/'+sourceImg2.imageId" alt="题目图片">
       </label>
-      <textarea id="ocrResult2" class="ocr-res" v-model="imageSource2.ocrResult"/>
+      <textarea id="ocrResult2" class="ocr-res" v-model="sourceImg2.ocrResult"/>
     </div>
     <div class="ocr-foot">
       <MyBtn text="关闭" type="secondary" @click="closeDialog2"/>
@@ -70,7 +69,7 @@ import MyDialog from "@/components/message/MyDialog.vue";
 import MyBtn from "@/components/button/MyBtn.vue";
 import {Result} from "@/model/vo/Result";
 import SureDelModal from "@/components/message/SureDelModal.vue";
-import {ImageSource} from "@/model/entity/ImageSource";
+import {SourceImage} from "@/model/entity/SourceImage";
 import {
   reqAddImg,
   reqDelImg,
@@ -79,8 +78,7 @@ import {
   reqOneImg,
   reqUpdImg,
   reqUploadImg
-} from "@/request/imgSourceApi";
-import {formatDateTime} from "@/utils/TimeUtil";
+} from "@/request/sourceImgApi";
 import TbBtn from "@/components/button/TbBtn.vue";
 import {useRoute, useRouter} from "vue-router";
 import {ImgSourceDto} from "@/model/dto/ImgSourceDto";
@@ -101,8 +99,8 @@ const setRouteData = (): void => {
   if (Object.keys(route.query).length > 0)
     cateId = parseInt(route.query.cateId as string)
   // 给增删实体类设置值
-  imageSource.categoryId = cateId;
-  imageSource2.categoryId = cateId;
+  sourceImg.categoryId = cateId;
+  sourceImg2.categoryId = cateId;
   paData.categoryId = cateId;
 }
 const router = useRouter();
@@ -164,16 +162,16 @@ const deleteById = (id: number): void => {
  * ===================================[表单数据]============================================
  */
 // 添加的实体类
-const imageSource: ImageSource = reactive({
-  categoryId: 0, fileName: "", ocrResult: "", ocrTime: "", remark: "", sourceId: 0, uploadTime: ""
+const sourceImg: SourceImage = reactive({
+  categoryId: 0, fileName: "", imageId: 0, ocrResult: "", ocrTime: "", remark: ""
 })
 
 // 表单弹出框
 const myShow = ref<InstanceType<typeof MyDialog> | null>(null)
 const openAddForm = () => {
-  imageSource.sourceId = 0
-  imageSource.fileName = ""
-  imageSource.remark = ""
+  sourceImg.imageId = 0
+  sourceImg.fileName = ""
+  sourceImg.remark = ""
   myShow.value?.showMe();
 }
 const closeDialog = () => myShow.value?.closeMe();
@@ -207,8 +205,8 @@ const uploadFile = (): void => {
   formData.append('file', file.value);
   reqUploadImg(formData, cateId).then(resp => {
     if (resp.code === 1) {
-      imageSource.fileName = resp.msg
-      reqAddImg(imageSource).then(resp => commonResp(resp))
+      sourceImg.fileName = resp.msg
+      reqAddImg(sourceImg).then(resp => commonResp(resp))
     } else if (resp.code === 0) {
       tesTus("err", resp.msg);
     } else {
@@ -222,25 +220,25 @@ const uploadFile = (): void => {
  * ===================================[识别结果数据]============================================
  */
 // 添加的实体类
-const imageSource2: ImageSource = reactive({
-  categoryId: 0, fileName: "", ocrResult: "", ocrTime: "", remark: "", sourceId: 0, uploadTime: ""
+const sourceImg2: SourceImage = reactive({
+  categoryId: 0, fileName: "", imageId: 0, ocrResult: "", ocrTime: "", remark: ""
 })
 
 // 表单弹出框
 const myShow2 = ref<InstanceType<typeof MyDialog> | null>(null)
 const openUpdForm = (id: number) => {
   reqOneImg(id).then(resp => {
-    imageSource2.sourceId = resp.sourceId
-    imageSource2.ocrResult = resp.ocrResult
-    imageSource2.remark = resp.remark
-    imageSource2.fileName = resp.fileName
+    sourceImg2.imageId = resp.imageId
+    sourceImg2.ocrResult = resp.ocrResult
+    sourceImg2.remark = resp.remark
+    sourceImg2.fileName = resp.fileName
   })
   myShow2.value?.showMe();
 }
 const closeDialog2 = () => myShow2.value?.closeMe();
 
 const handleOcrImg = (): void => {
-  if (imageSource2.ocrResult.length > 6) {
+  if (sourceImg2.ocrResult.length > 6) {
     sureDelModal.value?.confirmDel("识别后现有结果将丢失").then((resp: boolean) => {
       if (resp) {
         ocrImg()
@@ -250,10 +248,10 @@ const handleOcrImg = (): void => {
 }
 
 const ocrImg = (): void => {
-  reqOcrImg(imageSource2.sourceId).then(resp => {
+  reqOcrImg(sourceImg2.imageId).then(resp => {
     if (resp.code === 1) {
       tesTus("suc", "识别成功");
-      imageSource2.ocrResult = resp.msg
+      sourceImg2.ocrResult = resp.msg
     } else if (resp.code === 0) {
       tesTus("err", resp.msg);
     } else {
@@ -267,7 +265,7 @@ const submitForm2 = (): void => {
   // 开始提交
   closeDialog2()
   // 修改
-  reqUpdImg(imageSource2).then(resp => commonResp(resp))
+  reqUpdImg(sourceImg2).then(resp => commonResp(resp))
 }
 </script>
 

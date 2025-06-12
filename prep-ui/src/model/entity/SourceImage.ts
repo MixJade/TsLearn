@@ -1,9 +1,8 @@
-export interface ImageSource {
-    sourceId: number;
+export interface SourceImage {
+    imageId: number;
     fileName: string;
     categoryId: number;
     remark: string;
-    uploadTime: string;
     ocrResult: string;
     ocrTime: string;
 }

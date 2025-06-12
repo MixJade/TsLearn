@@ -8,8 +8,8 @@ const routes: RouteRecordRaw[] = [
         path: '/sourceCate',
         component: () => import('@/views/sourceCate.vue')
     }, {
-        path: '/imgSource',
-        component: () => import('@/views/imgSource.vue')
+        path: '/sourceImg',
+        component: () => import('@/views/sourceImg.vue')
     },
 ]
 export const router = createRouter({

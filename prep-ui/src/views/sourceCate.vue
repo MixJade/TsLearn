@@ -13,7 +13,7 @@
       <td>{{ td.folderName }}</td>
       <td>{{ td.recordNum }}</td>
       <td>{{ td.remark }}</td>
-      <td>{{ formatDateTime(td.createTime) }}</td>
+      <td>{{ td.createDate }}</td>
       <td>
         <TbBtn type="ent" text="进入" @click="toImg(td.categoryId)"/>
         <TbBtn type="upd" text="修改" @click="openUpdForm(td)"/>
@@ -60,7 +60,6 @@ import {Result} from "@/model/vo/Result";
 import SureDelModal from "@/components/message/SureDelModal.vue";
 import {SourceCategory} from "@/model/entity/SourceCategory";
 import {reqAddCate, reqDelCate, reqSourceCatePage, reqUpdCate} from "@/request/sourceCateApi";
-import {formatDateTime} from "@/utils/TimeUtil";
 import TbBtn from "@/components/button/TbBtn.vue";
 import {useRouter} from "vue-router";
 import {SourceCateVo} from "@/model/vo/SourceCateVo";
@@ -122,7 +121,7 @@ const deleteById = (id: number): void => {
  */
 // 添加的实体类
 const sourceCategory: SourceCategory = reactive({
-  categoryId: 0, categoryName: "", createTime: "", folderName: "", remark: ""
+  categoryId: 0, categoryName: "", createDate: "", folderName: "", remark: ""
 })
 
 // 表单弹出框
@@ -169,7 +168,7 @@ const submitForm = (): void => {
 const router = useRouter();
 // 跳转路由
 const toImg = (id: string) => {
-  router.push({path: '/imgSource', query: {cateId: id}})
+  router.push({path: '/sourceImg', query: {cateId: id}})
 }
 // 返回上级页面
 const toUp = () => {
