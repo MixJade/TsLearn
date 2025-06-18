@@ -1,22 +1,23 @@
 <template>
   <!-- 表格 -->
   <MyTable :tb-page="tablePage"
-           :thead="['科目名','正式考试日期','文件夹','创建时间','操作']"
-           caption="科目表"
+           :thead="['试卷名','文件夹','总分','考试时长(秒)','创建日期','操作']"
+           caption="试卷表"
            @pageChange="getAll">
     <template #searchBtn>
-      <MyBtn text="添加科目" type="success" @click="openAddForm"/>
+      <MyBtn text="添加试卷" type="success" @click="openAddForm"/>
       <MyBtn text="返回上级" type="secondary" @click="toUp"/>
     </template>
-    <tr v-for="td in tableData" :key="td.subjectId">
-      <td>{{ td.subjectName }}</td>
-      <td>{{ td.examStartDate }}</td>
+    <tr v-for="td in tableData" :key="td.paperId">
+      <td>{{ td.paperName }}</td>
       <td>{{ td.folderName }}</td>
+      <td>{{ td.totalScore }}</td>
+      <td>{{ td.duration }}</td>
       <td>{{ td.createDate }}</td>
       <td>
-        <TbBtn type="ent" text="进入" @click="toPaper(td.subjectId)"/>
+        <TbBtn type="ent" text="进入"/>
         <TbBtn type="upd" text="修改" @click="openUpdForm(td)"/>
-        <TbBtn type="del" text="删除" @click="deleteById(td.subjectId)"/>
+        <TbBtn type="del" text="删除" @click="deleteById(td.paperId)"/>
       </td>
     </tr>
   </MyTable>
@@ -24,18 +25,18 @@
   <MyDialog ref="myShow">
     <form class="myForm">
       <fieldset>
-        <legend>{{ isAddForm ? "新增" : "修改" }}科目</legend>
+        <legend>{{ isAddForm ? "新增" : "修改" }}试卷</legend>
         <div class="form-row">
-          <label for="remark">科目名</label>
-          <input id="remark" v-model="examSubject.subjectName" type="text">
+          <label for="remark">试卷名</label>
+          <input id="remark" v-model="examPaper.paperName" type="text">
         </div>
         <div class="form-row">
           <label for="remark">文件夹</label>
-          <input id="remark" v-model="examSubject.folderName" type="text">
+          <input id="remark" v-model="examPaper.folderName" type="text">
         </div>
         <div class="form-row">
-          <label for="remark">正式考试时间</label>
-          <input id="remark" v-model="examSubject.examStartDate" type="date">
+          <label for="remark">考试时长(秒)</label>
+          <input id="remark" v-model="examPaper.duration" type="number">
         </div>
       </fieldset>
       <div class="form-footer">
@@ -57,12 +58,15 @@ import MyDialog from "@/components/message/MyDialog.vue";
 import MyBtn from "@/components/button/MyBtn.vue";
 import {Result} from "@/model/vo/Result";
 import SureDelModal from "@/components/message/SureDelModal.vue";
-import {ExamSubject} from "@/model/entity/ExamSubject";
-import {reqAddSubject, reqDelSubject, reqSubjectPage, reqUpdSubject} from "@/request/examSubjectApi";
+import {ExamPaper} from "@/model/entity/ExamPaper";
+import {reqAddPaper, reqDelPaper, reqPaperPage, reqUpdPaper} from "@/request/examPaperApi";
 import TbBtn from "@/components/button/TbBtn.vue";
-import {useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
+import {ExamPaperDto} from "@/model/dto/ExamPaperDto";
 
+let subjectId = 0;
 onMounted(() => {
+  setRouteData();
   getAll();
 })
 
@@ -94,10 +98,11 @@ const commonResp = (resp: Result): void => {
  * ===================================[表格数据]============================================
  */
 // 表格数据
-const tableData = ref<ExamSubject[]>([])
+const tableData = ref<ExamPaper[]>([])
 const tablePage: TbPage = reactive({current: 1, pages: 1, total: 0, size: 10}) as TbPage
+const paData: ExamPaperDto = {subjectId: 0}
 const getAll = () => {
-  reqSubjectPage(tablePage.current, tablePage.size).then(resp => {
+  reqPaperPage(tablePage.current, tablePage.size, paData).then(resp => {
     tableData.value = resp.records
     tablePage.current = resp.current;
     tablePage.pages = resp.pages
@@ -110,7 +115,7 @@ const getAll = () => {
 const sureDelModal = ref<InstanceType<typeof SureDelModal> | null>(null);
 const deleteById = (id: number): void => {
   sureDelModal.value?.confirmDel("确定删除？删除后数据无法找回").then((resp: boolean) => {
-    if (resp) reqDelSubject(id).then(resp => commonResp(resp))
+    if (resp) reqDelPaper(id).then(resp => commonResp(resp))
   })
 }
 
@@ -118,8 +123,8 @@ const deleteById = (id: number): void => {
  * ===================================[表单数据]============================================
  */
 // 添加的实体类
-const examSubject: ExamSubject = reactive({
-  createDate: "", examStartDate: "", folderName: "", subjectId: 0, subjectName: ""
+const examPaper: ExamPaper = reactive({
+  createDate: "", duration: 0, folderName: "", paperId: 0, paperName: "", subjectId: 0, totalScore: 0
 })
 
 // 表单弹出框
@@ -127,18 +132,18 @@ const myShow = ref<InstanceType<typeof MyDialog> | null>(null)
 const isAddForm = ref<boolean>(false)
 const openAddForm = () => {
   isAddForm.value = true;
-  examSubject.subjectId = 0
-  examSubject.subjectName = ""
-  examSubject.examStartDate = ""
-  examSubject.folderName = ""
+  examPaper.paperId = 0
+  examPaper.paperName = ""
+  examPaper.folderName = ""
+  examPaper.duration = 0
   myShow.value?.showMe();
 }
-const openUpdForm = (data: ExamSubject) => {
+const openUpdForm = (data: ExamPaper) => {
   isAddForm.value = false;
-  examSubject.subjectId = data.subjectId
-  examSubject.subjectName = data.subjectName
-  examSubject.examStartDate = data.examStartDate
-  examSubject.folderName = data.folderName
+  examPaper.paperId = data.paperId
+  examPaper.paperName = data.paperName
+  examPaper.folderName = data.folderName
+  examPaper.duration = data.duration
   myShow.value?.showMe();
 }
 const closeDialog = () => myShow.value?.closeMe();
@@ -146,33 +151,36 @@ const closeDialog = () => myShow.value?.closeMe();
 // 提交表单
 const submitForm = (): void => {
   // 校验
-  if (examSubject.subjectName === "") {
-    tesTus("err", "请填写科目名称");
+  if (examPaper.paperName === "") {
+    tesTus("err", "请填写试卷名称");
     return;
-  } else if (examSubject.folderName === "") {
+  } else if (examPaper.folderName === "") {
     tesTus("err", "请填写文件夹名称");
-    return;
-  } else if (examSubject.examStartDate === "") {
-    tesTus("err", "请填写考试时间");
     return;
   }
   // 开始提交
   closeDialog()
   if (isAddForm.value)
-    reqAddSubject(examSubject).then(resp => commonResp(resp))
+    reqAddPaper(examPaper).then(resp => commonResp(resp))
   else
-    reqUpdSubject(examSubject).then(resp => commonResp(resp))
+    reqUpdPaper(examPaper).then(resp => commonResp(resp))
 }
 /**
  * ===================================[路由跳转]============================================
  */
+// 如此获取路由传参
+const route = useRoute();
+const setRouteData = (): void => {
+  if (Object.keys(route.query).length > 0)
+    subjectId = parseInt(route.query.subjectId as string)
+  // 给增删实体类设置值
+  examPaper.subjectId = subjectId;
+  paData.subjectId = subjectId;
+}
 const router = useRouter();
 // 返回上级页面
 const toUp = () => {
-  router.push('/')
-}
-const toPaper = (id: number) => {
-  router.push({path: '/examPaper', query: {subjectId: id}})
+  router.push('/examSubject')
 }
 </script>
 
