@@ -128,6 +128,7 @@ const isAddForm = ref<boolean>(false)
 const openAddForm = () => {
   isAddForm.value = true;
   examSubject.subjectId = 0
+  examSubject.subjectName = ""
   examSubject.examStartDate = ""
   examSubject.folderName = ""
   myShow.value?.showMe();
@@ -135,6 +136,7 @@ const openAddForm = () => {
 const openUpdForm = (data: ExamSubject) => {
   isAddForm.value = false;
   examSubject.subjectId = data.subjectId
+  examSubject.subjectName = data.subjectName
   examSubject.examStartDate = data.examStartDate
   examSubject.folderName = data.folderName
   myShow.value?.showMe();
