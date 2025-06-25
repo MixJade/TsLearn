@@ -2,11 +2,10 @@ import {myReq} from "@/request/myReq";
 import {Result} from "@/model/vo/Result";
 import {IPage} from "@/model/vo/IPage";
 import {ExamPaper} from "@/model/entity/ExamPaper";
-import {ExamPaperDto} from "@/model/dto/ExamPaperDto";
 
 
-export const reqPaperPage = (pageNum: number, pageSize: number, dto: ExamPaperDto): Promise<IPage<ExamPaper>> =>
-    myReq.post<IPage<ExamPaper>>(`/api/examPaper/page?pageNum=${pageNum}&pageSize=${pageSize}`, dto)
+export const reqPaperPage = (pageNum: number, pageSize: number): Promise<IPage<ExamPaper>> =>
+    myReq.get<IPage<ExamPaper>>(`/api/examPaper/page?pageNum=${pageNum}&pageSize=${pageSize}`)
 
 export const reqAddPaper = (data: ExamPaper): Promise<Result> =>
     myReq.post<Result>(`/api/examPaper`, data)

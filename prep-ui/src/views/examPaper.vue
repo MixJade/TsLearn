@@ -15,7 +15,7 @@
       <td>{{ td.duration }}</td>
       <td>{{ td.createDate }}</td>
       <td>
-        <TbBtn type="ent" text="进入"/>
+        <TbBtn type="ent" text="进入" @click="toQuest(td.paperId)"/>
         <TbBtn type="upd" text="修改" @click="openUpdForm(td)"/>
         <TbBtn type="del" text="删除" @click="deleteById(td.paperId)"/>
       </td>
@@ -27,16 +27,16 @@
       <fieldset>
         <legend>{{ isAddForm ? "新增" : "修改" }}试卷</legend>
         <div class="form-row">
-          <label for="remark">试卷名</label>
-          <input id="remark" v-model="examPaper.paperName" type="text">
+          <label for="paperName">试卷名</label>
+          <input id="paperName" v-model="examPaper.paperName" type="text">
         </div>
         <div class="form-row">
-          <label for="remark">文件夹</label>
-          <input id="remark" v-model="examPaper.folderName" type="text">
+          <label for="folderName">文件夹</label>
+          <input id="folderName" v-model="examPaper.folderName" type="text">
         </div>
         <div class="form-row">
-          <label for="remark">考试时长(秒)</label>
-          <input id="remark" v-model="examPaper.duration" type="number">
+          <label for="duration">考试时长(秒)</label>
+          <input id="duration" v-model="examPaper.duration" type="number">
         </div>
       </fieldset>
       <div class="form-footer">
@@ -61,12 +61,9 @@ import SureDelModal from "@/components/message/SureDelModal.vue";
 import {ExamPaper} from "@/model/entity/ExamPaper";
 import {reqAddPaper, reqDelPaper, reqPaperPage, reqUpdPaper} from "@/request/examPaperApi";
 import TbBtn from "@/components/button/TbBtn.vue";
-import {useRoute, useRouter} from "vue-router";
-import {ExamPaperDto} from "@/model/dto/ExamPaperDto";
+import {useRouter} from "vue-router";
 
-let subjectId = 0;
 onMounted(() => {
-  setRouteData();
   getAll();
 })
 
@@ -100,9 +97,8 @@ const commonResp = (resp: Result): void => {
 // 表格数据
 const tableData = ref<ExamPaper[]>([])
 const tablePage: TbPage = reactive({current: 1, pages: 1, total: 0, size: 10}) as TbPage
-const paData: ExamPaperDto = {subjectId: 0}
 const getAll = () => {
-  reqPaperPage(tablePage.current, tablePage.size, paData).then(resp => {
+  reqPaperPage(tablePage.current, tablePage.size).then(resp => {
     tableData.value = resp.records
     tablePage.current = resp.current;
     tablePage.pages = resp.pages
@@ -124,7 +120,7 @@ const deleteById = (id: number): void => {
  */
 // 添加的实体类
 const examPaper: ExamPaper = reactive({
-  createDate: "", duration: 0, folderName: "", paperId: 0, paperName: "", subjectId: 0, totalScore: 0
+  createDate: "", duration: 0, folderName: "", paperId: 0, paperName: "", totalScore: 0
 })
 
 // 表单弹出框
@@ -168,19 +164,14 @@ const submitForm = (): void => {
 /**
  * ===================================[路由跳转]============================================
  */
-// 如此获取路由传参
-const route = useRoute();
-const setRouteData = (): void => {
-  if (Object.keys(route.query).length > 0)
-    subjectId = parseInt(route.query.subjectId as string)
-  // 给增删实体类设置值
-  examPaper.subjectId = subjectId;
-  paData.subjectId = subjectId;
-}
 const router = useRouter();
 // 返回上级页面
 const toUp = () => {
-  router.push('/examSubject')
+  router.push('/')
+}
+// 进入题目管理
+const toQuest = (id: number) => {
+  router.push({path: '/dealQuest', query: {paperID: id}})
 }
 </script>
 

@@ -11,7 +11,10 @@
             <router-link to="/sourceCate">图片识别</router-link>
           </div>
           <div class="ipt-btn">
-            <router-link to="/examSubject">试卷编辑</router-link>
+            <router-link to="/examPaper">试卷编辑</router-link>
+          </div>
+          <div class="ipt-btn">
+            <router-link to="/examSubject">科目备忘</router-link>
           </div>
         </div>
       </div>

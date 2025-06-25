@@ -16,6 +16,9 @@ const routes: RouteRecordRaw[] = [
     },{
         path: '/examPaper',
         component: () => import('@/views/examPaper.vue')
+    },{
+        path: '/dealQuest',
+        component: () => import('@/views/dealQuest.vue')
     },
 ]
 export const router = createRouter({

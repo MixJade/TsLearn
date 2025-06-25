@@ -1,7 +1,7 @@
 <template>
   <!-- 表格 -->
   <MyTable :tb-page="tablePage"
-           :thead="['科目名','正式考试日期','文件夹','创建时间','操作']"
+           :thead="['科目名','正式考试日期','报名日期','操作']"
            caption="科目表"
            @pageChange="getAll">
     <template #searchBtn>
@@ -11,10 +11,8 @@
     <tr v-for="td in tableData" :key="td.subjectId">
       <td>{{ td.subjectName }}</td>
       <td>{{ td.examStartDate }}</td>
-      <td>{{ td.folderName }}</td>
-      <td>{{ td.createDate }}</td>
+      <td>{{ td.registerDate }}</td>
       <td>
-        <TbBtn type="ent" text="进入" @click="toPaper(td.subjectId)"/>
         <TbBtn type="upd" text="修改" @click="openUpdForm(td)"/>
         <TbBtn type="del" text="删除" @click="deleteById(td.subjectId)"/>
       </td>
@@ -26,16 +24,16 @@
       <fieldset>
         <legend>{{ isAddForm ? "新增" : "修改" }}科目</legend>
         <div class="form-row">
-          <label for="remark">科目名</label>
-          <input id="remark" v-model="examSubject.subjectName" type="text">
+          <label for="subjectName">科目名</label>
+          <input id="subjectName" v-model="examSubject.subjectName" type="text">
         </div>
         <div class="form-row">
-          <label for="remark">文件夹</label>
-          <input id="remark" v-model="examSubject.folderName" type="text">
+          <label for="examStartDate">正式考试日期</label>
+          <input id="examStartDate" v-model="examSubject.examStartDate" type="date">
         </div>
         <div class="form-row">
-          <label for="remark">正式考试时间</label>
-          <input id="remark" v-model="examSubject.examStartDate" type="date">
+          <label for="registerDate">报名日期</label>
+          <input id="registerDate" v-model="examSubject.registerDate" type="date">
         </div>
       </fieldset>
       <div class="form-footer">
@@ -119,7 +117,7 @@ const deleteById = (id: number): void => {
  */
 // 添加的实体类
 const examSubject: ExamSubject = reactive({
-  createDate: "", examStartDate: "", folderName: "", subjectId: 0, subjectName: ""
+  createDate: "", examStartDate: "", registerDate: "", subjectId: 0, subjectName: ""
 })
 
 // 表单弹出框
@@ -130,7 +128,7 @@ const openAddForm = () => {
   examSubject.subjectId = 0
   examSubject.subjectName = ""
   examSubject.examStartDate = ""
-  examSubject.folderName = ""
+  examSubject.registerDate = ""
   myShow.value?.showMe();
 }
 const openUpdForm = (data: ExamSubject) => {
@@ -138,7 +136,7 @@ const openUpdForm = (data: ExamSubject) => {
   examSubject.subjectId = data.subjectId
   examSubject.subjectName = data.subjectName
   examSubject.examStartDate = data.examStartDate
-  examSubject.folderName = data.folderName
+  examSubject.registerDate = data.registerDate
   myShow.value?.showMe();
 }
 const closeDialog = () => myShow.value?.closeMe();
@@ -148,9 +146,6 @@ const submitForm = (): void => {
   // 校验
   if (examSubject.subjectName === "") {
     tesTus("err", "请填写科目名称");
-    return;
-  } else if (examSubject.folderName === "") {
-    tesTus("err", "请填写文件夹名称");
     return;
   } else if (examSubject.examStartDate === "") {
     tesTus("err", "请填写考试时间");
@@ -170,9 +165,6 @@ const router = useRouter();
 // 返回上级页面
 const toUp = () => {
   router.push('/')
-}
-const toPaper = (id: number) => {
-  router.push({path: '/examPaper', query: {subjectId: id}})
 }
 </script>
 

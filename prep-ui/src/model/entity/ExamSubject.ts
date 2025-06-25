@@ -2,6 +2,6 @@ export interface ExamSubject {
     subjectId: number;
     subjectName: string;
     examStartDate: string;
-    folderName: string;
+    registerDate: string;
     createDate: string;
 }
