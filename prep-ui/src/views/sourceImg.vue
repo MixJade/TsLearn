@@ -48,7 +48,7 @@
       <label for="ocrResult2" class="child-img">
         <img class="ocr-img" :src="'/api/sourceImage/img/'+sourceImg2.imageId" alt="题目图片">
       </label>
-      <textarea id="ocrResult2" class="ocr-res" v-model="sourceImg2.ocrResult"/>
+      <textarea id="ocrResult2" class="ocr-res new-line" v-model="sourceImg2.ocrResult"/>
     </div>
     <div class="ocr-foot">
       <MyBtn text="关闭" type="secondary" @click="closeDialog2"/>
@@ -291,9 +291,6 @@ const submitForm2 = (): void => {
 .ocr-res
   background-color: #f8f9fa
   padding: 4px
-  //结果换行
-  white-space: pre-wrap
-  word-break: break-all
   max-height: 70vh
   min-height: 200px
   width: 650px
