@@ -1,7 +1,7 @@
 <template>
   <!-- 表格 -->
   <MyTable :tb-page="tablePage"
-           :thead="['试卷名','文件夹','总分','考试时长(秒)','创建日期','操作']"
+           :thead="['试卷名','题源','文件夹','总分','考试时长(秒)','创建日期','操作']"
            caption="试卷表"
            @pageChange="getAll">
     <template #searchBtn>
@@ -10,6 +10,7 @@
     </template>
     <tr v-for="td in tableData" :key="td.paperId">
       <td>{{ td.paperName }}</td>
+      <td>{{ td.categoryName }}</td>
       <td>{{ td.folderName }}</td>
       <td>{{ td.totalScore }}</td>
       <td>{{ td.duration }}</td>
@@ -29,6 +30,12 @@
         <div class="form-row">
           <label for="paperName">试卷名</label>
           <input id="paperName" v-model="examPaper.paperName" type="text">
+        </div>
+        <div class="form-row">
+          <label for="categoryId">题源</label>
+          <select id="categoryId" v-model="examPaper.categoryId">
+            <option v-for="op in cateLabel" :key="op.categoryId" :value="op.categoryId">{{ op.categoryName }}</option>
+          </select>
         </div>
         <div class="form-row">
           <label for="folderName">文件夹</label>
@@ -62,9 +69,13 @@ import {ExamPaper} from "@/model/entity/ExamPaper";
 import {reqAddPaper, reqDelPaper, reqPaperPage, reqUpdPaper} from "@/request/examPaperApi";
 import TbBtn from "@/components/button/TbBtn.vue";
 import {useRouter} from "vue-router";
+import {ExamPaperVo} from "@/model/vo/ExamPaperVo";
+import {CateLabelVo} from "@/model/vo/CateLabelVo";
+import {reqCateLabel} from "@/request/sourceCateApi";
 
 onMounted(() => {
   getAll();
+  reqCateLabel().then(resp => cateLabel.value = resp)
 })
 
 /**
@@ -95,7 +106,7 @@ const commonResp = (resp: Result): void => {
  * ===================================[表格数据]============================================
  */
 // 表格数据
-const tableData = ref<ExamPaper[]>([])
+const tableData = ref<ExamPaperVo[]>([])
 const tablePage: TbPage = reactive({current: 1, pages: 1, total: 0, size: 10}) as TbPage
 const getAll = () => {
   reqPaperPage(tablePage.current, tablePage.size).then(resp => {
@@ -120,9 +131,10 @@ const deleteById = (id: number): void => {
  */
 // 添加的实体类
 const examPaper: ExamPaper = reactive({
-  createDate: "", duration: 0, folderName: "", paperId: 0, paperName: "", totalScore: 0
+  categoryId: 0, createDate: "", duration: 0, folderName: "", paperId: 0, paperName: "", totalScore: 0
 })
-
+// 题源的下拉框
+const cateLabel = ref<CateLabelVo[]>([])
 // 表单弹出框
 const myShow = ref<InstanceType<typeof MyDialog> | null>(null)
 const isAddForm = ref<boolean>(false)
@@ -130,6 +142,7 @@ const openAddForm = () => {
   isAddForm.value = true;
   examPaper.paperId = 0
   examPaper.paperName = ""
+  examPaper.categoryId = 0
   examPaper.folderName = ""
   examPaper.duration = 0
   myShow.value?.showMe();
@@ -138,6 +151,7 @@ const openUpdForm = (data: ExamPaper) => {
   isAddForm.value = false;
   examPaper.paperId = data.paperId
   examPaper.paperName = data.paperName
+  examPaper.categoryId = 0
   examPaper.folderName = data.folderName
   examPaper.duration = data.duration
   myShow.value?.showMe();
