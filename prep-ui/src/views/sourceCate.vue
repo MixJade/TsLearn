@@ -167,7 +167,7 @@ const submitForm = (): void => {
  */
 const router = useRouter();
 // 跳转路由
-const toImg = (id: string) => {
+const toImg = (id: number) => {
   router.push({path: '/sourceImg', query: {cateId: id}})
 }
 // 返回上级页面

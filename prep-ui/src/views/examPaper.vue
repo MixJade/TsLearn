@@ -29,21 +29,21 @@
         <legend>{{ isAddForm ? "新增" : "修改" }}试卷</legend>
         <div class="form-row">
           <label for="paperName">试卷名</label>
-          <input id="paperName" v-model="examPaper.paperName" type="text">
+          <input id="paperName" v-model="paperData.paperName" type="text">
         </div>
         <div class="form-row">
           <label for="categoryId">题源</label>
-          <select id="categoryId" v-model="examPaper.categoryId">
+          <select id="categoryId" v-model="paperData.categoryId">
             <option v-for="op in cateLabel" :key="op.categoryId" :value="op.categoryId">{{ op.categoryName }}</option>
           </select>
         </div>
         <div class="form-row">
           <label for="folderName">文件夹</label>
-          <input id="folderName" v-model="examPaper.folderName" type="text">
+          <input id="folderName" v-model="paperData.folderName" type="text">
         </div>
         <div class="form-row">
           <label for="duration">考试时长(秒)</label>
-          <input id="duration" v-model="examPaper.duration" type="number">
+          <input id="duration" v-model="paperData.duration" type="number">
         </div>
       </fieldset>
       <div class="form-footer">
@@ -130,7 +130,7 @@ const deleteById = (id: number): void => {
  * ===================================[表单数据]============================================
  */
 // 添加的实体类
-const examPaper: ExamPaper = reactive({
+const paperData: ExamPaper = reactive({
   categoryId: 0, createDate: "", duration: 0, folderName: "", paperId: 0, paperName: "", totalScore: 0
 })
 // 题源的下拉框
@@ -140,20 +140,20 @@ const myShow = ref<InstanceType<typeof MyDialog> | null>(null)
 const isAddForm = ref<boolean>(false)
 const openAddForm = () => {
   isAddForm.value = true;
-  examPaper.paperId = 0
-  examPaper.paperName = ""
-  examPaper.categoryId = 0
-  examPaper.folderName = ""
-  examPaper.duration = 0
+  paperData.paperId = 0
+  paperData.paperName = ""
+  paperData.categoryId = 0
+  paperData.folderName = ""
+  paperData.duration = 0
   myShow.value?.showMe();
 }
 const openUpdForm = (data: ExamPaper) => {
   isAddForm.value = false;
-  examPaper.paperId = data.paperId
-  examPaper.paperName = data.paperName
-  examPaper.categoryId = 0
-  examPaper.folderName = data.folderName
-  examPaper.duration = data.duration
+  paperData.paperId = data.paperId
+  paperData.paperName = data.paperName
+  paperData.categoryId = 0
+  paperData.folderName = data.folderName
+  paperData.duration = data.duration
   myShow.value?.showMe();
 }
 const closeDialog = () => myShow.value?.closeMe();
@@ -161,19 +161,19 @@ const closeDialog = () => myShow.value?.closeMe();
 // 提交表单
 const submitForm = (): void => {
   // 校验
-  if (examPaper.paperName === "") {
+  if (paperData.paperName === "") {
     tesTus("err", "请填写试卷名称");
     return;
-  } else if (examPaper.folderName === "") {
+  } else if (paperData.folderName === "") {
     tesTus("err", "请填写文件夹名称");
     return;
   }
   // 开始提交
   closeDialog()
   if (isAddForm.value)
-    reqAddPaper(examPaper).then(resp => commonResp(resp))
+    reqAddPaper(paperData).then(resp => commonResp(resp))
   else
-    reqUpdPaper(examPaper).then(resp => commonResp(resp))
+    reqUpdPaper(paperData).then(resp => commonResp(resp))
 }
 /**
  * ===================================[路由跳转]============================================
