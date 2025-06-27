@@ -22,7 +22,7 @@ if (props.type === "success") {
 } else if (props.type === "info") {
   myColorTxt.value = "#909399"
   myColorBac.value = "#e9e9eb"
-}else if (props.type === "danger") {
+} else if (props.type === "danger") {
   myColorTxt.value = "#f56c6c"
   myColorBac.value = "#fef0f0"
 }
