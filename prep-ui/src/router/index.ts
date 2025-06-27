@@ -13,10 +13,13 @@ const routes: RouteRecordRaw[] = [
     }, {
         path: '/examSubject',
         component: () => import('@/views/examSubject.vue')
-    },{
+    }, {
         path: '/examPaper',
         component: () => import('@/views/examPaper.vue')
-    },{
+    }, {
+        path: '/examQuest',
+        component: () => import('@/views/examQuest.vue')
+    }, {
         path: '/dealQuest',
         component: () => import('@/views/dealQuest.vue')
     },

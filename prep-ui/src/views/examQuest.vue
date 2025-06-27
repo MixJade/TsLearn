@@ -1,24 +1,21 @@
 <template>
   <!-- 表格 -->
   <MyTable :tb-page="tablePage"
-           :thead="['试卷名','题源','文件夹','总分','考试时长(秒)','创建日期','操作']"
-           caption="试卷表"
+           :thead="['序号','类型','分值','操作']"
+           caption="题目表"
            @pageChange="getAll">
     <template #searchBtn>
-      <MyBtn text="添加试卷" type="success" @click="openAddForm"/>
+      <MyBtn text="添加题目" type="success" @click="openAddForm"/>
       <MyBtn text="返回上级" type="secondary" @click="toUp"/>
     </template>
-    <tr v-for="td in tableData" :key="td.paperId">
-      <td>{{ td.paperName }}</td>
-      <td>{{ td.categoryName }}</td>
-      <td>{{ td.folderName }}</td>
-      <td>{{ td.totalScore }}</td>
-      <td>{{ td.duration }}</td>
-      <td>{{ td.createDate }}</td>
+    <tr v-for="td in tableData" :key="td.questId">
+      <td>{{ td.questNo }}</td>
+      <td>{{ getQuestType(td.questType) }}</td>
+      <td>{{ td.score }}</td>
       <td>
-        <TbBtn type="ent" text="进入" @click="toQuest(td.paperId)"/>
+        <TbBtn type="ent" text="编辑" @click="toQuest(td.questId)"/>
         <TbBtn type="upd" text="修改" @click="openUpdForm(td)"/>
-        <TbBtn type="del" text="删除" @click="deleteById(td.paperId)"/>
+        <TbBtn type="del" text="删除" @click="deleteById(td.questId)"/>
       </td>
     </tr>
   </MyTable>
@@ -26,24 +23,22 @@
   <MyDialog ref="myShow">
     <form class="myForm">
       <fieldset>
-        <legend>{{ isAddForm ? "新增" : "修改" }}试卷</legend>
+        <legend>{{ isAddForm ? "新增" : "修改" }}题目</legend>
         <div class="form-row">
-          <label for="paperName">试卷名</label>
-          <input id="paperName" v-model="paperData.paperName" type="text">
+          <label for="questNo">序号</label>
+          <input id="questNo" v-model="questData.questNo" type="number">
         </div>
         <div class="form-row">
-          <label for="categoryId">题源</label>
-          <select id="categoryId" v-model="paperData.categoryId">
-            <option v-for="op in cateLabel" :key="op.categoryId" :value="op.categoryId">{{ op.categoryName }}</option>
+          <label for="questType">类型</label>
+          <select id="questType" v-model="questData.questType">
+            <option :value="1">选择</option>
+            <option :value="3">填空</option>
+            <option :value="3">大题</option>
           </select>
         </div>
         <div class="form-row">
-          <label for="folderName">文件夹</label>
-          <input id="folderName" v-model="paperData.folderName" type="text">
-        </div>
-        <div class="form-row">
-          <label for="duration">考试时长(秒)</label>
-          <input id="duration" v-model="paperData.duration" type="number">
+          <label for="duration">分值</label>
+          <input id="duration" v-model="questData.score" type="number">
         </div>
       </fieldset>
       <div class="form-footer">
@@ -65,17 +60,15 @@ import MyDialog from "@/components/message/MyDialog.vue";
 import MyBtn from "@/components/button/MyBtn.vue";
 import {Result} from "@/model/vo/Result";
 import SureDelModal from "@/components/message/SureDelModal.vue";
-import {ExamPaper} from "@/model/entity/ExamPaper";
-import {reqAddPaper, reqDelPaper, reqPaperPage, reqUpdPaper} from "@/request/examPaperApi";
+import {ExamQuest} from "@/model/entity/ExamQuest";
+import {reqAddQuest, reqDelQuest, reqQuestPage, reqUpdQuest} from "@/request/ExamQuestApi";
 import TbBtn from "@/components/button/TbBtn.vue";
-import {useRouter} from "vue-router";
-import {ExamPaperVo} from "@/model/vo/ExamPaperVo";
-import {CateLabelVo} from "@/model/vo/CateLabelVo";
-import {reqCateLabel} from "@/request/sourceCateApi";
+import {useRoute, useRouter} from "vue-router";
+import {ExamQuestDto} from "@/model/dto/ExamQuestDto";
 
 onMounted(() => {
+  setRouteData()
   getAll();
-  reqCateLabel().then(resp => cateLabel.value = resp)
 })
 
 /**
@@ -106,10 +99,11 @@ const commonResp = (resp: Result): void => {
  * ===================================[表格数据]============================================
  */
 // 表格数据
-const tableData = ref<ExamPaperVo[]>([])
+const tableData = ref<ExamQuest[]>([])
 const tablePage: TbPage = reactive({current: 1, pages: 1, total: 0, size: 10}) as TbPage
+const questDto: ExamQuestDto = {paperId: 0}
 const getAll = () => {
-  reqPaperPage(tablePage.current, tablePage.size).then(resp => {
+  reqQuestPage(tablePage.current, tablePage.size, questDto).then(resp => {
     tableData.value = resp.records
     tablePage.current = resp.current;
     tablePage.pages = resp.pages
@@ -122,38 +116,49 @@ const getAll = () => {
 const sureDelModal = ref<InstanceType<typeof SureDelModal> | null>(null);
 const deleteById = (id: number): void => {
   sureDelModal.value?.confirmDel("确定删除？删除后数据无法找回").then((resp: boolean) => {
-    if (resp) reqDelPaper(id).then(resp => commonResp(resp))
+    if (resp) reqDelQuest(id).then(resp => commonResp(resp))
   })
+}
+
+const getQuestType = (tpe: number) => {
+  if (tpe == 1) return "选择"
+  else if (tpe == 2) return "填空"
+  else if (tpe == 3) return "大题"
+  else return "其它"
 }
 
 /**
  * ===================================[表单数据]============================================
  */
 // 添加的实体类
-const paperData: ExamPaper = reactive({
-  categoryId: 0, createDate: "", duration: 0, folderName: "", paperId: 0, paperName: "", totalScore: 0
+const questData: ExamQuest = reactive({
+  haveImg: false,
+  imgName: "",
+  paperId: 0,
+  questAnalysis: "",
+  questContent: "",
+  questId: 0,
+  questNo: 0,
+  questType: 0,
+  score: 0
 })
-// 题源的下拉框
-const cateLabel = ref<CateLabelVo[]>([])
 // 表单弹出框
 const myShow = ref<InstanceType<typeof MyDialog> | null>(null)
 const isAddForm = ref<boolean>(false)
 const openAddForm = () => {
   isAddForm.value = true;
-  paperData.paperId = 0
-  paperData.paperName = ""
-  paperData.categoryId = 0
-  paperData.folderName = ""
-  paperData.duration = 0
+  questData.questId = 0
+  questData.questType = 0
+  questData.questNo = 0
+  questData.score = 0
   myShow.value?.showMe();
 }
-const openUpdForm = (data: ExamPaper) => {
+const openUpdForm = (data: ExamQuest) => {
   isAddForm.value = false;
-  paperData.paperId = data.paperId
-  paperData.paperName = data.paperName
-  paperData.categoryId = data.categoryId
-  paperData.folderName = data.folderName
-  paperData.duration = data.duration
+  questData.questId = data.questId
+  questData.questType = data.questType
+  questData.questNo = data.questNo
+  questData.score = data.score
   myShow.value?.showMe();
 }
 const closeDialog = () => myShow.value?.closeMe();
@@ -161,31 +166,41 @@ const closeDialog = () => myShow.value?.closeMe();
 // 提交表单
 const submitForm = (): void => {
   // 校验
-  if (paperData.paperName === "") {
-    tesTus("err", "请填写试卷名称");
+  if (questData.questType === 0) {
+    tesTus("err", "请填写题目类型");
     return;
-  } else if (paperData.folderName === "") {
-    tesTus("err", "请填写文件夹名称");
+  } else if (questData.questNo === 0) {
+    tesTus("err", "请填写题目顺序");
     return;
   }
   // 开始提交
   closeDialog()
   if (isAddForm.value)
-    reqAddPaper(paperData).then(resp => commonResp(resp))
+    reqAddQuest(questData).then(resp => commonResp(resp))
   else
-    reqUpdPaper(paperData).then(resp => commonResp(resp))
+    reqUpdQuest(questData).then(resp => commonResp(resp))
 }
 /**
  * ===================================[路由跳转]============================================
  */
+let paperId = 0;
+// 如此获取路由传参
+const route = useRoute();
+const setRouteData = (): void => {
+  if (Object.keys(route.query).length > 0) {
+    paperId = parseInt(route.query.paperId as string)
+  }
+  questData.paperId = paperId
+  questDto.paperId = paperId
+}
 const router = useRouter();
 // 返回上级页面
 const toUp = () => {
-  router.push('/')
+  router.push('/examPaper')
 }
 // 进入题目管理
 const toQuest = (id: number) => {
-  router.push({path: '/examQuest', query: {paperId: id}})
+  router.push({path: '/dealQuest', query: {questId: id}})
 }
 </script>
 

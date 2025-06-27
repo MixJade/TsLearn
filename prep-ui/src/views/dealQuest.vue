@@ -1,14 +1,14 @@
 <template>
   <header class="header">
-    <MyBtn text="跳转题源" type="primary"/>
+    <MyBtn text="跳转题源" type="primary" @click="toImg"/>
     <span>第一题</span>
-    <MyBtn text="返回上级" type="secondary"/>
+    <MyBtn text="返回上级" type="secondary" @click="toBack"/>
   </header>
 
   <main class="main-content">
     <aside class="sidebar">
-      <span class="content-tit">题源20250626</span>
-      <BlockBtn style="float: right" text="切换题源" type="primary"/>
+      <span class="content-tit">图片20250626</span>
+      <BlockBtn style="float: right" text="切换图片" type="primary"/>
       <pre class="ocr-res new-line">{{ ocrRes }}</pre>
     </aside>
 
@@ -27,25 +27,58 @@
           <p>即使内容不同，两个区域的高度也会保持一致。</p>
         </div>
       </div>
-      <ReportBtn type="success" text="添加选项"/>
+      <BlockBtn type="success" text="添加选项"/>
+      <BlockBtn type="warning" text="编辑解析"/>
+      <div class="quest">
+        <h4>解析</h4>
+        <pre class="new-line">{{ ocrRes }}</pre>
+      </div>
     </section>
   </main>
-
 </template>
 
 <script lang="ts" setup>
-import ReportBtn from "@/components/button/BlockBtn.vue";
 import BlockBtn from "@/components/button/BlockBtn.vue";
 import MyBtn from "@/components/button/MyBtn.vue";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
+import {useRoute, useRouter} from "vue-router";
+import {reqCateImg} from "@/request/examQuestApi";
+
+onMounted(() => {
+  setRouteData()
+})
 
 const ocrRes = ref<string>("Lorem ipsum dolor sit amet, consectetur adipisicing elit.\n" +
     "Accusantium architecto cumque explicabo maxime molestias nemo nisi quis veritatis vitae voluptas.\n" +
     "Exercitationem ipsum magni numquam perferendis quis quisquam similique unde velit.")
+
+/**
+ * ===================================[路由跳转]============================================
+ */
+let cateId = 0;
+let questId = 0;
+// 如此获取路由传参
+const route = useRoute();
+const setRouteData = (): void => {
+  if (Object.keys(route.query).length > 0) {
+    questId = parseInt(route.query.questId as string)
+  }
+  reqCateImg(questId).then(resp => {
+    cateId = resp.categoryId
+  })
+}
+const router = useRouter();
+// 返回上级页面
+const toBack = () => {
+  router.back()
+}
+// 进入题源图片
+const toImg = () => {
+  router.push({path: '/sourceImg', query: {cateId: cateId}})
+}
 </script>
 
 <style lang="sass" scoped>
-$spacing-sm: 0.5rem
 $spacing-md: 1rem
 $spacing-lg: 1.5rem
 $shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)
@@ -103,23 +136,22 @@ $shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06
       font-size: 1rem
 
 
+    h4
+      font-weight: 600
+      color: #111827
+      margin-top: 0
+
     .grid
       display: grid
       grid-template-columns: repeat(2, 1fr)
       gap: $spacing-md
-      margin-bottom: $spacing-lg
+      margin-bottom: 1.5rem
 
       .card
         background-color: white
         padding: $spacing-md
         border-radius: 8px
         box-shadow: $shadow-md
-
-        h4
-          font-weight: 600
-          color: #111827
-          margin-top: 0
-          margin-bottom: $spacing-sm
 
         p
           font-size: 0.875rem

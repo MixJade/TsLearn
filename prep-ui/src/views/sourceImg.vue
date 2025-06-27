@@ -6,7 +6,7 @@
            @pageChange="getAll">
     <template #searchBtn>
       <MyBtn text="添加图片" type="success" @click="openAddForm"/>
-      <MyBtn text="返回上级" type="secondary" @click="toUp"/>
+      <MyBtn text="返回上级" type="secondary" @click="toBack"/>
     </template>
     <tr v-for="td in tableData" :key="td.imageId">
       <td>{{ td.fileName }}</td>
@@ -84,7 +84,6 @@ import {useRoute, useRouter} from "vue-router";
 import {SourceImgDto} from "@/model/dto/SourceImgDto";
 import {SourceImgVo} from "@/model/vo/SourceImgVo";
 
-let cateId = 0;
 onMounted(() => {
   setRouteData()
   getAll();
@@ -95,6 +94,7 @@ onMounted(() => {
  */
 // 如此获取路由传参
 const route = useRoute();
+let cateId = 0;
 const setRouteData = (): void => {
   if (Object.keys(route.query).length > 0)
     cateId = parseInt(route.query.cateId as string)
@@ -105,8 +105,8 @@ const setRouteData = (): void => {
 }
 const router = useRouter();
 // 返回上级页面
-const toUp = () => {
-  router.push('/sourceCate')
+const toBack = () => {
+  router.back()
 }
 
 /**
