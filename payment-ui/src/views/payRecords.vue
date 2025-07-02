@@ -9,6 +9,8 @@
       <input id="beginDate" v-model="reqBody.beginDate" class="search-inp" type="date" @change="getAll">
       <label class="search-lab" for="endDate">终止日</label>
       <input id="endDate" v-model="reqBody.endDate" class="search-inp" type="date" @change="getAll">
+      <label class="search-lab" for="remark">备注</label>
+      <input id="remark" v-model="reqBody.remark" class="search-inp" type="text" placeholder="无">
     </template>
     <template #searchBtn>
       <MyBtn text="添加记录" type="success" @click="openAddForm"/>
@@ -201,7 +203,7 @@ const tableData = ref<PayRecordVo[]>([])
 const tablePage: TbPage = reactive({current: 1, pages: 1, total: 0, size: 10}) as TbPage
 // 分页条件请求体
 const reqBody: PayRecordPageDto = reactive({
-  beginDate: "", bigType: 0, endDate: "", paymentType: 0
+  beginDate: "", bigType: 0, endDate: "", paymentType: 0, remark: ""
 })
 const getAll = () => {
   reqPayRecordPage(tablePage.current, tablePage.size, reqBody).then(resp => {

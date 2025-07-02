@@ -3,4 +3,5 @@ export interface PayRecordPageDto {
     paymentType: number | null;
     beginDate: string;
     endDate: string;
+    remark: string;
 }
