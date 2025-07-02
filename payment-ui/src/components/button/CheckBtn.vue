@@ -1,18 +1,13 @@
 <template>
   <label class="rocker">
     <input id="rockerBtn" v-model="checked" type="checkbox">
-    <span class="switch-left">{{ left }}</span>
-    <span class="switch-right">{{ right }}</span>
+    <span class="switch-left">收</span>
+    <span class="switch-right">支</span>
   </label>
 </template>
 
 <script lang="ts" setup>
-
-// 日历图的“年月”开关按钮
-defineProps<{
-  readonly left: string;
-  readonly right: string;
-}>()
+// 报告的“收支”开关按钮
 const checked = defineModel<boolean>()
 </script>
 
@@ -82,7 +77,7 @@ const checked = defineModel<boolean>()
 .switch-right
   right: 0.5em
   bottom: 0
-  background-color: #bd5757
+  background-color: #17bd17
   color: #fff
 
   &::before
@@ -98,7 +93,7 @@ const checked = defineModel<boolean>()
 input
   &:checked
     & + .switch-left
-      background-color: #0084d0
+      background-color: #c45656
       color: #fff
       bottom: 0
       left: 0.5em

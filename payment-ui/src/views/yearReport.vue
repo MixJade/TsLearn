@@ -43,7 +43,7 @@
       <canvas ref="lineYearChartRef"></canvas>
     </div>
   </div>
-  <CheckBtn v-model="isIncome" left="收" right="支" @change="reqDrawChart"/>
+  <CheckBtn v-model="isIncome" @change="reqDrawChart"/>
   <h3>消费分析</h3>
   <div class="yearReport">
     <div class="dashboard">
