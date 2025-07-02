@@ -12,9 +12,7 @@
     </template>
     <template #searchBtn>
       <MyBtn text="添加记录" type="success" @click="openAddForm"/>
-      <MyBtn text="缓存转正" type="warning" @click="toRoute('/payCaches')"/>
-      <MyBtn text="收支类型" type="secondary" @click="toRoute('/payDicts')"/>
-      <MyBtn text="返回首页" type="primary" @click="toCalendar"/>
+      <MyBtn text="返回首页" type="secondary" @click="toCalendar"/>
     </template>
     <tr v-for="td in tableData" :key="td.recordId">
       <td :style="{color: td.color}" class="weight">{{ td.keyName }}</td>
@@ -160,12 +158,10 @@ const getStartAndEndOfMonth = (monthStr: string): void => {
     reqBody.endDate = clickDate;
   }
 }
-
+/**
+ * =======================================[路由跳转]=======================================
+ */
 const router = useRouter();
-// 跳转路由
-const toRoute = (url: string) => {
-  router.push(url)
-}
 // 跳转首页路由
 const toCalendar = (): void => {
   if (Object.keys(route.query).length > 0)

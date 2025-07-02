@@ -13,7 +13,7 @@
     <template #searchBtn>
       <MyBtn text="上传csv" type="success" @click="openForm2"/>
       <MyBtn text="清空缓存" type="danger" @click="deleteAll"/>
-      <MyBtn text="返回上级" type="primary" @click="toBack"/>
+      <MyBtn text="返回上级" type="secondary" @click="toBack"/>
     </template>
     <tr v-for="td in tableData" :key="td.cacheId">
       <td>{{ td.payDate }}</td>

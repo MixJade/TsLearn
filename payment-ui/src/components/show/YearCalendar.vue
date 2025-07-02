@@ -1,8 +1,9 @@
 <template>
+  <MySidebar ref="mySidebar"></MySidebar>
+  <ReportBtn text="更多功能" type="primary" @click="openSidebar"/>
   <ReportBtn text="收支记录" type="success" @click="toYearPayRecords"/>
-  <ReportBtn text="年度报告" type="primary" @click="toYearReport"/>
+  <ReportBtn text="年度报告" type="danger" @click="toYearReport"/>
   <ReportBtn text="导出sql" type="info" @click="downInsertSql(0)"/>
-  <ReportBtn text="导入sql" type="danger" @click="openForm2"/>
   <ReportBtn text="页面简化" type="warning" @click="isShowUl = !isShowUl"/>
   <table class="yearCalendar">
     <caption>
@@ -43,18 +44,7 @@
     </tr>
     </tbody>
   </table>
-  <!--上传文件的对话框-->
-  <MyDialog ref="myShow2">
-    <form class="myForm">
-      <fieldset>
-        <legend>上传sql</legend>
-        <div class="form-row">
-          <input accept=".sql" type="file" @change="handleFileChange"/>
-          <MyBtn text="上传文件" type="success" @click="uploadFile"/>
-        </div>
-      </fieldset>
-    </form>
-  </MyDialog>
+
 </template>
 
 <script lang="ts" setup>
@@ -63,10 +53,9 @@ import {onMounted, ref} from "vue";
 import MoneyTag from "@/components/tags/MoneyTag.vue";
 import {reqCalendarMonth} from "@/request/chartApi";
 import ReportBtn from "@/components/button/ReportBtn.vue";
-import {reqDownInsertSql, reqUploadSql} from "@/request/payRecordApi";
+import {reqDownInsertSql} from "@/request/payRecordApi";
 import {useRouter} from "vue-router";
-import MyDialog from "@/components/message/MyDialog.vue";
-import MyBtn from "@/components/button/MyBtn.vue";
+import MySidebar from "@/components/show/MySidebar.vue";
 
 const props = defineProps<{
   year: number;
@@ -142,40 +131,14 @@ const downInsertSql = (month: number): void => {
   }
 }
 
-/**
- * ===================================[文件上传下载]============================================
- */
-// 表单弹出框(文件)
-const myShow2 = ref<InstanceType<typeof MyDialog> | null>(null)
-const openForm2 = () => {
-  myShow2.value?.showMe();
-}
-const file = ref<File | null>(null);
-// 处理文件选择事件
-const handleFileChange = (event: Event) => {
-  const target = event.target as HTMLInputElement;
-  const selectedFile = target.files![0];
-  if (selectedFile) {
-    file.value = selectedFile;
-  } else {
-    file.value = null;
-  }
-};
 
-// 上传文件
-const uploadFile = async () => {
-  if (!file.value) {
-    alert('请选择一个 sql 文件');
-    return;
-  }
-  const formData = new FormData() as FormData;
-  formData.append('file', file.value);
-  reqUploadSql(formData).then(resp => {
-    alert(resp.msg)
-  });
-  file.value = null;
-  myShow2.value?.closeMe();
-};
+/**
+ * ===================================[侧边栏代码]============================================
+ */
+const mySidebar = ref<InstanceType<typeof MySidebar> | null>(null)
+const openSidebar = () => {
+  mySidebar.value?.openSide();
+}
 </script>
 
 <style lang="sass" scoped>

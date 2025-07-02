@@ -19,7 +19,7 @@
     </template>
     <template #searchBtn>
       <MyBtn text="添加字典" type="success" @click="openAddForm"/>
-      <MyBtn text="返回上级" type="primary" @click="toBack"/>
+      <MyBtn text="返回上级" type="secondary" @click="toBack"/>
     </template>
     <tr v-for="td in tableData" :key="td.paymentType">
       <td :class="[td.isIncome ? 'in' : 'out']" class="weight">{{ td.isIncome ? "收入" : "支出" }}</td>

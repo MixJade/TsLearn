@@ -1,6 +1,6 @@
 <template>
   <ReportBtn text="收支记录" type="success" @click="toMonthPayRecords"/>
-  <ReportBtn text="消费分析" type="primary" @click="toMonthReport"/>
+  <ReportBtn text="消费分析" type="danger" @click="toMonthReport"/>
   <ReportBtn text="导出sql" type="info" @click="downInsertSql"/>
   <table class="monthCalendar">
     <caption>
