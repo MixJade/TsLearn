@@ -54,14 +54,14 @@ import {reqCalendarDay} from "@/request/chartApi";
 import ReportBtn from "@/components/button/ReportBtn.vue";
 import {DayPayVo} from "@/model/chart/DayPayVo";
 import {useRouter} from "vue-router";
-import {sharedDate} from "@/store/shareDate";
+import {DateStore, sharedDate} from "@/store/shareDate";
 
 const dayPayVoss = ref<DayPayVo[][]>([])
 onMounted(() => {
   reqCalendarDay(sharedDate.year, sharedDate.month).then(resp => dayPayVoss.value = resp)
 })
 // 当前选中年月
-const selDate: { year: number; month: number } = reactive({year: sharedDate.year, month: sharedDate.month})
+const selDate: DateStore = reactive({year: sharedDate.year, month: sharedDate.month})
 
 const addMonth = (isAdd: boolean) => {
   if (isAdd) {
