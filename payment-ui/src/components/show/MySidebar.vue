@@ -10,6 +10,7 @@
       <li class="li-cache" @click="toRoute('/payCaches')">缓存转正</li>
       <li class="li-dict" @click="toRoute('/payDicts')">收支字典</li>
       <li class="li-in-sql" @click="openForm2">导入SQL</li>
+      <li class="li-out-sql" @click="downInsertSql">导出SQL</li>
     </ul>
     <footer>MixJade</footer>
   </div>
@@ -33,9 +34,10 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import MyDialog from "@/components/message/MyDialog.vue";
-import {reqUploadSql} from "@/request/payRecordApi";
+import {reqDownInsertSql, reqUploadSql} from "@/request/payRecordApi";
 import MyBtn from "@/components/button/MyBtn.vue";
 import {useRouter} from "vue-router";
+import {sharedDate} from "@/store/shareDate";
 
 const isOpen = ref<boolean>(false)
 
@@ -87,6 +89,18 @@ const router = useRouter();
 // 跳转路由
 const toRoute = (url: string) => {
   router.push(url)
+}
+/**
+ * ==================================[导出SQL]===============================
+ */
+/**
+ * 导出对应年份的sql文件
+ */
+const downInsertSql = (): void => {
+  const answer = confirm(`确认下载${sharedDate.year}年数据？`);
+  if (answer) {
+    reqDownInsertSql(sharedDate.year);
+  }
 }
 </script>
 
@@ -159,6 +173,9 @@ const toRoute = (url: string) => {
 
 .li-in-sql
   @include li-color(#f56c6c)
+
+.li-out-sql
+  @include li-color(#67c23a)
 
 
 #closeSidebar

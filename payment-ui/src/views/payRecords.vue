@@ -14,7 +14,7 @@
     </template>
     <template #searchBtn>
       <MyBtn text="添加记录" type="success" @click="openAddForm"/>
-      <MyBtn text="返回首页" type="secondary" @click="toCalendar"/>
+      <MyBtn text="返回上级" type="secondary" @click="toBack"/>
     </template>
     <tr v-for="td in tableData" :key="td.recordId">
       <td :style="{color: td.color}" class="weight">{{ td.keyName }}</td>
@@ -165,10 +165,8 @@ const getStartAndEndOfMonth = (monthStr: string): void => {
  */
 const router = useRouter();
 // 跳转首页路由
-const toCalendar = (): void => {
-  if (Object.keys(route.query).length > 0)
-    router.push({name: "calendar", query: {date: route.query.month}})
-  else router.push("/")
+const toBack = (): void => {
+  router.back()
 }
 
 /**

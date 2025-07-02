@@ -3,8 +3,11 @@ import {createRouter, createWebHashHistory, RouteRecordRaw} from "vue-router"
 const routes: RouteRecordRaw[] = [
     {
         path: '/',
-        name: 'calendar',
-        component: () => import('@/views/calendar.vue')
+        component: () => import('@/views/yearCalendar.vue')
+    },
+    {
+        path: '/monthCalendar',
+        component: () => import('@/views/monthCalendar.vue')
     },
     {
         path: '/payRecords',

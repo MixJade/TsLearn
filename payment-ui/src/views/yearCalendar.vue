@@ -3,8 +3,8 @@
   <ReportBtn text="更多功能" type="primary" @click="openSidebar"/>
   <ReportBtn text="收支记录" type="success" @click="toYearPayRecords"/>
   <ReportBtn text="年度报告" type="danger" @click="toYearReport"/>
-  <ReportBtn text="导出sql" type="info" @click="downInsertSql"/>
   <ReportBtn text="页面简化" type="warning" @click="isShowUl = !isShowUl"/>
+  <ReportBtn style="float: right" text="当月日历" type="info" @click="toMonthCal(selectedMonth)"/>
   <table class="yearCalendar">
     <caption>
       <span v-if="selectedYear>2023" class="yearBtn" @click="addYear(false)">&lt;</span>
@@ -37,7 +37,7 @@
           <div class="sci-btns">
             <button class="sci-btn" type="button" @click="toMonthPayRecords(item.month)">账单</button>
             <button class="sci-btn" type="button" @click="toMonthReport(item.month)">分析</button>
-            <button class="sci-btn" type="button">事记</button>
+            <button class="sci-btn" type="button" @click="toMonthCal(item.month)">日历</button>
           </div>
         </div>
       </td>
@@ -53,34 +53,26 @@ import {onMounted, ref} from "vue";
 import MoneyTag from "@/components/tags/MoneyTag.vue";
 import {reqCalendarMonth} from "@/request/chartApi";
 import ReportBtn from "@/components/button/ReportBtn.vue";
-import {reqDownInsertSql} from "@/request/payRecordApi";
 import {useRouter} from "vue-router";
 import MySidebar from "@/components/show/MySidebar.vue";
+import {sharedDate} from "@/store/shareDate";
 
-const props = defineProps<{
-  year: number;
-  month: number;
-}>()
-const emits = defineEmits<{
-  (e: "upYear", year: number): void;
-  (e: "upMonth", month: number): void;
-}>();
 const monthPayVoss = ref<MonthPayVo[][]>([])
 onMounted(() => {
-  reqCalendarMonth(props.year).then(resp => monthPayVoss.value = resp)
+  reqCalendarMonth(sharedDate.year).then(resp => monthPayVoss.value = resp)
 })
 // 当前选中月份
-const selectedMonth = ref<number>(props.month)
+const selectedMonth = ref<number>(sharedDate.month)
 const selectCard = (month: number) => {
   selectedMonth.value = month
-  emits('upMonth', month);
+  sharedDate.month = month
 }
 // 当前选中年份
-const selectedYear = ref<number>(props.year)
+const selectedYear = ref<number>(sharedDate.year)
 const addYear = (isAdd: boolean) => {
   if (isAdd) selectedYear.value++;
   else selectedYear.value--
-  emits('upYear', selectedYear.value);
+  sharedDate.year = selectedYear.value
   // 重新请求
   reqCalendarMonth(selectedYear.value).then(resp => {
     monthPayVoss.value = resp;
@@ -116,20 +108,11 @@ const toYearReport = (): void => {
 const toMonthReport = (month: number): void => {
   router.push({name: "monthReport", query: {year: selectedYear.value, month}})
 }
-
-/**
- * ==================================[提示框按钮]===============================
- */
-/**
- * 导出对应年份的sql文件
- */
-const downInsertSql = (): void => {
-  const answer = confirm("确认下载？");
-  if (answer) {
-    reqDownInsertSql(selectedYear.value);
-  }
+// 跳转路由
+const toMonthCal = (month: number) => {
+  sharedDate.month = month
+  router.push("/monthCalendar")
 }
-
 
 /**
  * ===================================[侧边栏代码]============================================

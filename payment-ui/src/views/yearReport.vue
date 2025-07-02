@@ -79,12 +79,13 @@ import {
   TooltipItem
 } from 'chart.js';
 import {ChartType} from "chart.js/dist/types";
-import {useRoute, useRouter} from "vue-router";
+import {useRouter} from "vue-router";
 import {reqBigTypePie, reqYearLine, reqYearPie} from "@/request/chartApi";
 import {YearPayDo} from "@/model/vo/YearLineVo";
 import MoneyTag from "@/components/tags/MoneyTag.vue";
 import CheckBtn from "@/components/button/CheckBtn.vue";
 import ReportBtn from "@/components/button/ReportBtn.vue";
+import {sharedDate} from "@/store/shareDate";
 
 // 注册所需的元素、控制器和比例尺
 Chart.register(
@@ -108,7 +109,7 @@ const barChartRef = ref<HTMLCanvasElement | null>(null);
 const pieChartRef = ref<HTMLCanvasElement | null>(null);
 const pieBigTypeChartRef = ref<HTMLCanvasElement | null>(null);
 // 展示数据
-let year: number = 2025;
+let year: number = sharedDate.year;
 let yearData: YearPayDo = reactive({
   money: 0,
   moneyIn: 0,
@@ -119,11 +120,6 @@ let yearData: YearPayDo = reactive({
 });
 const isIncome = ref<boolean>(false)
 onMounted(() => {
-  // 如此获取路由传参
-  const route = useRoute();
-  if (typeof route.query.year === 'string') {
-    year = parseInt(route.query.year, 10);
-  }
   reqYearLine(year).then(resp => {
     Object.assign(yearData, resp.yearMoney);
     drawLine(resp.moneyOut, resp.moneyIn, resp.money)
@@ -323,7 +319,7 @@ const drawBigTypePie = (labels: string[], moneys: number[]): void => {
 
 const router = useRouter();
 const toCalendar = (): void => {
-  router.push({name: "calendar", query: {date: year}})
+  router.push("/")
 }
 </script>
 <style lang="sass" scoped src="../myCss/myReport.sass">

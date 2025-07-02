@@ -1,7 +1,7 @@
 <template>
   <ReportBtn text="收支记录" type="success" @click="toMonthPayRecords"/>
   <ReportBtn text="消费分析" type="danger" @click="toMonthReport"/>
-  <ReportBtn text="当月事件" type="info"/>
+  <ReportBtn style="float: right" text="返回首页" type="info" @click="toBack"/>
   <table class="monthCalendar">
     <caption>
       <span v-if="selDate.year>2023" class="monthBtn" @click="addMonth(false)">&lt;</span>
@@ -54,20 +54,14 @@ import {reqCalendarDay} from "@/request/chartApi";
 import ReportBtn from "@/components/button/ReportBtn.vue";
 import {DayPayVo} from "@/model/chart/DayPayVo";
 import {useRouter} from "vue-router";
+import {sharedDate} from "@/store/shareDate";
 
-const props = defineProps<{
-  year: number;
-  month: number;
-}>()
-const emits = defineEmits<{
-  (e: "upDate", year: number, month: number): void;
-}>();
 const dayPayVoss = ref<DayPayVo[][]>([])
 onMounted(() => {
-  reqCalendarDay(props.year, props.month).then(resp => dayPayVoss.value = resp)
+  reqCalendarDay(sharedDate.year, sharedDate.month).then(resp => dayPayVoss.value = resp)
 })
 // 当前选中年月
-const selDate: { year: number; month: number } = reactive({year: props.year, month: props.month})
+const selDate: { year: number; month: number } = reactive({year: sharedDate.year, month: sharedDate.month})
 
 const addMonth = (isAdd: boolean) => {
   if (isAdd) {
@@ -81,7 +75,8 @@ const addMonth = (isAdd: boolean) => {
       selDate.year--;
     } else selDate.month--;
   }
-  emits('upDate', selDate.year, selDate.month);
+  sharedDate.year = selDate.year
+  sharedDate.month = selDate.month
   // 重新请求
   reqCalendarDay(selDate.year, selDate.month).then(resp => dayPayVoss.value = resp)
 }
@@ -130,6 +125,9 @@ const toDayPayRecords = (day: string): void => {
 }
 const toMonthReport = (): void => {
   router.push({name: "monthReport", query: {year: selDate.year, month: selDate.month}})
+}
+const toBack = (): void => {
+  router.push("/")
 }
 </script>
 
