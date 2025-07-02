@@ -3,7 +3,7 @@
   <ReportBtn text="更多功能" type="primary" @click="openSidebar"/>
   <ReportBtn text="收支记录" type="success" @click="toYearPayRecords"/>
   <ReportBtn text="年度报告" type="danger" @click="toYearReport"/>
-  <ReportBtn text="导出sql" type="info" @click="downInsertSql(0)"/>
+  <ReportBtn text="导出sql" type="info" @click="downInsertSql"/>
   <ReportBtn text="页面简化" type="warning" @click="isShowUl = !isShowUl"/>
   <table class="yearCalendar">
     <caption>
@@ -37,7 +37,7 @@
           <div class="sci-btns">
             <button class="sci-btn" type="button" @click="toMonthPayRecords(item.month)">账单</button>
             <button class="sci-btn" type="button" @click="toMonthReport(item.month)">分析</button>
-            <button class="sci-btn" type="button" @click="downInsertSql(item.month)">导出</button>
+            <button class="sci-btn" type="button">事记</button>
           </div>
         </div>
       </td>
@@ -121,13 +121,12 @@ const toMonthReport = (month: number): void => {
  * ==================================[提示框按钮]===============================
  */
 /**
- * 导出对应月份的sql文件
- * @param month 月份
+ * 导出对应年份的sql文件
  */
-const downInsertSql = (month: number): void => {
+const downInsertSql = (): void => {
   const answer = confirm("确认下载？");
   if (answer) {
-    reqDownInsertSql(selectedYear.value, month);
+    reqDownInsertSql(selectedYear.value);
   }
 }
 

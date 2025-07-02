@@ -6,16 +6,12 @@ import {Result} from "@/model/vo/Result";
 import {PaymentRecord} from "@/model/entity/PaymentRecord";
 
 /**
- * 下载某个月份的账单
+ * 下载某个年份的账单
  * @param year 年份
- * @param month 月份
  */
-export const reqDownInsertSql = (year: number, month: number): void => {
-    let fileName;
-    if (month === 0) fileName = `paymentRecord(${year}).sql`
-    else fileName = `paymentRecord(${year}-${month}).sql`
+export const reqDownInsertSql = (year: number): void => {
     // noinspection JSIgnoredPromiseFromCall
-    myReq.down(`/api/paymentRecord/downInsertSql?year=${year}&month=${month}`, fileName)
+    myReq.down(`/api/paymentRecord/downInsertSql?year=${year}`, `paymentRecord(${year}).sql`)
 }
 
 /**
