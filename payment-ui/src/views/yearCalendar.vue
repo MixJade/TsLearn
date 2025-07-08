@@ -103,10 +103,11 @@ const toMonthPayRecords = (month: number): void => {
   router.push({name: "payRecords", query: {month: `${selectedYear.value}-${month}`}})
 }
 const toYearReport = (): void => {
-  router.push({name: "yearReport", query: {year: selectedYear.value}})
+  router.push("/yearReport")
 }
 const toMonthReport = (month: number): void => {
-  router.push({name: "monthReport", query: {year: selectedYear.value, month}})
+  sharedDate.month = month
+  router.push("/monthReport")
 }
 // 跳转路由
 const toMonthCal = (month: number) => {

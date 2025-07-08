@@ -124,7 +124,7 @@ const toDayPayRecords = (day: string): void => {
   router.push({name: "payRecords", query: {month: day}})
 }
 const toMonthReport = (): void => {
-  router.push({name: "monthReport", query: {year: selDate.year, month: selDate.month}})
+  router.push("/monthReport")
 }
 const toBack = (): void => {
   router.push("/")
