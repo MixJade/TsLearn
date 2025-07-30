@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>正则备忘表</title>
+    <link href='assert/v.svg' rel="icon" type="image/svg+xml"/>
+    <style>
+        table {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            border-spacing: 12px 8px;
+            border-collapse: separate;
+        }
+
+        td {
+            padding: 6px 24px;
+        }
+
+        tr td:nth-child(1) {
+            border-radius: 0 22px 22px 0;
+            background: linear-gradient(90deg, transparent 0%, #409eff 100%);
+        }
+
+        tr td:nth-child(2), tr td:nth-child(3) {
+            border-width: 3px;
+            border-style: solid;
+            cursor: pointer;
+        }
+
+        tr td:nth-child(2):hover, tr td:nth-child(3):hover {
+            background-color: #dedfe0;
+        }
+
+        tr td:nth-child(2) {
+            border-color: transparent transparent #67c23a transparent;
+        }
+
+        tr td:nth-child(3) {
+            border-color: transparent transparent #e6a23c transparent;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <th>描述</th>
+        <th>搜索正则</th>
+        <th>替换内容</th>
+    </tr>
+    <tr>
+        <td>删除java注释</td>
+        <td>[ \t]*//[^\n]*\n</td>
+        <td>\n</td>
+    </tr>
+    <tr>
+        <td>引号后的逗号合为一句</td>
+        <td>”\n+，</td>
+        <td>”，</td>
+    </tr>
+    <tr>
+        <td>多个空行合并为一个</td>
+        <td>^\n+$</td>
+        <td>空白</td>
+    </tr>
+    <tr>
+        <td>匹配字符过多的行</td>
+        <td>.{200,}</td>
+    </tr>
+    <tr>
+        <td>匹配长度少于12字的行</td>
+        <td>^.{0,12}$</td>
+    </tr>
+    <tr>
+        <td>匹配中文章节</td>
+        <td>第[零一二两三四五六七八九十百]+章</td>
+    </tr>
+    <tr>
+        <td>匹配数字章节</td>
+        <td>第\d+章</td>
+    </tr>
+    <tr>
+        <td>移除中文括号包裹内容</td>
+        <td>（.*?）</td>
+        <td>空白</td>
+    </tr>
+    <tr>
+        <td>移除英文括号包裹内容</td>
+        <td>\(.*?\)</td>
+        <td>空白</td>
+    </tr>
+</table>
+</body>
+<script>
+    window.onload = () => {
+        // 选中所有tr中的第2个和第3个td
+        const targetCells = document.querySelectorAll('tr td:nth-child(2), tr td:nth-child(3)');
+        // 为每个选中的元素添加点击事件
+        targetCells.forEach(cell => {
+            cell.addEventListener('click', function () {
+                // 获取单元格的文本内容并去除前后空格
+                const cellText = this.textContent.trim();
+                navigator.clipboard.writeText(cellText).then(() => {
+                    alert("复制成功: " + cellText);
+                });
+            });
+        });
+    }
+</script>
+</html>
