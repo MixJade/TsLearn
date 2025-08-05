@@ -9,8 +9,8 @@
     <ul>
       <li class="li-cache" @click="toRoute('/payCaches')">缓存转正</li>
       <li class="li-dict" @click="toRoute('/payDicts')">收支字典</li>
-      <li class="li-in-csv" @click="openForm2">导入SQL</li>
-      <li class="li-out-csv" @click="downInsertCsv">导出SQL</li>
+      <li class="li-in-csv" @click="openForm2">导入账本</li>
+      <li class="li-out-csv" @click="downInsertCsv">导出账本</li>
     </ul>
     <footer>MixJade</footer>
   </div>
@@ -91,7 +91,7 @@ const toRoute = (url: string) => {
   router.push(url)
 }
 /**
- * ==================================[导出SQL]===============================
+ * ==================================[导出账本]===============================
  */
 /**
  * 导出对应年份的csv文件
