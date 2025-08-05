@@ -9,8 +9,8 @@
     <ul>
       <li class="li-cache" @click="toRoute('/payCaches')">缓存转正</li>
       <li class="li-dict" @click="toRoute('/payDicts')">收支字典</li>
-      <li class="li-in-sql" @click="openForm2">导入SQL</li>
-      <li class="li-out-sql" @click="downInsertSql">导出SQL</li>
+      <li class="li-in-csv" @click="openForm2">导入SQL</li>
+      <li class="li-out-csv" @click="downInsertCsv">导出SQL</li>
     </ul>
     <footer>MixJade</footer>
   </div>
@@ -21,9 +21,9 @@
   <MyDialog ref="myShow2">
     <form class="myForm">
       <fieldset>
-        <legend>上传sql</legend>
+        <legend>上传csv</legend>
         <div class="form-row">
-          <input accept=".sql" type="file" @change="handleFileChange"/>
+          <input accept=".csv" type="file" @change="handleFileChange"/>
           <MyBtn text="上传文件" type="success" @click="uploadFile"/>
         </div>
       </fieldset>
@@ -34,7 +34,7 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import MyDialog from "@/components/message/MyDialog.vue";
-import {reqDownInsertSql, reqUploadSql} from "@/request/payRecordApi";
+import {reqDownInsertCsv, reqUploadCsv} from "@/request/payRecordApi";
 import MyBtn from "@/components/button/MyBtn.vue";
 import {useRouter} from "vue-router";
 import {sharedDate} from "@/store/shareDate";
@@ -71,12 +71,12 @@ const handleFileChange = (event: Event) => {
 // 上传文件
 const uploadFile = async () => {
   if (!file.value) {
-    alert('请选择一个 sql 文件');
+    alert('请选择一个 csv 文件');
     return;
   }
   const formData = new FormData() as FormData;
   formData.append('file', file.value);
-  reqUploadSql(formData).then(resp => {
+  reqUploadCsv(formData).then(resp => {
     alert(resp.msg)
   });
   file.value = null;
@@ -94,12 +94,12 @@ const toRoute = (url: string) => {
  * ==================================[导出SQL]===============================
  */
 /**
- * 导出对应年份的sql文件
+ * 导出对应年份的csv文件
  */
-const downInsertSql = (): void => {
+const downInsertCsv = (): void => {
   const answer = confirm(`确认下载${sharedDate.year}年数据？`);
   if (answer) {
-    reqDownInsertSql(sharedDate.year);
+    reqDownInsertCsv(sharedDate.year);
   }
 }
 </script>
@@ -140,11 +140,12 @@ const downInsertSql = (): void => {
     gap: 12px
 
   li
-    padding: 8px 12px
+    padding: 6px 10px
     border-radius: 8px
     transition: all 0.2s ease
     text-decoration: none
     cursor: pointer
+    text-align: center
 
   footer
     position: absolute
@@ -159,7 +160,7 @@ const downInsertSql = (): void => {
     font-size: small
 
 @mixin li-color($txt-color: #e6a23c)
-  box-shadow: inset 0 0 12px #e9e9eb
+  border: 2px solid $txt-color
   color: $txt-color
   &:hover
     box-shadow: inset 0 0 12px $txt-color
@@ -171,10 +172,10 @@ const downInsertSql = (): void => {
 .li-cache
   @include li-color()
 
-.li-in-sql
+.li-in-csv
   @include li-color(#f56c6c)
 
-.li-out-sql
+.li-out-csv
   @include li-color(#67c23a)
 
 

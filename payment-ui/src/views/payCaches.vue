@@ -81,8 +81,7 @@
           <MyBtn text="上传文件" type="success" @click="uploadFile"/>
         </div>
         <div class="form-row">
-          csv需为utf-8编码，且遵循样例格式
-          <MyBtn text="样例csv" type="primary" @click="downSampleCsv"/>
+          csv需为utf-8编码，且遵循<span class="fake-a" @click="reqSampleCsv">样例格式</span>
         </div>
       </fieldset>
     </form>
@@ -281,11 +280,12 @@ const uploadFile = async () => {
   file.value = null;
   myShow2.value?.closeMe();
 };
-
-const downSampleCsv = () => {
-  reqSampleCsv();
-}
 </script>
 
 <style lang="sass" scoped>
+.fake-a
+  color: blue
+  text-decoration: underline
+  font-style: italic
+  cursor: pointer
 </style>

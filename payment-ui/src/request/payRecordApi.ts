@@ -9,9 +9,9 @@ import {PaymentRecord} from "@/model/entity/PaymentRecord";
  * 下载某个年份的账单
  * @param year 年份
  */
-export const reqDownInsertSql = (year: number): void => {
+export const reqDownInsertCsv = (year: number): void => {
     // noinspection JSIgnoredPromiseFromCall
-    myReq.down(`/api/paymentRecord/downInsertSql?year=${year}`, `paymentRecord(${year}).sql`)
+    myReq.down(`/api/paymentRecord/downInsertCsv?year=${year}`, `paymentRecord(${year}).csv`)
 }
 
 /**
@@ -45,8 +45,8 @@ export const reqDelRecord = (id: number): Promise<Result> =>
     myReq.delete<Result>(`/api/paymentRecord/${id}`)
 
 /**
- * 上传导出的sql文件
- * @param file sql文件数据
+ * 上传导出的csv文件
+ * @param file csv文件数据
  */
-export const reqUploadSql = (file: FormData): Promise<Result> =>
-    myReq.upload<Result>("/api/paymentRecord/upload-sql", file)
+export const reqUploadCsv = (file: FormData): Promise<Result> =>
+    myReq.upload<Result>("/api/paymentRecord/upload-csv", file)
