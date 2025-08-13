@@ -7,28 +7,31 @@
 
   <main class="main-content">
     <aside class="sidebar">
-      <span class="content-tit">图片20250626</span>
-      <BlockBtn style="float: right" text="切换图片" type="primary"/>
+      <TabLine tit="图片20250626" type="primary">
+        <BlockBtn style="float: right" text="切换图片" type="primary"/>
+      </TabLine>
       <pre class="ocr-res new-line">{{ ocrRes }}</pre>
     </aside>
 
     <section class="content">
-      <span class="content-tit">第一题</span>
-      <BlockBtn style="float: right" text="编辑题目" type="warning"/>
+      <TabLine tit="第一题" type="warning">
+        <BlockBtn style="float: right" text="编辑题目" type="warning"/>
+      </TabLine>
       <pre class="quest new-line">{{ ocrRes }}</pre>
-
-      <div class="grid">
-        <div class="card">
-          <h4>特性1</h4>
-          <p class="new-line">这个网格布局展示了如何在右侧内容区域中创建更复杂的布局结构。</p>
-        </div>
-        <div class="card">
-          <h4>特性2</h4>
-          <p>即使内容不同，两个区域的高度也会保持一致。</p>
-        </div>
+      <TabLine tit="题目选项" type="success">
+        <BlockBtn text="添加选项" type="success"/>
+      </TabLine>
+      <div class="opt">
+        <h4>A</h4>
+        <span class="new-line">{{ ocrRes }}</span>
       </div>
-      <BlockBtn type="success" text="添加选项"/>
-      <BlockBtn type="warning" text="编辑解析"/>
+      <div class="opt">
+        <h4>B</h4>
+        <span>{{ ocrRes }}</span>
+      </div>
+      <TabLine tit="题目解析" type="warning">
+        <BlockBtn text="编辑解析" type="warning"/>
+      </TabLine>
       <div class="quest">
         <h4>解析</h4>
         <pre class="new-line">{{ ocrRes }}</pre>
@@ -43,6 +46,7 @@ import MyBtn from "@/components/button/MyBtn.vue";
 import {onMounted, ref} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {reqCateImg} from "@/request/examQuestApi";
+import TabLine from "@/components/show/TabLine.vue";
 
 onMounted(() => {
   setRouteData()
@@ -100,13 +104,6 @@ $shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06
   display: flex
   min-height: calc(100vh - 36px)
 
-  //题目或图源标题
-  .content-tit
-    font-size: 1.25rem
-    font-weight: 700
-    color: #1F2937
-    margin-bottom: $spacing-md
-
   // 左侧边栏
   .sidebar
     width: 33.333%
@@ -140,20 +137,12 @@ $shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06
       font-weight: 600
       color: #111827
       margin-top: 0
+      margin-bottom: 6px
 
-    .grid
-      display: grid
-      grid-template-columns: repeat(2, 1fr)
-      gap: $spacing-md
-      margin-bottom: 1.5rem
-
-      .card
-        background-color: white
-        padding: $spacing-md
-        border-radius: 8px
-        box-shadow: $shadow-md
-
-        p
-          font-size: 0.875rem
-          color: #4B5563
+    .opt
+      background-color: white
+      padding: 8px
+      border-radius: 8px
+      margin-bottom: 12px
+      border: #909399 dashed 2px
 </style>

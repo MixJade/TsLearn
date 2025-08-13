@@ -13,7 +13,7 @@
       <td>{{ getQuestType(td.questType) }}</td>
       <td>{{ td.score }}</td>
       <td>
-        <TbBtn type="ent" text="编辑" @click="toQuest(td.questId)"/>
+        <TbBtn type="ent" text="进入" @click="toQuest(td.questId)"/>
         <TbBtn type="upd" text="修改" @click="openUpdForm(td)"/>
         <TbBtn type="del" text="删除" @click="deleteById(td.questId)"/>
       </td>
