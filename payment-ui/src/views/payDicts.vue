@@ -1,6 +1,6 @@
 <template>
   <!-- 表格 -->
-  <MyTable :tb-page="tablePage" :thead="['收支','大类','名称','颜色','数量','操作']" caption="收支字典"
+  <MyTable :tb-page="tablePage" :thead="['码值','收支','大类','名称','颜色','数量','操作']" caption="收支字典"
            @pageChange="getAll">
     <template #searchForm>
       <label class="search-lab" for="sear-bigType">大类</label>
@@ -22,8 +22,9 @@
       <MyBtn text="返回上级" type="secondary" @click="toBack"/>
     </template>
     <tr v-for="td in tableData" :key="td.paymentType">
+      <td>{{ td.paymentType }}</td>
       <td :class="[td.isIncome ? 'in' : 'out']" class="weight">{{ td.isIncome ? "收入" : "支出" }}</td>
-      <td :style="{color: td.bigTypeColor}" class="weight">{{ td.bigTypeName }}</td>
+      <td :style="{color: td.bigTypeColor}" :title="td.bigTypeName " class="weight">{{ td.bigTypeName }}</td>
       <td :style="{color: td.color}" class="weight">{{ td.keyName }}</td>
       <td :style="{color: td.color}" class="weight canCopy">{{ td.color }}</td>
       <td :style="{color: td.color}" class="weight">{{ td.recordNum }}</td>
