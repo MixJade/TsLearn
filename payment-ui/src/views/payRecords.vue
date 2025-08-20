@@ -120,8 +120,12 @@ const changeSel = (oneKey: number, twoKey: number | null) => {
 // 如此获取路由传参
 const route = useRoute();
 const setRouteData = (): void => {
-  if (Object.keys(route.query).length > 0)
+  if (Object.keys(route.query).length > 0) {
+    // 设置查询条件的开启日期与结束日期
     getStartAndEndOfMonth(route.query.month as string)
+    // 新增修改表单默认为查询的开始日期
+    payRecord.payDate = reqBody.beginDate
+  }
 }
 
 /**

@@ -4,7 +4,7 @@
   <ReportBtn style="float: right" text="返回首页" type="info" @click="toBack"/>
   <table class="monthCalendar">
     <caption>
-      <span v-if="selDate.year>2023" class="monthBtn" @click="addMonth(false)">&lt;</span>
+      <span v-if="selDate.year>2022" class="monthBtn" @click="addMonth(false)">&lt;</span>
       {{ selDate.year }}-{{ selDate.month }}
       <span v-if="selDate.year<2035" class="monthBtn" @click="addMonth(true)">&gt;</span>
     </caption>
