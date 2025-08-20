@@ -24,7 +24,7 @@
     <tr v-for="td in tableData" :key="td.paymentType">
       <td>{{ td.paymentType }}</td>
       <td :class="[td.isIncome ? 'in' : 'out']" class="weight">{{ td.isIncome ? "收入" : "支出" }}</td>
-      <td :style="{color: td.bigTypeColor}" :title="td.bigTypeName " class="weight">{{ td.bigTypeName }}</td>
+      <td :style="{color: td.bigTypeColor}" :title="td.typeDesc " class="weight">{{ td.bigTypeName }}</td>
       <td :style="{color: td.color}" class="weight">{{ td.keyName }}</td>
       <td :style="{color: td.color}" class="weight canCopy">{{ td.color }}</td>
       <td :style="{color: td.color}" class="weight">{{ td.recordNum }}</td>

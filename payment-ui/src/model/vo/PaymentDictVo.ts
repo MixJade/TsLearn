@@ -4,4 +4,5 @@ export interface PaymentDictVo extends PaymentDict {
     recordNum: number;
     bigTypeName: string;
     bigTypeColor: string;
+    typeDesc: string;
 }
