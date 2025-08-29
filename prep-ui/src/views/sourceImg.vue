@@ -82,7 +82,6 @@ import {
 import TbBtn from "@/components/button/TbBtn.vue";
 import {useRoute, useRouter} from "vue-router";
 import {SourceImgDto} from "@/model/dto/SourceImgDto";
-import {SourceImgVo} from "@/model/vo/SourceImgVo";
 
 onMounted(() => {
   setRouteData()
@@ -137,7 +136,7 @@ const commonResp = (resp: Result): void => {
  * ===================================[表格数据]============================================
  */
 // 表格数据
-const tableData = ref<SourceImgVo[]>([])
+const tableData = ref<SourceImage[]>([])
 const tablePage: TbPage = reactive({current: 1, pages: 1, total: 0, size: 10}) as TbPage
 const paData: SourceImgDto = {categoryId: 0}
 const getAll = () => {

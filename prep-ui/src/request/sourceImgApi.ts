@@ -3,14 +3,13 @@ import {Result} from "@/model/vo/Result";
 import {IPage} from "@/model/vo/IPage";
 import {SourceImage} from "@/model/entity/SourceImage";
 import {SourceImgDto} from "@/model/dto/SourceImgDto";
-import {SourceImgVo} from "@/model/vo/SourceImgVo";
 
 
 /**
  * 查询图源表
  */
-export const reqImgSourcePage = (pageNum: number, pageSize: number, data: SourceImgDto): Promise<IPage<SourceImgVo>> =>
-    myReq.post<IPage<SourceImgVo>>(`/api/sourceImage/page?pageNum=${pageNum}&pageSize=${pageSize}`, data)
+export const reqImgSourcePage = (pageNum: number, pageSize: number, data: SourceImgDto): Promise<IPage<SourceImage>> =>
+    myReq.post<IPage<SourceImage>>(`/api/sourceImage/page?pageNum=${pageNum}&pageSize=${pageSize}`, data)
 
 /**
  * 查询单个图片

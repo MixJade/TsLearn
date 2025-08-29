@@ -1,7 +1,7 @@
 <template>
   <!-- 表格 -->
   <MyTable :tb-page="tablePage"
-           :thead="['分类名','文件夹','文件数','备注','创建时间','操作']"
+           :thead="['分类名','文件数','备注','创建时间','操作']"
            caption="题源分类表"
            @pageChange="getAll">
     <template #searchBtn>
@@ -10,7 +10,6 @@
     </template>
     <tr v-for="td in tableData" :key="td.categoryId">
       <td>{{ td.categoryName }}</td>
-      <td>{{ td.folderName }}</td>
       <td>{{ td.recordNum }}</td>
       <td>{{ td.remark }}</td>
       <td>{{ td.createDate }}</td>
@@ -29,10 +28,6 @@
         <div class="form-row">
           <label for="remark">分类名</label>
           <input id="remark" v-model="sourceCategory.categoryName" type="text">
-        </div>
-        <div class="form-row">
-          <label for="remark">文件夹</label>
-          <input id="remark" v-model="sourceCategory.folderName" type="text">
         </div>
         <div class="form-row">
           <label for="remark">备注</label>
@@ -121,7 +116,7 @@ const deleteById = (id: number): void => {
  */
 // 添加的实体类
 const sourceCategory: SourceCategory = reactive({
-  categoryId: 0, categoryName: "", createDate: "", folderName: "", remark: ""
+  categoryId: 0, categoryName: "", createDate: "", remark: ""
 })
 
 // 表单弹出框
@@ -131,7 +126,6 @@ const openAddForm = () => {
   isAddForm.value = true;
   sourceCategory.categoryId = 0
   sourceCategory.categoryName = ""
-  sourceCategory.folderName = ""
   sourceCategory.remark = ""
   myShow.value?.showMe();
 }
@@ -139,7 +133,6 @@ const openUpdForm = (data: SourceCategory) => {
   isAddForm.value = false;
   sourceCategory.categoryId = data.categoryId
   sourceCategory.categoryName = data.categoryName
-  sourceCategory.folderName = data.folderName
   sourceCategory.remark = data.remark
   myShow.value?.showMe();
 }
@@ -150,9 +143,6 @@ const submitForm = (): void => {
   // 校验
   if (sourceCategory.categoryName === "") {
     tesTus("err", "请填写名称");
-    return;
-  } else if (sourceCategory.folderName === "") {
-    tesTus("err", "请填写文件夹名称");
     return;
   }
   // 开始提交
