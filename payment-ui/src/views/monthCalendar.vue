@@ -57,7 +57,7 @@ import {DayPayVo} from "@/model/chart/DayPayVo";
 import {useRouter} from "vue-router";
 import {DateStore, sharedDate} from "@/store/shareDate";
 
-const isYear = false;
+const isYear = ref(false);
 const dayPayVoss = ref<DayPayVo[][]>([])
 onMounted(() => {
   reqCalendarDay(sharedDate.year, sharedDate.month).then(resp => dayPayVoss.value = resp)

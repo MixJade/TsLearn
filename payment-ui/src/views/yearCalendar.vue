@@ -58,7 +58,7 @@ import {useRouter} from "vue-router";
 import MySidebar from "@/components/show/MySidebar.vue";
 import {sharedDate} from "@/store/shareDate";
 
-const isYear = true;
+const isYear = ref(true);
 const monthPayVoss = ref<MonthPayVo[][]>([])
 onMounted(() => {
   reqCalendarMonth(sharedDate.year).then(resp => monthPayVoss.value = resp)
