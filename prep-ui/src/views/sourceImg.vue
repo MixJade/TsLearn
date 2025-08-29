@@ -1,7 +1,7 @@
 <template>
   <!-- 表格 -->
   <MyTable :tb-page="tablePage"
-           :thead="['文件名','文件夹','备注','识别时间','操作']"
+           :thead="['文件名','备注','识别时间','操作']"
            caption="题源图片表"
            @pageChange="getAll">
     <template #searchBtn>
@@ -10,7 +10,6 @@
     </template>
     <tr v-for="td in tableData" :key="td.imageId">
       <td>{{ td.fileName }}</td>
-      <td>{{ td.folderName }}</td>
       <td>{{ td.remark }}</td>
       <td>{{ td.ocrTime }}</td>
       <td>
@@ -71,7 +70,6 @@ import {Result} from "@/model/vo/Result";
 import SureDelModal from "@/components/message/SureDelModal.vue";
 import {SourceImage} from "@/model/entity/SourceImage";
 import {
-  reqAddImg,
   reqDelImg,
   reqImgSourcePage,
   reqOcrImg,
@@ -202,16 +200,7 @@ const uploadFile = (): void => {
   }
   const formData = new FormData() as FormData;
   formData.append('file', file.value);
-  reqUploadImg(formData, cateId).then(resp => {
-    if (resp.code === 1) {
-      sourceImg.fileName = resp.msg
-      reqAddImg(sourceImg).then(resp => commonResp(resp))
-    } else if (resp.code === 0) {
-      tesTus("err", resp.msg);
-    } else {
-      tesTus("err", "服务器无响应");
-    }
-  });
+  reqUploadImg(formData, cateId, sourceImg.remark).then(resp => commonResp(resp));
   file.value = null;
 };
 

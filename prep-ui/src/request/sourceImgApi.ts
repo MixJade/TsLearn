@@ -19,13 +19,6 @@ export const reqOneImg = (id: number): Promise<SourceImage> =>
     myReq.get<SourceImage>(`/api/sourceImage/${id}`)
 
 /**
- * 向图源表新增
- * @param data 请求体
- */
-export const reqAddImg = (data: SourceImage): Promise<Result> =>
-    myReq.post<Result>(`/api/sourceImage`, data)
-
-/**
  * 向图源表修改
  * @param data 请求体
  */
@@ -43,9 +36,10 @@ export const reqDelImg = (id: number): Promise<Result> =>
  * 上传图片
  * @param file 图片数据
  * @param cateId 文件夹主键
+ * @param remark 图片备注
  */
-export const reqUploadImg = (file: FormData, cateId: number): Promise<Result> =>
-    myReq.upload<Result>(`/api/sourceImage/uploadImg?cateId=${cateId}`, file)
+export const reqUploadImg = (file: FormData, cateId: number, remark: string): Promise<Result> =>
+    myReq.upload<Result>(`/api/sourceImage/uploadImg?cateId=${cateId}&remark=${remark}`, file)
 
 /**
  * ocr识别
