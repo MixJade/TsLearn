@@ -4,7 +4,7 @@
   <ReportBtn text="收支记录" type="success" @click="toYearPayRecords"/>
   <ReportBtn text="年度报告" type="danger" @click="toYearReport"/>
   <ReportBtn text="页面简化" type="warning" @click="isShowUl = !isShowUl"/>
-  <ReportBtn style="float: right" text="当月日历" type="info" @click="toMonthCal(selectedMonth)"/>
+  <CheckBtn style="float: right" v-model="isYear" left="年" right="月" @click="toMonthCal(selectedMonth)"/>
   <table class="yearCalendar">
     <caption>
       <span v-if="selectedYear>2023" class="yearBtn" @click="addYear(false)">&lt;</span>
@@ -53,10 +53,12 @@ import {onMounted, ref} from "vue";
 import MoneyTag from "@/components/tags/MoneyTag.vue";
 import {reqCalendarMonth} from "@/request/chartApi";
 import ReportBtn from "@/components/button/ReportBtn.vue";
+import CheckBtn from "@/components/button/CheckBtn.vue";
 import {useRouter} from "vue-router";
 import MySidebar from "@/components/show/MySidebar.vue";
 import {sharedDate} from "@/store/shareDate";
 
+const isYear = true;
 const monthPayVoss = ref<MonthPayVo[][]>([])
 onMounted(() => {
   reqCalendarMonth(sharedDate.year).then(resp => monthPayVoss.value = resp)

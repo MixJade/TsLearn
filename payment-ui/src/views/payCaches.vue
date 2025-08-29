@@ -13,7 +13,7 @@
     <template #searchBtn>
       <MyBtn text="上传csv" type="success" @click="openForm2"/>
       <MyBtn text="清空缓存" type="danger" @click="deleteAll"/>
-      <MyBtn text="返回上级" type="secondary" @click="toBack"/>
+      <MyBtn text="返回首页" type="secondary" @click="toBack"/>
     </template>
     <tr v-for="td in tableData" :key="td.cacheId">
       <td>{{ td.payDate }}</td>
@@ -129,7 +129,7 @@ onMounted(() => {
 const router = useRouter();
 // 跳转路由
 const toBack = () => {
-  router.back();
+  router.push("/")
 }
 
 /**

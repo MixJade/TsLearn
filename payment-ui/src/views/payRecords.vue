@@ -170,7 +170,17 @@ const getStartAndEndOfMonth = (monthStr: string): void => {
 const router = useRouter();
 // 跳转首页路由
 const toBack = (): void => {
-  router.back()
+  if (Object.keys(route.query).length > 0) {
+    // 设置查询条件的开启日期与结束日期
+    const dateStr: string[] = (route.query.month as string).split("-")
+    if (dateStr.length === 3) {
+      // 有年月日,肯定是从月份过来的
+      router.push("/monthCalendar")
+      return;
+    }
+  }
+  // 不是特殊情况直接返回首页
+  router.push("/")
 }
 
 /**

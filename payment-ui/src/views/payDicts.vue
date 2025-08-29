@@ -19,7 +19,7 @@
     </template>
     <template #searchBtn>
       <MyBtn text="添加字典" type="success" @click="openAddForm"/>
-      <MyBtn text="返回上级" type="secondary" @click="toBack"/>
+      <MyBtn text="返回首页" type="secondary" @click="toBack"/>
     </template>
     <tr v-for="td in tableData" :key="td.paymentType">
       <td>{{ td.paymentType }}</td>
@@ -108,7 +108,7 @@ const bigTypes = ref<PayBigType[]>([])
 // 跳转路由
 const router = useRouter();
 const toBack = () => {
-  router.back();
+  router.push("/")
 }
 
 /**

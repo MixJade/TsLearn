@@ -1,7 +1,7 @@
 <template>
   <ReportBtn text="收支记录" type="success" @click="toMonthPayRecords"/>
   <ReportBtn text="消费分析" type="danger" @click="toMonthReport"/>
-  <ReportBtn style="float: right" text="返回首页" type="info" @click="toBack"/>
+  <CheckBtn style="float: right" v-model="isYear" left="年" right="月" @click="toBack"/>
   <table class="monthCalendar">
     <caption>
       <span v-if="selDate.year>2022" class="monthBtn" @click="addMonth(false)">&lt;</span>
@@ -52,10 +52,12 @@ import {onMounted, reactive, ref} from "vue";
 import MoneyTag from "@/components/tags/MoneyTag.vue";
 import {reqCalendarDay} from "@/request/chartApi";
 import ReportBtn from "@/components/button/ReportBtn.vue";
+import CheckBtn from "@/components/button/CheckBtn.vue";
 import {DayPayVo} from "@/model/chart/DayPayVo";
 import {useRouter} from "vue-router";
 import {DateStore, sharedDate} from "@/store/shareDate";
 
+const isYear = false;
 const dayPayVoss = ref<DayPayVo[][]>([])
 onMounted(() => {
   reqCalendarDay(sharedDate.year, sharedDate.month).then(resp => dayPayVoss.value = resp)
