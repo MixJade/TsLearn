@@ -1,7 +1,7 @@
 <template>
   <!-- 表格 -->
   <MyTable :tb-page="tablePage"
-           :thead="['文件名','备注','识别时间','操作']"
+           :thead="['编号','备注','识别时间','操作']"
            caption="题源图片表"
            @pageChange="getAll">
     <template #searchBtn>
@@ -9,7 +9,7 @@
       <MyBtn text="返回上级" type="secondary" @click="toBack"/>
     </template>
     <tr v-for="td in tableData" :key="td.imageId">
-      <td>{{ td.fileName }}</td>
+      <td>{{ td.imageId }}</td>
       <td>{{ td.remark }}</td>
       <td>{{ td.ocrTime }}</td>
       <td>
@@ -27,7 +27,6 @@
           <label for="myImg">文件</label>
           <input id="myImg" accept="image/*" type="file" @change="handleFileChange"/>
         </div>
-        <span class="form-info">{{ sourceImg.fileName }}</span>
         <div class="form-row">
           <label for="remark">备注</label>
           <input id="remark" v-model="sourceImg.remark" type="text">
@@ -41,8 +40,6 @@
   </MyDialog>
   <!--识别结果弹窗-->
   <MyDialog ref="myShow2">
-    <label for="remark2"><strong>{{ sourceImg2.fileName }}</strong></label>
-    <input id="remark2" v-model="sourceImg2.remark" placeholder="备注" type="text">
     <div class="parent">
       <label for="ocrResult2" class="child-img">
         <img class="ocr-img" :src="'/api/sourceImage/img/'+sourceImg2.imageId" alt="题目图片">
@@ -69,14 +66,7 @@ import MyBtn from "@/components/button/MyBtn.vue";
 import {Result} from "@/model/vo/Result";
 import SureDelModal from "@/components/message/SureDelModal.vue";
 import {SourceImage} from "@/model/entity/SourceImage";
-import {
-  reqDelImg,
-  reqImgSourcePage,
-  reqOcrImg,
-  reqOneImg,
-  reqUpdImg,
-  reqUploadImg
-} from "@/request/sourceImgApi";
+import {reqDelImg, reqImgSourcePage, reqOcrImg, reqOneImg, reqUpdImg, reqUploadImg} from "@/request/sourceImgApi";
 import TbBtn from "@/components/button/TbBtn.vue";
 import {useRoute, useRouter} from "vue-router";
 import {SourceImgDto} from "@/model/dto/SourceImgDto";
@@ -97,7 +87,6 @@ const setRouteData = (): void => {
     cateId = parseInt(route.query.cateId as string)
   // 给增删实体类设置值
   sourceImg.categoryId = cateId;
-  sourceImg2.categoryId = cateId;
   paData.categoryId = cateId;
 }
 const router = useRouter();
@@ -160,14 +149,13 @@ const deleteById = (id: number): void => {
  */
 // 添加的实体类
 const sourceImg: SourceImage = reactive({
-  categoryId: 0, fileName: "", imageId: 0, ocrResult: "", ocrTime: "", remark: ""
+  categoryId: 0, imageId: 0, ocrResult: "", ocrTime: "", remark: ""
 })
 
 // 表单弹出框
 const myShow = ref<InstanceType<typeof MyDialog> | null>(null)
 const openAddForm = () => {
   sourceImg.imageId = 0
-  sourceImg.fileName = ""
   sourceImg.remark = ""
   myShow.value?.showMe();
 }
@@ -209,17 +197,15 @@ const uploadFile = (): void => {
  */
 // 添加的实体类
 const sourceImg2: SourceImage = reactive({
-  categoryId: 0, fileName: "", imageId: 0, ocrResult: "", ocrTime: "", remark: ""
+  categoryId: 0, imageId: 0, ocrResult: "", ocrTime: "", remark: ""
 })
 
 // 表单弹出框
 const myShow2 = ref<InstanceType<typeof MyDialog> | null>(null)
 const openUpdForm = (id: number) => {
   reqOneImg(id).then(resp => {
-    sourceImg2.imageId = resp.imageId
+    sourceImg2.imageId = id
     sourceImg2.ocrResult = resp.ocrResult
-    sourceImg2.remark = resp.remark
-    sourceImg2.fileName = resp.fileName
   })
   myShow2.value?.showMe();
 }
