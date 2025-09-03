@@ -1,7 +1,7 @@
 <template>
   <!-- 表格 -->
   <MyTable :tb-page="tablePage"
-           :thead="['试卷名','题源','文件夹','总分','考试时长(秒)','创建日期','操作']"
+           :thead="['试卷名','题源', '总分','考试时长(秒)','创建日期','操作']"
            caption="试卷表"
            @pageChange="getAll">
     <template #searchBtn>
@@ -11,7 +11,6 @@
     <tr v-for="td in tableData" :key="td.paperId">
       <td>{{ td.paperName }}</td>
       <td>{{ td.categoryName }}</td>
-      <td>{{ td.folderName }}</td>
       <td>{{ td.totalScore }}</td>
       <td>{{ td.duration }}</td>
       <td>{{ td.createDate }}</td>
@@ -36,10 +35,6 @@
           <select id="categoryId" v-model="paperData.categoryId">
             <option v-for="op in cateLabel" :key="op.categoryId" :value="op.categoryId">{{ op.categoryName }}</option>
           </select>
-        </div>
-        <div class="form-row">
-          <label for="folderName">文件夹</label>
-          <input id="folderName" v-model="paperData.folderName" type="text">
         </div>
         <div class="form-row">
           <label for="duration">考试时长(秒)</label>
@@ -131,7 +126,7 @@ const deleteById = (id: number): void => {
  */
 // 添加的实体类
 const paperData: ExamPaper = reactive({
-  categoryId: 0, createDate: "", duration: 0, folderName: "", paperId: 0, paperName: "", totalScore: 0
+  categoryId: 0, createDate: "", duration: 0,  paperId: 0, paperName: "", totalScore: 0
 })
 // 题源的下拉框
 const cateLabel = ref<CateLabelVo[]>([])
@@ -143,7 +138,6 @@ const openAddForm = () => {
   paperData.paperId = 0
   paperData.paperName = ""
   paperData.categoryId = 0
-  paperData.folderName = ""
   paperData.duration = 0
   myShow.value?.showMe();
 }
@@ -152,7 +146,6 @@ const openUpdForm = (data: ExamPaper) => {
   paperData.paperId = data.paperId
   paperData.paperName = data.paperName
   paperData.categoryId = data.categoryId
-  paperData.folderName = data.folderName
   paperData.duration = data.duration
   myShow.value?.showMe();
 }
@@ -163,9 +156,6 @@ const submitForm = (): void => {
   // 校验
   if (paperData.paperName === "") {
     tesTus("err", "请填写试卷名称");
-    return;
-  } else if (paperData.folderName === "") {
-    tesTus("err", "请填写文件夹名称");
     return;
   }
   // 开始提交
