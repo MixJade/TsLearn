@@ -1,0 +1,24 @@
+{
+  "name": "silk-collect",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build"
+  },
+  "dependencies": {
+    "crypto-js": "^4.2.0",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.2.2",
+    "@types/node": "^22.14.1",
+    "@vitejs/plugin-vue": "^5.2.3",
+    "@vue/tsconfig": "^0.7.0",
+    "sass": "^1.86.3",
+    "typescript": "~5.8.3",
+    "vite": "^6.3.1",
+    "vue-tsc": "^2.2.8"
+  }
+}
