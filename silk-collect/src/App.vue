@@ -24,14 +24,26 @@
     <!-- 文件内容区域 -->
     <div v-if="showContentModal">
       <div>
-        <pre>{{ fileContent }}</pre>
+        <h3>面具</h3>
+        <ul>
+          <li v-for="td in showHeartList" :key="td.checkId">{{ td.scene }}【{{ td.complete ? '已' : '未' }}完成】
+            <span>【{{ td.hasEvent ? '已' : '未' }}获取】</span>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h3>金属</h3>
+        <ul>
+          <li v-for="td in showMetalList" :key="td.checkId">{{ td.scene }}【{{ td.complete ? '已' : '未' }}完成】</li>
+        </ul>
       </div>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
 import {ref} from 'vue';
-import {decode} from './silkAES';
+import {decode} from './utils/silkAES';
+import {CollectInf, parseJsonData} from './utils/parseSaveData';
 
 // 文件输入框引用
 const fileInput = ref<HTMLInputElement | null>(null);
@@ -39,7 +51,10 @@ const accept = ".json,.dat,.txt"
 
 // 状态管理
 const showContentModal = ref<boolean>(false);
-const fileContent = ref<string>('');
+const showBoxList = ref<CollectInf[]>([]);
+const showSilkList = ref<CollectInf[]>([]);
+const showHeartList = ref<CollectInf[]>([]);
+const showMetalList = ref<CollectInf[]>([]);
 
 // 触发文件选择对话框
 const triggerFileSelect = (): void => {
@@ -74,7 +89,6 @@ const readFileContent = (file: File | undefined): void => {
     return;
   }
   // 重置状态
-  fileContent.value = '';
   showContentModal.value = true;
 
   // 提取文件后缀
@@ -83,13 +97,18 @@ const readFileContent = (file: File | undefined): void => {
   const fileExt = lastDotIndex > -1 ? fileName.slice(lastDotIndex + 1).toLowerCase() : '';
 
   const reader = new FileReader();
-  if (fileExt === "txt") {
+  if (fileExt === "txt" || fileExt === "json") {
     reader.readAsText(file);
     // 读取成功
     reader.onload = (e: ProgressEvent<FileReader>): void => {
       // 确保结果存在且为字符串
       if (typeof e.target?.result === 'string') {
-        fileContent.value = e.target.result;
+        const fileContent = e.target.result;
+        const parseRes = parseJsonData(fileContent);
+        showBoxList.value = parseRes.boxList
+        showSilkList.value = parseRes.silkList
+        showHeartList.value = parseRes.heartList
+        showMetalList.value = parseRes.metalList
       }
     };
   } else if (fileExt === "dat") {
@@ -102,7 +121,12 @@ const readFileContent = (file: File | undefined): void => {
         // 将ArrayBuffer转换为Uint8Array（字节数组）
         const byteArray = new Uint8Array(e.target.result);
         // 传入decode函数（该函数需要接收Uint8Array参数）
-        fileContent.value = decode(byteArray);
+        const fileContent = decode(byteArray);
+        const parseRes = parseJsonData(fileContent);
+        showBoxList.value = parseRes.boxList
+        showSilkList.value = parseRes.silkList
+        showHeartList.value = parseRes.heartList
+        showMetalList.value = parseRes.metalList
       }
     };
   }

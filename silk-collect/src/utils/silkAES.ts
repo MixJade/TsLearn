@@ -1,5 +1,4 @@
-import CryptoJS from 'crypto-js/core';
-
+import CryptoJS from 'crypto-js';
 // 常量定义
 const cSharpHeader: Uint8Array<ArrayBuffer> = new Uint8Array([0, 1, 0, 0, 0, 255, 255, 255, 255, 1, 0, 0, 0, 0, 0, 0, 0, 6, 1, 0, 0, 0]);
 const aesKey = CryptoJS.enc.Utf8.parse('UKu52ePUBwetZ9wNX88o54dnfKRu0T1l');
@@ -24,7 +23,7 @@ function removeHeader(bytesData: Uint8Array<ArrayBuffer>): Uint8Array<ArrayBuffe
 }
 
 /**
- * AES ECB模式解密（移除PKCS7填充）
+ * 解密（移除PKCS7填充）
  * @param ciphertext 加密的字节数据
  * @returns 解密后的字节数据
  */
@@ -48,14 +47,14 @@ function aesDecrypt(ciphertext: Uint8Array<ArrayBuffer>): Uint8Array<ArrayBuffer
 }
 
 /**
- * 完整解码流程：去头部 -> Base64解码 -> AES解密 -> 转字符串
+ * 解码
  * @param bytesData 输入的字节数据
  * @returns 解码后的字符串
  */
 function decode(bytesData: Uint8Array<ArrayBuffer>): string {
     // 移除头部
     let data = removeHeader(bytesData);
-    // Base64解码
+    // 解码
     const base64Str = new TextDecoder('latin1').decode(data);
     const base64Decoded = CryptoJS.enc.Base64.parse(base64Str);
     const base64Bytes = new Uint8Array(base64Decoded.sigBytes);
