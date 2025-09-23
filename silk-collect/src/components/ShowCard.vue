@@ -3,8 +3,8 @@
   <div :class="type" class="show-card">
     <h3>{{ title }}</h3>
     <ol>
-      <li v-for="td in show" :key="td.checkId" :title="td.axis">
-        <span :class="td.resStr==='已完成'?'s-green':'s-red'">【{{ td.resStr }}】</span>{{ td.scene }}
+      <li v-for="td in show" :key="td.checkId">
+        <span :class="td.resStr==='已完成'?'s-green':'s-red'" :title="td.axis">【{{ td.resStr }}】</span>{{ td.scene }}
       </li>
     </ol>
   </div>
