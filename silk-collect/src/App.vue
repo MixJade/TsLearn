@@ -23,20 +23,10 @@
 
     <!-- 文件内容区域 -->
     <div v-if="showContentModal">
-      <div>
-        <h3>面具</h3>
-        <ul>
-          <li v-for="td in showHeartList" :key="td.checkId">{{ td.scene }}【{{ td.complete ? '已' : '未' }}完成】
-            <span>【{{ td.hasEvent ? '已' : '未' }}获取】</span>
-          </li>
-        </ul>
-      </div>
-      <div>
-        <h3>金属</h3>
-        <ul>
-          <li v-for="td in showMetalList" :key="td.checkId">{{ td.scene }}【{{ td.complete ? '已' : '未' }}完成】</li>
-        </ul>
-      </div>
+      <ShowCard type="heart" title="面具碎片" :show="showHeartList"/>
+      <ShowCard type="metal" title="制造金属" :show="showMetalList"/>
+      <ShowCard type="box" title="忆境纪念盒" :show="showBoxList"/>
+      <ShowCard type="silk" title="丝轴碎片" :show="showSilkList"/>
     </div>
   </div>
 </template>
@@ -44,6 +34,7 @@
 import {ref} from 'vue';
 import {decode} from './utils/silkAES';
 import {CollectInf, parseJsonData} from './utils/parseSaveData';
+import ShowCard from "./components/ShowCard.vue";
 
 // 文件输入框引用
 const fileInput = ref<HTMLInputElement | null>(null);

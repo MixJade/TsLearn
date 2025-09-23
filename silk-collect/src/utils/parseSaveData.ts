@@ -48,8 +48,8 @@ interface GameData {
 export interface CollectInf {
     checkId: number;
     scene: string
-    complete: boolean
-    hasEvent: boolean
+    axis: string
+    resStr: string
 }
 
 interface ParseRes {
@@ -87,10 +87,23 @@ export const parseJsonData = (jsonStr: string): ParseRes => {
                     complete = data.playerData.PurchasedPilgrimsRestMemoryLocket
                 } else if (cd.evidence2 === "4") {
                     complete = data.playerData.PurchasedBelltownMemoryLocket
+                } else if (cd.evidence2 === "5") {
+                    complete = data.playerData.PurchasedBelltownSpoolSegment
+                } else if (cd.evidence2 === "6") {
+                    complete = data.playerData.MerchantEnclaveShellFragment
+                } else if (cd.evidence2 === "7") {
+                    complete = data.playerData.purchasedGrindleSpoolPiece
+                } else if (cd.evidence2 === "8") {
+                    complete = data.playerData.MetCaravanTroupeLeaderJudge
+                } else if (cd.evidence2 === "9") {
+                    complete = data.playerData.MerchantEnclaveToolMetal
+                } else if (cd.evidence2 === "10") {
+                    complete = data.playerData.MerchantEnclaveSpoolPiece
                 }
             } else if (cd.evi === 2) {
                 // 任务
-                const find = questCompletionData.find(comp => (comp.Name === cd.evidence1))
+                const find = questCompletionData.find(comp => (comp.Name === cd.evidence2))
+                console.log("saaaa", cd.evidence2,find)
                 if (find !== undefined && (find.Data.IsCompleted) && (find.Data.WasEverCompleted)) {
                     complete = true;
                 }
@@ -103,10 +116,21 @@ export const parseJsonData = (jsonStr: string): ParseRes => {
                 if (find !== undefined) {
                     hasEvent = true;
                 }
+            } else {
+                // 金属的获取没有事件，所以等于其是否完成
+                hasEvent = complete
+            }
+            // 统一设置文本
+            let checkRes = "未完成";
+            if (complete && hasEvent) {
+                checkRes = "已完成";
+            } else if (complete && !hasEvent) {
+                // 已完成但没有获取事件的，就是有问题
+                checkRes = "疑似BUG";
             }
 
             // 根据类型放入不同列表
-            const collect: CollectInf = {checkId: cd.checkId, scene: cd.scene, complete: complete, hasEvent: hasEvent}
+            const collect: CollectInf = {checkId: cd.checkId, scene: cd.scene, axis: cd.axis, resStr: checkRes}
             if (cd.type === 0) {
                 parseRes.heartList.push(collect)
             } else if (cd.type === 1) {
