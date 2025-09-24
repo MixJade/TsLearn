@@ -110,7 +110,7 @@ export const parseJsonData = (jsonStr: string): ParseRes => {
 
             // 查看是否有获取事件
             let hasEvent = false;
-            if (cd.type !== 4) {
+            if (cd.type !== 4 && storyEvents !== undefined) {
                 const find = storyEvents.find(comp => (comp.EventType === cd.type) && (comp.SceneName === cd.evidence1))
                 if (find !== undefined) {
                     hasEvent = true;
