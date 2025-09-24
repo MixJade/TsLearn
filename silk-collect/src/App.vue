@@ -28,6 +28,10 @@
       <ShowCard type="box" title="忆境纪念盒" :show="showBoxList"/>
       <ShowCard type="silk" title="丝轴碎片" :show="showSilkList"/>
     </div>
+    <div v-else>
+      丝之歌存档路径:
+      <p class="no-wrap">%userprofile%/AppData/LocalLow/Team Cherry/Hollow Knight Silksong/{一串数字}/user1.dat</p>
+    </div>
   </div>
 </template>
 <script lang="ts" setup>
@@ -154,4 +158,7 @@ const readFileContent = (file: File | undefined): void => {
   margin: 0
   color: #666
   font-size: 0.9rem
+
+.no-wrap
+  white-space: nowrap
 </style>
