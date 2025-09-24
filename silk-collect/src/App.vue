@@ -127,7 +127,8 @@ const readFileContent = (file: File | undefined): void => {
   }
 };
 </script>
-<style lang="sass" scoped>
+<!--去掉scoped作用域，这样生成的css就没有`[data-v-34552472]`标识-->
+<style lang="sass">
 .file-upload-container
   max-width: 800px
   margin: 20px auto

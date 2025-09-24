@@ -18,8 +18,8 @@ defineProps<{
   readonly show: CollectInf[];
 }>()
 </script>
-
-<style lang="sass" scoped>
+<!--去掉scoped作用域，这样生成的css就没有`[data-v-34552472]`标识-->
+<style lang="sass">
 .s-red
   color: red
 
