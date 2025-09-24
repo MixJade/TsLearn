@@ -13,13 +13,11 @@ export default defineConfig({
     server: {
         port: 25904, // 端口号
     },
+    esbuild: {
+        // 移除所有版权注释（包括第三方依赖的注释）
+        legalComments: 'none'
+    },
     build: {
-        minify: 'terser', // 显式指定使用terser压缩
-        terserOptions: {
-            format: {
-                comments: false, // 移除所有注释
-            },
-        },
         // 自定义构建输出规则：不加哈希码
         rollupOptions: {
             output: {
