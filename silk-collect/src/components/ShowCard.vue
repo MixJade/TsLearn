@@ -1,4 +1,3 @@
-<!--suppress ES6PreferShortImport -->
 <template>
   <div :class="type" class="show-card">
     <h3>{{ title }}</h3>

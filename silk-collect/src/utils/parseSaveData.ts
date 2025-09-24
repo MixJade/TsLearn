@@ -103,7 +103,6 @@ export const parseJsonData = (jsonStr: string): ParseRes => {
             } else if (cd.evi === 2) {
                 // 任务
                 const find = questCompletionData.find(comp => (comp.Name === cd.evidence2))
-                console.log("saaaa", cd.evidence2,find)
                 if (find !== undefined && (find.Data.IsCompleted) && (find.Data.WasEverCompleted)) {
                     complete = true;
                 }
