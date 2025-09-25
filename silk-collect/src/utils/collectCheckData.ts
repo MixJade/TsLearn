@@ -60,7 +60,7 @@ export const checkDataList: CheckData[] = [
     {checkId: 48, type: 0, scene: '罪石监狱上右', evi: 0, evidence1: "Slab_17", evidence2: "Heart Piece", axis: 'Slab_17(19,68)'},
     {checkId: 49, type: 1, scene: '罪石监狱左侧', evi: 0, evidence1: "Peak_01", evidence2: "Silk Spool", axis: 'Peak_01(86,192)'},
     {checkId: 50, type: 0, scene: '雪山柱子内', evi: 0, evidence1: "Peak_04c", evidence2: "Heart Piece", axis: 'Peak_04c(68,8)'},
-    {checkId: 51, type: 0, scene: '蚀阶', evi: 0, evidence1: "Peak_04c", evidence2: "Heart Piece", axis: 'Coral_19b(75,108)'},
+    {checkId: 51, type: 0, scene: '蚀阶', evi: 0, evidence1: "Coral_19b", evidence2: "Heart Piece", axis: 'Coral_19b(75,108)'},
     {checkId: 52, type: 1, scene: '深坞', evi: 0, evidence1: "Bone_East_13", evidence2: "Silk Spool", axis: 'Bone_East_13(41,24)'},
     {checkId: 53, type: 1, scene: '德鲁伊下方', evi: 0, evidence1: "Bone_11b", evidence2: "Silk Spool", axis: 'Bone_11b(31,5)'},
     {checkId: 54, type: 1, scene: '深坞右侧', evi: 0, evidence1: "Dock_03c", evidence2: "Silk Spool", axis: 'Dock_03c(128,55)'},
