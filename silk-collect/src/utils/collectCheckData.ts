@@ -18,7 +18,7 @@ export const checkDataList: CheckData[] = [
     {checkId: 6, type: 4, scene: "骸底买金属", evi: 1, evidence1: "Bonetown", evidence2: "2", axis: "商店购买"},
     {checkId: 7, type: 0, scene: "沙虫道", evi: 0, evidence1: "Crawl_02", evidence2: "Heart Piece", axis: "Crawl_02(22,5)"},
     {checkId: 8, type: 3, scene: "朝圣者憩所购买", evi: 1, evidence1: "Bone_East_10_Room", evidence2: "3", axis: "商店购买"},
-    {checkId: 9, type: 0, scene: "甲木林", evi: 0, evidence1: "Crawl_02", evidence2: "Heart Piece", axis: "Shellwood_14(128,12)"},
+    {checkId: 9, type: 0, scene: "甲木林", evi: 0, evidence1: "Shellwood_14", evidence2: "Heart Piece", axis: "Shellwood_14(128,12)"},
     {checkId: 10, type: 3, scene: "骸骨洞窟", evi: 0, evidence1: "Bone_18", evidence2: "Collectable Item Pickup", axis: "Bone_18(36,22)"},
     {checkId: 11, type: 0, scene: "洞窟与深坞之间", evi: 0, evidence1: "Dock_08", evidence2: "Heart Piece", axis: "Dock_08(54,20)"},
     {checkId: 12, type: 3, scene: "骸底提交暴烈燧甲虫任务", evi: 2, evidence1: "Bonetown", evidence2: "Rock Rollers", axis: "任务提交"},
