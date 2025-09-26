@@ -1,7 +1,7 @@
 // 2. 用于校验的数据
 interface CheckData {
     checkId: number;
-    type: number; // 0面具,1丝轴,3盒子,4金属
+    type: number; // 0面具,1丝轴,3盒子,4金属,5苔梅
     scene: string; // 场景名称
     evi: number; // 证据来源 0场景 1购买 2任务
     evidence1: string; // 用以确认的证据
@@ -76,4 +76,11 @@ export const checkDataList: CheckData[] = [
     {checkId: 64, type: 0, scene: '第三幕雪山洞窟', evi: 0, evidence1: "Peak_06", evidence2: "Heart Piece", axis: 'Peak_06(28,182)'},
     {checkId: 65, type: 0, scene: '第三幕暗蚀之心任务', evi: 2, evidence1: "Belltown", evidence2: "Destroy Thread Cores", axis: '任务提交'},
     {checkId: 66, type: 0, scene: '第三幕隐秘猎手任务', evi: 2, evidence1: "Belltown", evidence2: "Ant Trapper", axis: '任务提交'},
+    {checkId: 67, type: 5, scene: '忆廊_椅子旁', evi: 0, evidence1: "Arborium_04", evidence2: "moss_berry_fruit", axis: 'Arborium_04(72,9)'},
+    {checkId: 68, type: 5, scene: '苔穴出生点左上', evi: 0, evidence1: "Tut_02", evidence2: "moss_berry_fruit", axis: 'Tut_02(140,50)'},
+    {checkId: 69, type: 5, scene: '出生点织巢左侧', evi: 0, evidence1: "Weave_03", evidence2: "moss_berry_fruit", axis: 'Weave_03(165,28)'},
+    {checkId: 70, type: 5, scene: '苔穴出生点右上', evi: 0, evidence1: "Tut_01b", evidence2: "moss_berry_fruit", axis: 'Tut_01b(7489)'},
+    {checkId: 71, type: 5, scene: '骸底镇上空_蚊子', evi: 1, evidence1: 'Bonetown', evidence2: '11', axis: 'Bonetown(286,55)'},
+    {checkId: 72, type: 5, scene: '德鲁伊下方_蚊子', evi: 1, evidence1: 'Bone_05b', evidence2: '12', axis: 'Bone_05b(61,25)'},
+    {checkId: 73, type: 5, scene: '漫游者教堂上空_蚊子', evi: 1, evidence1: 'Bonegrave', evidence2: '13', axis: 'Bonegrave(253,39)'},
 ]

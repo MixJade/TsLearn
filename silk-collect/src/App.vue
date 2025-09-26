@@ -27,6 +27,7 @@
       <ShowCard type="metal" title="制造金属" :show="showMetalList"/>
       <ShowCard type="box" title="忆境纪念盒" :show="showBoxList"/>
       <ShowCard type="silk" title="丝轴碎片" :show="showSilkList"/>
+      <ShowCard type="heart" title="苔莓" :show="showBerryList"/>
     </div>
     <div v-else>
       丝之歌存档路径:
@@ -50,6 +51,7 @@ const showBoxList = ref<CollectInf[]>([]);
 const showSilkList = ref<CollectInf[]>([]);
 const showHeartList = ref<CollectInf[]>([]);
 const showMetalList = ref<CollectInf[]>([]);
+const showBerryList = ref<CollectInf[]>([]);
 
 // 触发文件选择对话框
 const triggerFileSelect = (): void => {
@@ -104,6 +106,7 @@ const readFileContent = (file: File | undefined): void => {
         showSilkList.value = parseRes.silkList
         showHeartList.value = parseRes.heartList
         showMetalList.value = parseRes.metalList
+        showBerryList.value = parseRes.berryList
       }
     };
   } else if (fileExt === "dat") {
@@ -122,6 +125,7 @@ const readFileContent = (file: File | undefined): void => {
         showSilkList.value = parseRes.silkList
         showHeartList.value = parseRes.heartList
         showMetalList.value = parseRes.metalList
+        showBerryList.value = parseRes.berryList
       }
     };
   }

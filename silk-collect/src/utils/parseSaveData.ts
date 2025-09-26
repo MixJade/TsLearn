@@ -13,6 +13,9 @@ interface GameData {
         MetCaravanTroupeLeaderJudge: boolean, // 解救14只跳蚤
         MerchantEnclaveToolMetal: boolean, // 圣歌盟地买金属
         MerchantEnclaveSpoolPiece: boolean, // 圣歌盟地买丝轴
+        bonetownAspidBerryCollected: boolean, // 骸底镇上空苔莓
+        mosstownAspidBerryCollected: boolean, // 德鲁伊下方苔莓
+        bonegraveAspidBerryCollected: boolean, // 漫游者教堂上空苔莓
         QuestCompletionData: {
             savedData: [{
                 Name: string,
@@ -57,10 +60,11 @@ interface ParseRes {
     silkList: CollectInf[]
     heartList: CollectInf[]
     metalList: CollectInf[]
+    berryList: CollectInf[]
 }
 
 export const parseJsonData = (jsonStr: string): ParseRes => {
-    const parseRes: ParseRes = {boxList: [], heartList: [], metalList: [], silkList: []}
+    const parseRes: ParseRes = {boxList: [], heartList: [], metalList: [], silkList: [], berryList: []}
     try {
         // 解析JSON字符串为JavaScript对象
         const data = JSON.parse(jsonStr) as GameData;
@@ -99,6 +103,12 @@ export const parseJsonData = (jsonStr: string): ParseRes => {
                     complete = data.playerData.MerchantEnclaveToolMetal
                 } else if (cd.evidence2 === "10") {
                     complete = data.playerData.MerchantEnclaveSpoolPiece
+                } else if (cd.evidence2 === "11") {
+                    complete = data.playerData.bonetownAspidBerryCollected
+                } else if (cd.evidence2 === "12") {
+                    complete = data.playerData.mosstownAspidBerryCollected
+                } else if (cd.evidence2 === "13") {
+                    complete = data.playerData.bonegraveAspidBerryCollected
                 }
             } else if (cd.evi === 2) {
                 // 任务
@@ -110,13 +120,13 @@ export const parseJsonData = (jsonStr: string): ParseRes => {
 
             // 查看是否有获取事件
             let hasEvent = false;
-            if (cd.type !== 4 && storyEvents !== undefined) {
+            if (cd.type !== 4 && cd.type !== 5 && storyEvents !== undefined) {
                 const find = storyEvents.find(comp => (comp.EventType === cd.type) && (comp.SceneName === cd.evidence1))
                 if (find !== undefined) {
                     hasEvent = true;
                 }
             } else {
-                // 金属的获取没有事件，所以等于其是否完成
+                // 金属\苔莓的获取没有事件，所以等于其是否完成
                 hasEvent = complete
             }
             // 统一设置文本
@@ -138,6 +148,8 @@ export const parseJsonData = (jsonStr: string): ParseRes => {
                 parseRes.boxList.push(collect)
             } else if (cd.type === 4) {
                 parseRes.metalList.push(collect)
+            } else if (cd.type === 5) {
+                parseRes.berryList.push(collect)
             }
         }
     } catch (error) {
