@@ -140,6 +140,14 @@ export const parseJsonData = (jsonStr: string): ParseRes => {
 
             // 根据类型放入不同列表
             const collect: CollectInf = {checkId: cd.checkId, scene: cd.scene, axis: cd.axis, resStr: checkRes}
+            if (checkRes === "疑似BUG") {
+                // 进第三幕后有变化的碎片(可能导致疑似Bug出现)
+                const threeMuId = [5, 8, 25, 47];
+                if (threeMuId.includes(cd.checkId)) {
+                    collect.scene += "——可能已在小偷处购买"
+                }
+            }
+
             if (cd.type === 0) {
                 parseRes.heartList.push(collect)
             } else if (cd.type === 1) {

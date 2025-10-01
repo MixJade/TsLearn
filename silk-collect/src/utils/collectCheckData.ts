@@ -48,7 +48,7 @@ export const checkDataList: CheckData[] = [
     {checkId: 36, type: 1, scene: '蚀阶小偷购买', evi: 1, evidence1: "Coral_42", evidence2: "7", axis: "商店购买"},
     {checkId: 37, type: 3, scene: '卡拉卡沙川', evi: 0, evidence1: "Coral_23", evidence2: "Collectable Item Pickup", axis: 'Coral_23(91,52)'},
     {checkId: 38, type: 4, scene: '蚀阶', evi: 0, evidence1: "Coral_32", evidence2: "Collectable Item Pickup - Tool Metal", axis: 'Coral_32(78,9)'},
-    {checkId: 39, type: 1, scene: '解救14只跳蚤', evi: 1, evidence1: "Coral_Judge_Arena", evidence2: "8", axis: "商店购买"},
+    {checkId: 39, type: 1, scene: '解救14只跳蚤', evi: 1, evidence1: "Coral_Judge_Arena", evidence2: "8", axis: "任务提交"},
     {checkId: 40, type: 3, scene: '灰沼车站左侧', evi: 0, evidence1: "Greymoor_16", evidence2: "Collectable Item Pickup", axis: 'Greymoor_16(131,53)'},
     {checkId: 41, type: 0, scene: '机枢核心左边', evi: 0, evidence1: "Song_09", evidence2: "Heart Piece", axis: 'Song_09(42,43)'},
     {checkId: 42, type: 0, scene: '出生点织巢', evi: 0, evidence1: "Weave_05b", evidence2: "Heart Piece", axis: 'Weave_05b(161,29)'},
