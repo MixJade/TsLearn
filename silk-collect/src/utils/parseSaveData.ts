@@ -142,8 +142,7 @@ export const parseJsonData = (jsonStr: string): ParseRes => {
             const collect: CollectInf = {checkId: cd.checkId, scene: cd.scene, axis: cd.axis, resStr: checkRes}
             if (checkRes === "疑似BUG") {
                 // 进第三幕后有变化的碎片(可能导致疑似Bug出现)
-                const threeMuId = [5, 8, 25, 47];
-                if (threeMuId.includes(cd.checkId)) {
+                if ([5, 8, 25, 47].includes(cd.checkId)) {
                     collect.scene += "——可能已在小偷处购买"
                 }
             }
