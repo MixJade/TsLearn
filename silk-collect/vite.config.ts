@@ -10,6 +10,7 @@ export default defineConfig({
             },
         },
     })],
+    base: '', // 引用资源路径以相对路径生成，而不是根路径
     server: {
         port: 25904, // 端口号
     },
