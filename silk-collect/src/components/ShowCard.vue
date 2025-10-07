@@ -2,7 +2,7 @@
   <div :class="type" class="show-card">
     <h3>{{ title }}</h3>
     <ol>
-      <li v-for="td in show" :key="td.checkId">
+      <li v-for="td in show" :key="td.cId">
         <span :class="td.resStr==='已完成'?'s-green':'s-red'" :title="td.axis">【{{ td.resStr }}】</span>{{ td.scene }}
       </li>
     </ol>

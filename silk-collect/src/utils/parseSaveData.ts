@@ -79,7 +79,7 @@ interface GameData {
 
 // 3. 解析后返回的数据
 export interface CollectInf {
-    checkId: number;
+    cId: number;
     scene: string
     axis: string
     resStr: string
@@ -99,111 +99,112 @@ export const parseJsonData = (jsonStr: string): ParseRes => {
     try {
         // 解析JSON字符串为JavaScript对象
         const data = JSON.parse(jsonStr) as GameData;
-        const storyEvents = data.playerData.StoryEvents
+        const playerData = data.playerData;
+        const storyEvents = playerData.StoryEvents
         const serializedList = data.sceneData.persistentBools.serializedList
-        const questCompletionData = data.playerData.QuestCompletionData.savedData
+        const questCompletionData = playerData.QuestCompletionData.savedData
 
         for (const cd of checkDataList) {
             let complete = false;
             // 判断是否完成
-            if (cd.evi === 0) {
+            if (cd.ev === 0) {
                 // 场景
-                const find = serializedList.find(scene => (scene.SceneName === cd.evidence1) && (scene.ID === cd.evidence2));
+                const find = serializedList.find(scene => (scene.SceneName === cd.ev1) && (scene.ID === cd.ev2));
                 if (find !== undefined && find.Value) {
                     complete = true;
                 }
-            } else if (cd.evi === 1) {
+            } else if (cd.ev === 1) {
                 // 购买
-                if (cd.evidence2 === "1") {
-                    complete = data.playerData.PurchasedBonebottomHeartPiece
-                } else if (cd.evidence2 === "2") {
-                    complete = data.playerData.PurchasedBonebottomToolMetal
-                } else if (cd.evidence2 === "3") {
-                    complete = data.playerData.PurchasedPilgrimsRestMemoryLocket
-                } else if (cd.evidence2 === "4") {
-                    complete = data.playerData.PurchasedBelltownMemoryLocket
-                } else if (cd.evidence2 === "5") {
-                    complete = data.playerData.PurchasedBelltownSpoolSegment
-                } else if (cd.evidence2 === "6") {
-                    complete = data.playerData.MerchantEnclaveShellFragment
-                } else if (cd.evidence2 === "7") {
-                    complete = data.playerData.purchasedGrindleSpoolPiece
-                } else if (cd.evidence2 === "8") {
-                    complete = data.playerData.MetCaravanTroupeLeaderJudge
-                } else if (cd.evidence2 === "9") {
-                    complete = data.playerData.MerchantEnclaveToolMetal
-                } else if (cd.evidence2 === "10") {
-                    complete = data.playerData.MerchantEnclaveSpoolPiece
-                } else if (cd.evidence2 === "11") {
-                    complete = data.playerData.bonetownAspidBerryCollected
-                } else if (cd.evidence2 === "12") {
-                    complete = data.playerData.mosstownAspidBerryCollected
-                } else if (cd.evidence2 === "13") {
-                    complete = data.playerData.bonegraveAspidBerryCollected
-                } else if (cd.evidence2 === "14") {
-                    complete = data.playerData.SavedFlea_Bone_East_05
-                } else if (cd.evidence2 === "15") {
-                    complete = data.playerData.SavedFlea_Dock_16
-                } else if (cd.evidence2 === "16") {
-                    complete = data.playerData.SavedFlea_Dock_03d
-                } else if (cd.evidence2 === "17") {
-                    complete = data.playerData.SavedFlea_Bone_East_17b
-                } else if (cd.evidence2 === "18") {
-                    complete = data.playerData.SavedFlea_Bone_East_10_Church
-                } else if (cd.evidence2 === "19") {
-                    complete = data.playerData.SavedFlea_Greymoor_15b
-                } else if (cd.evidence2 === "20") {
-                    complete = data.playerData.SavedFlea_Greymoor_06
-                } else if (cd.evidence2 === "21") {
-                    complete = data.playerData.CaravanLechReturnedToCaravan
-                } else if (cd.evidence2 === "22") {
-                    complete = data.playerData.SavedFlea_Shellwood_03
-                } else if (cd.evidence2 === "23") {
-                    complete = data.playerData.SavedFlea_Belltown_04
-                } else if (cd.evidence2 === "24") {
-                    complete = data.playerData.SavedFlea_Bone_06
-                } else if (cd.evidence2 === "25") {
-                    complete = data.playerData.SavedFlea_Ant_03
-                } else if (cd.evidence2 === "26") {
-                    complete = data.playerData.SavedFlea_Dust_12
-                } else if (cd.evidence2 === "27") {
-                    complete = data.playerData.SavedFlea_Peak_05c
-                } else if (cd.evidence2 === "28") {
-                    complete = data.playerData.SavedFlea_Under_21
-                } else if (cd.evidence2 === "29") {
-                    complete = data.playerData.SavedFlea_Under_23
-                } else if (cd.evidence2 === "30") {
-                    complete = data.playerData.SavedFlea_Coral_35
-                } else if (cd.evidence2 === "31") {
-                    complete = data.playerData.SavedFlea_Coral_24
-                } else if (cd.evidence2 === "32") {
-                    complete = data.playerData.SavedFlea_Crawl_06
-                } else if (cd.evidence2 === "33") {
-                    complete = data.playerData.SavedFlea_Slab_Cell
-                } else if (cd.evidence2 === "34") {
-                    complete = data.playerData.SavedFlea_Slab_06
-                } else if (cd.evidence2 === "35") {
-                    complete = data.playerData.tamedGiantFlea
-                } else if (cd.evidence2 === "36") {
-                    complete = data.playerData.MetTroupeHunterWild
-                } else if (cd.evidence2 === "37") {
-                    complete = data.playerData.SavedFlea_Shadow_10
-                } else if (cd.evidence2 === "38") {
-                    complete = data.playerData.SavedFlea_Shadow_28
-                } else if (cd.evidence2 === "39") {
-                    complete = data.playerData.SavedFlea_Dust_09
-                } else if (cd.evidence2 === "40") {
-                    complete = data.playerData.SavedFlea_Song_14
-                } else if (cd.evidence2 === "41") {
-                    complete = data.playerData.SavedFlea_Song_11
-                } else if (cd.evidence2 === "42") {
-                    complete = data.playerData.SavedFlea_Library_09
-                } else if (cd.evidence2 === "43") {
-                    complete = data.playerData.SavedFlea_Library_01
+                if (cd.ev2 === "1") {
+                    complete = playerData.PurchasedBonebottomHeartPiece
+                } else if (cd.ev2 === "2") {
+                    complete = playerData.PurchasedBonebottomToolMetal
+                } else if (cd.ev2 === "3") {
+                    complete = playerData.PurchasedPilgrimsRestMemoryLocket
+                } else if (cd.ev2 === "4") {
+                    complete = playerData.PurchasedBelltownMemoryLocket
+                } else if (cd.ev2 === "5") {
+                    complete = playerData.PurchasedBelltownSpoolSegment
+                } else if (cd.ev2 === "6") {
+                    complete = playerData.MerchantEnclaveShellFragment
+                } else if (cd.ev2 === "7") {
+                    complete = playerData.purchasedGrindleSpoolPiece
+                } else if (cd.ev2 === "8") {
+                    complete = playerData.MetCaravanTroupeLeaderJudge
+                } else if (cd.ev2 === "9") {
+                    complete = playerData.MerchantEnclaveToolMetal
+                } else if (cd.ev2 === "10") {
+                    complete = playerData.MerchantEnclaveSpoolPiece
+                } else if (cd.ev2 === "11") {
+                    complete = playerData.bonetownAspidBerryCollected
+                } else if (cd.ev2 === "12") {
+                    complete = playerData.mosstownAspidBerryCollected
+                } else if (cd.ev2 === "13") {
+                    complete = playerData.bonegraveAspidBerryCollected
+                } else if (cd.ev2 === "14") {
+                    complete = playerData.SavedFlea_Bone_East_05
+                } else if (cd.ev2 === "15") {
+                    complete = playerData.SavedFlea_Dock_16
+                } else if (cd.ev2 === "16") {
+                    complete = playerData.SavedFlea_Dock_03d
+                } else if (cd.ev2 === "17") {
+                    complete = playerData.SavedFlea_Bone_East_17b
+                } else if (cd.ev2 === "18") {
+                    complete = playerData.SavedFlea_Bone_East_10_Church
+                } else if (cd.ev2 === "19") {
+                    complete = playerData.SavedFlea_Greymoor_15b
+                } else if (cd.ev2 === "20") {
+                    complete = playerData.SavedFlea_Greymoor_06
+                } else if (cd.ev2 === "21") {
+                    complete = playerData.CaravanLechReturnedToCaravan
+                } else if (cd.ev2 === "22") {
+                    complete = playerData.SavedFlea_Shellwood_03
+                } else if (cd.ev2 === "23") {
+                    complete = playerData.SavedFlea_Belltown_04
+                } else if (cd.ev2 === "24") {
+                    complete = playerData.SavedFlea_Bone_06
+                } else if (cd.ev2 === "25") {
+                    complete = playerData.SavedFlea_Ant_03
+                } else if (cd.ev2 === "26") {
+                    complete = playerData.SavedFlea_Dust_12
+                } else if (cd.ev2 === "27") {
+                    complete = playerData.SavedFlea_Peak_05c
+                } else if (cd.ev2 === "28") {
+                    complete = playerData.SavedFlea_Under_21
+                } else if (cd.ev2 === "29") {
+                    complete = playerData.SavedFlea_Under_23
+                } else if (cd.ev2 === "30") {
+                    complete = playerData.SavedFlea_Coral_35
+                } else if (cd.ev2 === "31") {
+                    complete = playerData.SavedFlea_Coral_24
+                } else if (cd.ev2 === "32") {
+                    complete = playerData.SavedFlea_Crawl_06
+                } else if (cd.ev2 === "33") {
+                    complete = playerData.SavedFlea_Slab_Cell
+                } else if (cd.ev2 === "34") {
+                    complete = playerData.SavedFlea_Slab_06
+                } else if (cd.ev2 === "35") {
+                    complete = playerData.tamedGiantFlea
+                } else if (cd.ev2 === "36") {
+                    complete = playerData.MetTroupeHunterWild
+                } else if (cd.ev2 === "37") {
+                    complete = playerData.SavedFlea_Shadow_10
+                } else if (cd.ev2 === "38") {
+                    complete = playerData.SavedFlea_Shadow_28
+                } else if (cd.ev2 === "39") {
+                    complete = playerData.SavedFlea_Dust_09
+                } else if (cd.ev2 === "40") {
+                    complete = playerData.SavedFlea_Song_14
+                } else if (cd.ev2 === "41") {
+                    complete = playerData.SavedFlea_Song_11
+                } else if (cd.ev2 === "42") {
+                    complete = playerData.SavedFlea_Library_09
+                } else if (cd.ev2 === "43") {
+                    complete = playerData.SavedFlea_Library_01
                 }
-            } else if (cd.evi === 2) {
+            } else if (cd.ev === 2) {
                 // 任务
-                const find = questCompletionData.find(comp => (comp.Name === cd.evidence2))
+                const find = questCompletionData.find(comp => (comp.Name === cd.ev2))
                 if (find !== undefined && (find.Data.IsCompleted) && (find.Data.WasEverCompleted)) {
                     complete = true;
                 }
@@ -212,7 +213,7 @@ export const parseJsonData = (jsonStr: string): ParseRes => {
             // 查看是否有获取事件
             let hasEvent = false;
             if ([0, 1, 3].includes(cd.type) && storyEvents !== undefined) {
-                const find = storyEvents.find(comp => (comp.EventType === cd.type) && (comp.SceneName === cd.evidence1))
+                const find = storyEvents.find(comp => (comp.EventType === cd.type) && (comp.SceneName === cd.ev1))
                 if (find !== undefined) {
                     hasEvent = true;
                 }
@@ -230,10 +231,10 @@ export const parseJsonData = (jsonStr: string): ParseRes => {
             }
 
             // 根据类型放入不同列表
-            const collect: CollectInf = {checkId: cd.checkId, scene: cd.scene, axis: cd.axis, resStr: checkRes}
+            const collect: CollectInf = {cId: cd.cId, scene: cd.scene, axis: cd.axis, resStr: checkRes}
             if (checkRes === "疑似BUG") {
                 // 进第三幕后有变化的碎片(可能导致疑似Bug出现)
-                if ([5, 8, 25].includes(cd.checkId)) {
+                if ([5, 8, 25].includes(cd.cId)) {
                     collect.scene += "——可能已在小偷处购买"
                 }
             }
