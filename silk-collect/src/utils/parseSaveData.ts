@@ -23,7 +23,7 @@ interface GameData {
         SavedFlea_Bone_East_10_Church: boolean, // 跳蚤：朝圣者憩所右侧门内(需从远野车站隐藏通道进入)
         SavedFlea_Greymoor_15b: boolean, // 跳蚤：灰沼_腐囊虫庭附近
         SavedFlea_Greymoor_06: boolean, // 跳蚤：灰沼塔顶
-        CaravanLechReturnedToCaravan: boolean, // 跳蚤：灰沼_中途酒馆上方隐藏墙（色跳蚤）
+        CaravanLechSaved: boolean, // 跳蚤：灰沼_中途酒馆上方隐藏墙（色跳蚤）
         SavedFlea_Shellwood_03: boolean, // 跳蚤：甲木林拿螳螂爪路上
         SavedFlea_Belltown_04: boolean, // 跳蚤：钟心镇上方钟道顶部
         SavedFlea_Bone_06: boolean, // 跳蚤：骸骨洞窟
@@ -156,7 +156,7 @@ export const parseJsonData = (jsonStr: string): ParseRes => {
                 } else if (cd.ev2 === "20") {
                     complete = playerData.SavedFlea_Greymoor_06
                 } else if (cd.ev2 === "21") {
-                    complete = playerData.CaravanLechReturnedToCaravan
+                    complete = playerData.CaravanLechSaved
                 } else if (cd.ev2 === "22") {
                     complete = playerData.SavedFlea_Shellwood_03
                 } else if (cd.ev2 === "23") {
