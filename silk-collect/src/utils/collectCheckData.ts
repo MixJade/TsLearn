@@ -1,7 +1,7 @@
 // 2. 用于校验的数据
 interface CheckData {
     checkId: number;
-    type: number; // 0面具,1丝轴,3盒子,4金属,5苔梅
+    type: number; // 0面具,1丝轴,3盒子,4金属,5苔梅,6跳蚤
     scene: string; // 场景名称
     evi: number; // 证据来源 0场景 1购买 2任务
     evidence1: string; // 用以确认的证据
@@ -83,4 +83,34 @@ export const checkDataList: CheckData[] = [
     {checkId: 71, type: 5, scene: '骸底镇上空_蚊子', evi: 1, evidence1: 'Bonetown', evidence2: '11', axis: 'Bonetown(286,55)'},
     {checkId: 72, type: 5, scene: '德鲁伊下方_蚊子', evi: 1, evidence1: 'Bone_05b', evidence2: '12', axis: 'Bone_05b(61,25)'},
     {checkId: 73, type: 5, scene: '漫游者教堂上空_蚊子', evi: 1, evidence1: 'Bonegrave', evidence2: '13', axis: 'Bonegrave(253,39)'},
+    {checkId: 74, type: 6, scene: '深坞_冲刺能力旁', evi: 1, evidence1: '_', evidence2: '14', axis: 'Bone_East_05(35,39)'},
+    {checkId: 75, type: 6, scene: '深坞_车站隐藏墙', evi: 1, evidence1: '_', evidence2: '15', axis: 'Dock_16(52,21)'},
+    {checkId: 76, type: 6, scene: '深坞右下方隐藏房（需飞针）', evi: 1, evidence1: '_', evidence2: '16', axis: 'Dock_03d(102,69)'},
+    {checkId: 77, type: 6, scene: '远野左侧笼子', evi: 1, evidence1: '_', evidence2: '17', axis: 'Bone_East_17b(85,30)'},
+    {checkId: 78, type: 6, scene: '朝圣者憩所右侧门内(需从远野车站隐藏通道进入)', evi: 1, evidence1: '_', evidence2: '18', axis: 'Bone_East_10_Church(182,24)'},
+    {checkId: 79, type: 6, scene: '灰沼_腐囊虫庭附近', evi: 1, evidence1: '_', evidence2: '19', axis: 'Greymoor_15b(179,54)'},
+    {checkId: 80, type: 6, scene: '灰沼塔顶', evi: 1, evidence1: '_', evidence2: '20', axis: 'Greymoor_06(26,140)'},
+    {checkId: 81, type: 6, scene: '灰沼_中途酒馆上方隐藏墙【色跳蚤】', evi: 1, evidence1: '_', evidence2: '21', axis: 'Greymoor_24(73,13)'},
+    {checkId: 82, type: 6, scene: '甲木林拿螳螂爪路上', evi: 1, evidence1: '_', evidence2: '22', axis: 'Shellwood_03(26,48)'},
+    {checkId: 83, type: 6, scene: '钟心镇上方钟道顶部', evi: 1, evidence1: '_', evidence2: '23', axis: 'Belltown_04(11,89)'},
+    {checkId: 84, type: 6, scene: '骸骨洞窟', evi: 1, evidence1: '_', evidence2: '24', axis: 'Bone_06(101,24)'},
+    {checkId: 85, type: 6, scene: '猎人小径左侧（下劈红豆上去）', evi: 1, evidence1: '_', evidence2: '25', axis: 'Ant_03(42,70)'},
+    {checkId: 86, type: 6, scene: '罪途左侧笼子', evi: 1, evidence1: '_', evidence2: '26', axis: 'Dust_12(30,4)'},
+    {checkId: 87, type: 6, scene: '雪山跳蚤', evi: 1, evidence1: '_', evidence2: '27', axis: 'Peak_05c(248,113)'},
+    {checkId: 88, type: 6, scene: '圣堡工厂下层（全是炸弹人的房间）', evi: 1, evidence1: '_', evidence2: '28', axis: 'Under_21(9,16)'},
+    {checkId: 89, type: 6, scene: '圣堡工厂底部（火灵竹林出来）', evi: 1, evidence1: '_', evidence2: '29', axis: 'Under_23(20,24)'},
+    {checkId: 90, type: 6, scene: '蚀阶_车站左侧房间顶部', evi: 1, evidence1: '_', evidence2: '30', axis: 'Coral_35(7,144)'},
+    {checkId: 91, type: 6, scene: '蚀阶_去往椅子路上', evi: 1, evidence1: '_', evidence2: '31', axis: 'Coral_24(33,45)'},
+    {checkId: 92, type: 6, scene: '沙虫道_门上方隐藏墙', evi: 1, evidence1: '_', evidence2: '32', axis: 'Crawl_06(70,20)'},
+    {checkId: 93, type: 6, scene: '罪石监狱_小房间', evi: 1, evidence1: '_', evidence2: '33', axis: 'Slab_Cell(52,6)'},
+    {checkId: 94, type: 6, scene: '罪石监狱_车站旁椅子上方', evi: 1, evidence1: '_', evidence2: '34', axis: 'Slab_06(85,28)'},
+    {checkId: 95, type: 6, scene: '忆廊顶部【大跳蚤】', evi: 1, evidence1: '_', evidence2: '35', axis: 'Arborium_08(34,32)'},
+    {checkId: 96, type: 6, scene: '腐殖渠【龙牙跳蚤，救出可解锁全部跳蚤位置】', evi: 1, evidence1: '_', evidence2: '36', axis: 'Bellway_Aqueduct(67,63)'},
+    {checkId: 97, type: 6, scene: '腐汁泽隐藏椅子上方跳蚤', evi: 1, evidence1: '_', evidence2: '37', axis: 'Shadow_10(82,41)'},
+    {checkId: 98, type: 6, scene: '腐汁泽下方隐藏墙', evi: 1, evidence1: '_', evidence2: '38', axis: 'Shadow_28(31,22)'},
+    {checkId: 99, type: 6, scene: '废旧管风琴（打完boss左走）', evi: 1, evidence1: '_', evidence2: '39', axis: 'Dust_09(6,35)'},
+    {checkId: 100, type: 6, scene: '圣咏殿跳蚤（从餐厅往左走）', evi: 1, evidence1: '_', evidence2: '40', axis: 'Song_14(62,7)'},
+    {checkId: 101, type: 6, scene: '圣咏殿隐藏墙跳蚤（下方隐藏墙有风扇）', evi: 1, evidence1: '_', evidence2: '41', axis: 'Song_11(51,165)'},
+    {checkId: 102, type: 6, scene: '圣歌盟地右侧（需从图书馆隐藏墙上去）', evi: 1, evidence1: '_', evidence2: '42', axis: 'Library_09(126,101)'},
+    {checkId: 103, type: 6, scene: '图书馆推箱子', evi: 1, evidence1: '_', evidence2: '43', axis: 'Library_01(49,87)'},
 ]
