@@ -33,10 +33,10 @@ interface GameData {
         SavedFlea_Under_21: boolean, // 跳蚤：圣堡工厂下层（全是炸弹人的房间）
         SavedFlea_Under_23: boolean, // 跳蚤：圣堡工厂底部(火灵竹林出来)
         SavedFlea_Coral_35: boolean, // 跳蚤：蚀阶_车站左侧房间顶部
-        SavedFlea_Coral_24: boolean, // 跳蚤：蚀阶_去往椅子路上
+        SavedFlea_Coral_24: boolean, // 跳蚤：卡拉卡沙川_去往椅子路上
         SavedFlea_Crawl_06: boolean, // 跳蚤：沙虫道_门上方隐藏墙
         SavedFlea_Slab_Cell: boolean, // 跳蚤：罪石监狱_小房间
-        SavedFlea_Slab_06: boolean, // 跳蚤：罪石监狱_车站旁椅子上方
+        SavedFlea_Slab_06: boolean, // 跳蚤：罪石监狱_车站椅子上方
         tamedGiantFlea: boolean, // 跳蚤：忆廊顶部（大跳蚤）
         MetTroupeHunterWild: boolean, // 跳蚤：腐殖渠（龙牙跳蚤，救出可解锁全部跳蚤位置）
         SavedFlea_Shadow_10: boolean, // 跳蚤：腐汁泽隐藏椅子上方跳蚤
