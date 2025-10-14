@@ -1,7 +1,7 @@
 /*让body为A4纸的尺寸*/
 body {
     width: 210mm;
-    height: 297mm;
+    min-height: 297mm;
     margin: 0 auto;
     border: 1px #D3D3D3 solid;
     border-radius: 5px;
@@ -24,6 +24,11 @@ body {
 header {
     display: flex;
     justify-content: space-between;
+}
+
+#myImg {
+    width: 95px;
+    height: 133px;
 }
 
 #myName {
@@ -51,7 +56,6 @@ header {
 hr {
     border: none;
     border-top: 2px solid #ccc;
-
 }
 
 /*绿色的标题*/
@@ -63,28 +67,32 @@ hr {
 }
 
 /*学校信息，独立一行*/
-#school-p {
+.info-p {
     display: flex;
     justify-content: space-between;
     margin: 2px 0;
 }
 
-/*学校信息，一行四个空*/
-#school-p span {
+.info-p span {
     flex: 1;
     font-weight: bolder;
     text-align: center;
     box-sizing: border-box;
 }
 
-/*一行展示多个信息*/
-.two-space-p {
-    display: flex;
-    justify-content: space-between;
-    margin: 4px 0;
+.info-p span:first-child {
+    text-align: left;
+}
+
+.info-p span:last-child {
+    text-align: right;
 }
 
 /*去除链接的下划线*/
-.two-space-p a {
+a {
     text-decoration: none;
+}
+
+ol {
+    margin-top: 4px;
 }
