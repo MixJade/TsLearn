@@ -23,10 +23,11 @@
 
     <!-- 文件内容区域 -->
     <div v-if="showContentModal">
-      <ShowCard type="heart" title="面具碎片" :show="showHeartList"/>
+      <h5>当前文件：{{ selectFileName }}</h5>
+      <ShowCard type="heart" title="面具碎片" :show="showHeartList" :quantity="showHeartNum"/>
       <ShowCard type="metal" title="制造金属" :show="showMetalList"/>
-      <ShowCard type="box" title="忆境纪念盒" :show="showBoxList"/>
-      <ShowCard type="silk" title="丝轴碎片" :show="showSilkList"/>
+      <ShowCard type="box" title="忆境纪念盒" :show="showBoxList" :quantity="showBoxNum"/>
+      <ShowCard type="silk" title="丝轴碎片" :show="showSilkList" :quantity="showSilkNum"/>
       <ShowCard type="heart" title="苔莓" :show="showBerryList"/>
       <ShowCard type="metal" title="跳蚤旅团" :show="showFleaList"/>
     </div>
@@ -48,9 +49,14 @@ const accept = ".json,.dat,.txt"
 
 // 状态管理
 const showContentModal = ref<boolean>(false);
+const selectFileName = ref<string>("");
+// 各收集品数据
 const showBoxList = ref<CollectInf[]>([]);
+const showBoxNum = ref<number>(0);
 const showSilkList = ref<CollectInf[]>([]);
+const showSilkNum = ref<number>(0);
 const showHeartList = ref<CollectInf[]>([]);
+const showHeartNum = ref<number>(0);
 const showMetalList = ref<CollectInf[]>([]);
 const showBerryList = ref<CollectInf[]>([]);
 const showFleaList = ref<CollectInf[]>([]);
@@ -82,6 +88,20 @@ const handleDrop = (e: DragEvent): void => {
   }
 };
 
+// 设置收集品的数据
+const putCollectNum = (fileContent: string): void => {
+  const parseRes = parseJsonData(fileContent);
+  showBoxList.value = parseRes.boxList
+  showBoxNum.value = parseRes.boxNum
+  showSilkList.value = parseRes.silkList
+  showSilkNum.value = parseRes.silkNum
+  showHeartList.value = parseRes.heartList
+  showHeartNum.value = parseRes.heartNum
+  showMetalList.value = parseRes.metalList
+  showBerryList.value = parseRes.berryList
+  showFleaList.value = parseRes.fleaList
+}
+
 // 读取文件内容
 const readFileContent = (file: File | undefined): void => {
   if (file === undefined) {
@@ -92,6 +112,7 @@ const readFileContent = (file: File | undefined): void => {
 
   // 提取文件后缀
   const fileName = file.name;
+  selectFileName.value = fileName;
   const lastDotIndex = fileName.lastIndexOf('.');
   const fileExt = lastDotIndex > -1 ? fileName.slice(lastDotIndex + 1).toLowerCase() : '';
 
@@ -103,13 +124,7 @@ const readFileContent = (file: File | undefined): void => {
       // 确保结果存在且为字符串
       if (typeof e.target?.result === 'string') {
         const fileContent = e.target.result;
-        const parseRes = parseJsonData(fileContent);
-        showBoxList.value = parseRes.boxList
-        showSilkList.value = parseRes.silkList
-        showHeartList.value = parseRes.heartList
-        showMetalList.value = parseRes.metalList
-        showBerryList.value = parseRes.berryList
-        showFleaList.value = parseRes.fleaList
+        putCollectNum(fileContent);
       }
     };
   } else if (fileExt === "dat") {
@@ -123,13 +138,7 @@ const readFileContent = (file: File | undefined): void => {
         const byteArray = new Uint8Array(e.target.result);
         // 传入decode函数（该函数需要接收Uint8Array参数）
         const fileContent = decode(byteArray);
-        const parseRes = parseJsonData(fileContent);
-        showBoxList.value = parseRes.boxList
-        showSilkList.value = parseRes.silkList
-        showHeartList.value = parseRes.heartList
-        showMetalList.value = parseRes.metalList
-        showBerryList.value = parseRes.berryList
-        showFleaList.value = parseRes.fleaList
+        putCollectNum(fileContent);
       }
     };
   }

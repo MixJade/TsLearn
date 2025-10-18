@@ -87,15 +87,28 @@ export interface CollectInf {
 
 interface ParseRes {
     boxList: CollectInf[]
+    boxNum: number
     silkList: CollectInf[]
+    silkNum: number
     heartList: CollectInf[]
+    heartNum: number
     metalList: CollectInf[]
     berryList: CollectInf[]
     fleaList: CollectInf[]
 }
 
 export const parseJsonData = (jsonStr: string): ParseRes => {
-    const parseRes: ParseRes = {boxList: [], heartList: [], metalList: [], silkList: [], berryList: [], fleaList: []}
+    const parseRes: ParseRes = {
+        berryList: [],
+        boxList: [],
+        boxNum: 0,
+        fleaList: [],
+        heartList: [],
+        heartNum: 0,
+        metalList: [],
+        silkList: [],
+        silkNum: 0
+    }
     try {
         // 解析JSON字符串为JavaScript对象
         const data = JSON.parse(jsonStr) as GameData;
@@ -103,6 +116,16 @@ export const parseJsonData = (jsonStr: string): ParseRes => {
         const storyEvents = playerData.StoryEvents
         const serializedList = data.sceneData.persistentBools.serializedList
         const questCompletionData = playerData.QuestCompletionData.savedData
+
+        // 先统计面具、丝轴、盒子的数量
+        for (const se of storyEvents) {
+            if (se.EventType === 0)
+                parseRes.heartNum++;
+            else if (se.EventType === 1)
+                parseRes.silkNum++;
+            else if (se.EventType === 3)
+                parseRes.boxNum++;
+        }
 
         for (const cd of checkDataList) {
             let complete = false;
