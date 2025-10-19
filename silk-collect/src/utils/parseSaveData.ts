@@ -46,6 +46,14 @@ interface GameData {
         SavedFlea_Song_11: boolean, // 跳蚤：圣咏殿隐藏墙跳蚤（下方隐藏墙有风扇）
         SavedFlea_Library_09: boolean, // 跳蚤：圣歌盟地右侧（需从图书馆隐藏墙上去）
         SavedFlea_Library_01: boolean, // 跳蚤：图书馆推箱子
+        Relics: {
+            savedData: [{
+                "Name": string,
+                "Data": {
+                    "IsCollected": boolean
+                }
+            }]
+        },
         QuestCompletionData: {
             savedData: [{
                 Name: string,
@@ -95,6 +103,7 @@ interface ParseRes {
     metalList: CollectInf[]
     berryList: CollectInf[]
     fleaList: CollectInf[]
+    relicList: CollectInf[]
 }
 
 export const parseJsonData = (jsonStr: string): ParseRes => {
@@ -107,7 +116,8 @@ export const parseJsonData = (jsonStr: string): ParseRes => {
         heartNum: 0,
         metalList: [],
         silkList: [],
-        silkNum: 0
+        silkNum: 0,
+        relicList: []
     }
     try {
         // 解析JSON字符串为JavaScript对象
@@ -116,6 +126,7 @@ export const parseJsonData = (jsonStr: string): ParseRes => {
         const storyEvents = playerData.StoryEvents
         const serializedList = data.sceneData.persistentBools.serializedList
         const questCompletionData = playerData.QuestCompletionData.savedData
+        const relics = playerData.Relics.savedData
 
         // 先统计面具、丝轴、盒子的数量
         for (const se of storyEvents) {
@@ -231,6 +242,12 @@ export const parseJsonData = (jsonStr: string): ParseRes => {
                 if (find !== undefined && (find.Data.IsCompleted) && (find.Data.WasEverCompleted)) {
                     complete = true;
                 }
+            } else if (cd.ev === 3) {
+                // 古董
+                const find = relics.find(comp => (comp.Name === cd.ev2))
+                if (find !== undefined && (find.Data.IsCollected)) {
+                    complete = true;
+                }
             }
 
             // 查看是否有获取事件
@@ -274,6 +291,8 @@ export const parseJsonData = (jsonStr: string): ParseRes => {
                 parseRes.berryList.push(collect)
             } else if (cd.type === 6) {
                 parseRes.fleaList.push(collect)
+            } else if (cd.type === 7) {
+                parseRes.relicList.push(collect)
             }
         }
     } catch (error) {

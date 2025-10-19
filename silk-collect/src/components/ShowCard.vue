@@ -25,7 +25,7 @@ defineProps<{
 }>()
 
 // 点击展开按钮
-const btnExpand = ref<boolean>(false);
+const btnExpand = ref<boolean>(true);
 
 // 计算完成数量
 const completeStr = (collectInfList: CollectInf[], enNum: number | undefined): string => {

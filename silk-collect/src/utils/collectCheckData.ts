@@ -1,16 +1,15 @@
 // 2. 用于校验的数据
 interface CheckData {
     cId: number;
-    type: number; // 0面具,1丝轴,3盒子,4金属,5苔梅,6跳蚤
+    type: number; // 0面具,1丝轴,3盒子,4金属,5苔梅,6跳蚤,7古董
     scene: string; // 场景名称
-    ev: number; // 证据来源 0场景 1购买 2任务
+    ev: number; // 证据来源 0场景 1购买 2任务 3古董
     ev1: string; // 用以确认的证据
     ev2: string; // 用以确认的证据
     axis: string; // 场景坐标(没有就写任务或商店)
 }
 
-export const checkDataList: CheckData[] = [
-    {cId: 1, type: 4, scene: "骸骨洞窟", ev: 0, ev1: "Bone_07", ev2: "Collectable Item Pickup - Tool Metal", axis: "Bone_07(37,5)"},
+export const checkDataList: CheckData[] = [{cId: 1, type: 4, scene: "骸骨洞窟", ev: 0, ev1: "Bone_07", ev2: "Collectable Item Pickup - Tool Metal", axis: "Bone_07(37,5)"},
     {cId: 2, type: 4, scene: "深坞右侧宝箱", ev: 0, ev1: "Dock_03", ev2: "Collectable Item Pickup", axis: "Dock_03(11,82)"},
     {cId: 3, type: 3, scene: "猎人小径野兽教堂旁", ev: 0, ev1: "Ant_20", ev2: "Collectable Item Pickup", axis: "Ant_20(145,12)"},
     {cId: 4, type: 0, scene: "远野炸地板", ev: 0, ev1: "Bone_East_20", ev2: "Heart Piece", axis: "Bone_East_20(92,17)"},
@@ -113,4 +112,25 @@ export const checkDataList: CheckData[] = [
     {cId: 101, type: 6, scene: '圣咏殿隐藏墙跳蚤（下方隐藏墙有风扇）', ev: 1, ev1: '_', ev2: '41', axis: 'Song_11(51,165)'},
     {cId: 102, type: 6, scene: '圣歌盟地右侧（需从图书馆隐藏墙上去）', ev: 1, ev1: '_', ev2: '42', axis: 'Library_09(126,101)'},
     {cId: 103, type: 6, scene: '图书馆推箱子', ev: 1, ev1: '_', ev2: '43', axis: 'Library_01(49,87)'},
+    {cId: 104, type: 7, scene: '骨卷轴（远野织女右侧通道）（90念珠）', ev: 3, ev1: '_', ev2: 'Bone Record Bone_East_14', axis: 'Bone_East_14(43,42)'},
+    {cId: 105, type: 7, scene: '骨卷轴（中途酒馆右侧水池）', ev: 3, ev1: '_', ev2: 'Bone Record Greymoor_flooded_corridor', axis: 'Greymoor_21(73,10)'},
+    {cId: 106, type: 7, scene: '骨卷轴（工厂拿地图房间）', ev: 3, ev1: '_', ev2: 'Bone Record Understore_Map_Room', axis: 'Under_16(72,17)'},
+    {cId: 107, type: 7, scene: '骨卷轴（火灵竹林最顶端）', ev: 3, ev1: '_', ev2: 'Bone Record Wisp Top', axis: 'Wisp_08(11,116)'},
+    {cId: 108, type: 7, scene: '织者雕像（骸底镇上空）（150念珠）', ev: 3, ev1: '_', ev2: 'Weaver Totem Bonetown_upper_room', axis: 'Bonetown(151,70)'},
+    {cId: 109, type: 7, scene: '织者雕像（甲木林下方，被寄生后可拿）', ev: 3, ev1: '_', ev2: 'Weaver Totem Witch', axis: 'Shellwood_25(281,28)'},
+    {cId: 110, type: 7, scene: '织者雕像（罪石监狱底部）', ev: 3, ev1: '_', ev2: 'Weaver Totem Slab_Bottom', axis: 'Slab_12(99,29)'},
+    {cId: 111, type: 7, scene: '圣咏戒律（骸底镇上方悬崖）（180念珠）', ev: 3, ev1: '_', ev2: 'Seal Chit Aspid_01', axis: 'Aspid_01(63,67)'},
+    {cId: 112, type: 7, scene: '圣咏戒律（白愈厅左侧）', ev: 3, ev1: '_', ev2: 'Seal Chit Ward Corpse', axis: 'Ward_02b(54,4)'},
+    {cId: 113, type: 7, scene: '圣咏戒律（圣歌盟地再寻商贾后购买）', ev: 3, ev1: '_', ev2: 'Seal Chit City Merchant', axis: '_'},
+    {cId: 114, type: 7, scene: '圣咏戒律（第三幕白愈厅上冲）', ev: 3, ev1: '_', ev2: 'Seal Chit Silk Siphon', axis: 'Ward_05(133,6)'},
+    {cId: 115, type: 7, scene: '符文竖琴（出生点织巢右上）（210念珠）', ev: 3, ev1: '_', ev2: 'Weaver Record Weave_08', axis: 'Weave_08(42,55)'},
+    {cId: 116, type: 7, scene: '符文竖琴（远野织巢隐藏）', ev: 3, ev1: '_', ev2: 'Weaver Record Sprint_Challenge', axis: 'Bone_East_Weavehome(59,65)'},
+    {cId: 117, type: 7, scene: '符文竖琴（第三幕高庭，指挥家身旁）', ev: 3, ev1: '_', ev2: 'Weaver Record Conductor', axis: 'Hang_12(18,7)'},
+    {cId: 118, type: 7, scene: '神秘蛋（第三幕深渊）（600念珠）', ev: 3, ev1: '_', ev2: 'Ancient Egg Abyss Middle', axis: 'Abyss_04(99,51)'},
+    {cId: 119, type: 7, scene: '圣咏音筒（图书馆现任管理员房间）（200念珠）', ev: 3, ev1: '_', ev2: 'Psalm Cylinder Librarian', axis: 'Library_08(92,32)'},
+    {cId: 120, type: 7, scene: '圣咏音筒（白愈厅打完boss向下）', ev: 3, ev1: '_', ev2: 'Psalm Cylinder Ward', axis: 'Under_08(70,48)'},
+    {cId: 121, type: 7, scene: '圣咏音筒（高庭中部澡堂）', ev: 3, ev1: '_', ev2: 'Psalm Cylinder Hang', axis: 'Hang_10(73,17)'},
+    {cId: 122, type: 7, scene: '圣咏音筒（蚀阶小偷购买）', ev: 3, ev1: '_', ev2: 'Psalm Cylinder Grindle', axis: 'Coral_42(27,22)'},
+    {cId: 123, type: 7, scene: '圣咏音筒（图书馆右上隐藏通道）', ev: 3, ev1: '_', ev2: 'Psalm Cylinder Library Roof', axis: 'Library_09(26,13)'},
+    {cId: 124, type: 7, scene: '圣歌音筒（图书馆底部，主线必拿）（320念珠）', ev: 3, ev1: '_', ev2: 'Librarian Melody Cylinder', axis: 'Library_10(18,5)'},
 ]

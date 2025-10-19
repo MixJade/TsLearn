@@ -30,10 +30,38 @@
       <ShowCard type="silk" title="丝轴碎片" :show="showSilkList" :quantity="showSilkNum"/>
       <ShowCard type="heart" title="苔莓" :show="showBerryList"/>
       <ShowCard type="metal" title="跳蚤旅团" :show="showFleaList"/>
+      <ShowCard type="box" title="古董" :show="showRelicList"/>
     </div>
     <div v-else>
-      丝之歌存档路径:
-      <p class="no-wrap">%userprofile%/AppData/LocalLow/Team Cherry/Hollow Knight Silksong/{一串数字}/user1.dat</p>
+      <h4>丝之歌存档路径:</h4>
+      <ul>
+        <li>Steam（Windows）
+          <p class="code">%userprofile%/AppData/LocalLow/Team Cherry/Hollow Knight Silksong/{一串数字}/user1.dat</p>
+        </li>
+      </ul>
+      <ol class="intro">
+        <li><b>【解析异常】说明：</b>
+          <ul>
+            <li>如果出现解析异常，先确认是否拖错文件</li>
+            <li>需拿到第一个丝之心后（开局解救钟道兽）才能进行解析</li>
+          </ul>
+        </li>
+        <li><b>【疑似bug】说明：</b>
+          <ul>
+            <li>意为：可能是非正常流程获取（比如在小偷处购买），也可能是卡bug给永久卡没了</li>
+            <li>如果面具或丝轴的解析中出现【疑似bug】，请先计算实际拥有数量，确认是否真的丢失</li>
+          </ul>
+        </li>
+        <li><b>【完成度】说明：</b>
+          <ul>
+            <li>解析项与完成度直接相关的只有面具碎片（占5%）、丝轴碎片（占9%）</li>
+            <li>其余完成度相关物品，可直接使用小黑盒存档解析</li>
+            <li>
+              本网站只查游戏中不能直接定位的物品（如面具、丝轴、纪念盒、金属、苔莓）,<br>或定位比较麻烦的（如跳蚤需花费念珠，古董需回钟心镇确认）
+            </li>
+          </ul>
+        </li>
+      </ol>
     </div>
   </div>
 </template>
@@ -60,6 +88,7 @@ const showHeartNum = ref<number>(0);
 const showMetalList = ref<CollectInf[]>([]);
 const showBerryList = ref<CollectInf[]>([]);
 const showFleaList = ref<CollectInf[]>([]);
+const showRelicList = ref<CollectInf[]>([]);
 
 // 触发文件选择对话框
 const triggerFileSelect = (): void => {
@@ -100,6 +129,7 @@ const putCollectNum = (fileContent: string): void => {
   showMetalList.value = parseRes.metalList
   showBerryList.value = parseRes.berryList
   showFleaList.value = parseRes.fleaList
+  showRelicList.value = parseRes.relicList
 }
 
 // 读取文件内容
@@ -177,6 +207,19 @@ const readFileContent = (file: File | undefined): void => {
   color: #666
   font-size: 0.9rem
 
-.no-wrap
+.code
+  // 存档地址样式
   white-space: nowrap
+  background-color: #e9e9eb
+  padding: 8px 4px
+
+.intro
+  // 说明书
+  font-size: small
+  border-top: 2px solid #ccc
+  padding: 4px
+  margin-top: 36px
+
+  b
+    color: #dc3545
 </style>
