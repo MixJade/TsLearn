@@ -9,7 +9,8 @@ interface CheckData {
     axis: string; // 场景坐标(没有就写任务或商店)
 }
 
-export const checkDataList: CheckData[] = [{cId: 1, type: 4, scene: "骸骨洞窟", ev: 0, ev1: "Bone_07", ev2: "Collectable Item Pickup - Tool Metal", axis: "Bone_07(37,5)"},
+export const checkDataList: CheckData[] = [
+    {cId: 1, type: 4, scene: "骸骨洞窟", ev: 0, ev1: "Bone_07", ev2: "Collectable Item Pickup - Tool Metal", axis: "Bone_07(37,5)"},
     {cId: 2, type: 4, scene: "深坞右侧宝箱", ev: 0, ev1: "Dock_03", ev2: "Collectable Item Pickup", axis: "Dock_03(11,82)"},
     {cId: 3, type: 3, scene: "猎人小径野兽教堂旁", ev: 0, ev1: "Ant_20", ev2: "Collectable Item Pickup", axis: "Ant_20(145,12)"},
     {cId: 4, type: 0, scene: "远野炸地板", ev: 0, ev1: "Bone_East_20", ev2: "Heart Piece", axis: "Bone_East_20(92,17)"},
