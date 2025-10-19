@@ -66,7 +66,7 @@ interface GameData {
                 }
             }]
         },
-        StoryEvents: [{
+        StoryEvents?: [{
             EventType: number,
             SceneName: string,
             PlayTime: number
@@ -129,13 +129,15 @@ export const parseJsonData = (jsonStr: string): ParseRes => {
         const relics = playerData.Relics.savedData
 
         // 先统计面具、丝轴、盒子的数量
-        for (const se of storyEvents) {
-            if (se.EventType === 0)
-                parseRes.heartNum++;
-            else if (se.EventType === 1)
-                parseRes.silkNum++;
-            else if (se.EventType === 3)
-                parseRes.boxNum++;
+        if (storyEvents !== undefined) {
+            for (const se of storyEvents) {
+                if (se.EventType === 0)
+                    parseRes.heartNum++;
+                else if (se.EventType === 1)
+                    parseRes.silkNum++;
+                else if (se.EventType === 3)
+                    parseRes.boxNum++;
+            }
         }
 
         for (const cd of checkDataList) {
