@@ -275,9 +275,12 @@ export const parseJsonData = (jsonStr: string): ParseRes => {
             // 根据类型放入不同列表
             const collect: CollectInf = {cId: cd.cId, scene: cd.scene, axis: cd.axis, resStr: checkRes}
             if (checkRes === "疑似BUG") {
-                // 进第三幕后有变化的碎片(可能导致疑似Bug出现)
-                if ([5, 8, 25].includes(cd.cId)) {
+                if ([5, 8].includes(cd.cId)) {
+                    // 进第三幕后有变化的碎片(可能导致疑似Bug出现)
                     collect.scene += "——可能已在小偷处购买"
+                } else if (cd.cId === 25) {
+                    // 第二幕在图书馆放苍白油的房间遇到商人
+                    collect.scene += "——可能已在其它地方购买"
                 }
             }
 
