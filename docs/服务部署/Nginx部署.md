@@ -7,7 +7,7 @@
 
 ## 前提：安装 Nginx
 1. 下载 Nginx for Windows 
-   官网地址：[nginx.org/en/download.html](https://nginx.org/en/download.html)，选择稳定版（Stable version）的 `nginx-x.x.x.zip`（比如 `nginx-1.24.0.zip`）。  
+   官网地址：[nginx.org/en/download.html](https://nginx.org/en/download.html)，选择稳定版（Stable version）的 `nginx-x.x.x.zip`（比如 `nginx-1.28.0.zip`）
 2. 解压到本地目录 
    比如解压到 `D:\nginx`（路径尽量不要有中文或空格，避免冲突）。
    解压后目录结构大致如下：  
@@ -15,7 +15,7 @@
    ```
    nginx/
    ├─ conf/         # 配置文件目录（核心是 nginx.conf）
-   ├─ html/         # 默认静态文件目录（可修改）
+   ├─ html/         # 样例静态文件目录
    ├─ logs/         # 日志文件
    └─ nginx.exe     # 启动程序
    ```
@@ -41,8 +41,7 @@
        location / {
            root   D:/rainincat;  # 你的网站根目录（注意用 / 分隔路径）
            index  index.html index.htm;  # 默认首页文件
-    }
-   
+    	}
        # 其他默认配置保持不变（如错误页面等）
    }
    ```
