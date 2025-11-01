@@ -88,7 +88,7 @@ export const checkDataList: CheckData[] = [
     {cId: 76, type: 6, scene: '深坞右下方隐藏房（需飞针）', ev: 1, ev1: '_', ev2: '16', axis: 'Dock_03d(102,69)'},
     {cId: 77, type: 6, scene: '远野左侧笼子', ev: 1, ev1: '_', ev2: '17', axis: 'Bone_East_17b(85,30)'},
     {cId: 78, type: 6, scene: '朝圣者憩所右侧门内(需从远野车站隐藏通道进入)', ev: 1, ev1: '_', ev2: '18', axis: 'Bone_East_10_Church(182,24)'},
-    {cId: 79, type: 6, scene: '灰沼_腐囊虫庭附近', ev: 1, ev1: '_', ev2: '19', axis: 'Greymoor_15b(179,54)'},
+    {cId: 79, type: 6, scene: '灰沼_鸦虫湖附近', ev: 1, ev1: '_', ev2: '19', axis: 'Greymoor_15b(179,54)'},
     {cId: 80, type: 6, scene: '灰沼塔顶', ev: 1, ev1: '_', ev2: '20', axis: 'Greymoor_06(26,140)'},
     {cId: 81, type: 6, scene: '灰沼_酒馆上方隐藏【色跳蚤】', ev: 1, ev1: '_', ev2: '21', axis: 'Greymoor_24(73,13)'},
     {cId: 82, type: 6, scene: '壳木林拿爬墙路上', ev: 1, ev1: '_', ev2: '22', axis: 'Shellwood_03(26,48)'},
