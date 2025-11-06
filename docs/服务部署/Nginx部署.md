@@ -75,6 +75,7 @@
 | 强行停止 | `.\nginx.exe -s stop` | 注意加`.\`前缀 |
 | 优雅停止 | `.\nginx.exe -s quit` | 处理完当前请求再停 |
 | 重新加载配置 | `.\nginx.exe -s reload` | 修改 `nginx.conf` 后无需重启，执行此命令 |
+| 指定配置文件 | `.\nginx -c /your/path/nginx-dev.conf` | 部分前端项目有定制化nginx配置 |
 | 查看版本 | `.\nginx.exe -v` |      |
 
 
