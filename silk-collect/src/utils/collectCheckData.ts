@@ -39,7 +39,7 @@ export const checkDataList: CheckData[] = [
     {cId: 27, type: 4, scene: '火灵竹林_上方小道旁', ev: 0, ev1: "Wisp_05", ev2: "Collectable Item Pickup - Tool Metal", axis: 'Wisp_05(42,58)'},
     {cId: 28, type: 1, scene: '忆廊_左侧翠庭生态区', ev: 0, ev1: "Arborium_09", ev2: "Silk Spool", axis: 'Arborium_09(19,32)'},
     {cId: 29, type: 3, scene: '忆廊_中部壳木林生态区', ev: 0, ev1: "Arborium_05", ev2: "Collectable Item Pickup", axis: 'Arborium_05(5,9)'},
-    {cId: 30, type: 4, scene: '腐殖渠', ev: 0, ev1: "Aqueduct_05", ev2: "Collectable Item Pickup - Tool Metal", axis: 'Aqueduct_05(325,17)'},
+    {cId: 30, type: 4, scene: '腐殖渠_蚤托邦右侧', ev: 0, ev1: "Aqueduct_05", ev2: "Collectable Item Pickup - Tool Metal", axis: 'Aqueduct_05(325,17)'},
     {cId: 31, type: 0, scene: '远野岩浆挑战', ev: 0, ev1: "Bone_East_LavaChallenge", ev2: "Heart Piece (1)", axis: 'Bone_East_LavaChallenge(21,278)'},
     {cId: 32, type: 3, scene: '腐汁泽车站左侧', ev: 0, ev1: "Shadow_20", ev2: "Collectable Item Pickup", axis: 'Shadow_20(18,25)'},
     {cId: 33, type: 3, scene: '腐汁泽打沙包', ev: 0, ev1: "Shadow_27", ev2: "Sack Corpse Pickup", axis: 'Shadow_27(192,10)'},
