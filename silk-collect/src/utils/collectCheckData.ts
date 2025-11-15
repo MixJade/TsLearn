@@ -10,7 +10,7 @@ interface CheckData {
 }
 
 export const checkDataList: CheckData[] = [
-    {cId: 1, type: 4, scene: "骸骨洞窟", ev: 0, ev1: "Bone_07", ev2: "Collectable Item Pickup - Tool Metal", axis: "Bone_07(37,5)"},
+    {cId: 1, type: 4, scene: "髓骨洞窟", ev: 0, ev1: "Bone_07", ev2: "Collectable Item Pickup - Tool Metal", axis: "Bone_07(37,5)"},
     {cId: 2, type: 4, scene: "深坞右侧宝箱", ev: 0, ev1: "Dock_03", ev2: "Collectable Item Pickup", axis: "Dock_03(11,82)"},
     {cId: 3, type: 3, scene: "猎人小径野兽教堂旁", ev: 0, ev1: "Ant_20", ev2: "Collectable Item Pickup", axis: "Ant_20(145,12)"},
     {cId: 4, type: 0, scene: "远野炸地板", ev: 0, ev1: "Bone_East_20", ev2: "Heart Piece", axis: "Bone_East_20(92,17)"},
@@ -19,7 +19,7 @@ export const checkDataList: CheckData[] = [
     {cId: 7, type: 0, scene: "沙虫道_简易钥匙门前（底部隐藏墙）", ev: 0, ev1: "Crawl_02", ev2: "Heart Piece", axis: "Crawl_02(22,5)"},
     {cId: 8, type: 3, scene: "朝圣者憩所购买", ev: 1, ev1: "Bone_East_10_Room", ev2: "3", axis: "Bone_East_10_Room(62,14)"},
     {cId: 9, type: 0, scene: "壳木林（下劈花朵连跳）", ev: 0, ev1: "Shellwood_14", ev2: "Heart Piece", axis: "Shellwood_14(128,12)"},
-    {cId: 10, type: 3, scene: "骸骨洞窟(需爬墙)", ev: 0, ev1: "Bone_18", ev2: "Collectable Item Pickup", axis: "Bone_18(36,22)"},
+    {cId: 10, type: 3, scene: "髓骨洞窟(需爬墙)", ev: 0, ev1: "Bone_18", ev2: "Collectable Item Pickup", axis: "Bone_18(36,22)"},
     {cId: 11, type: 0, scene: "洞窟与深坞之间", ev: 0, ev1: "Dock_08", ev2: "Heart Piece", axis: "Dock_08(54,20)"},
     {cId: 12, type: 3, scene: "骸底镇暴烈燧甲虫任务", ev: 2, ev1: "Bonetown", ev2: "Rock Rollers", axis: "任务提交"},
     {cId: 13, type: 1, scene: "阿特拉织巢", ev: 0, ev1: "Weave_11", ev2: "Silk Spool", axis: "Weave_11(15,24)"},
@@ -77,9 +77,9 @@ export const checkDataList: CheckData[] = [
     {cId: 65, type: 0, scene: '第三幕暗蚀之心任务', ev: 2, ev1: "Belltown", ev2: "Destroy Thread Cores", axis: '任务提交'},
     {cId: 66, type: 0, scene: '第三幕隐秘猎手任务', ev: 2, ev1: "Belltown", ev2: "Ant Trapper", axis: '任务提交'},
     {cId: 67, type: 5, scene: '忆廊_椅子旁', ev: 0, ev1: "Arborium_04", ev2: "moss_berry_fruit", axis: 'Arborium_04(72,9)'},
-    {cId: 68, type: 5, scene: '苔穴出生点左上', ev: 0, ev1: "Tut_02", ev2: "moss_berry_fruit", axis: 'Tut_02(140,50)'},
+    {cId: 68, type: 5, scene: '苔藓洞穴出生点左上', ev: 0, ev1: "Tut_02", ev2: "moss_berry_fruit", axis: 'Tut_02(140,50)'},
     {cId: 69, type: 5, scene: '阿特拉织巢左侧', ev: 0, ev1: "Weave_03", ev2: "moss_berry_fruit", axis: 'Weave_03(165,28)'},
-    {cId: 70, type: 5, scene: '苔穴出生点右上', ev: 0, ev1: "Tut_01b", ev2: "moss_berry_fruit", axis: 'Tut_01b(74,89)'},
+    {cId: 70, type: 5, scene: '苔藓洞穴出生点右上', ev: 0, ev1: "Tut_01b", ev2: "moss_berry_fruit", axis: 'Tut_01b(74,89)'},
     {cId: 71, type: 5, scene: '骸底镇上空_蚊子', ev: 1, ev1: 'Bonetown', ev2: '11', axis: 'Bonetown(286,55)'},
     {cId: 72, type: 5, scene: '德鲁伊下方_蚊子', ev: 1, ev1: 'Bone_05b', ev2: '12', axis: 'Bone_05b(61,25)'},
     {cId: 73, type: 5, scene: '漫游者教堂上空_蚊子', ev: 1, ev1: 'Bonegrave', ev2: '13', axis: 'Bonegrave(253,39)'},
@@ -93,7 +93,7 @@ export const checkDataList: CheckData[] = [
     {cId: 81, type: 6, scene: '灰沼_酒馆上方隐藏【色跳蚤】', ev: 1, ev1: '_', ev2: '21', axis: 'Greymoor_24(73,13)'},
     {cId: 82, type: 6, scene: '壳木林拿爬墙路上', ev: 1, ev1: '_', ev2: '22', axis: 'Shellwood_03(26,48)'},
     {cId: 83, type: 6, scene: '钟心镇上方钟道顶部', ev: 1, ev1: '_', ev2: '23', axis: 'Belltown_04(11,89)'},
-    {cId: 84, type: 6, scene: '骸骨洞窟左上', ev: 1, ev1: '_', ev2: '24', axis: 'Bone_06(101,24)'},
+    {cId: 84, type: 6, scene: '髓骨洞窟左上', ev: 1, ev1: '_', ev2: '24', axis: 'Bone_06(101,24)'},
     {cId: 85, type: 6, scene: '猎人小径左侧（下劈红豆上去）', ev: 1, ev1: '_', ev2: '25', axis: 'Ant_03(42,70)'},
     {cId: 86, type: 6, scene: '罪途左侧笼子', ev: 1, ev1: '_', ev2: '26', axis: 'Dust_12(30,4)'},
     {cId: 87, type: 6, scene: '雪山冻蚤', ev: 1, ev1: '_', ev2: '27', axis: 'Peak_05c(248,113)'},
