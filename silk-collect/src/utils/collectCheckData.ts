@@ -59,7 +59,7 @@ export const checkDataList: CheckData[] = [
     {cId: 47, type: 1, scene: '圣歌盟地买丝轴（需再寻商贾）', ev: 1, ev1: "Song_Enclave", ev2: "10", axis: "商店购买"},
     {cId: 48, type: 0, scene: '监狱右上', ev: 0, ev1: "Slab_17", ev2: "Heart Piece", axis: 'Slab_17(19,68)'},
     {cId: 49, type: 1, scene: '监狱左侧', ev: 0, ev1: "Peak_01", ev2: "Silk Spool", axis: 'Peak_01(86,192)'},
-    {cId: 50, type: 0, scene: '雪山柱子内', ev: 0, ev1: "Peak_04c", ev2: "Heart Piece", axis: 'Peak_04c(68,8)'},
+    {cId: 50, type: 0, scene: '雪山左侧柱子内', ev: 0, ev1: "Peak_04c", ev2: "Heart Piece", axis: 'Peak_04c(68,8)'},
     {cId: 51, type: 0, scene: '蚀阶（冲刺跳+飞针+二段跳）', ev: 0, ev1: "Coral_19b", ev2: "Heart Piece", axis: 'Coral_19b(75,108)'},
     {cId: 52, type: 1, scene: '深坞（熔岩地板房）', ev: 0, ev1: "Bone_East_13", ev2: "Silk Spool", axis: 'Bone_East_13(41,24)'},
     {cId: 53, type: 1, scene: '德鲁伊下方', ev: 0, ev1: "Bone_11b", ev2: "Silk Spool", axis: 'Bone_11b(31,5)'},
