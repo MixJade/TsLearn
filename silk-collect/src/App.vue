@@ -124,6 +124,9 @@ const handleDrop = (e: DragEvent): void => {
 
 // 设置收集品的数据
 const putCollectNum = (fileContent: string): void => {
+  // 展示列表
+  showContentModal.value = true;
+  // 分析存档数据
   const parseRes = parseJsonData(fileContent);
   showBoxList.value = parseRes.boxList
   showBoxNum.value = parseRes.boxNum
@@ -142,8 +145,6 @@ const readFileContent = (file: File | undefined): void => {
   if (file === undefined) {
     return;
   }
-  // 重置状态
-  showContentModal.value = true;
 
   // 提取文件后缀
   const fileName = file.name;
@@ -176,6 +177,8 @@ const readFileContent = (file: File | undefined): void => {
         putCollectNum(fileContent);
       }
     };
+  } else {
+    alert("文件读取失败：后缀只能是json、dat、txt")
   }
 };
 </script>
