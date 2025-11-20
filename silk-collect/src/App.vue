@@ -148,13 +148,13 @@ const readFileContent = (file: File | undefined): void => {
 
   // 提取文件后缀
   const fileName = file.name;
-  selectFileName.value = fileName;
   const lastDotIndex = fileName.lastIndexOf('.');
   const fileExt = lastDotIndex > -1 ? fileName.slice(lastDotIndex + 1).toLowerCase() : '';
 
   const reader = new FileReader();
   if (fileExt === "txt" || fileExt === "json") {
     reader.readAsText(file);
+    selectFileName.value = fileName; // 展示文件名
     // 读取成功
     reader.onload = (e: ProgressEvent<FileReader>): void => {
       // 确保结果存在且为字符串
@@ -166,6 +166,7 @@ const readFileContent = (file: File | undefined): void => {
   } else if (fileExt === "dat") {
     // 使用readAsArrayBuffer读取文件为二进制数据
     reader.readAsArrayBuffer(file);
+    selectFileName.value = fileName; // 展示文件名
     // 读取成功
     reader.onload = (e: ProgressEvent<FileReader>): void => {
       // 确保结果存在且为ArrayBuffer
@@ -178,7 +179,7 @@ const readFileContent = (file: File | undefined): void => {
       }
     };
   } else {
-    alert("文件读取失败：后缀只能是json、dat、txt")
+    alert(`【${fileName}】读取失败：后缀只能是json、dat、txt`)
   }
 };
 </script>
