@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>收藏表格</title>
+    <link href="tableFav.min.css" rel="stylesheet">
+    <link href='icoLogo/webPage.png' rel="icon" type="image/png"/>
+</head>
+<body>
+<nav id="headNav">
+    <button type="button" onclick="cikNav(0)" class="selectNav">初始教程</button>
+    <button type="button" onclick="cikNav(1)">补充知识</button>
+</nav>
+<div id="navHr"></div>
+<div class="tableDiv" style="display: block">
+    <table>
+        <caption>参考网站</caption>
+        <tbody>
+        <tr>
+            <td>
+                <div title="一切根基">
+                    <img src="icoLogo/vue.svg" alt="ico">
+                    <a href="https://cn.vuejs.org/guide/quick-start.html">Vue上手</a>
+                    ...
+                    <button type="button" onclick="geCopy('测试复制')">复密</button>
+                    <span class="btnDot"></span>
+                </div>
+            </td>
+            <td>
+                <div title="项目组件库">
+                    <img src="icoLogo/element-plus.svg" alt="ico">
+                    <a href="https://element-plus.org/zh-CN/">Element-Plus</a>
+                    ...
+                </div>
+            </td>
+            <td>
+                <div title="美化图标">
+                    <img src="icoLogo/element-plus.svg" alt="ico">
+                    <a href="https://element-plus.org/zh-CN/component/icon.html">Element的Icon</a>
+                    ...
+                </div>
+            </td>
+            <td class="emptyTd">
+                <div></div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <table>
+        <caption>样式参考</caption>
+        <tbody>
+        <tr>
+            <td>
+                <div title="但不建议看这个">
+                    <img src="icoLogo/sass.png" alt="ico">
+                    <a href="https://www.sass.hk/docs/">Sass官网教程</a>
+                    ...
+                </div>
+            </td>
+            <td class="emptyTd">
+                <div></div>
+            </td>
+            <td class="emptyTd">
+                <div></div>
+            </td>
+            <td class="emptyTd">
+                <div></div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <footer>2024-6-11 16:32</footer>
+</div>
+<div class="tableDiv" style="display: none">
+    <table>
+        <caption>前端知识</caption>
+        <tbody>
+        <tr>
+            <td>
+                <div title="">
+                    <img src="icoLogo/csdn.png" alt="ico">
+                    <a href="https://blog.csdn.net/qq_42231156/article/details/124506627">计算属性传参</a>
+
+                </div>
+            </td>
+            <td>
+                <div title="">
+                    <img src="icoLogo/csdn.png" alt="ico">
+                    <a href="https://blog.csdn.net/GraySakura/article/details/104821218">div换行设置</a>
+
+                </div>
+            </td>
+            <td>
+                <div title="">
+                    <img src="icoLogo/juejin.png" alt="ico">
+                    <a href="https://juejin.cn/post/7074448287352225823">Vue3关于路由动画的注意事项</a>
+
+                </div>
+            </td>
+            <td>
+                <div title="包括flex翻转，用做聊天页面">
+                    <img src="icoLogo/juejin.png" alt="ico">
+                    <a href="https://juejin.cn/post/7137460519497105439">Vue3关于滚动条的细节</a>
+                    ...
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div title="">
+                    <img src="icoLogo/juejin.png" alt="ico">
+                    <a href="https://juejin.cn/post/7132656370901336101">Vue3的h函数</a>
+
+                </div>
+            </td>
+            <td class="emptyTd">
+                <div></div>
+            </td>
+            <td class="emptyTd">
+                <div></div>
+            </td>
+            <td class="emptyTd">
+                <div></div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <footer>2024-6-11 17:52</footer>
+</div>
+</body>
+</html>
+<script src="../../showTs/tableFav2.js"></script>
