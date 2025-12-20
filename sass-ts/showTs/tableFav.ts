@@ -272,3 +272,34 @@ const getCopy = (e: HTMLElement) => {
         )
     }
 }
+
+// // 可以解除下方注释，来进行配置迁移
+//
+// // 输出代码配置
+// myData.forEach(i => {
+//     console.log(`// 一级菜单：${i.nav}
+//         lv1DirList.add(new Lv1Dir("${i.nav}", "${i.updateTime}", new Lv2Dir[]{`)
+//     i.group.forEach(j => {
+//         console.log(`new Lv2Dir("${j.title}", new FavUrl[]{`)
+//         j.ul.forEach(k => {
+//             let pwd = k.pwd;
+//             if (pwd === undefined) pwd = ""
+//             console.log(`new FavUrl("${k.name}", "${k.href}", IcoEnum.${k.img.slice(0, -4).replace("-", "")}, "${k.remark}", "${pwd}"),`)
+//         })
+//         console.log(`}),`)
+//     })
+//     console.log(`}));`)
+// })
+//
+// // 输出图片枚举
+// const imgSet = new Set();
+// myData.forEach(i => {
+//     i.group.forEach(j => {
+//         j.ul.forEach(k => {
+//             imgSet.add(k.img)
+//         })
+//     })
+// })
+// imgSet.forEach(i => {
+//     console.log(`${i.slice(0, -4).replace("-", "")}("${i}"),`)
+// })
