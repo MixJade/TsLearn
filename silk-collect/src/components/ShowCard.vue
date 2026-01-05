@@ -2,7 +2,9 @@
   <div :class="type" class="show-card">
     <header>
       <h3>{{ title }}（{{ completeStr(show, quantity) }}）</h3>
-      <ExpandBtn :expend="btnExpand" @click="btnExpand=!btnExpand"/>
+      <ExpandBtn :expend="btnExpand"
+                 :color="{box: '#909399', silk: '#409eff', heart: '#67c23a', metal: '#e6a23c'}[type]"
+                 @click="btnExpand=!btnExpand"/>
     </header>
     <ol v-if="btnExpand">
       <li v-for="td in show" :key="td.cId">
