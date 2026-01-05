@@ -67,7 +67,6 @@ const completeStr = (collectInfList: CollectInf[], enNum: number | undefined): s
     justify-content: space-between
     align-items: center
     margin: 0
-    border-bottom: 1px solid #ccc
 
 // 设置各类型的卡片颜色
 @mixin box-color($color1: #909399,$color2: #f4f4f5)
@@ -75,7 +74,8 @@ const completeStr = (collectInfList: CollectInf[], enNum: number | undefined): s
   background-color: $color2
 
   header
-    border-color: $color1
+    // 水平偏移0、垂直偏移1px、模糊0、扩散0，模拟下边框
+    box-shadow: 0 1px 0 0 $color1
 
 .box
   @include box-color()
