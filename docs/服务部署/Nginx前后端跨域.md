@@ -22,7 +22,7 @@ http {
 
     # Nginx服务器配置
     server {
-        # 监听端口（可以与前端服务的端口一样，但建议另起一个）
+        # 监听端口（与前后端的端口区分开）
         listen 23802;
         # 服务器域名（本地开发可填 localhost 或 127.0.0.1）
         server_name localhost;
@@ -55,7 +55,7 @@ http {
             return 204;
         }
 
-        # ******** 核心3（可选）：反向代理前端服务********
+        # ******** 核心3：反向代理前端服务********
         location /demo-ui/ {
             proxy_pass http://localhost:8081/demo-ui/;
         }
