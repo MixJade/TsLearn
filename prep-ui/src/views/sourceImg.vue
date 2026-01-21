@@ -212,7 +212,7 @@ const openUpdForm = (id: number) => {
 const closeDialog2 = () => myShow2.value?.closeMe();
 
 const handleOcrImg = (): void => {
-  if (sourceImg2.ocrResult.length > 6) {
+  if (sourceImg2.ocrResult != null && sourceImg2.ocrResult.length > 6) {
     sureDelModal.value?.confirmDel("识别后现有结果将丢失").then((resp: boolean) => {
       if (resp) {
         ocrImg()
