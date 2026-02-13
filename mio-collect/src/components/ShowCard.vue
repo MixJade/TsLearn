@@ -1,0 +1,83 @@
+<template>
+  <div :class="type" class="show-card">
+    <header>
+      <h3>{{ title }}（{{ completeStr(show) }}）</h3>
+      <ExpandBtn :expend="btnExpand"
+                 :color="{box: '#909399', silk: '#409eff', heart: '#67c23a', metal: '#e6a23c'}[type]"
+                 @click="btnExpand=!btnExpand"/>
+    </header>
+    <ol v-if="btnExpand">
+      <li v-for="td in show" :key="td.cId">
+        <span :class="td.res==='已完成'?'s-green':'s-red'">【{{ td.res }}】</span>{{ td.nm }}
+      </li>
+    </ol>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import {CollectInf} from '../utils/parseSaveData';
+import ExpandBtn from "./ExpandBtn.vue";
+import {ref} from "vue";
+// 展示收集进度的卡片
+defineProps<{
+  readonly type: "box" | "silk" | "heart" | "metal";
+  readonly title: string;
+  readonly show: CollectInf[];
+}>()
+
+// 点击展开按钮
+const btnExpand = ref<boolean>(true);
+
+// 计算完成数量
+const completeStr = (collectInfList: CollectInf[]): string => {
+  const cifLength = collectInfList.length;
+  // 计算已完成数量
+  let completeNum = 0;
+  for (const cil of collectInfList) {
+    if (cil.res === "已完成")
+      completeNum++;
+  }
+  return `${completeNum}/${cifLength}`
+}
+</script>
+<style lang="sass">
+.s-red
+  color: red
+
+.s-green
+  color: green
+
+.show-card
+  border: 2px solid #ccc
+  border-radius: 8px
+  padding: 0 22px
+  margin: 12px 0
+  position: relative
+
+  header
+    display: flex
+    justify-content: space-between
+    align-items: center
+    margin: 0
+
+// 设置各类型的卡片颜色
+@mixin box-color($color1: #909399,$color2: #f4f4f5)
+  border-color: $color1
+  background-color: $color2
+
+  header
+    // 水平偏移0、垂直偏移1px、模糊0、扩散0，模拟下边框
+    box-shadow: 0 1px 0 0 $color1
+
+.box
+  @include box-color()
+
+.metal
+  @include box-color(#e6a23c, #fdf6ec)
+
+.heart
+  @include box-color(#67c23a, #f0f9eb)
+
+.silk
+  @include box-color(#409eff, #ebf5ff)
+</style>
