@@ -42,8 +42,13 @@
         <ol>
           <li><b>【开发过程参考】：</b>
             <ul>
-              <li>B站up：老陌</li>
-              <li>雪球的地图工坊</li>
+              <li>B站up：老陌GAME 的视频： <a href="https://www.bilibili.com/video/BV1LczTBVE35">【秘奥】全收集</a></li>
+              <li>B站up：好吃的香草雪球 的网站： <a href="https://xueqiumaps.cn/">雪球的地图工坊</a></li>
+            </ul>
+          </li>
+          <li><b>【问题反馈】</b>
+            <ul>
+              <li>关于存档解析方面的问题可前往这个视频的评论区反馈：</li>
             </ul>
           </li>
         </ol>
@@ -178,7 +183,6 @@ const readFileContent = (file: File | undefined): void => {
 
 .intro
   // 说明书
-  font-size: small
   border-top: 2px solid #ccc
   padding: 4px
   margin-top: 36px
