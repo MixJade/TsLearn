@@ -7,8 +7,9 @@
                  @click="btnExpand=!btnExpand"/>
     </header>
     <ol v-if="btnExpand">
-      <li v-for="td in show" :key="td.cId">
+      <li class="cLi" v-for="td in show" :key="td.cId">
         <span :class="td.res==='已完成'?'s-green':'s-red'">【{{ td.res }}】</span>{{ td.nm }}
+        <button class="cBtn" type="button" @click="jumpBill(td.vd)">跳转视频</button>
       </li>
     </ol>
   </div>
@@ -38,6 +39,14 @@ const completeStr = (collectInfList: CollectInf[]): string => {
       completeNum++;
   }
   return `${completeNum}/${cifLength}`
+}
+
+const jumpBill = (vb: string): void => {
+  if (vb === "") {
+    alert("暂无视频")
+    return;
+  }
+  window.open("https://www.bilibili.com/video/BV1LczTBVE35?" + vb)
 }
 </script>
 <style lang="sass">
@@ -80,4 +89,14 @@ const completeStr = (collectInfList: CollectInf[]): string => {
 
 .silk
   @include box-color(#409eff, #ebf5ff)
+
+// 名称联动视频按钮
+.cBtn
+  display: none
+  margin-left: 12px
+
+.cLi
+  &:hover
+    .cBtn
+      display: inline-block
 </style>

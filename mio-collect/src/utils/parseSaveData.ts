@@ -19,6 +19,11 @@ interface ParseRes {
 }
 
 export const parseSaveData = (saveStr: string): ParseRes => {
+    // （元素防重）收集所有有效的ev属性值（过滤掉undefined/null的情况）
+    // const evValues = checkDataList.map(item => item?.ev).filter(val => val !== undefined && val !== null && val !== "暂未收录");
+    // const uniqueEvValues = new Set(evValues);
+    // console.log("原始_", evValues.length, " SET_", uniqueEvValues.size)
+
     // 先初始化数据
     const parseRes: ParseRes = {elderList: [], giftList: [], heartList: [], oldCoreList: [], serialList: []}
     // 定义 type 与 parseRes 中数组的映射关系
@@ -59,7 +64,7 @@ export const parseSaveData = (saveStr: string): ParseRes => {
             // 如果在Saved_entries区块内，执行判断逻辑
             if (inSavedEntries) {
                 for (const cd of checkDataList) {
-                    if (trimmedLine.includes(cd.ev)) {
+                    if (trimmedLine.includes(`"${cd.ev}"`)) {
                         // 根据类型放入不同列表
                         const arrName = typeToArrMap[cd.type];
                         const targetObj = parseRes[arrName].find(obj => obj.cId === cd.cId);
