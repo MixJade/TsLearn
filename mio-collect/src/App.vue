@@ -42,8 +42,8 @@
         <ol>
           <li><b>【开发过程参考】：</b>
             <ul>
-              <li>B站up：老陌GAME 的视频： <a href="https://www.bilibili.com/video/BV1LczTBVE35">【秘奥】全收集</a></li>
-              <li>B站up：好吃的香草雪球 的网站： <a href="https://xueqiumaps.cn/">雪球的地图工坊</a></li>
+              <li>B站up：<a href="https://space.bilibili.com/426475408">老陌GAME</a>的视频： <a href="https://www.bilibili.com/video/BV1LczTBVE35">【秘奥】全收集</a></li>
+              <li>B站up：<a href="https://space.bilibili.com/3804625">好吃的香草雪球</a>的网站： <a href="https://xueqiumaps.cn/">雪球的地图工坊</a></li>
             </ul>
           </li>
           <li><b>【问题反馈】</b>
@@ -157,6 +157,10 @@ const readFileContent = (file: File | undefined): void => {
   cursor: pointer
   transition: all 0.3s ease
   background-color: #f9f9f9
+  // 背景图片
+  background-image: url("/mio.svg")
+  background-position: center
+  background-repeat: no-repeat
 
   &:hover
     border-color: #42b983
