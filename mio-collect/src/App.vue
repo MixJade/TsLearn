@@ -33,8 +33,11 @@
     <div v-else>
       <h4>MIO存档路径:</h4>
       <ul>
-        <li>Steam（Windows）
+        <li>Windows
           <p class="code">%userprofile%/AppData/Local/MIO/Saves/Steam/{一串数字}/slot_0.save</p>
+        </li>
+        <li>Xbox（仅作参考，将存档文件复制一份，后缀改为save）
+          <p class="code">%LOCALAPPDATA%/Packages/FocusHomeInteractiveSA.MioMemoriesinOrbit_4hny5m903y3g0/SystemAppData/wgs/{一串字母}/{按时间排序最新的文件夹}/{一串字母}</p>
         </li>
       </ul>
       <details class="intro">
@@ -181,9 +184,11 @@ const readFileContent = (file: File | undefined): void => {
 
 .code
   // 存档地址样式
-  white-space: nowrap
   background-color: #e9e9eb
   padding: 8px 4px
+  // 自动换行
+  white-space: normal
+  word-wrap: break-word
 
 .intro
   // 说明书
