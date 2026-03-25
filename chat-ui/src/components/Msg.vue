@@ -2,7 +2,7 @@
   <span v-if="ms.isSystem" class="noticeMsg">{{ ms.message }}</span>
   <div v-else :class="isMe?'selfMsg':''" class="msgDiv">
     <span class="msgUser">{{ ms.userVo.username }} {{ ms.sendTime }}</span>
-    <div class="msgImg">{{ ms.userVo.simpleNm }}</div>
+    <div class="msgImg" :style="{backgroundColor: ms.userVo.imgColor}">{{ ms.userVo.simpleNm }}</div>
     <div class="msgContent">{{ ms.message }}</div>
   </div>
 </template>
@@ -34,7 +34,6 @@ defineProps<{
   height: $msgImgHeight
   width: $msgImgHeight
   //大致样式
-  background-color: #8047b2
   border-radius: 50%
   //字体样式
   text-align: center
