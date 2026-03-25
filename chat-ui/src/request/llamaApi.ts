@@ -13,9 +13,8 @@ export const reqOpenAi = (): Promise<Result> =>
 export const reqIsAlive = (): Promise<Result> =>
     myReq.get<Result>("/api/llama/isAlive")
 
-
 /**
- * 停止AI
+ * 停止AI对话
  */
 export const reqStopAi = (): Promise<Result> =>
     myReq.get<Result>("/api/llama/stopAi")
