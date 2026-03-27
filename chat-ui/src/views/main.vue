@@ -4,19 +4,9 @@
     <input id="user" v-model="username" name="user" type="text">
     <img id="touZi" alt="骰子" src="/icon/touzi.png" @click="randomName">
     <div id="container">
-      <div>
-        <div class="route-card" style="background-color: #5b88ea" @click="loginChat">在线聊天页面</div>
-        <label id="check-ai">
-          <input type="checkbox" v-model="aiChatEnabled" @change="openOrStopAI">
-          AI对话
-        </label>
-      </div>
-      <div>
-        <div class="route-card" style="background-color: #c45656" @click="toRoute('/fileUp')">文件上传下载</div>
-      </div>
-      <div>
-        <div class="route-card" style="background-color: #198754" @click="toRoute('/qrCode')">二维码处理器</div>
-      </div>
+      <div style="background-color: #5b88ea" @click="loginChat">在线{{ aiChatEnabled ? "AI" : "" }}聊天页面</div>
+      <div style="background-color: #c45656" @click="toRoute('/fileUp')">文件上传下载</div>
+      <div style="background-color: #198754" @click="toRoute('/qrCode')">二维码处理器</div>
     </div>
   </div>
 </template>
@@ -25,7 +15,7 @@
 import {useRouter} from "vue-router";
 import {onMounted, ref} from "vue";
 import {reqRandomName, reqToLogin} from "@/request/loginApi";
-import {reqIsAlive, reqOpenAi, reqStopAi} from "@/request/llamaApi";
+import {reqIsAlive} from "@/request/llamaApi";
 
 onMounted(() => {
   randomName();
@@ -59,21 +49,7 @@ const loginChat = () => {
  │=============AI about=============│
  └──────────────────────────────────┘
  */
-const aiChatEnabled = ref(false); // AI对话勾选框状态
-const openOrStopAI = () => {
-  if (aiChatEnabled.value) {
-    reqOpenAi().then(res => {
-      alert(res.msg)
-      checkAI();
-    })
-  } else {
-    reqStopAi().then(res => {
-      alert(res.msg);
-      checkAI();
-    })
-  }
-}
-
+const aiChatEnabled = ref(false); // AI对话状态
 const checkAI = () => {
   reqIsAlive().then(res => {
     aiChatEnabled.value = res.flag
@@ -113,27 +89,16 @@ $borderColor: #008A5B
   padding: 6px
 
   > div
+    $divSize: 200px
     margin: 6px
-
-.route-card
-  $divSize: 200px
-  width: $divSize
-  height: $divSize
-  line-height: $divSize
-  //设置字体
-  font-weight: bolder
-  font-size: larger
-  color: white
-  //设置圆角阴影
-  border-radius: 16px
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.7)
-
-#check-ai
-  display: block
-  cursor: pointer
-
-  input[type=checkbox]
-    width: 16px
-    height: 16px
-    cursor: pointer
+    width: $divSize
+    height: $divSize
+    line-height: $divSize
+    //设置字体
+    font-weight: bolder
+    font-size: larger
+    color: white
+    //设置圆角阴影
+    border-radius: 16px
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.7)
 </style>
