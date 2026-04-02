@@ -1,0 +1,58 @@
+@use "sass:math"
+// 连接线颜色
+$line-color: #67c23a
+$main-line-width: 8px
+$main-line-padding: 12px
+$main-line-left: 20px
+// 连接线长度
+$line-length: $main-line-width + $main-line-padding +  $main-line-left
+
+// 卡片容器
+.card-container
+  position: relative
+  border-left: $line-color $main-line-width solid
+  margin-left: 128px
+  padding: $main-line-padding
+
+  .add-btn
+    $btn-width: 48px
+    $btn-pos: -(math.div($btn-width, 2) + math.div($main-line-width, 2))
+    position: absolute
+    width: $btn-width
+    height: $btn-width
+    border-radius: 50%
+    bottom: $btn-pos
+    left: $btn-pos
+    //边框与文字颜色
+    border: $line-color 3px solid
+    color: $line-color
+    background-color: white
+    &:hover
+      box-shadow: 0 0 16px $line-color
+// 卡片
+.card
+  $card-border-width: 2px
+  margin-bottom: 20px
+  margin-left: $main-line-left
+  width: 70%
+  background: #ffffff
+  border: $line-color $card-border-width solid
+  border-radius: 8px
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1)
+  padding: 16px
+  position: relative
+  transition: transform 0.3s ease
+
+  &:hover
+    transform: translateX($main-line-width - $card-border-width)
+
+  // 连接线：刚好碰到竖轴
+  &::before
+    content: ""
+    position: absolute
+    left: -#{$line-length}
+    top: 50%
+    transform: translateY(-50%)
+    width: $line-length
+    height: 4px
+    background-color: $line-color
