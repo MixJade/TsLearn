@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "主页卡片-b": "sass 主页卡片/homeCard.sass:主页卡片/homeCard.min.css --no-source-map --style=compressed",
     "侧边栏-b": "sass 侧边栏/tooltipNav.sass:侧边栏/tooltipNav.min.css --no-source-map --style=compressed",
     "右键菜单-b": "sass 右键菜单/rightMenu.sass:右键菜单/rightMenu.min.css --no-source-map --style=compressed",
     "吐司消息-b": "sass 吐司消息/baseTus.sass:吐司消息/baseTus.min.css --no-source-map --style=compressed",
