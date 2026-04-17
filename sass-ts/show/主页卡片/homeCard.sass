@@ -40,31 +40,24 @@ $label-height: 48px
     transform: translateY(-8px)
     box-shadow: 0 14px 32px rgba(0, 0, 0, 0.25)
 
-  // 背景图铺满整张卡片
+  // SVG 背景图铺满整张卡片，保持比例居中
   .card-bg
     width: 100%
     height: 100%
-    background-size: cover
-    background-position: center
+    background-size: 60%
+    background-position: center 38%
     background-repeat: no-repeat
 
-  // 底部纯色标签条
+  // 底部标签条
   .card-label
     position: absolute
     bottom: 0
-    left: 0
     width: 100%
     height: $label-height
     display: flex
     align-items: center
     justify-content: center
     color: #ffffff
-    font-size: 1rem
-    font-weight: 600
+    font-size: large
+    font-weight: bold
     letter-spacing: 0.08em
-    // 文字防溢出
-    white-space: nowrap
-    overflow: hidden
-    text-overflow: ellipsis
-    padding: 0 12px
-    box-sizing: border-box
