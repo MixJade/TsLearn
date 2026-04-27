@@ -49,7 +49,7 @@
     <div class="ocr-foot">
       <MyBtn text="关闭" type="secondary" @click="closeDialog2"/>
       <MyBtn text="图片识别" type="success" @click="handleOcrImg"/>
-      <MyBtn text="确认提交" type="primary" @click="submitForm2"/>
+      <MyBtn text="保存" type="primary" @click="submitForm2"/>
     </div>
   </MyDialog>
   <!-- 吐司组件-->
@@ -257,6 +257,10 @@ const submitForm2 = (): void => {
   margin: 10px 0
   border: 1px solid #ddd
   padding: 10px
+
+.child-img
+  max-height: 70vh
+  overflow-y: auto
 
 .ocr-img
   width: 400px
