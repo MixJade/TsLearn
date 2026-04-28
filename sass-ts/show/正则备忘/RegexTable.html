@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>正则备忘表</title>
+    <link rel="stylesheet" href="regexMemo.min.css">
+</head>
+<body>
+<div class="container">
+    <!-- 第一部分：常用 -->
+    <div class="section-base section-common">
+        <header>
+            <span class="book-icon">⚡</span>
+            一、常用语法
+        </header>
+        <main>
+            <div class="table-half">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>语法</th>
+                        <th>含义</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>.</td>
+                        <td>任意单个字符（通常不含换行）</td>
+                    </tr>
+                    <tr>
+                        <td>\d</td>
+                        <td>数字，等价 [0-9]</td>
+                    </tr>
+                    <tr>
+                        <td>\w</td>
+                        <td>字母/数字/下划线，等价 [A-Za-z0-9_]</td>
+                    </tr>
+                    <tr>
+                        <td>\s</td>
+                        <td>空白字符（空格、换行、Tab）</td>
+                    </tr>
+                    <tr>
+                        <td>[abc]</td>
+                        <td>匹配 a、b、c 中任意一个</td>
+                    </tr>
+                    <tr>
+                        <td>[^abc]</td>
+                        <td>匹配不是 a、b、c 的任意字符</td>
+                    </tr>
+                    <tr>
+                        <td>[a-z]</td>
+                        <td>字符范围，如小写字母</td>
+                    </tr>
+                    <tr>
+                        <td>*</td>
+                        <td>0 次或多次</td>
+                    </tr>
+                    <tr>
+                        <td>+</td>
+                        <td>1 次或多次</td>
+                    </tr>
+                    <tr>
+                        <td>?</td>
+                        <td>0 次或 1 次</td>
+                    </tr>
+                    <tr>
+                        <td>{n}</td>
+                        <td>恰好 n 次</td>
+                    </tr>
+                    <tr>
+                        <td>{n,m}</td>
+                        <td>n 到 m 次</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-half">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>语法</th>
+                        <th>含义</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>()</td>
+                        <td>捕获分组</td>
+                    </tr>
+                    <tr>
+                        <td>(?:)</td>
+                        <td>非捕获分组</td>
+                    </tr>
+                    <tr>
+                        <td>|</td>
+                        <td>或（A|B）</td>
+                    </tr>
+                    <tr>
+                        <td>^</td>
+                        <td>字符串开头</td>
+                    </tr>
+                    <tr>
+                        <td>$</td>
+                        <td>字符串结尾</td>
+                    </tr>
+                    <tr>
+                        <td>\b</td>
+                        <td>单词边界</td>
+                    </tr>
+                    <tr>
+                        <td>g</td>
+                        <td>全局匹配</td>
+                    </tr>
+                    <tr>
+                        <td>i</td>
+                        <td>忽略大小写</td>
+                    </tr>
+                    <tr>
+                        <td>m</td>
+                        <td>多行模式</td>
+                    </tr>
+                    <tr>
+                        <td>s</td>
+                        <td>. 可匹配换行</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+        <footer>
+            <span class="star-icon">★</span>
+            RegEX备忘清单
+        </footer>
+    </div>
+
+    <!-- 第二部分：不常用 -->
+    <div class="section-base section-rare">
+        <header>
+            <span class="book-icon">📖</span>
+            二、正则备份
+        </header>
+        <main>
+            <div class="table-half">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>语法</th>
+                        <th>含义</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>[ \t]*//[^\n]*\n</td>
+                        <td>删除java注释</td>
+                    </tr>
+                    <tr>
+                        <td>”\n+，</td>
+                        <td>引号后的逗号合为一句</td>
+                    </tr>
+                    <tr>
+                        <td>^\n+$</td>
+                        <td>多个空行合并为一个</td>
+                    </tr>
+                    <tr>
+                        <td>.{200,}</td>
+                        <td>匹配字符过多的行</td>
+                    </tr>
+                    <tr>
+                        <td>^.{0,12}$</td>
+                        <td>匹配长度少于12字的行</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-half">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>语法</th>
+                        <th>含义</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>第[零一二两三四五六七八九十百]+章</td>
+                        <td>匹配中文章节</td>
+                    </tr>
+                    <tr>
+                        <td>第\d+章</td>
+                        <td>匹配数字章节</td>
+                    </tr>
+                    <tr>
+                        <td>（.*?）</td>
+                        <td>中文括号包裹内容</td>
+                    </tr>
+                    <tr>
+                        <td>\(.*?\)</td>
+                        <td>英文括号包裹内容</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+        <footer>
+            <span class="star-icon">💡</span>
+            曾经使用过的正则表达式
+        </footer>
+    </div>
+</div>
+</body>
+</html>

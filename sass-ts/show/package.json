@@ -6,6 +6,7 @@
     "吐司消息-b": "sass 吐司消息/baseTus.sass:吐司消息/baseTus.min.css --no-source-map --style=compressed",
     "密码备忘-w": "sass 密码备忘/pwdBak.sass:密码备忘/pwdBak.min.css --no-source-map --style=compressed --watch",
     "收藏表格-w": "sass 收藏表格/tableFav.sass:收藏表格/tableFav.min.css --no-source-map --style=compressed --watch",
+    "正则备忘-b": "sass 正则备忘/regexMemo.sass:正则备忘/regexMemo.min.css --no-source-map --style=compressed",
     "流星背景-b": "sass 流星背景/meteor.sass:流星背景/meteor.min.css --no-source-map --style=compressed",
     "卡片竖轴-w": "sass 卡片竖轴/lineCard.sass:卡片竖轴/lineCard.min.css --no-source-map --style=compressed --watch",
     "漫画布局-b": "sass 漫画布局/cartoonLayout.sass:漫画布局/cartoonLayout.min.css --no-source-map --style=compressed",
