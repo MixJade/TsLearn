@@ -4,108 +4,8 @@
     <meta charset="UTF-8">
     <title>颜色卡片</title>
     <link href='v.svg' rel="icon" type="image/svg+xml"/>
-    <style>
-        #container, #container2, #container3 {
-            display: flex;
-            flex-wrap: wrap
-        }
-
-        .colorCard, .bootstrapCard {
-            height: 96px;
-            width: 256px;
-            -webkit-user-select: none;
-            user-select: none;
-            margin: 12px;
-            border-radius: 12px;
-            overflow: hidden
-        }
-
-        .topDiv {
-            height: 58px;
-            width: 256px;
-            box-sizing: border-box;
-            padding: 12px;
-            font-size: smaller;
-            color: #fff
-        }
-
-        .bottomDiv {
-            height: 38px;
-            width: 256px;
-            display: grid;
-            grid-template-columns:repeat(6, 1fr)
-        }
-
-        .bottomDiv div {
-            height: 38px;
-            grid-column: span 1
-        }
-
-        .bootstrapCard {
-            height: 64px;
-            width: 144px;
-            text-align: center;
-            border-radius: 32px
-        }
-
-        .bootstrapCard span {
-            line-height: 64px;
-            color: #fff;
-            font-weight: bold
-        }
-    </style>
-    <style>.baseTus {
-        top: -100%;
-        opacity: 0;
-        position: fixed;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 250px;
-        height: 38px;
-        border-radius: 6px;
-        box-shadow: 0 8px 28px #909399;
-        border: 1px solid #67c23a;
-        color: #67c23a;
-        background: #e1f3d8;
-        box-sizing: border-box;
-        padding-left: 36px;
-        line-height: 36px;
-        -webkit-user-select: none;
-        user-select: none;
-        display: none
-    }
-
-    .baseTus > svg {
-        position: absolute;
-        top: 9px;
-        left: 9px
-    }
-
-    /*noinspection CssUnusedSymbol*/
-    .visible {
-        display: block;
-        animation: moveAndFade 3s
-    }
-
-    @keyframes moveAndFade {
-        0% {
-            top: -100%;
-            opacity: 0
-        }
-        15% {
-            top: 5vh;
-            opacity: 1
-        }
-        65% {
-            top: 5vh;
-            opacity: 1
-        }
-        100% {
-            top: 10vh;
-            opacity: 0
-        }
-    }
-    </style>
+    <link href="styles/ColorCard.min.css" rel="stylesheet">
+    <link href="styles/baseTus.min.css" rel="stylesheet">
 </head>
 <body>
 <h5>element色卡</h5>
@@ -116,7 +16,13 @@
 <div id="container2"></div>
 <hr>
 <h5>Bootstrap配色</h5>
-<div id="container3"></div>
+<div id="container3">
+    <div class="palette" id="container3Pa">
+    </div>
+    <div id="stats">
+        <span>bootstrapCard</span>
+    </div>
+</div>
 <!--隐藏的吐司消息-->
 <div class="baseTus" id="myTus">
     <svg height="18" width="18" xmlns="http://www.w3.org/2000/svg">
@@ -173,7 +79,7 @@
     // bootstrap色卡
     const bootstrapColor = [
         ["primary", "#0d6efd", "#f8f9fa"],
-        ["secondary", "#6c757d", "#f8f9fa"],
+        ["second", "#6c757d", "#f8f9fa"],
         ["success", "#198754", "#f8f9fa"],
         ["info", "#0dcaf0", "#f8f9fa"],
         ["warning", "#ffc107", "#f8f9fa"],
@@ -187,7 +93,7 @@
         elementColor.forEach(item => container.innerHTML += getCardTxt(item))
         const container2 = document.getElementById("container2")
         rmbColor.forEach(item => container2.innerHTML += getCardTxt(item))
-        const container3 = document.getElementById("container3")
+        const container3 = document.getElementById("container3Pa")
         bootstrapColor.forEach(item => container3.innerHTML += getBootstrapCardTxt(item))
     }
     // 卡片颜色
@@ -204,10 +110,7 @@
     </div>
 </div>`
     // bootstrap卡片颜色
-    const getBootstrapCardTxt = item => `
-<div class="bootstrapCard" onclick="copyColor('${item[1]}')" style="background-color: ${item[1]}">
-    <span style="color: ${item[2]}">${item[0]}</span>
-</div>`
+    const getBootstrapCardTxt = item => `<div class="color" onclick="copyColor('${item[1]}')" style="background-color: ${item[1]};color: ${item[2]}"><span>${item[0]}</span></div>`
     // 复制函数
     const copyColor = (text) => {
         navigator.clipboard.writeText(text).then(() => {
