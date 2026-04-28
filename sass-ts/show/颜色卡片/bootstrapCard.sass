@@ -1,0 +1,50 @@
+@charset "UTF-8"
+// 容器（由内容撑起宽度）
+#container3
+  height: 160px
+  border-radius: 1em
+  overflow: hidden
+  box-shadow: 0 10px 20px #dbdbdb
+  display: inline-flex
+  flex-direction: column
+  // 容器向右移动一点
+  margin-left: 20px
+
+// 调色板主体
+.palette
+  display: flex
+  height: 86%
+  flex-shrink: 0
+
+// 每个颜色块：固定宽度
+.color
+  height: 100%
+  width: 60px
+  flex: none
+  display: flex
+  align-items: center
+  justify-content: center
+  color: white
+  font-weight: bold
+  letter-spacing: 1px
+  transition: width 0.1s linear
+  cursor: pointer
+
+  span
+    opacity: 0
+    transition: opacity 0.1s linear
+
+  &:hover
+    width: 80px
+    box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0
+
+    span
+      opacity: 1
+
+// 底部状态栏
+#stats
+  height: 14%
+  width: 100%
+  padding: 0 1.5em
+  box-sizing: border-box
+  color: #bebebe

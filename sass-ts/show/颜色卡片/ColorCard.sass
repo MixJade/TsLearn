@@ -1,6 +1,6 @@
 @use "sass:math"
-
-#container, #container2, #container3
+@use "bootstrapCard"
+#container, #container2
   //自动换行
   display: flex
   flex-wrap: wrap
@@ -37,16 +37,3 @@ $card-weight: 256px
   div
     height: math.round($card-height * 0.4)
     grid-column: span 1
-
-$bootstrap-card-height: 64px
-.bootstrapCard
-  @extend .colorCard
-  height: $bootstrap-card-height
-  width: 144px
-  text-align: center
-  border-radius: math.round($bootstrap-card-height * 0.5)
-
-  span
-    line-height: $bootstrap-card-height
-    color: white
-    font-weight: bold

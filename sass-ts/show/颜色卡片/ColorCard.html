@@ -15,7 +15,13 @@
 <div id="container2"></div>
 <hr>
 <h5>Bootstrap配色</h5>
-<div id="container3"></div>
+<div id="container3">
+    <div class="palette" id="container3Pa">
+    </div>
+    <div id="stats">
+        <span>bootstrapCard</span>
+    </div>
+</div>
 </body>
 <script src="../../showTs/baseTus.js"></script>
 <script>
@@ -41,7 +47,7 @@
     // bootstrap色卡
     const bootstrapColor = [
         ["primary", "#0d6efd", "#f8f9fa"],
-        ["secondary", "#6c757d", "#f8f9fa"],
+        ["second", "#6c757d", "#f8f9fa"],
         ["success", "#198754", "#f8f9fa"],
         ["info", "#0dcaf0", "#f8f9fa"],
         ["warning", "#ffc107", "#f8f9fa"],
@@ -55,7 +61,7 @@
         elementColor.forEach(item => container.innerHTML += getCardTxt(item))
         const container2 = document.getElementById("container2")
         rmbColor.forEach(item => container2.innerHTML += getCardTxt(item))
-        const container3 = document.getElementById("container3")
+        const container3 = document.getElementById("container3Pa")
         bootstrapColor.forEach(item => container3.innerHTML += getBootstrapCardTxt(item))
     }
     // 卡片颜色
@@ -72,10 +78,7 @@
     </div>
 </div>`
     // bootstrap卡片颜色
-    const getBootstrapCardTxt = item => `
-<div class="bootstrapCard" onclick="copyColor('${item[1]}')" style="background-color: ${item[1]}">
-    <span style="color: ${item[2]}">${item[0]}</span>
-</div>`
+    const getBootstrapCardTxt = item => `<div class="color" onclick="copyColor('${item[1]}')" style="background-color: ${item[1]};color: ${item[2]}"><span>${item[0]}</span></div>`
     // 复制函数
     const copyColor = (text) => {
         navigator.clipboard.writeText(text).then(() => {
