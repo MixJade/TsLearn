@@ -1,6 +1,0 @@
-{
-  "scripts": {
-    "showTs-compile": "tsc",
-    "showTs-watch": "tsc --watch"
-  }
-}

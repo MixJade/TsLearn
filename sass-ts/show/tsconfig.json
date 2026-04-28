@@ -4,8 +4,6 @@
     "target": "es2022",
     // 指定使用模块: 'commonjs'
     "module": "commonjs",
-    // 输出的JS目录
-    // "outDir": "",
     // 去除注释
     "removeComments": true,
     // 出错时不编译
