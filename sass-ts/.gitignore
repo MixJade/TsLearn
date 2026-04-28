@@ -3,3 +3,4 @@ package-lock.json
 *.min.css
 # 忽略TS的编译输出文件
 out-js/
+*.js
