@@ -7,10 +7,18 @@ $main-line-left: 20px
 // 连接线长度
 $line-length: $main-line-width + $main-line-padding +  $main-line-left
 
+.card-head
+  width: 100%
+  height: 32px
+  line-height: 32px
+  border-bottom: $line-color 1px solid
+  padding: 4px 12px
+  color: $line-color
+
 // 卡片容器
 .card-container
   position: relative
-  border-left: $line-color $main-line-width solid
+  border-left: $line-color $main-line-width double
   margin-left: 128px
   padding: $main-line-padding
 
@@ -26,6 +34,7 @@ $line-length: $main-line-width + $main-line-padding +  $main-line-left
     //边框与文字颜色
     border: $line-color 3px solid
     color: $line-color
+    font-size: 24px
     background-color: white
 
     &:hover
@@ -56,7 +65,7 @@ $line-length: $main-line-width + $main-line-padding +  $main-line-left
     top: 50%
     transform: translateY(-50%)
     width: $line-length
-    height: 4px
+    height: 2px
     background-color: $line-color
 
 .child-ul
