@@ -1,110 +1,91 @@
 <template>
-  <main>
-    <div class="ring">
-      <i style="--clr:#00ff0a;"></i>
-      <i style="--clr:#ff0057;"></i>
-      <i style="--clr:#fffd44;"></i>
-      <div class="login">
-        <h2>小镇做题家</h2>
-        <div class="ipt-box">
-          <div class="ipt-btn">
-            <router-link to="/sourceCate">图片识别</router-link>
-          </div>
-          <div class="ipt-btn">
-            <router-link to="/examPaper">试卷编辑</router-link>
-          </div>
-          <div class="ipt-btn">
-            <router-link to="/examSubject">科目备忘</router-link>
-          </div>
-        </div>
-      </div>
+  <h1>做题家</h1>
+  <div class="card-grid">
+    <!-- 卡片1 -->
+    <div class="home-card" style="background-color: #cd5c5c" @click="router.push('/sourceCate')">
+      <div class="card-bg" style="background-image: url('/public/imgSee.svg')"></div>
+      <div class="card-label">图片识别</div>
     </div>
-  </main>
+    <!-- 卡片2 -->
+    <div class="home-card" style="background-color: #5b8dd9"
+         @click="router.push('/examPaper')">
+      <div class="card-bg" style="background-image: url('/public/examUpd.svg')"></div>
+      <div class="card-label">试卷编辑</div>
+    </div>
+    <!-- 卡片3 -->
+    <div class="home-card" style="background-color: #1cab69">
+      <div class="card-bg" style="background-image: url('/public/subject.svg')"></div>
+      <div class="card-label">开始刷题</div>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
+import router from "@/router";
 </script>
 
 <style scoped lang="sass">
-main
-  min-height: 100vh
-  background-color: #111
-  display: flex
-  justify-content: center
-  align-items: center
-  overflow: hidden
+body
+  background-color: #f5f5f5
+  margin: 0
+  padding: 40px
+  font-family: sans-serif
+  box-sizing: border-box
 
-.ring
-  //登录卡片
+h1
+  text-align: center
+  margin-bottom: 40px
+  font-size: 2rem
+  color: #333
+  letter-spacing: 0.05em
+  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.15)
+
+// 卡片容器 —— 自动换行、居中
+.card-grid
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+  gap: 24px
+
+// 单张正方形卡片
+$card-size: 240px
+$label-height: 48px
+
+.home-card
   position: relative
-  width: 500px
-  height: 500px
-  display: flex
-  justify-content: center
-  align-items: center
+  width: $card-size
+  height: $card-size
+  border-radius: 14px
+  overflow: hidden
+  cursor: pointer
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18)
+  transition: transform 0.3s, box-shadow 0.3s
+  -webkit-user-select: none
+  user-select: none
 
-  i
-    //环绕发光线条
-    position: absolute
-    border: 6px solid var(--clr)
-    filter: drop-shadow(0 0 20px var(--clr))
-    inset: 0
-    transition: all 0.5s
+  &:hover
+    transform: translateY(-8px)
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.25)
 
-    &:nth-child(1)
-      border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%
-      animation: animate 6s linear infinite
-
-    &:nth-child(2)
-      border-radius: 41% 44% 56% 59% / 38% 62% 63% 37%
-      animation: animate 4s linear infinite
-
-    &:nth-child(3)
-      border-radius: 41% 44% 56% 59% / 38% 62% 63% 37%
-      animation: animate 10s linear infinite reverse
-
-.login
-  //内容物
-  position: absolute
-  width: 300px
-  height: 100%
-  display: flex
-  flex-direction: column
-  justify-content: center
-  align-items: center
-  gap: 20px
-
-  h2
-    color: #fff
-    font-size: 32px
-    margin-bottom: 16px
-
-  .ipt-box
-    //存放按钮的div
-    position: relative
+  // SVG 背景图铺满整张卡片，保持比例居中
+  .card-bg
     width: 100%
+    height: 100%
+    background-size: 60%
+    background-position: center 38%
+    background-repeat: no-repeat
 
-    .ipt-btn
-      position: relative
-      width: 100%
-      padding: 8px
-      margin-bottom: 3px
-      text-align: center
-
-      &:hover
-        background: linear-gradient(to right, rgba(255, 53, 122, 0) 0%, rgba(255, 53, 122, 1) 30%, rgba(255, 241, 114, 1) 70%, rgba(255, 241, 114, 0) 100%)
-
-    a
-      text-decoration: none
-      font-size: larger
-      font-weight: bolder
-      color: white
-      //文字阴影
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)
-
-@keyframes animate
-  0%
-    transform: rotate(0)
-  100%
-    transform: rotate(360deg)
+  // 底部标签条
+  .card-label
+    position: absolute
+    bottom: 0
+    width: 100%
+    height: $label-height
+    display: flex
+    align-items: center
+    justify-content: center
+    color: #ffffff
+    font-size: large
+    font-weight: bold
+    letter-spacing: 0.08em
 </style>
