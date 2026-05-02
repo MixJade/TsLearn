@@ -11,9 +11,6 @@ const routes: RouteRecordRaw[] = [
         path: '/sourceImg',
         component: () => import('@/views/sourceImg.vue')
     }, {
-        path: '/examSubject',
-        component: () => import('@/views/examSubject.vue')
-    }, {
         path: '/examPaper',
         component: () => import('@/views/examPaper.vue')
     }, {
