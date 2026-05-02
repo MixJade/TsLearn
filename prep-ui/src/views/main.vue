@@ -3,18 +3,18 @@
   <div class="card-grid">
     <!-- 卡片1 -->
     <div class="home-card" style="background-color: #cd5c5c" @click="router.push('/sourceCate')">
-      <div class="card-bg" style="background-image: url('/public/imgSee.svg')"></div>
+      <div class="card-bg" style="background-image: url('/imgSee.svg')"></div>
       <div class="card-label">图片识别</div>
     </div>
     <!-- 卡片2 -->
     <div class="home-card" style="background-color: #5b8dd9"
          @click="router.push('/examPaper')">
-      <div class="card-bg" style="background-image: url('/public/examUpd.svg')"></div>
+      <div class="card-bg" style="background-image: url('/examUpd.svg')"></div>
       <div class="card-label">试卷编辑</div>
     </div>
     <!-- 卡片3 -->
     <div class="home-card" style="background-color: #1cab69">
-      <div class="card-bg" style="background-image: url('/public/subject.svg')"></div>
+      <div class="card-bg" style="background-image: url('/subject.svg')"></div>
       <div class="card-label">开始刷题</div>
     </div>
   </div>
