@@ -1,26 +1,6 @@
 <template>
-  <!-- 表格 -->
-  <MyTable :tb-page="tablePage"
-           :thead="['试卷名','题源', '总分','考试时长(秒)','创建日期','操作']"
-           caption="试卷表"
-           @pageChange="getAll">
-    <template #searchBtn>
-      <MyBtn text="添加试卷" type="success" @click="openAddForm"/>
-      <MyBtn text="返回上级" type="secondary" @click="toUp"/>
-    </template>
-    <tr v-for="td in tableData" :key="td.paperId">
-      <td>{{ td.paperName }}</td>
-      <td>{{ td.categoryName }}</td>
-      <td>{{ td.totalScore }}</td>
-      <td>{{ td.duration }}</td>
-      <td>{{ td.createDate }}</td>
-      <td>
-        <TbBtn type="ent" text="进入" @click="toQuest(td.paperId)"/>
-        <TbBtn type="upd" text="修改" @click="openUpdForm(td)"/>
-        <TbBtn type="del" text="删除" @click="deleteById(td.paperId)"/>
-      </td>
-    </tr>
-  </MyTable>
+  <LineCard tit="试卷列表" :card-data-list="listCardData" @openAddForm="openAddForm" @openUpdForm="openUpdForm"
+            @deleteById="deleteById"/>
   <!--添加修改的对话框-->
   <MyDialog ref="myShow">
     <form class="myForm">
@@ -55,18 +35,15 @@
 <script lang="ts" setup>
 import ToastBox from "@/components/message/ToastBox.vue";
 import {onMounted, reactive, ref} from "vue";
-import MyTable, {TbPage} from "@/components/show/MyTable.vue";
 import MyDialog from "@/components/message/MyDialog.vue";
 import MyBtn from "@/components/button/MyBtn.vue";
 import {Result} from "@/model/vo/Result";
 import SureDelModal from "@/components/message/SureDelModal.vue";
 import {ExamPaper} from "@/model/entity/ExamPaper";
-import {reqAddPaper, reqDelPaper, reqPaperPage, reqUpdPaper} from "@/request/examPaperApi";
-import TbBtn from "@/components/button/TbBtn.vue";
-import {useRouter} from "vue-router";
-import {ExamPaperVo} from "@/model/vo/ExamPaperVo";
+import {reqAddPaper, reqDelPaper, reqPaperList, reqUpdPaper} from "@/request/examPaperApi";
 import {CateLabelVo} from "@/model/vo/CateLabelVo";
 import {reqCateLabel} from "@/request/sourceCateApi";
+import LineCard, {CardData} from "@/components/show/LineCard.vue";
 
 onMounted(() => {
   getAll();
@@ -101,15 +78,21 @@ const commonResp = (resp: Result): void => {
  * ===================================[表格数据]============================================
  */
 // 表格数据
-const tableData = ref<ExamPaperVo[]>([])
-const tablePage: TbPage = reactive({current: 1, pages: 1, total: 0, size: 10}) as TbPage
+const listCardData = ref<CardData[]>([])
 const getAll = () => {
-  reqPaperPage(tablePage.current, tablePage.size).then(resp => {
-    tableData.value = resp.records
-    tablePage.current = resp.current;
-    tablePage.pages = resp.pages
-    tablePage.total = resp.total
-    tablePage.size = resp.size
+  reqPaperList().then(resp => {
+    const cardData: CardData[] = [];
+    resp.forEach(item => {
+      cardData.push({
+        remark: `总分：${item.totalScore}分`,
+        childPath: `/examQuest?paperId=${item.paperId}`,
+        data: item,
+        dataId: item.categoryId,
+        footer: [`题源：${item.categoryName}`, `时长：${item.duration}秒`, `创建日期：${item.createDate}`],
+        tit: item.paperName
+      })
+    })
+    listCardData.value = cardData;
   })
 }
 
@@ -126,7 +109,7 @@ const deleteById = (id: number): void => {
  */
 // 添加的实体类
 const paperData: ExamPaper = reactive({
-  categoryId: 0, createDate: "", duration: 0,  paperId: 0, paperName: "", totalScore: 0
+  categoryId: 0, createDate: "", duration: 0, paperId: 0, paperName: "", totalScore: 0
 })
 // 题源的下拉框
 const cateLabel = ref<CateLabelVo[]>([])
@@ -164,18 +147,6 @@ const submitForm = (): void => {
     reqAddPaper(paperData).then(resp => commonResp(resp))
   else
     reqUpdPaper(paperData).then(resp => commonResp(resp))
-}
-/**
- * ===================================[路由跳转]============================================
- */
-const router = useRouter();
-// 返回上级页面
-const toUp = () => {
-  router.push('/')
-}
-// 进入题目管理
-const toQuest = (id: number) => {
-  router.push({path: '/examQuest', query: {paperId: id}})
 }
 </script>
 

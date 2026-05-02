@@ -1,25 +1,6 @@
 <template>
-  <!-- 表格 -->
-  <MyTable :tb-page="tablePage"
-           :thead="['分类名','文件数','备注','创建时间','操作']"
-           caption="题源分类表"
-           @pageChange="getAll">
-    <template #searchBtn>
-      <MyBtn text="添加分类" type="success" @click="openAddForm"/>
-      <MyBtn text="返回上级" type="secondary" @click="toUp"/>
-    </template>
-    <tr v-for="td in tableData" :key="td.categoryId">
-      <td>{{ td.categoryName }}</td>
-      <td>{{ td.recordNum }}</td>
-      <td>{{ td.remark }}</td>
-      <td>{{ td.createDate }}</td>
-      <td>
-        <TbBtn type="ent" text="进入" @click="toImg(td.categoryId)"/>
-        <TbBtn type="upd" text="修改" @click="openUpdForm(td)"/>
-        <TbBtn type="del" text="删除" @click="deleteById(td.categoryId)"/>
-      </td>
-    </tr>
-  </MyTable>
+  <LineCard tit="图片分类" :card-data-list="listCardData" @openAddForm="openAddForm" @openUpdForm="openUpdForm"
+            @deleteById="deleteById"/>
   <!--添加修改的对话框-->
   <MyDialog ref="myShow">
     <form class="myForm">
@@ -48,16 +29,13 @@
 <script lang="ts" setup>
 import ToastBox from "@/components/message/ToastBox.vue";
 import {onMounted, reactive, ref} from "vue";
-import MyTable, {TbPage} from "@/components/show/MyTable.vue";
 import MyDialog from "@/components/message/MyDialog.vue";
 import MyBtn from "@/components/button/MyBtn.vue";
 import {Result} from "@/model/vo/Result";
 import SureDelModal from "@/components/message/SureDelModal.vue";
 import {SourceCategory} from "@/model/entity/SourceCategory";
-import {reqAddCate, reqDelCate, reqSourceCatePage, reqUpdCate} from "@/request/sourceCateApi";
-import TbBtn from "@/components/button/TbBtn.vue";
-import {useRouter} from "vue-router";
-import {SourceCateVo} from "@/model/vo/SourceCateVo";
+import {reqAddCate, reqDelCate, reqSourceCate, reqUpdCate} from "@/request/sourceCateApi";
+import LineCard, {CardData} from "@/components/show/LineCard.vue";
 
 onMounted(() => {
   getAll();
@@ -91,15 +69,21 @@ const commonResp = (resp: Result): void => {
  * ===================================[表格数据]============================================
  */
 // 表格数据
-const tableData = ref<SourceCateVo[]>([])
-const tablePage: TbPage = reactive({current: 1, pages: 1, total: 0, size: 10}) as TbPage
+const listCardData = ref<CardData[]>([])
 const getAll = () => {
-  reqSourceCatePage(tablePage.current, tablePage.size).then(resp => {
-    tableData.value = resp.records
-    tablePage.current = resp.current;
-    tablePage.pages = resp.pages
-    tablePage.total = resp.total
-    tablePage.size = resp.size
+  reqSourceCate().then(resp => {
+    const cardData: CardData[] = [];
+    resp.forEach(item => {
+      cardData.push({
+        remark: item.remark,
+        childPath: `/sourceImg?cateId=${item.categoryId}`,
+        data: item,
+        dataId: item.categoryId,
+        footer: [`创建时间：${item.createDate}`, `文件数：${item.recordNum}`],
+        tit: item.categoryName
+      })
+    })
+    listCardData.value = cardData;
   })
 }
 
@@ -151,18 +135,6 @@ const submitForm = (): void => {
     reqAddCate(sourceCategory).then(resp => commonResp(resp))
   else
     reqUpdCate(sourceCategory).then(resp => commonResp(resp))
-}
-/**
- * ===================================[路由跳转]============================================
- */
-const router = useRouter();
-// 跳转路由
-const toImg = (id: number) => {
-  router.push({path: '/sourceImg', query: {cateId: id}})
-}
-// 返回上级页面
-const toUp = () => {
-  router.push('/')
 }
 </script>
 

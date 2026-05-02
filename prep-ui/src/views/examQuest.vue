@@ -61,7 +61,7 @@ import MyBtn from "@/components/button/MyBtn.vue";
 import {Result} from "@/model/vo/Result";
 import SureDelModal from "@/components/message/SureDelModal.vue";
 import {ExamQuest} from "@/model/entity/ExamQuest";
-import {reqAddQuest, reqDelQuest, reqQuestPage, reqUpdQuest} from "@/request/ExamQuestApi";
+import {reqAddQuest, reqDelQuest, reqQuestPage, reqUpdQuest} from "@/request/examQuestApi";
 import TbBtn from "@/components/button/TbBtn.vue";
 import {useRoute, useRouter} from "vue-router";
 import {ExamQuestDto} from "@/model/dto/ExamQuestDto";
