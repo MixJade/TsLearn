@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+    <defs>
+        <!-- 橙色渐变：左淡右标准 -->
+        <linearGradient id="grad-orange" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#ffd080"/>
+            <stop offset="100%" stop-color="#ff8c00"/>
+        </linearGradient>
+        <!-- 红色渐变：左淡右暗 -->
+        <linearGradient id="grad-red" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#ffaaaa"/>
+            <stop offset="100%" stop-color="#ee0000"/>
+        </linearGradient>
+        <!-- 蓝色渐变：左淡右暗 -->
+        <linearGradient id="grad-blue" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#99ccff"/>
+            <stop offset="100%" stop-color="#0066ff"/>
+        </linearGradient>
+        <!-- 投影滤镜 -->
+        <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="rgba(0,0,0,0.5)"/>
+        </filter>
+    </defs>
+
+    <!-- 蓝色层（最底层） -->
+    <rect x="0" y="0" width="256" height="256"
+          fill="url(#grad-blue)"
+          filter="url(#shadow)">
+        <animate attributeName="opacity"
+                 values="0;0;1;1;0;0;0"
+                 keyTimes="0;0.166;0.333;0.5;0.666;0.833;1"
+                 dur="4.5s"
+                 calcMode="spline"
+                 keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"
+                 begin="-3s"
+                 repeatCount="indefinite"/>
+    </rect>
+    <!-- 红色层 -->
+    <rect x="0" y="0" width="256" height="256"
+          fill="url(#grad-red)">
+        <animate attributeName="opacity"
+                 values="0;0;1;1;0;0;0"
+                 keyTimes="0;0.166;0.333;0.5;0.666;0.833;1"
+                 dur="4.5s"
+                 calcMode="spline"
+                 keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"
+                 begin="-1.5s"
+                 repeatCount="indefinite"/>
+    </rect>
+    <!-- 橙色层（最顶层） -->
+    <rect x="0" y="0" width="256" height="256"
+          fill="url(#grad-orange)">
+        <animate attributeName="opacity"
+                 values="0;0;1;1;0;0;0"
+                 keyTimes="0;0.166;0.333;0.5;0.666;0.833;1"
+                 dur="4.5s"
+                 calcMode="spline"
+                 keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"
+                 begin="0s"
+                 repeatCount="indefinite"/>
+    </rect>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+    <defs>
+        <!-- 金色渐变背景：左淡金 → 中金 → 右深金 -->
+        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#f5d060"/>
+            <stop offset="50%" stop-color="#daa520"/>
+            <stop offset="100%" stop-color="#b8780a"/>
+        </linearGradient>
+        <!-- 中心放射白光渐变：中心亮白 → 边缘透明 -->
+        <radialGradient id="centerGlow" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="rgba(255,255,255,0.85)"/>
+            <stop offset="20%" stop-color="rgba(255,255,255,0.92)"/>
+            <stop offset="45%" stop-color="rgba(255,255,255,0.65)"/>
+            <stop offset="75%" stop-color="rgba(255,255,255,0.18)"/>
+            <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        </radialGradient>
+        <!-- 卡片投影 -->
+        <filter id="cardShadow" x="-15%" y="-15%" width="130%" height="130%">
+            <feDropShadow dx="0" dy="4" stdDeviation="10" flood-color="#000" flood-opacity="0.75"/>
+        </filter>
+        <!-- 裁剪路径 -->
+        <clipPath id="cardClip">
+            <rect x="0" y="0" width="256" height="256"/>
+        </clipPath>
+    </defs>
+
+    <g clip-path="url(#cardClip)">
+        <!-- 1. 金色渐变背景 -->
+        <rect x="0" y="0" width="256" height="256" fill="url(#goldGrad)" filter="url(#cardShadow)"/>
+        <!-- 2. 金色边框光晕 -->
+        <rect x="0" y="0" width="256" height="256"
+              fill="none" stroke="rgba(255,215,50,0.18)" stroke-width="1"/>
+        <!-- 3. 中心放射白光，覆盖整张卡片 -->
+        <rect x="0" y="0" width="256" height="256" fill="url(#centerGlow)"
+              style="mix-blend-mode:screen;">
+            <!-- 脉冲呼吸动画：白光强度周期性变化 -->
+            <animate attributeName="opacity"
+                     values="1; 0.55; 1"
+                     dur="3.2s"
+                     repeatCount="indefinite"
+                     calcMode="spline"
+                     keyTimes="0; 0.5; 1"
+                     keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"/>
+        </rect>
+    </g>
+</svg>

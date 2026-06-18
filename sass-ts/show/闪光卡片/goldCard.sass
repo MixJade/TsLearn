@@ -1,47 +1,40 @@
 // ============================================
-// 金色卡片 — 扑克牌比例，hover 3D + 常态扫光
+// 卡片 — 扑克牌比例，hover 3D
 // ============================================
 
-// ── 卡片外层（3D 透视容器）──
+// ── 卡片外层 flex 行容器 ──
 .card-wrapper
-  perspective: 1000px
-  display: inline-block
-
-  // hover 3D 倾斜
-  &:hover .card
-    transform: rotateX(5deg) rotateY(-10deg) scale(1.02)
-    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 215, 50, 0.35), -3px -3px 12px rgba(212, 160, 23, 0.55)
-
-  // active 按压反馈
-  &:active .card
-    transform: rotateX(15deg) rotateY(-5deg) scale(0.98)
+  display: flex
+  flex-direction: row
+  gap: 12px
+  padding: 12px
+  align-items: center
+  justify-content: center
 
   // ── 卡片主体 ──
   .card
     position: relative
     width: 110px
+    min-width: 110px
     height: 154px
+    flex-shrink: 0
     border-radius: 7px
     transform-style: preserve-3d
     transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.6s ease
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 215, 50, 0.18)
     overflow: hidden
+    //禁止文字选中
+    -webkit-user-select: none
+    user-select: none
 
-    // ── 常态循环扫光（单斜线往复）──
-    &::after
-      content: ""
-      position: absolute
-      top: -100%
-      left: -60%
-      width: 40%
-      height: 300%
-      border-radius: 0
-      pointer-events: none
-      z-index: 10
-      background: linear-gradient(to right, transparent 0%, rgba(255, 255, 255, 0.12) 40%, rgba(255, 255, 255, 0.45) 50%, rgba(255, 255, 255, 0.12) 60%, transparent 100%)
-      transform: rotate(-20deg)
-      mix-blend-mode: overlay
-      animation: sheen-slide 2.8s ease-in-out infinite alternate
+    // hover 3D 倾斜（每张独立响应）
+    &:hover
+      transform: perspective(800px) rotateX(5deg) rotateY(-10deg) scale(1.02)
+      box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 215, 50, 0.35), -3px -3px 12px rgba(212, 160, 23, 0.55)
+
+    // active 按压反馈
+    &:active
+      transform: perspective(800px) rotateX(15deg) rotateY(-5deg) scale(0.98)
 
     // ── 上半部分 70%：左右分隔金色背景 ──
     .card-top
@@ -49,8 +42,9 @@
       width: 100%
       height: 70%
       overflow: hidden
-      // 左淡金→金 右金→深金，中间金色分隔
-      background: linear-gradient(to right, #f5d060, #daa520 50%, #b8780a)
+      background-size: cover
+      background-position: center
+      background-repeat: no-repeat
 
       // SVG 装饰图覆盖
       img
@@ -80,7 +74,6 @@
       background: #ffffff
 
     .card-label
-      font-family: "Noto Serif SC", "SimSun", "Georgia", serif
       font-weight: 700
       font-size: 8px
       letter-spacing: 0.10em
@@ -88,11 +81,3 @@
       text-align: center
       padding: 0 7px
       line-height: 1.4
-
-
-// ── 扫光动画 ──
-@keyframes sheen-slide
-  0%
-    left: -60%
-  100%
-    left: 120%

@@ -1,0 +1,46 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+    <!-- 外圈圆环 -->
+    <circle cx="128" cy="128" r="115" fill="none" stroke="white" stroke-width="2" opacity="0.55"/>
+    <!-- 内圈圆环 -->
+    <circle cx="128" cy="128" r="85" fill="none" stroke="white" stroke-width="2" opacity="0.55"/>
+
+    <!-- 刻度短线 -->
+    <g stroke="white" stroke-width="1" opacity="0.5">
+        <line x1="128" y1="43" x2="128" y2="53"/>
+        <line x1="178" y1="58" x2="188" y2="68"/>
+        <line x1="213" y1="128" x2="203" y2="128"/>
+        <line x1="178" y1="198" x2="188" y2="188"/>
+        <line x1="128" y1="213" x2="128" y2="203"/>
+        <line x1="78" y1="198" x2="68" y2="188"/>
+        <line x1="43" y1="128" x2="53" y2="128"/>
+        <line x1="78" y1="58" x2="68" y2="68"/>
+    </g>
+
+    <!-- 两个小圆装饰 -->
+    <circle cx="70" cy="185" r="9" fill="none" stroke="white" stroke-width="1" opacity="0.5"/>
+    <circle cx="186" cy="70" r="9" fill="none" stroke="white" stroke-width="1" opacity="0.5"/>
+
+    <!-- 四角菱形角标 -->
+    <g fill="white" opacity="0.35" font-family="serif" font-size="12">
+        <text x="27" y="35">◆</text>
+        <text x="217" y="35">◆</text>
+    </g>
+
+    <!-- 匕首图标（刀尖向下，纯线条，居中） -->
+    <g transform="translate(128, 128)" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+        <!-- 圆头柄首 -->
+        <circle cx="0" cy="-55" r="8"/>
+        <!-- 握把两侧 -->
+        <line x1="-7" y1="-47" x2="-7" y2="-28"/>
+        <line x1="7" y1="-47" x2="7" y2="-28"/>
+        <!-- 握把缠绕线 -->
+        <line x1="-7" y1="-42" x2="7" y2="-42" stroke-width="2" opacity="0.6"/>
+        <line x1="-7" y1="-37" x2="7" y2="-37" stroke-width="2" opacity="0.6"/>
+        <!-- 护手（横档） -->
+        <line x1="-28" y1="-28" x2="28" y2="-28"/>
+        <!-- 刀身（收窄至刀尖） -->
+        <path d="M -16,-28 L 0,60 L 16,-28"/>
+        <!-- 血槽 -->
+        <line x1="0" y1="-20" x2="0" y2="45" stroke-width="1.5" opacity="0.6"/>
+    </g>
+</svg>

@@ -1,0 +1,45 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+    <!-- 外圈圆环 -->
+    <circle cx="128" cy="128" r="115" fill="none" stroke="white" stroke-width="2" opacity="0.55"/>
+    <!-- 内圈圆环 -->
+    <circle cx="128" cy="128" r="85" fill="none" stroke="white" stroke-width="2" opacity="0.55"/>
+
+    <!-- 刻度短线 -->
+    <g stroke="white" stroke-width="1" opacity="0.5">
+        <line x1="128" y1="43" x2="128" y2="53"/>
+        <line x1="178" y1="58" x2="188" y2="68"/>
+        <line x1="213" y1="128" x2="203" y2="128"/>
+        <line x1="178" y1="198" x2="188" y2="188"/>
+        <line x1="128" y1="213" x2="128" y2="203"/>
+        <line x1="78" y1="198" x2="68" y2="188"/>
+        <line x1="43" y1="128" x2="53" y2="128"/>
+        <line x1="78" y1="58" x2="68" y2="68"/>
+    </g>
+
+    <!-- 两个小圆装饰 -->
+    <circle cx="70" cy="185" r="9" fill="none" stroke="white" stroke-width="1" opacity="0.5"/>
+    <circle cx="186" cy="70" r="9" fill="none" stroke="white" stroke-width="1" opacity="0.5"/>
+
+    <!-- 四角菱形角标 -->
+    <g fill="white" opacity="0.35" font-family="serif" font-size="12">
+        <text x="27" y="35">◆</text>
+        <text x="217" y="35">◆</text>
+    </g>
+
+    <!-- 灯泡图标（纯线条，居中） -->
+    <g transform="translate(128, 128)" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <!-- 玻璃罩 -->
+        <circle cx="0" cy="-19" r="38"/>
+        <!-- 颈部（从球体收窄到灯座） -->
+        <line x1="-22" y1="11" x2="-18" y2="28"/>
+        <line x1="22" y1="11" x2="18" y2="28"/>
+        <!-- 灯座螺纹 -->
+        <line x1="-18" y1="28" x2="18" y2="28"/>
+        <line x1="-18" y1="38" x2="18" y2="38"/>
+        <line x1="-18" y1="48" x2="18" y2="48"/>
+        <!-- 底部触点 -->
+        <line x1="-10" y1="58" x2="10" y2="58"/>
+        <!-- 简化灯丝 -->
+        <path d="M -14,-24 L -5,-6 L 5,-24 L 14,-6" stroke-width="1.5" opacity="0.7"/>
+    </g>
+</svg>
