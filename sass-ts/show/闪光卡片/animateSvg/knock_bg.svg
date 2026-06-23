@@ -62,6 +62,8 @@
     <g clip-path="url(#cardClip)">
         <!-- 主渐变底色 -->
         <rect id="bgRect" x="0" y="0" width="256" height="256" fill="url(#bgGrad)"/>
+        <!-- 1.5 右半边黑色遮罩（透明度0.1） -->
+        <rect x="128" y="0" width="128" height="256" fill="#000000" opacity="0.1"/>
         <!-- ===== 红色通道故障层 ===== -->
         <!-- 段落 1 -->
         <rect x="-3" y="0" width="256" height="256" fill="url(#redGrad)"
