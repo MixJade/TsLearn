@@ -1,135 +1,86 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
-  <defs>
+    <defs>
+        <!-- ===== 血红主背景渐变（深红底，衬托波浪） ===== -->
+        <radialGradient id="bloodGrad" cx="50%" cy="35%" r="75%" fx="50%" fy="35%">
+            <stop offset="0%" stop-color="#a01010"/>
+            <stop offset="35%" stop-color="#6e0000"/>
+            <stop offset="75%" stop-color="#3e0000"/>
+            <stop offset="100%" stop-color="#1a0000"/>
+        </radialGradient>
 
-    <!-- ===== 血红主背景渐变（更亮更鲜艳） ===== -->
-    <radialGradient id="bloodGrad" cx="50%" cy="45%" r="65%" fx="50%" fy="45%">
-      <stop offset="0%"   stop-color="#ff4040"/>
-      <stop offset="40%"  stop-color="#ff0000"/>
-      <stop offset="80%"  stop-color="#cc0000"/>
-      <stop offset="100%" stop-color="#660000"/>
-    </radialGradient>
+        <!-- ===== 后景波浪渐变（暗红） ===== -->
+        <linearGradient id="waveBackGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#8a0808"/>
+            <stop offset="40%" stop-color="#5a0000"/>
+            <stop offset="100%" stop-color="#2a0000"/>
+        </linearGradient>
 
-    <!-- ===== 内部高光渐变（液态感） ===== -->
-    <radialGradient id="shineGrad" cx="42%" cy="30%" r="50%">
-      <stop offset="0%"   stop-color="#ff9999" stop-opacity="0.75"/>
-      <stop offset="60%"  stop-color="#ff3333" stop-opacity="0.25"/>
-      <stop offset="100%" stop-color="#cc0000" stop-opacity="0"/>
-    </radialGradient>
+        <!-- ===== 前景波浪渐变（鲜红） ===== -->
+        <linearGradient id="waveFrontGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#ff2a2a"/>
+            <stop offset="35%" stop-color="#ee0000"/>
+            <stop offset="100%" stop-color="#9a0000"/>
+        </linearGradient>
 
-    <!-- ===== 边缘暗边 ===== -->
-    <radialGradient id="rimDark" cx="50%" cy="50%" r="50%">
-      <stop offset="55%"  stop-color="#000000" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.4"/>
-    </radialGradient>
+        <!-- ===== 边缘暗边 ===== -->
+        <radialGradient id="rimDark" cx="50%" cy="50%" r="50%">
+            <stop offset="55%" stop-color="#000000" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#000000" stop-opacity="0.45"/>
+        </radialGradient>
 
-    <!-- ===== 液态水滴滤镜（gooey 效果） ===== -->
-    <filter id="gooey" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur"/>
-      <feColorMatrix in="blur"
-        values="1 0 0 0 0
-                0 1 0 0 0
-                0 0 1 0 0
-                0 0 0 22 -9" result="goo"/>
-      <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
-    </filter>
+        <!-- ===== 裁剪用 ===== -->
+        <clipPath id="cardClip">
+            <rect x="0" y="0" width="256" height="256"/>
+        </clipPath>
+    </defs>
 
-    <!-- ===== 光泽高光滤镜 ===== -->
-    <filter id="glossFilter" x="-5%" y="-5%" width="110%" height="110%">
-      <feGaussianBlur stdDeviation="3" result="gb"/>
-      <feComposite in="SourceGraphic" in2="gb"/>
-    </filter>
+    <!-- ========== 卡片底层背景 ========== -->
+    <rect x="0" y="0" width="256" height="256"
+          fill="url(#bloodGrad)"/>
 
-    <!-- ===== 裁剪用圆角矩形 ===== -->
-    <clipPath id="cardClip">
-      <rect x="0" y="0" width="256" height="256"/>
-    </clipPath>
+    <!-- ========== 波浪层 ========== -->
+    <g clip-path="url(#cardClip)">
+        <!-- 后景波浪（暗红，流速慢，波幅大，位置偏上） -->
+        <g>
+            <animateTransform attributeName="transform"
+                              values="0,0; 0,7; 0,-5; 0,4; 0,0" dur="5.2s" repeatCount="indefinite"
+                              calcMode="spline"
+                              keySplines="0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1"/>
+            <path d="M 0,78 Q 64,48 128,78 T 256,78 T 384,78 T 512,78 L 512,256 L 0,256 Z"
+                  fill="url(#waveBackGrad)" opacity="0.88">
+                <animateTransform attributeName="transform"
+                                  values="0,0; -256,0" dur="10s" repeatCount="indefinite"/>
+            </path>
+        </g>
 
-  </defs>
+        <!-- 前景波浪（鲜红，流速快，波幅稍小，位置偏下） -->
+        <g>
+            <animateTransform attributeName="transform"
+                              values="0,0; 0,-5; 0,6; 0,-3; 0,0" dur="4.3s" repeatCount="indefinite"
+                              calcMode="spline"
+                              keySplines="0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1"/>
+            <path d="M 0,128 Q 64,104 128,128 T 256,128 T 384,128 T 512,128 L 512,256 L 0,256 Z"
+                  fill="url(#waveFrontGrad)" opacity="0.92">
+                <animateTransform attributeName="transform"
+                                  values="0,0; -256,0" dur="5s" repeatCount="indefinite"/>
+            </path>
+        </g>
 
-  <!-- ========== 卡片底层圆角矩形背景 ========== -->
-  <rect x="0" y="0" width="256" height="256"
-        fill="url(#bloodGrad)"/>
+        <!-- 前景波浪顶部高光线（液面反光） -->
+        <g>
+            <animateTransform attributeName="transform"
+                              values="0,0; 0,-5; 0,6; 0,-3; 0,0" dur="4.3s" repeatCount="indefinite"
+                              calcMode="spline"
+                              keySplines="0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1"/>
+            <path d="M 0,128 Q 64,104 128,128 T 256,128 T 384,128 T 512,128"
+                  fill="none" stroke="#ff7070" stroke-width="1.5" opacity="0.45">
+                <animateTransform attributeName="transform"
+                                  values="0,0; -256,0" dur="5s" repeatCount="indefinite"/>
+            </path>
+        </g>
+    </g>
 
-  <!-- ========== 水滴晃动层（gooey blobs），裁切在卡片内 ========== -->
-  <g clip-path="url(#cardClip)" filter="url(#gooey)">
-
-    <!-- 主体大水滴 blob（在卡片中央，缓慢上下左右晃动） -->
-    <ellipse cx="128" cy="137" rx="97" ry="87" fill="#ff2020" opacity="0.92">
-      <animateTransform attributeName="transform"
-        values="0,0; 6,-8; -5,10; 8,4; -4,-10; 0,0"
-        dur="5.5s" repeatCount="indefinite" calcMode="spline"
-        keySplines="0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1"/>
-      <animate attributeName="rx" values="97;101;89;99;107;97" dur="5.5s" repeatCount="indefinite" calcMode="spline"
-        keySplines="0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1"/>
-      <animate attributeName="ry" values="87;81;95;83;89;87" dur="5.5s" repeatCount="indefinite" calcMode="spline"
-        keySplines="0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1"/>
-    </ellipse>
-
-    <!-- 左上副水滴 -->
-    <ellipse cx="56" cy="66" rx="53" ry="48" fill="#ff3333" opacity="0.88">
-      <animateTransform attributeName="transform"
-        values="0,0; -7,5; 4,-8; 9,3; -3,7; 0,0"
-        dur="6.2s" repeatCount="indefinite" calcMode="spline"
-        keySplines="0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1"/>
-      <animate attributeName="rx" values="53;61;47;55;58;53" dur="6.2s" repeatCount="indefinite" calcMode="spline"
-        keySplines="0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1"/>
-      <animate attributeName="ry" values="48;42;55;44;50;48" dur="6.2s" repeatCount="indefinite" calcMode="spline"
-        keySplines="0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1"/>
-    </ellipse>
-
-    <!-- 右下副水滴 -->
-    <ellipse cx="207" cy="212" rx="56" ry="51" fill="#ff1111" opacity="0.90">
-      <animateTransform attributeName="transform"
-        values="0,0; 5,8; -8,-4; 3,-9; 7,6; 0,0"
-        dur="7.1s" repeatCount="indefinite" calcMode="spline"
-        keySplines="0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1"/>
-      <animate attributeName="rx" values="56;62;48;58;66;56" dur="7.1s" repeatCount="indefinite" calcMode="spline"
-        keySplines="0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1"/>
-      <animate attributeName="ry" values="51;45;58;52;47;51" dur="7.1s" repeatCount="indefinite" calcMode="spline"
-        keySplines="0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1"/>
-    </ellipse>
-
-    <!-- 右上小水滴 -->
-    <ellipse cx="215" cy="50" rx="36" ry="33" fill="#ff4444" opacity="0.82">
-      <animateTransform attributeName="transform"
-        values="0,0; 6,-4; -4,7; -7,-2; 3,8; 0,0"
-        dur="4.8s" repeatCount="indefinite" calcMode="spline"
-        keySplines="0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1"/>
-      <animate attributeName="rx" values="36;42;30;38;44;36" dur="4.8s" repeatCount="indefinite" calcMode="spline"
-        keySplines="0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1"/>
-      <animate attributeName="ry" values="33;28;39;31;35;33" dur="4.8s" repeatCount="indefinite" calcMode="spline"
-        keySplines="0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1"/>
-    </ellipse>
-
-    <!-- 左下小水滴 -->
-    <ellipse cx="41" cy="224" rx="40" ry="37" fill="#ff2a2a" opacity="0.85">
-      <animateTransform attributeName="transform"
-        values="0,0; -5,6; 7,-3; -3,-8; 5,4; 0,0"
-        dur="5.9s" repeatCount="indefinite" calcMode="spline"
-        keySplines="0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1"/>
-      <animate attributeName="rx" values="40;46;34;42;37;40" dur="5.9s" repeatCount="indefinite" calcMode="spline"
-        keySplines="0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1"/>
-      <animate attributeName="ry" values="37;31;43;39;33;37" dur="5.9s" repeatCount="indefinite" calcMode="spline"
-        keySplines="0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1"/>
-    </ellipse>
-
-    <!-- 中央漂浮小泡泡 -->
-    <circle cx="151" cy="91" r="18" fill="#ff5555" opacity="0.75">
-      <animateTransform attributeName="transform"
-        values="0,0; 10,6; -5,-10; 8,-4; -9,8; 0,0"
-        dur="4.3s" repeatCount="indefinite" calcMode="spline"
-        keySplines="0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1"/>
-      <animate attributeName="r" values="18;23;15;20;22;18" dur="4.3s" repeatCount="indefinite" calcMode="spline"
-        keySplines="0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1;0.4,0,0.6,1"/>
-    </circle>
-
-  </g>
-
-  <!-- ========== 内部高光（液面反光感） ========== -->
-  <rect x="0" y="0" width="256" height="256"
-        fill="url(#shineGrad)" clip-path="url(#cardClip)"/>
-
-  <!-- ========== 边缘压暗（玻璃质感边框） ========== -->
-  <rect x="0" y="0" width="256" height="256"
-        fill="url(#rimDark)" clip-path="url(#cardClip)"/>
+    <!-- ========== 边缘压暗 ========== -->
+    <rect x="0" y="0" width="256" height="256"
+          fill="url(#rimDark)" clip-path="url(#cardClip)"/>
 </svg>
