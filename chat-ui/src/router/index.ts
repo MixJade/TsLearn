@@ -13,6 +13,9 @@ const routes: RouteRecordRaw[] = [
     }, {
         path: '/qrCode',
         component: () => import('@/views/qrCode.vue')
+    }, {
+        path: '/aiControl',
+        component: () => import('@/views/aiControl.vue')
     },
 ]
 export const router = createRouter({

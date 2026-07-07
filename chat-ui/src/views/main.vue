@@ -1,5 +1,7 @@
 <template>
   <div id="login-form">
+    <AiCorner route="/aiControl" text="AI"/>
+
     <label for="user">账号</label>
     <input id="user" v-model="username" name="user" type="text">
     <img id="touZi" alt="骰子" src="/icon/touzi.png" @click="randomName">
@@ -16,6 +18,7 @@ import {useRouter} from "vue-router";
 import {onMounted, ref} from "vue";
 import {reqRandomName, reqToLogin} from "@/request/loginApi";
 import {reqIsAlive} from "@/request/llamaApi";
+import AiCorner from "@/components/AiCorner.vue";
 
 onMounted(() => {
   randomName();
@@ -64,7 +67,6 @@ $borderColor: #008A5B
 
   label
     color: $borderColor
-
 
 //聊天页面
 #user

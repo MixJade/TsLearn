@@ -6,3 +6,9 @@ import {Result} from "@/model/Result";
  */
 export const reqIsAlive = (): Promise<Result> =>
     myReq.get<Result>("/api/llama/isAlive")
+
+/**
+ * 切换AI存活状态
+ */
+export const reqToggleAlive = (): Promise<Result> =>
+    myReq.get<Result>("/api/llama/toggleAlive")
