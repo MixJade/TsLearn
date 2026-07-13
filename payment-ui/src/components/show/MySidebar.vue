@@ -7,10 +7,10 @@
       </svg>
     </div>
     <ul>
-      <li class="li-cache" @click="toRoute('/payCaches')">缓存转正</li>
-      <li class="li-dict" @click="toRoute('/payDicts')">收支字典</li>
-      <li class="li-in-csv" @click="openForm2">导入账本</li>
-      <li class="li-out-csv" @click="downInsertCsv">导出账本</li>
+      <li class="li-cache" data-tip="从微信支付导出的消费记录进行转换" @click="toRoute('/payCaches')">账单转换</li>
+      <li class="li-dict" data-tip="配置消费类型的字典项" @click="toRoute('/payDicts')">收支字典</li>
+      <li class="li-in-csv" data-tip="导入本项目的收支记录csv" @click="openForm2">导入记录</li>
+      <li class="li-out-csv" data-tip="将本项目的收支记录导出为csv" @click="downInsertCsv">导出记录</li>
     </ul>
     <footer>MixJade</footer>
   </div>
@@ -146,6 +146,7 @@ const downInsertCsv = (): void => {
     text-decoration: none
     cursor: pointer
     text-align: center
+    position: relative
 
   footer
     position: absolute
@@ -163,7 +164,30 @@ const downInsertCsv = (): void => {
   border: 2px solid $txt-color
   color: $txt-color
   &:hover
-    box-shadow: inset 0 0 12px $txt-color
+    transform: scale(1.1)
+
+    &::after
+      opacity: 1
+      visibility: visible
+      transform: translateY(-50%) translateX(0)
+  &::after
+    content: attr(data-tip)
+    position: absolute
+    left: calc(100% + 2px)
+    top: 50%
+    transform: translateY(-50%) translateX(-6px)
+    background-color: rgb(255, 255, 255, 0.8)
+    color: $txt-color
+    padding: 4px 12px 4px 14px
+    border-bottom: 1px solid $txt-color
+    white-space: nowrap
+    font-size: 12px
+    opacity: 0
+    visibility: hidden
+    transition: all 0.25s ease
+    z-index: 100
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1)
+    pointer-events: none
 
 //导航选项的颜色
 .li-dict
@@ -194,7 +218,7 @@ const downInsertCsv = (): void => {
   left: 0
   right: 0
   bottom: 0
-  background-color: rgba(0, 0, 0, 0.5)
+  background-color: rgba(0, 0, 0, 0.2)
   opacity: 0
   pointer-events: none
   transition: opacity 0.3s ease-in-out
