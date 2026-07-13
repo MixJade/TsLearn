@@ -1,9 +1,11 @@
 <template>
   <span v-if="ms.isSystem" class="noticeMsg">{{ ms.message }}</span>
-  <div v-else :class="isMe?'selfMsg':''" class="msgDiv">
-    <span class="msgUser">{{ ms.userVo.username }} {{ ms.sendTime }}</span>
+  <div v-else :class="isMe ? 'selfMsg' : 'otherMsg'" class="msgRow">
     <div class="msgImg" :style="{backgroundColor: ms.userVo.imgColor}">{{ ms.userVo.simpleNm }}</div>
-    <div class="msgContent">{{ ms.message }}</div>
+    <div class="msgBody">
+      <span class="msgUser">{{ ms.userVo.username }} {{ ms.sendTime }}</span>
+      <div class="msgBubble">{{ ms.message }}</div>
+    </div>
   </div>
 </template>
 
@@ -17,65 +19,69 @@ defineProps<{
 </script>
 
 <style lang="sass" scoped>
-.msgDiv
-  //聊天消息的样式
-  padding: 4px
+.msgRow
+  display: flex
+  align-items: flex-start
+  margin: 10px 0
+  gap: 10px
 
-.msgUser
-  $text-height: 8px
-  height: $text-height
-  display: inline-block
-  //文字样式
-  font-size: $text-height
-  color: #909399
+.otherMsg
+  // 别人的消息靠左
+  flex-direction: row
+
+.selfMsg
+  // 自己的消息靠右，头像放右边
+  flex-direction: row-reverse
+
+  .msgBubble
+    background-color: #95ec69
+    color: #1a1a1a
+    border-radius: 12px 4px 12px 12px
+
+  .msgUser
+    text-align: right
 
 .msgImg
-  $msgImgHeight: 36px
-  height: $msgImgHeight
-  width: $msgImgHeight
-  //大致样式
+  width: 40px
+  height: 40px
   border-radius: 50%
-  //字体样式
   text-align: center
   font-weight: bolder
   color: white
-  font-size: large
-  line-height: $msgImgHeight
+  font-size: 15px
+  line-height: 40px
+  flex-shrink: 0
 
-.msgContent
-  //定位
-  margin-left: 42px
-  margin-top: -32px
-  //大体样式
-  padding: 8px
-  border-radius: 4px
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5)
-  // 为内部文本宽度
-  display: table
+.msgBody
+  display: flex
+  flex-direction: column
   max-width: 70%
-  //换行
+
+.msgUser
+  font-size: 12px
+  color: #b0b0b0
+  margin-bottom: 4px
+
+.msgBubble
+  padding: 10px 14px
+  border-radius: 4px 12px 12px 12px
+  background-color: #ffffff
+  color: #1a1a1a
+  display: table
   white-space: pre-wrap
   word-break: break-all
-  background-color: #FAFAFA
-  //允许文字选中
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08)
   -webkit-user-select: text
   user-select: text
+  font-size: 14px
+  line-height: 1.5
 
 .noticeMsg
-  @extend .msgUser
-  //系统通知消息需居中
   display: block
   width: 100%
   text-align: center
-
-.selfMsg
-  // 自己的消息,整个左右翻转
-  transform: scaleX(-1)
-  // 子元素再翻回去
-  > *
-    transform: scaleX(-1)
-
-  .msgContent
-    background-color: #67c23a
-    color: white
+  font-size: 12px
+  color: #b0b0b0
+  margin: 8px 0
+  padding: 4px 0
 </style>

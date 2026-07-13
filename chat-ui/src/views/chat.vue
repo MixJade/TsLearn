@@ -1,20 +1,38 @@
 <template>
   <div id="chatMain">
     <header>
-      <a href="#/">返回</a>
-      <span>{{ username }}({{ isOn ? "在线" : "离线" }})</span>
-      <button type="button" @click="clickLoginUser">在线人员</button>
+      <a href="#/" class="backBtn">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+        返回
+      </a>
+      <span class="statusInfo">
+        <span class="dot" :class="isOn ? 'dotOn' : 'dotOff'"></span>
+        {{ username }}
+      </span>
+      <button type="button" class="onlineBtn" @click="clickLoginUser">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        在线人员
+      </button>
     </header>
     <main ref="chatContent">
       <Msg v-for="ms in myMsg" :is-me="!ms.isSystem && username===ms.userVo.username" :ms="ms"/>
     </main>
     <footer>
-      <label for="msgTextArea">
-        消息
-      </label>
-      <textarea id="msgTextArea" v-model="sendMsg" cols="70" placeholder="输入消息或粘贴图片" rows="6"
-                @paste="handlePaste"></textarea>
-      <button type="button" @click="clickSend">发送</button>
+      <textarea v-model="sendMsg" placeholder="输入消息或粘贴图片..."
+                @paste="handlePaste" @keydown.enter.exact="clickSend"></textarea>
+      <button type="button" class="sendBtn" @click="clickSend">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"/>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+      </button>
     </footer>
   </div>
 </template>
@@ -47,7 +65,7 @@ const rollBottom = () => {
 }
 
 // 链接webSocket
-const ws = new WebSocket("ws://" + window.location.host + "/ws/chat");  // 建立WebSocket对象
+const ws = new WebSocket("ws://" + window.location.host + "/ws/chat");
 if (typeof (ws) === "undefined") {
   alert("您的浏览器不支持socket")
 }
@@ -84,7 +102,6 @@ const clickLoginUser = () => {
  └───────────────────────────────────┘
  */
 onBeforeUnmount(() => {
-  // 1000是关闭代码，表示正常关闭连接，'正常关闭连接'是一个可选的文字描述
   ws.close(1000, '正常关闭连接');
 })
 /**
@@ -93,18 +110,15 @@ onBeforeUnmount(() => {
  └───────────────────────────────────┘
  */
 const handlePaste = async (e: ClipboardEvent) => {
-  // 检查剪贴板是否有文件
   const items = e.clipboardData?.items;
   if (!items) return;
 
   for (const item of items) {
-    // 检查是否为图片
     if (item.type.indexOf('image') !== -1) {
-      e.preventDefault(); // 阻止默认粘贴行为
+      e.preventDefault();
       const blob = item.getAsFile();
       if (blob) {
         try {
-          // 上传图片
           const formData = new FormData() as FormData;
           formData.append('file', blob);
           reqUpPasteImg(formData).then(resp => {
@@ -119,7 +133,7 @@ const handlePaste = async (e: ClipboardEvent) => {
           alert('图片上传失败');
         }
       }
-      break; // 只处理第一个图片
+      break;
     }
   }
 };
@@ -127,7 +141,6 @@ const handlePaste = async (e: ClipboardEvent) => {
 
 <style lang="sass" scoped>
 #chatMain
-  //页面必须刚好填满屏幕
   position: absolute
   top: 0
   bottom: 0
@@ -135,80 +148,120 @@ const handlePaste = async (e: ClipboardEvent) => {
   right: 0
   width: 100%
   height: 100%
-  //主题颜色
-  $backColor: #409eff
-  //子元素高度
-  $headerHeight: 6%
-  $footerHeight: 12%
+  display: flex
+  flex-direction: column
+  background-color: #f5f5f5
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif
 
   header
-    width: 100%
-    height: $headerHeight
-    //定位
-    position: absolute
-    top: 0
-    //背景颜色
-    background-color: $backColor
-    //内部样式
-    box-sizing: border-box
-    padding: 6px
     display: flex
     justify-content: space-between
     align-items: center
+    padding: 0 16px
+    height: 52px
+    background: rgba(255, 255, 255, 0.85)
+    backdrop-filter: blur(10px)
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06)
+    z-index: 10
 
-    a, span
-      //字体颜色
-      font-size: smaller
-      color: white
-      font-weight: bolder
+    .backBtn
+      display: flex
+      align-items: center
+      gap: 4px
+      color: #576b95
+      font-size: 14px
+      font-weight: 500
+      &:hover
+        color: #3a5a8c
+
+    .statusInfo
+      display: flex
+      align-items: center
+      gap: 6px
+      font-size: 15px
+      font-weight: 600
+      color: #1a1a1a
+
+    .dot
+      width: 8px
+      height: 8px
+      border-radius: 50%
+      display: inline-block
+
+    .dotOn
+      background-color: #07c160
+
+    .dotOff
+      background-color: #ccc
+
+    .onlineBtn
+      display: flex
+      align-items: center
+      gap: 4px
+      padding: 6px 12px
+      font-size: 13px
+      color: #576b95
+      background: rgba(87, 107, 149, 0.08)
+      border: none
+      border-radius: 8px
+      cursor: pointer
+      font-weight: 500
+      &:hover
+        background: rgba(87, 107, 149, 0.15)
 
   main
-    width: 90%
-    height: 100%-$headerHeight - $footerHeight
-    //定位
-    position: absolute
-    left: 5%
-    top: $headerHeight
-    bottom: $footerHeight
-    //滚轮
+    flex: 1
     overflow-y: auto
-    //内部样式
-    box-sizing: border-box
-    padding: 12px
-    //背景颜色
-    background-color: #F0F2F5
+    padding: 16px 24px
+    background-color: #f5f5f5
+    // 自定义滚动条
+    &::-webkit-scrollbar
+      width: 4px
+    &::-webkit-scrollbar-thumb
+      background-color: rgba(0, 0, 0, 0.12)
+      border-radius: 4px
 
   footer
-    width: 100%
-    height: $footerHeight
-    //定位
-    position: absolute
-    bottom: 0
-    //背景颜色
-    background-color: $backColor
-    border-top: 2px solid #3c3c3c
-    //内部样式
-    box-sizing: border-box
-    padding: 4px 6px
     display: flex
-    justify-content: center
-
-    label
-      font-weight: bolder
-      color: white
+    align-items: flex-end
+    gap: 10px
+    padding: 12px 16px
+    background: rgba(255, 255, 255, 0.92)
+    backdrop-filter: blur(10px)
+    border-top: 1px solid rgba(0, 0, 0, 0.06)
+    z-index: 10
 
     textarea
-      margin: 0 4px
+      flex: 1
+      resize: none
+      border: none
+      outline: none
+      background-color: transparent
+      font-size: 14px
+      line-height: 1.5
+      padding: 8px 0
+      color: #1a1a1a
+      min-height: 40px
+      max-height: 120px
+      font-family: inherit
+      &::placeholder
+        color: #b0b0b0
 
-button
-  padding: 2px 6px
-  color: white
-  background-color: #67C23A
-  border: 2px solid #529b2e
-  border-radius: 6px
-  font-weight: bolder
-
-  &:hover
-    //表中按钮
-    box-shadow: 0 0 8px 0 #73767a
+    .sendBtn
+      width: 40px
+      height: 40px
+      border-radius: 50%
+      border: none
+      background: #07c160
+      color: white
+      cursor: pointer
+      display: flex
+      align-items: center
+      justify-content: center
+      flex-shrink: 0
+      transition: background 0.2s
+      &:hover
+        background: #06ad56
+      &:active
+        background: #059648
 </style>
