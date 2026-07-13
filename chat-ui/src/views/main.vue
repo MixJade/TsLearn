@@ -4,7 +4,6 @@
 
     <label for="user">账号</label>
     <input id="user" v-model="username" name="user" type="text">
-    <img id="touZi" alt="骰子" src="/icon/touzi.png" @click="randomName">
     <div id="container">
       <div style="background-color: #5b88ea" @click="loginChat">在线{{ aiChatEnabled ? "AI" : "" }}聊天页面</div>
       <div style="background-color: #c45656" @click="toRoute('/fileUp')">文件上传下载</div>
@@ -16,12 +15,12 @@
 <script lang="ts" setup>
 import {useRouter} from "vue-router";
 import {onMounted, ref} from "vue";
-import {reqRandomName, reqToLogin} from "@/request/loginApi";
+import {reqUserName, reqToLogin} from "@/request/loginApi";
 import {reqIsAlive} from "@/request/llamaApi";
 import AiCorner from "@/components/AiCorner.vue";
 
 onMounted(() => {
-  randomName();
+  getUserName();
   checkAI();
 })
 
@@ -33,8 +32,8 @@ const toRoute = (url: string) => {
 
 // 登录聊天页面
 const username = ref<string>("")
-const randomName = () => {
-  reqRandomName().then(res => {
+const getUserName = () => {
+  reqUserName().then(res => {
     username.value = res
   })
 }
@@ -76,13 +75,6 @@ $borderColor: #008A5B
   //50%圆角
   border-radius: 36px
   padding-left: 18px
-
-#touZi
-  //骰子图片
-  $imgSize: 42px
-  width: $imgSize
-  height: $imgSize
-  margin-bottom: - calc($imgSize / 2)
 
 #container
   display: flex
