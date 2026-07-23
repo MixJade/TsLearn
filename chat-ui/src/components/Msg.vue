@@ -4,7 +4,8 @@
     <div class="msgImg" :style="{backgroundColor: ms.userVo.imgColor}">{{ ms.userVo.simpleNm }}</div>
     <div class="msgBody">
       <span class="msgUser">{{ ms.userVo.username }} {{ ms.sendTime }}</span>
-      <div class="msgBubble">{{ ms.message }}</div>
+      <div v-if="ms.isHtml" class="msgBubble" v-html="ms.message"></div>
+      <div v-else class="msgBubble">{{ ms.message }}</div>
     </div>
   </div>
 </template>

@@ -5,4 +5,5 @@ export interface Message {
     userVo: UserVo;//发送者
     message: string;//信息
     sendTime: string;//发送时间
+    isHtml: boolean;//是否为 HTML 内容（true 时 v-html 渲染）
 }
