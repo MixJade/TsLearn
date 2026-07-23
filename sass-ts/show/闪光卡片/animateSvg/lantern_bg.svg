@@ -1,46 +1,98 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
     <defs>
         <!-- 金色渐变背景：左淡金 → 中金 → 右深金 -->
-        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <linearGradient id="goldBright" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stop-color="#f5d060"/>
             <stop offset="50%" stop-color="#daa520"/>
             <stop offset="100%" stop-color="#b8780a"/>
         </linearGradient>
-        <!-- 中心放射白光渐变：中心亮白 → 边缘透明 -->
-        <radialGradient id="centerGlow" cx="50%" cy="50%" r="70%">
-            <stop offset="0%" stop-color="rgba(255,255,255,0.85)"/>
-            <stop offset="20%" stop-color="rgba(255,255,255,0.92)"/>
-            <stop offset="45%" stop-color="rgba(255,255,255,0.65)"/>
-            <stop offset="75%" stop-color="rgba(255,255,255,0.18)"/>
-            <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-        </radialGradient>
-        <!-- 卡片投影 -->
-        <filter id="cardShadow" x="-15%" y="-15%" width="130%" height="130%">
-            <feDropShadow dx="0" dy="4" stdDeviation="10" flood-color="#000" flood-opacity="0.75"/>
-        </filter>
-        <!-- 裁剪路径 -->
+
+        <!-- ===== 暗金色渐变 ===== -->
+        <linearGradient id="goldDark" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#daa520"/>
+            <stop offset="50%" stop-color="#9a7810"/>
+            <stop offset="100%" stop-color="#6a5008"/>
+        </linearGradient>
+
+        <!-- ===== 裁剪路径 ===== -->
         <clipPath id="cardClip">
             <rect x="0" y="0" width="256" height="256"/>
         </clipPath>
+
+        <!-- ====== 风车擦除 Mask ====== -->
+        <!-- 白色=显示暗金层，黑色=透出亮金层 -->
+        <!-- 6 个扇形逐个淡入/淡出（交错），配合整体旋转，形成风车叶片依次扫过的擦除效果 -->
+        <mask id="pinwheelMask" x="0" y="0" width="256" height="256">
+            <rect x="0" y="0" width="256" height="256" fill="black"/>
+
+            <g transform="translate(128 128)">
+                <!-- 旋转层：过渡期匀速自旋 360°，停留期静止 -->
+                <g>
+                    <animateTransform attributeName="transform" type="rotate"
+                                      values="0; 360; 360; 720; 720"
+                                      keyTimes="0; 0.15; 0.5; 0.65; 1"
+                                      dur="10s" repeatCount="indefinite"
+                                      calcMode="linear"/>
+
+                    <g transform="translate(-128 -128)">
+                        <!-- 扇形 0：0°─60° -->
+                        <path d="M 128,128 L 328,128 A 200,200 0 0,1 228,301.2 Z" fill="white">
+                            <animate attributeName="opacity"
+                                     values="0; 1; 1; 0; 0"
+                                     keyTimes="0; 0.025; 0.5; 0.525; 1"
+                                     dur="10s" repeatCount="indefinite" calcMode="linear"/>
+                        </path>
+
+                        <!-- 扇形 1：60°─120° -->
+                        <path d="M 128,128 L 228,301.2 A 200,200 0 0,1 28,301.2 Z" fill="white">
+                            <animate attributeName="opacity"
+                                     values="0; 0; 1; 1; 1; 0; 0"
+                                     keyTimes="0; 0.025; 0.05; 0.5; 0.525; 0.55; 1"
+                                     dur="10s" repeatCount="indefinite" calcMode="linear"/>
+                        </path>
+
+                        <!-- 扇形 2：120°─180° -->
+                        <path d="M 128,128 L 28,301.2 A 200,200 0 0,1 -72,128 Z" fill="white">
+                            <animate attributeName="opacity"
+                                     values="0; 0; 1; 1; 1; 0; 0"
+                                     keyTimes="0; 0.05; 0.075; 0.5; 0.55; 0.575; 1"
+                                     dur="10s" repeatCount="indefinite" calcMode="linear"/>
+                        </path>
+
+                        <!-- 扇形 3：180°─240° -->
+                        <path d="M 128,128 L -72,128 A 200,200 0 0,1 28,-45.2 Z" fill="white">
+                            <animate attributeName="opacity"
+                                     values="0; 0; 1; 1; 1; 0; 0"
+                                     keyTimes="0; 0.075; 0.1; 0.5; 0.575; 0.6; 1"
+                                     dur="10s" repeatCount="indefinite" calcMode="linear"/>
+                        </path>
+
+                        <!-- 扇形 4：240°─300° -->
+                        <path d="M 128,128 L 28,-45.2 A 200,200 0 0,1 228,-45.2 Z" fill="white">
+                            <animate attributeName="opacity"
+                                     values="0; 0; 1; 1; 1; 0; 0"
+                                     keyTimes="0; 0.1; 0.125; 0.5; 0.6; 0.625; 1"
+                                     dur="10s" repeatCount="indefinite" calcMode="linear"/>
+                        </path>
+
+                        <!-- 扇形 5：300°─360° -->
+                        <path d="M 128,128 L 228,-45.2 A 200,200 0 0,1 328,128 Z" fill="white">
+                            <animate attributeName="opacity"
+                                     values="0; 0; 1; 1; 1; 0; 0"
+                                     keyTimes="0; 0.125; 0.15; 0.5; 0.625; 0.65; 1"
+                                     dur="10s" repeatCount="indefinite" calcMode="linear"/>
+                        </path>
+                    </g>
+                </g>
+            </g>
+        </mask>
     </defs>
 
     <g clip-path="url(#cardClip)">
-        <!-- 1. 金色渐变背景 -->
-        <rect x="0" y="0" width="256" height="256" fill="url(#goldGrad)" filter="url(#cardShadow)"/>
-        <!-- 2. 金色边框光晕 -->
-        <rect x="0" y="0" width="256" height="256"
-              fill="none" stroke="rgba(255,215,50,0.18)" stroke-width="1"/>
-        <!-- 3. 中心放射白光，覆盖整张卡片 -->
-        <rect x="0" y="0" width="256" height="256" fill="url(#centerGlow)"
-              style="mix-blend-mode:screen;">
-            <!-- 脉冲呼吸动画：白光强度周期性变化 -->
-            <animate attributeName="opacity"
-                     values="1; 0.55; 1"
-                     dur="3.2s"
-                     repeatCount="indefinite"
-                     calcMode="spline"
-                     keyTimes="0; 0.5; 1"
-                     keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"/>
-        </rect>
+        <!-- 1. 亮金色背景（底层，始终可见） -->
+        <rect x="0" y="0" width="256" height="256" fill="url(#goldBright)"/>
+
+        <!-- 2. 暗金色背景（顶层，由风车 mask 控制显隐） -->
+        <rect x="0" y="0" width="256" height="256" fill="url(#goldDark)" mask="url(#pinwheelMask)"/>
     </g>
 </svg>
