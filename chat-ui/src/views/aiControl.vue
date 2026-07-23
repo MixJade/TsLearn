@@ -27,6 +27,30 @@
         <p class="hint">* 仅更新状态标识，不实际启停 llama-server 进程</p>
       </div>
       <!-- 未来其他 AI 卡片加在这里 -->
+
+      <!-- IMA 知识库卡片 -->
+      <div class="ai-card">
+        <div class="ai-card-header">
+          <span class="ai-title ima-title">IMA 知识库</span>
+        </div>
+
+        <div class="status-area">
+          <div class="status-dot" :class="{ alive: imaAlive, dead: !imaAlive }"></div>
+          <span class="status-text">{{ imaAlive ? '运行中' : '已停止' }}</span>
+        </div>
+
+        <button
+            class="toggle-btn"
+            :class="{ alive: imaAlive, dead: !imaAlive }"
+            :disabled="imaToggling"
+            @click="doToggleIma"
+        >
+          {{ imaToggling ? '切换中...' : (imaAlive ? '停止 IMA' : '启动 IMA') }}
+        </button>
+
+        <p class="hint">* 开启后，每条消息都会作为关键词搜索知识库<br>
+        * 需在 application.properties 中配置 ima.api-key + ima.client-id + ima.kb-id</p>
+      </div>
     </div>
   </div>
 </template>
@@ -34,18 +58,30 @@
 <script lang="ts" setup>
 import {onMounted, ref} from "vue";
 import {reqIsAlive, reqToggleAlive} from "@/request/llamaApi";
+import {reqImaIsAlive, reqImaToggleAlive} from "@/request/imaApi";
 import Header from "@/components/Header.vue";
 
 const aiAlive = ref(false);
 const toggling = ref(false);
 
+// ── IMA 知识库状态 ──
+const imaAlive = ref(false);
+const imaToggling = ref(false);
+
 onMounted(() => {
   checkStatus();
+  checkImaStatus();
 });
 
 const checkStatus = () => {
   reqIsAlive().then(res => {
     aiAlive.value = res.flag;
+  });
+};
+
+const checkImaStatus = () => {
+  reqImaIsAlive().then(res => {
+    imaAlive.value = res.flag;
   });
 };
 
@@ -57,6 +93,17 @@ const doToggle = () => {
       })
       .finally(() => {
         toggling.value = false;
+      });
+};
+
+const doToggleIma = () => {
+  imaToggling.value = true;
+  reqImaToggleAlive()
+      .then(res => {
+        imaAlive.value = res.flag;
+      })
+      .finally(() => {
+        imaToggling.value = false;
       });
 };
 </script>
@@ -97,6 +144,9 @@ $green-deep: #1b5e20
   font-size: 15px
   font-weight: 700
   color: $green-deep
+
+  &.ima-title
+    color: #1565c0
 
 .status-area
   display: flex
