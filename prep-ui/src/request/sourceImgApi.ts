@@ -1,15 +1,13 @@
 import {myReq} from "@/request/myReq";
 import {Result} from "@/model/vo/Result";
-import {IPage} from "@/model/vo/IPage";
 import {SourceImage} from "@/model/entity/SourceImage";
-import {SourceImgDto} from "@/model/dto/SourceImgDto";
 
 
 /**
  * 查询图源表
  */
-export const reqImgSourcePage = (pageNum: number, pageSize: number, data: SourceImgDto): Promise<IPage<SourceImage>> =>
-    myReq.post<IPage<SourceImage>>(`/api/sourceImage/page?pageNum=${pageNum}&pageSize=${pageSize}`, data)
+export const reqImgSourcePage = (cateId: number): Promise<SourceImage[]> =>
+    myReq.get<SourceImage[]>(`/api/sourceImage/all?cateId=${cateId}`)
 
 /**
  * 查询单个图片

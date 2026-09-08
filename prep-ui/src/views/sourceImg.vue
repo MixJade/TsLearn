@@ -58,7 +58,6 @@ import SureDelModal from "@/components/message/SureDelModal.vue";
 import {SourceImage} from "@/model/entity/SourceImage";
 import {reqDelImg, reqImgSourcePage, reqOcrImg, reqOneImg, reqUpdImg, reqUploadImg} from "@/request/sourceImgApi";
 import {useRoute} from "vue-router";
-import {SourceImgDto} from "@/model/dto/SourceImgDto";
 import CardMain from "@/components/show/CardMain.vue";
 import {CardData} from "@/model/dto/CardData";
 
@@ -78,7 +77,6 @@ const setRouteData = (): void => {
     cateId = parseInt(route.query.cateId as string)
   // 给增删实体类设置值
   sourceImg.categoryId = cateId;
-  paData.categoryId = cateId;
 }
 
 /**
@@ -110,11 +108,10 @@ const commonResp = (resp: Result): void => {
  */
 // 表格数据
 const listCardData = ref<CardData[]>([])
-const paData: SourceImgDto = {categoryId: 0}
 const getAll = () => {
-  reqImgSourcePage(1, 100, paData).then(resp => {
+  reqImgSourcePage(cateId).then(resp => {
     const cardData: CardData[] = [];
-    resp.records.forEach(item => {
+    resp.forEach(item => {
       cardData.push({
         remark: item.remark || '无备注',
         childPath: '',
