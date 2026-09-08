@@ -27,6 +27,7 @@
 import MyBtn from "@/components/button/MyBtn.vue";
 import TbBtn from "@/components/button/TbBtn.vue";
 import {useRouter} from "vue-router";
+import {CardData} from "@/model/dto/CardData";
 
 defineProps<{
   tit: string;
@@ -43,15 +44,6 @@ const emits = defineEmits<{
 /**
  * ==========================[卡片代码聚合]========================
  */
-export interface CardData {
-  tit: string;
-  remark: string;
-  footer: string[];
-  dataId: number;
-  data: any;
-  childPath: string;
-}
-
 const openAddForm = () => {
   emits('openAddForm')
 }

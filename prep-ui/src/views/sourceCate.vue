@@ -1,5 +1,5 @@
 <template>
-  <LineCard tit="图片分类" :card-data-list="listCardData" @openAddForm="openAddForm" @openUpdForm="openUpdForm"
+  <CardMain tit="图片分类" :card-data-list="listCardData" @openAddForm="openAddForm" @openUpdForm="openUpdForm"
             @deleteById="deleteById"/>
   <!--添加修改的对话框-->
   <MyDialog ref="myShow">
@@ -35,7 +35,8 @@ import {Result} from "@/model/vo/Result";
 import SureDelModal from "@/components/message/SureDelModal.vue";
 import {SourceCategory} from "@/model/entity/SourceCategory";
 import {reqAddCate, reqDelCate, reqSourceCate, reqUpdCate} from "@/request/sourceCateApi";
-import LineCard, {CardData} from "@/components/show/LineCard.vue";
+import CardMain from "@/components/show/CardMain.vue";
+import {CardData} from "@/model/dto/CardData";
 
 onMounted(() => {
   getAll();

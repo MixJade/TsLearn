@@ -43,7 +43,8 @@ import {ExamPaper} from "@/model/entity/ExamPaper";
 import {reqAddPaper, reqDelPaper, reqPaperList, reqUpdPaper} from "@/request/examPaperApi";
 import {CateLabelVo} from "@/model/vo/CateLabelVo";
 import {reqCateLabel} from "@/request/sourceCateApi";
-import LineCard, {CardData} from "@/components/show/LineCard.vue";
+import LineCard from "@/components/show/LineCard.vue";
+import {CardData} from "@/model/dto/CardData";
 
 onMounted(() => {
   getAll();

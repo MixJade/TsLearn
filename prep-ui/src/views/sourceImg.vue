@@ -1,23 +1,14 @@
 <template>
-  <!-- 表格 -->
-  <MyTable :tb-page="tablePage"
-           :thead="['编号','备注','识别时间','操作']"
-           caption="题源图片表"
-           @pageChange="getAll">
-    <template #searchBtn>
-      <MyBtn text="添加图片" type="success" @click="openAddForm"/>
-      <MyBtn text="返回上级" type="secondary" @click="toBack"/>
-    </template>
-    <tr v-for="td in tableData" :key="td.imageId">
-      <td>{{ td.imageId }}</td>
-      <td>{{ td.remark }}</td>
-      <td>{{ td.ocrTime }}</td>
-      <td>
-        <TbBtn text="编辑" type="upd" @click="openUpdForm(td.imageId)"/>
-        <TbBtn text="删除" type="del" @click="deleteById(td.imageId)"/>
-      </td>
-    </tr>
-  </MyTable>
+  <CardMain
+    tit="题源图片"
+    :card-data-list="listCardData"
+    :show-image="true"
+    parent-path="/sourceCate"
+    @openAddForm="openAddForm"
+    @openUpdForm="openUpdForm"
+    @deleteById="deleteById"
+    @enterChild="openUpdForm"
+  />
   <!--添加修改的对话框-->
   <MyDialog ref="myShow">
     <form class="myForm">
@@ -60,16 +51,16 @@
 <script lang="ts" setup>
 import ToastBox from "@/components/message/ToastBox.vue";
 import {onMounted, reactive, ref} from "vue";
-import MyTable, {TbPage} from "@/components/show/MyTable.vue";
 import MyDialog from "@/components/message/MyDialog.vue";
 import MyBtn from "@/components/button/MyBtn.vue";
 import {Result} from "@/model/vo/Result";
 import SureDelModal from "@/components/message/SureDelModal.vue";
 import {SourceImage} from "@/model/entity/SourceImage";
 import {reqDelImg, reqImgSourcePage, reqOcrImg, reqOneImg, reqUpdImg, reqUploadImg} from "@/request/sourceImgApi";
-import TbBtn from "@/components/button/TbBtn.vue";
-import {useRoute, useRouter} from "vue-router";
+import {useRoute} from "vue-router";
 import {SourceImgDto} from "@/model/dto/SourceImgDto";
+import CardMain from "@/components/show/CardMain.vue";
+import {CardData} from "@/model/dto/CardData";
 
 onMounted(() => {
   setRouteData()
@@ -88,11 +79,6 @@ const setRouteData = (): void => {
   // 给增删实体类设置值
   sourceImg.categoryId = cateId;
   paData.categoryId = cateId;
-}
-const router = useRouter();
-// 返回上级页面
-const toBack = () => {
-  router.back()
 }
 
 /**
@@ -120,19 +106,26 @@ const commonResp = (resp: Result): void => {
 }
 
 /**
- * ===================================[表格数据]============================================
+ * ===================================[卡片数据]============================================
  */
 // 表格数据
-const tableData = ref<SourceImage[]>([])
-const tablePage: TbPage = reactive({current: 1, pages: 1, total: 0, size: 10}) as TbPage
+const listCardData = ref<CardData[]>([])
 const paData: SourceImgDto = {categoryId: 0}
 const getAll = () => {
-  reqImgSourcePage(tablePage.current, tablePage.size, paData).then(resp => {
-    tableData.value = resp.records
-    tablePage.current = resp.current;
-    tablePage.pages = resp.pages
-    tablePage.total = resp.total
-    tablePage.size = resp.size
+  reqImgSourcePage(1, 100, paData).then(resp => {
+    const cardData: CardData[] = [];
+    resp.records.forEach(item => {
+      cardData.push({
+        remark: item.remark || '无备注',
+        childPath: '',
+        data: item,
+        dataId: item.imageId,
+        footer: [`${item.ocrTime || '未识别'}`],
+        tit: `图片 ${item.imageId}`,
+        imageUrl: `/api/sourceImage/img/${item.imageId}`
+      })
+    })
+    listCardData.value = cardData;
   })
 }
 
@@ -202,9 +195,9 @@ const sourceImg2: SourceImage = reactive({
 
 // 表单弹出框
 const myShow2 = ref<InstanceType<typeof MyDialog> | null>(null)
-const openUpdForm = (id: number) => {
-  reqOneImg(id).then(resp => {
-    sourceImg2.imageId = id
+const openUpdForm = (cardData: CardData) => {
+  reqOneImg(cardData.dataId).then(resp => {
+    sourceImg2.imageId = cardData.dataId
     sourceImg2.ocrResult = resp.ocrResult
   })
   myShow2.value?.showMe();
