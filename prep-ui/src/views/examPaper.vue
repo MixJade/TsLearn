@@ -1,5 +1,5 @@
 <template>
-  <LineCard tit="试卷列表" :card-data-list="listCardData" @openAddForm="openAddForm" @openUpdForm="openUpdForm"
+  <CardMain tit="试卷列表" :card-data-list="listCardData" @openAddForm="openAddForm" @openUpdForm="openUpdForm"
             @deleteById="deleteById"/>
   <!--添加修改的对话框-->
   <MyDialog ref="myShow">
@@ -43,7 +43,7 @@ import {ExamPaper} from "@/model/entity/ExamPaper";
 import {reqAddPaper, reqDelPaper, reqPaperList, reqUpdPaper} from "@/request/examPaperApi";
 import {CateLabelVo} from "@/model/vo/CateLabelVo";
 import {reqCateLabel} from "@/request/sourceCateApi";
-import LineCard from "@/components/show/LineCard.vue";
+import CardMain from "@/components/show/CardMain.vue";
 import {CardData} from "@/model/dto/CardData";
 
 onMounted(() => {

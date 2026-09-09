@@ -6,7 +6,7 @@
     <div class="card-co" v-for="cd in cardDataList" :key="cd.dataId">
       <div class="card">
         <div>
-          <h3>{{ cd.tit }}</h3>
+          <h3 @click="enterChild(cd.childPath)">{{ cd.tit }}</h3>
           <p>{{ cd.remark }}</p>
           <footer>
             <span v-for="foot in cd.footer">{{ foot }}</span>
@@ -69,7 +69,7 @@ const enterChild = (path: string) => {
 <style lang="sass" scoped>
 @use "sass:math"
 // 连接线颜色
-$line-color: #67c23a
+$line-color: #5b8dd9
 $main-line-width: 6px
 $main-line-padding: 12px
 $main-line-left: 20px
@@ -146,6 +146,7 @@ $line-length: $main-line-width + $main-line-padding +  $main-line-left
 
   h3
     margin: 0
+    cursor: pointer
 
   .btn-group
     position: absolute

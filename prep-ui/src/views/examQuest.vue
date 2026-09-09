@@ -1,24 +1,6 @@
 <template>
-  <!-- 表格 -->
-  <MyTable :tb-page="tablePage"
-           :thead="['序号','类型','分值','操作']"
-           caption="题目表"
-           @pageChange="getAll">
-    <template #searchBtn>
-      <MyBtn text="添加题目" type="success" @click="openAddForm"/>
-      <MyBtn text="返回上级" type="secondary" @click="toUp"/>
-    </template>
-    <tr v-for="td in tableData" :key="td.questId">
-      <td>{{ td.questNo }}</td>
-      <td>{{ getQuestType(td.questType) }}</td>
-      <td>{{ td.score }}</td>
-      <td>
-        <TbBtn type="ent" text="进入" @click="toQuest(td.questId)"/>
-        <TbBtn type="upd" text="修改" @click="openUpdForm(td)"/>
-        <TbBtn type="del" text="删除" @click="deleteById(td.questId)"/>
-      </td>
-    </tr>
-  </MyTable>
+  <LineCard tit="题目列表" :card-data-list="listCardData" :theme="'#5b8dd9'" @openAddForm="openAddForm" @openUpdForm="openUpdForm"
+            @deleteById="deleteById"/>
   <!--添加修改的对话框-->
   <MyDialog ref="myShow">
     <form class="myForm">
@@ -37,8 +19,8 @@
           </select>
         </div>
         <div class="form-row">
-          <label for="duration">分值</label>
-          <input id="duration" v-model="questData.score" type="number">
+          <label for="score">分值</label>
+          <input id="score" v-model="questData.score" type="number">
         </div>
       </fieldset>
       <div class="form-footer">
@@ -55,16 +37,15 @@
 <script lang="ts" setup>
 import ToastBox from "@/components/message/ToastBox.vue";
 import {onMounted, reactive, ref} from "vue";
-import MyTable, {TbPage} from "@/components/show/MyTable.vue";
 import MyDialog from "@/components/message/MyDialog.vue";
 import MyBtn from "@/components/button/MyBtn.vue";
 import {Result} from "@/model/vo/Result";
 import SureDelModal from "@/components/message/SureDelModal.vue";
 import {ExamQuest} from "@/model/entity/ExamQuest";
-import {reqAddQuest, reqDelQuest, reqQuestPage, reqUpdQuest} from "@/request/examQuestApi";
-import TbBtn from "@/components/button/TbBtn.vue";
+import {reqAddQuest, reqDelQuest, reqQuestAll, reqUpdQuest} from "@/request/examQuestApi";
+import LineCard from "@/components/show/LineCard.vue";
+import {CardData} from "@/model/dto/CardData";
 import {useRoute, useRouter} from "vue-router";
-import {ExamQuestDto} from "@/model/dto/ExamQuestDto";
 
 onMounted(() => {
   setRouteData()
@@ -72,7 +53,7 @@ onMounted(() => {
 })
 
 /**
- * =======================================[吐司消息]=======================================
+ * ===================================[吐司消息]=======================================
  */
 // 引用子组件
 const childRef = ref<InstanceType<typeof ToastBox> | null>(null);
@@ -96,19 +77,24 @@ const commonResp = (resp: Result): void => {
 }
 
 /**
- * ===================================[表格数据]============================================
+ * ===================================[卡片数据]============================================
  */
-// 表格数据
-const tableData = ref<ExamQuest[]>([])
-const tablePage: TbPage = reactive({current: 1, pages: 1, total: 0, size: 10}) as TbPage
-const questDto: ExamQuestDto = {paperId: 0}
+// 卡片数据
+const listCardData = ref<CardData[]>([])
 const getAll = () => {
-  reqQuestPage(tablePage.current, tablePage.size, questDto).then(resp => {
-    tableData.value = resp.records
-    tablePage.current = resp.current;
-    tablePage.pages = resp.pages
-    tablePage.total = resp.total
-    tablePage.size = resp.size
+  reqQuestAll(paperId).then(resp => {
+    const cardData: CardData[] = [];
+    resp.forEach(item => {
+      cardData.push({
+        remark: `类型：${getQuestType(item.questType)} | 分值：${item.score}分`,
+        childPath: `/dealQuest?questId=${item.questId}`,
+        data: item,
+        dataId: item.questId,
+        footer: [`题目序号：${item.questNo}`],
+        tit: `题目 ${item.questNo}`
+      })
+    })
+    listCardData.value = cardData;
   })
 }
 
@@ -191,17 +177,8 @@ const setRouteData = (): void => {
     paperId = parseInt(route.query.paperId as string)
   }
   questData.paperId = paperId
-  questDto.paperId = paperId
 }
 const router = useRouter();
-// 返回上级页面
-const toUp = () => {
-  router.push('/examPaper')
-}
-// 进入题目管理
-const toQuest = (id: number) => {
-  router.push({path: '/dealQuest', query: {questId: id}})
-}
 </script>
 
 <style lang="sass" scoped>

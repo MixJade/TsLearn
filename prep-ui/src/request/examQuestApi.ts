@@ -1,13 +1,15 @@
 import {myReq} from "@/request/myReq";
 import {Result} from "@/model/vo/Result";
-import {IPage} from "@/model/vo/IPage";
 import {ExamQuest} from "@/model/entity/ExamQuest";
-import {ExamQuestDto} from "@/model/dto/ExamQuestDto";
 import {QuestImgListVo} from "@/model/vo/QuestImgListVo";
+import {QuestAndOptVo} from "@/model/vo/QuestAndOptVo";
 
 
-export const reqQuestPage = (pageNum: number, pageSize: number, questDto: ExamQuestDto): Promise<IPage<ExamQuest>> =>
-    myReq.post<IPage<ExamQuest>>(`/api/examQuest/page?pageNum=${pageNum}&pageSize=${pageSize}`, questDto)
+export const reqQuestAll = (paperId: number): Promise<ExamQuest[]> =>
+    myReq.get<ExamQuest[]>(`/api/examQuest/all?paperId=${paperId}`)
+
+export const reqGetView = (questId: number): Promise<QuestAndOptVo> =>
+    myReq.get<QuestAndOptVo>(`/api/examQuest/${questId}`)
 
 export const reqAddQuest = (data: ExamQuest): Promise<Result> =>
     myReq.post<Result>(`/api/examQuest`, data)
