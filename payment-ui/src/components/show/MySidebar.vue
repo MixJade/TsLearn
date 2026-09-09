@@ -7,7 +7,7 @@
       </svg>
     </div>
     <ul>
-      <li class="li-cache" data-tip="从微信支付导出的消费记录进行转换" @click="toRoute('/payCaches')">账单转换</li>
+      <li class="li-cache" data-tip="从微信支付导出的消费记录进行转换" @click="toRoute('/payCaches')">微信账单</li>
       <li class="li-dict" data-tip="配置消费类型的字典项" @click="toRoute('/payDicts')">收支字典</li>
       <li class="li-in-csv" data-tip="导入本项目的收支记录csv" @click="openForm2">导入记录</li>
       <li class="li-out-csv" data-tip="将本项目的收支记录导出为csv" @click="downInsertCsv">导出记录</li>
@@ -194,13 +194,13 @@ const downInsertCsv = (): void => {
   @include li-color(#409eff)
 
 .li-cache
-  @include li-color()
+  @include li-color(#67c23a)
 
 .li-in-csv
   @include li-color(#f56c6c)
 
 .li-out-csv
-  @include li-color(#67c23a)
+  @include li-color()
 
 
 #closeSidebar
