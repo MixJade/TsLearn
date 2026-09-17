@@ -65,9 +65,6 @@ const router = useRouter();
 const toBack = () => {
   router.push(props.parentPath || "/")
 }
-const enterChild = (path: string) => {
-  router.push(path)
-}
 
 const handleEnterChild = (cd: CardData) => {
   emits('enterChild', cd)

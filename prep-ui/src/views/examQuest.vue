@@ -45,7 +45,7 @@ import {ExamQuest} from "@/model/entity/ExamQuest";
 import {reqAddQuest, reqDelQuest, reqQuestAll, reqUpdQuest} from "@/request/examQuestApi";
 import LineCard from "@/components/show/LineCard.vue";
 import {CardData} from "@/model/dto/CardData";
-import {useRoute, useRouter} from "vue-router";
+import {useRoute} from "vue-router";
 
 onMounted(() => {
   setRouteData()
@@ -178,7 +178,6 @@ const setRouteData = (): void => {
   }
   questData.paperId = paperId
 }
-const router = useRouter();
 </script>
 
 <style lang="sass" scoped>
