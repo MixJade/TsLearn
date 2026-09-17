@@ -6,35 +6,72 @@
 
   <main class="main-content">
     <aside class="sidebar">
-      <TabLine :tit="imgName" type="primary">
-        <BlockBtn style="float: right" text="切换图片" type="primary" @click="openImgDialog"/>
-      </TabLine>
+      <header class="tab-line">
+        <h3 class="primary">{{ imgName }}</h3>
+        <div>
+          <BlockBtn text="切换图片" type="primary" @click="openImgDialog"/>
+        </div>
+      </header>
       <pre class="ocr-res new-line">{{ ocrRes }}</pre>
     </aside>
 
     <section class="content">
-      <TabLine tit="第一题" type="warning">
-        <BlockBtn style="float: right" text="编辑题目" type="warning" @click="openEditDialog('题目内容', questMain)"/>
-      </TabLine>
-      <pre class="quest new-line">{{ questMain }}</pre>
-      <TabLine tit="题目选项" type="success">
-        <BlockBtn text="添加选项" type="success"/>
-      </TabLine>
-      <div class="opt">
-        <h4>A</h4>
-        <span class="new-line">{{ ocrRes }}</span>
+      <!-- 中部可滚动正文 -->
+      <div class="content-body">
+        <h3 class="primary">题目</h3>
+        <!--题目主干：悬停右上角浮出编辑按钮-->
+        <div class="hover-box">
+          <pre class="quest new-line">{{ questMain }}</pre>
+          <div class="hover-actions">
+            <button class="icon-btn" type="button" title="编辑题目"
+                    @click="openEditDialog('题目内容', questMain, 'main')">
+              <img src="/editBtn.svg" alt="编辑">
+            </button>
+          </div>
+        </div>
+
+        <header class="tab-line">
+          <h3 class="success">题目选项</h3>
+          <div>
+            <BlockBtn text="添加选项" type="success" @click="addOpt"/>
+          </div>
+        </header>
+        <!--选项：悬停右上角浮出编辑 + 删除按钮-->
+        <div v-for="(opt, idx) in optList" :key="opt.label" class="opt">
+          <div class="hover-actions">
+            <button class="icon-btn" type="button" title="编辑选项" @click="editOpt(idx)">
+              <img src="/editBtn.svg" alt="编辑">
+            </button>
+            <button class="icon-btn" type="button" title="删除选项" @click="delOpt(idx)">
+              <img src="/delBtn.svg" alt="删除">
+            </button>
+          </div>
+          <h4>
+            {{ opt.label }}
+            <span v-if="opt.isCorrect" class="correct-tag">正确答案</span>
+          </h4>
+          <span class="new-line">{{ opt.content || ocrRes }}</span>
+        </div>
+
+        <h3 class="warning">题目解析</h3>
+        <div class="hover-box">
+          <pre class="quest new-line">{{ questAnaly }}</pre>
+          <div class="hover-actions">
+            <button class="icon-btn" type="button" title="编辑解析"
+                    @click="openEditDialog('题目解析', questAnaly, 'analy')">
+              <img src="/editBtn.svg" alt="编辑">
+            </button>
+          </div>
+        </div>
       </div>
-      <div class="opt">
-        <h4>B</h4>
-        <span class="new-line">{{ ocrRes }}</span>
-      </div>
-      <TabLine tit="题目解析" type="warning">
-        <BlockBtn text="编辑解析" type="warning" @click="openEditDialog('题目解析', questAnaly)"/>
-      </TabLine>
-      <div class="quest">
-        <h4>解析</h4>
-        <pre class="new-line">{{ questAnaly }}</pre>
-      </div>
+
+      <!-- 底部固定长条：保存 / 取消 -->
+      <footer class="content-footer">
+        <div class="footer-actions">
+          <MyBtn text="取消" type="secondary" @click="onCancel"/>
+          <MyBtn text="保存" type="primary" @click="onSave"/>
+        </div>
+      </footer>
     </section>
   </main>
 
@@ -56,11 +93,18 @@
         <h3>编辑{{ editTitle }}</h3>
       </div>
       <textarea
-        v-model="editContent"
-        class="edit-textarea"
-        :placeholder="'请输入' + editTitle"
-        rows="8"
+          v-model="editContent"
+          class="edit-textarea"
+          :placeholder="'请输入' + editTitle"
+          rows="8"
       ></textarea>
+      <!--仅选项编辑 / 新增时显示“是否正确”-->
+      <div v-if="editMode === 'optionEdit' || editMode === 'optionNew'" class="edit-correct">
+        <label>
+          <input type="checkbox" v-model="editOptCorrect">
+          <span>是否正确（将此选项标记为正确答案）</span>
+        </label>
+      </div>
       <div class="edit-footer">
         <MyBtn text="取消" type="secondary" @click="editDialog?.closeMe()"/>
         <MyBtn text="保存" type="primary" @click="saveEditContent"/>
@@ -78,7 +122,6 @@ import MyBtn from "@/components/button/MyBtn.vue";
 import {onMounted, ref} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {ExamQuest} from "@/model/entity/ExamQuest";
-import TabLine from "@/components/show/TabLine.vue";
 import MyDialog from "@/components/message/MyDialog.vue";
 import ToastBox from "@/components/message/ToastBox.vue";
 import {CardData} from "@/model/dto/CardData";
@@ -158,31 +201,92 @@ const selectImg = (card: CardData) => {
 }
 
 /**
+ * ===================================[题目选项]============================================
+ */
+const optList = ref<{ label: string; content: string; isCorrect: boolean }[]>([
+  {label: "A", content: "", isCorrect: false},
+  {label: "B", content: "", isCorrect: false}
+])
+
+// 添加选项：用共用编辑弹窗输入内容，新增项的标签按现有数量顺序生成（A/B/C…）
+const addOpt = () => {
+  openEditDialog('新选项', '', 'optionNew')
+}
+
+// 编辑选项：复用共用编辑弹窗，回填当前内容（未编辑过则回填 OCR 原文）
+const editOpt = (idx: number) => {
+  const opt = optList.value[idx]
+  openEditDialog(`选项 ${opt.label}`, opt.content || ocrRes.value, 'optionEdit', idx)
+}
+
+// 删除选项
+const delOpt = (idx: number) => {
+  const [removed] = optList.value.splice(idx, 1)
+  tesTus("suc", `已删除选项 ${removed.label}`)
+}
+
+/**
  * ===================================[共用编辑弹窗]============================================
  */
+type EditMode = 'main' | 'analy' | 'optionEdit' | 'optionNew'
+
 const editDialog = ref<InstanceType<typeof MyDialog> | null>(null)
 const editTitle = ref<string>("") // 弹窗标题
 const editContent = ref<string>("") // 编辑内容
-const editTarget = ref<string>("") // 编辑目标字段名
+const editMode = ref<EditMode>('main') // 编辑目标的语义
+const editOptIdx = ref<number>(-1) // 编辑现有选项时的下标
+const editOptCorrect = ref<boolean>(false) // 选项编辑 / 新增时是否标记为正确答案
 
-const openEditDialog = (title: string, currentContent: string) => {
+const openEditDialog = (
+    title: string,
+    content: string,
+    mode: EditMode,
+    optIdx: number = -1
+) => {
   editTitle.value = title
-  editContent.value = currentContent
-  // 根据标题确定编辑目标
-  editTarget.value = title === '题目内容' ? 'questMain' : 'questAnaly'
+  editContent.value = content
+  editMode.value = mode
+  editOptIdx.value = optIdx
+  // 选项编辑时回填当前“是否正确”，新增时默认 false
+  if (mode === 'optionEdit') {
+    editOptCorrect.value = optList.value[optIdx].isCorrect
+  } else if (mode === 'optionNew') {
+    editOptCorrect.value = false
+  }
   editDialog.value?.showMe();
 }
 
 const saveEditContent = () => {
-  if (editTarget.value === 'questMain') {
-    questMain.value = editContent.value
-    questData.value.questContent = editContent.value
-  } else if (editTarget.value === 'questAnaly') {
-    questAnaly.value = editContent.value
-    questData.value.questAnalysis = editContent.value
-  }
+  const val = editContent.value
   editDialog.value?.closeMe();
-  // 实时更新到后端
+
+  switch (editMode.value) {
+    case 'optionEdit':
+      optList.value[editOptIdx.value].content = val
+      optList.value[editOptIdx.value].isCorrect = editOptCorrect.value
+      tesTus("suc", "选项已更新");
+      return
+    case 'optionNew': {
+      // 标签按当前选项数量生成：A、B、C…（> 26 时回落字母 + 数字）
+      const len = optList.value.length
+      const label = len < 26
+          ? String.fromCharCode(65 + len)
+          : `${String.fromCharCode(65 + (len % 26))}${Math.floor(len / 26)}`
+      optList.value.push({label, content: val, isCorrect: editOptCorrect.value})
+      tesTus("suc", `已添加选项 ${label}`);
+      return
+    }
+    case 'main':
+      questMain.value = val
+      questData.value.questContent = val
+      break
+    case 'analy':
+      questAnaly.value = val
+      questData.value.questAnalysis = val
+      break
+  }
+
+  // 题目主干 / 解析需要实时同步到后端
   reqUpdQuest(questData.value).then(resp => {
     if (resp.code === 1) {
       tesTus("suc", "保存成功");
@@ -219,6 +323,28 @@ const router = useRouter();
 const toBack = () => {
   router.back()
 }
+
+/**
+ * ===================================[底部保存 / 取消]============================================
+ */
+// 保存：题目主干 / 解析已经在每次编辑时实时同步过 questData，这里做一次整体兜底提交
+const onSave = () => {
+  // 兜底：把当前页面状态写回 questData（防止用户走别的路径跳过编辑弹窗）
+  questData.value.questContent = questMain.value
+  questData.value.questAnalysis = questAnaly.value
+  reqUpdQuest(questData.value).then(resp => {
+    if (resp.code === 1) {
+      tesTus('suc', '保存成功')
+    } else {
+      tesTus('err', resp.msg || '保存失败')
+    }
+  })
+}
+
+// 取消：返回上级（选项修改保留在本地，不自动提交）
+const onCancel = () => {
+  router.back()
+}
 </script>
 
 <style lang="sass" scoped>
@@ -238,16 +364,19 @@ $shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06
   padding: 2px $spacing-md
   box-shadow: $shadow-md
 
-// 主内容区
+// 主内容区：固定铺满屏幕（扣除 36px 顶部 header）
 .main-content
   display: flex
-  min-height: calc(100vh - 36px)
+  height: calc(100vh - 40px)
+  overflow: hidden
 
-  // 左侧边栏
+  // 左侧边栏：自然高度撑满，内部可独立滚动（图片 + OCR）
   .sidebar
     width: 33.333%
     background-color: #e9e9eb
     padding: 16px
+    overflow-y: auto
+    box-sizing: border-box
 
     .ocr-res
       background-color: white
@@ -258,32 +387,118 @@ $shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06
       font-size: 1rem
 
 
-  // 右侧内容区
+  // 右侧内容区：垂直 flex，上方 body 可滚动，底部 footer 固定
   .content
     width: 66.666%
-    padding: 16px
+    display: flex
+    flex-direction: column
+    min-height: 0
+    // 关键：允许 flex 子项收缩到小于内容高度，从而让 overflow 生效
 
-    .quest
-      background-color: white
+    .content-body
+      flex: 1
+      min-height: 0
+      overflow-y: auto
+      overflow-x: hidden
       padding: 16px
-      border-radius: 8px
-      box-shadow: $shadow-md
-      margin-bottom: 12px
-      font-size: 1rem
+
+      .quest
+        background-color: white
+        padding: 16px
+        border-radius: 8px
+        box-shadow: $shadow-md
+        margin-bottom: 12px
+        font-size: 1rem
 
 
-    h4
-      font-weight: 600
-      color: #111827
-      margin-top: 0
-      margin-bottom: 6px
+      h4
+        font-weight: 600
+        color: #111827
+        margin-top: 0
+        margin-bottom: 6px
 
-    .opt
-      background-color: white
-      padding: 8px
-      border-radius: 8px
-      margin-bottom: 12px
-      border: #909399 dashed 2px
+        // 选项被标记为正确时的“正确答案”徽标
+        .correct-tag
+          display: inline-block
+          vertical-align: middle
+          margin-left: 6px
+          padding: 1px 6px
+          background: #f0f9eb
+          color: #67c23a
+          border: 1px solid #c2e7b0
+          font-size: 11px
+          font-weight: 600
+          border-radius: 3px
+
+      .opt
+        background-color: white
+        padding: 8px
+        border-radius: 8px
+        margin-bottom: 12px
+        border: #909399 dashed 2px
+
+      // ========================[悬停浮出操作按钮]============================
+      // pre（题目主干 / 解析）与 opt 通用：鼠标移入时右上角浮现按钮
+      .hover-box,
+      .opt
+        position: relative
+
+        .hover-actions
+          position: absolute
+          top: 8px
+          right: 8px
+          display: flex
+          gap: 6px
+          // 默认隐藏，避免遮挡正文
+          opacity: 0
+          visibility: hidden
+          transition: opacity 0.2s ease, visibility 0.2s ease
+
+        &:hover .hover-actions,
+        &:focus-within .hover-actions
+          opacity: 1
+          visibility: visible
+
+      // 浮层内的图标按钮：淡蓝色背景 + svg 图标
+      .icon-btn
+        width: 24px
+        height: 24px
+        padding: 0
+        display: flex
+        align-items: center
+        justify-content: center
+        border: none
+        border-radius: 4px
+        background-color: #ecf5ff
+        cursor: pointer
+        transition: background-color 0.2s, box-shadow 0.2s
+
+        &:hover
+          background-color: #d9ecff
+          box-shadow: 0 1px 4px rgba(64, 158, 255, 0.35)
+
+        &:active
+          background-color: #c6e2ff
+
+        img
+          width: 16px
+          height: 16px
+          display: block
+
+    // 底部固定长条：右侧放保存 / 取消
+    .content-footer
+      flex-shrink: 0
+      display: flex
+      align-items: center
+      justify-content: flex-end
+      padding: 12px 24px
+      background-color: #f5f7fa
+      border-top: 1px solid #e4e7ed
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.04)
+
+      .footer-actions
+        display: flex
+        gap: 12px
 
 // 图片列表弹窗
 .img-list
@@ -356,9 +571,38 @@ $shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06
     border-color: #409eff
     box-shadow: 0 0 0 2px rgba(64, 158, 255, 0.1)
 
+// 选项编辑 / 新增时弹窗里出现的“是否正确”复选框
+.edit-correct
+  margin-top: 12px
+  padding: 8px 12px
+  background: #f5f7fa
+  border-radius: 4px
+
+  label
+    display: flex
+    align-items: center
+    gap: 6px
+    cursor: pointer
+    font-size: 13px
+    color: #606266
+
+  input[type="checkbox"]
+    width: 16px
+    height: 16px
+    cursor: pointer
+    accent-color: #67c23a
+
 .edit-footer
   display: flex
   justify-content: flex-end
   gap: 12px
   margin-top: 16px
+
+.tab-line
+  display: flex
+  justify-content: space-between
+  align-items: center
+  width: 100%
+  box-sizing: border-box
+  padding-right: 24px
 </style>
