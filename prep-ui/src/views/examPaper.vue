@@ -1,6 +1,6 @@
 <template>
-  <CardMain tit="试卷列表" :card-data-list="listCardData" @openAddForm="openAddForm" @openUpdForm="openUpdForm"
-            @deleteById="deleteById"/>
+  <FreshCard tit="试卷列表" :card-data-list="listCardData" @openAddForm="openAddForm" @openUpdForm="openUpdForm"
+             @deleteById="deleteById"/>
   <!--添加修改的对话框-->
   <MyDialog ref="myShow">
     <form class="myForm">
@@ -43,7 +43,7 @@ import {ExamPaper} from "@/model/entity/ExamPaper";
 import {reqAddPaper, reqDelPaper, reqPaperList, reqUpdPaper} from "@/request/examPaperApi";
 import {CateLabelVo} from "@/model/vo/CateLabelVo";
 import {reqCateLabel} from "@/request/sourceCateApi";
-import CardMain from "@/components/show/CardMain.vue";
+import FreshCard from "@/components/show/FreshCard.vue";
 import {CardData} from "@/model/dto/CardData";
 
 onMounted(() => {

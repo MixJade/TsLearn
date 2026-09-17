@@ -59,7 +59,7 @@ const deleteById = (dataId: number) => {
 const router = useRouter();
 // 返回上级页面
 const toBack = () => {
-  router.push("/")
+  router.push("/examPaper")
 }
 const enterChild = (path: string) => {
   router.push(path)
