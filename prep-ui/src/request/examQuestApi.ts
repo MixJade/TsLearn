@@ -17,6 +17,12 @@ export const reqAddQuest = (data: ExamQuest): Promise<Result> =>
 export const reqUpdQuest = (data: ExamQuest): Promise<Result> =>
     myReq.put<Result>(`/api/examQuest`, data)
 
+/**
+ * 保存题目详情：题目主干 + 题目解析 + 选项（选项按页面顺序全量覆盖）
+ */
+export const reqSaveQuestAll = (data: QuestAndOptVo): Promise<Result> =>
+    myReq.put<Result>(`/api/examQuest/saveAll`, data)
+
 export const reqDelQuest = (id: number): Promise<Result> =>
     myReq.delete<Result>(`/api/examQuest/${id}`)
 

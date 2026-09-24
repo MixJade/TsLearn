@@ -36,22 +36,35 @@
             <BlockBtn text="添加选项" type="success" @click="addOpt"/>
           </div>
         </header>
-        <!--选项：悬停右上角浮出编辑 + 删除按钮-->
-        <div v-for="(opt, idx) in optList" :key="opt.label" class="opt">
-          <div class="hover-actions">
-            <button class="icon-btn" type="button" title="编辑选项" @click="editOpt(idx)">
-              <img src="/editBtn.svg" alt="编辑">
-            </button>
-            <button class="icon-btn" type="button" title="删除选项" @click="delOpt(idx)">
-              <img src="/delBtn.svg" alt="删除">
-            </button>
+        <!--选项：按住右上角排序按钮拖动调整顺序；落点线按拖动方向贴在目标选项上/下方，换位时由 TransitionGroup 播上下位移动画-->
+        <TransitionGroup name="opt" tag="div" class="opt-list">
+          <div v-for="(opt, idx) in optList" :key="opt.uid" class="opt"
+               :ref="el => setCardRef(el, opt.uid)"
+               :class="{
+                 'is-dragging': dragIdx === idx,
+                 'is-drop-before': dragIdx > -1 && overIdx === idx && lineSide === 'before',
+                 'is-drop-after': dragIdx > -1 && overIdx === idx && lineSide === 'after'
+               }"
+               @dragstart.prevent>
+            <div class="hover-actions">
+              <button class="icon-btn sort-btn" type="button" title="按住拖动可调整选项顺序"
+                      @pointerdown.left.prevent="onHandleDown(idx, $event)">
+                <img src="/sortBtn.svg" alt="排序" draggable="false">
+              </button>
+              <button class="icon-btn" type="button" title="编辑选项" @click="editOpt(idx)">
+                <img src="/editBtn.svg" alt="编辑">
+              </button>
+              <button class="icon-btn" type="button" title="删除选项" @click="delOpt(idx)">
+                <img src="/delBtn.svg" alt="删除">
+              </button>
+            </div>
+            <h4>
+              {{ opt.label }}
+              <span v-if="opt.isCorrect" class="correct-tag">正确答案</span>
+            </h4>
+            <span class="new-line">{{ opt.content || ocrRes }}</span>
           </div>
-          <h4>
-            {{ opt.label }}
-            <span v-if="opt.isCorrect" class="correct-tag">正确答案</span>
-          </h4>
-          <span class="new-line">{{ opt.content || ocrRes }}</span>
-        </div>
+        </TransitionGroup>
 
         <h3 class="warning">题目解析</h3>
         <div class="hover-box">
@@ -119,17 +132,28 @@
 <script lang="ts" setup>
 import BlockBtn from "@/components/button/BlockBtn.vue";
 import MyBtn from "@/components/button/MyBtn.vue";
-import {onMounted, ref} from "vue";
+import {onBeforeUnmount, onMounted, ref} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {ExamQuest} from "@/model/entity/ExamQuest";
 import MyDialog from "@/components/message/MyDialog.vue";
 import ToastBox from "@/components/message/ToastBox.vue";
 import {CardData} from "@/model/dto/CardData";
 import {reqImgSourcePage, reqOneImg} from "@/request/sourceImgApi";
-import {reqCateImg, reqGetView, reqUpdQuest} from "@/request/examQuestApi";
+import {reqCateImg, reqGetView, reqSaveQuestAll} from "@/request/examQuestApi";
+import {ExamQuestOpt} from "@/model/entity/ExamQuestOpt";
 
 onMounted(() => {
   setRouteData()
+})
+
+// 拖拽是在 window 上监听指针事件的，页面销毁时要一并摘掉（并清掉拖拽期间的临时样式）
+onBeforeUnmount(() => {
+  window.removeEventListener('pointermove', onDragMove)
+  window.removeEventListener('pointerup', onDragUp)
+  window.removeEventListener('pointercancel', onDragUp)
+  document.body.style.cursor = ''
+  document.body.style.userSelect = ''
+  dragMoved = false
 })
 
 const ocrRes = ref<string>("")
@@ -203,10 +227,47 @@ const selectImg = (card: CardData) => {
 /**
  * ===================================[题目选项]============================================
  */
-const optList = ref<{ label: string; content: string; isCorrect: boolean }[]>([
-  {label: "A", content: "", isCorrect: false},
-  {label: "B", content: "", isCorrect: false}
+// 页面内的选项结构：label 只是本地展示用的字母（由下标生成），content 对应后端 optCont
+interface OptItem {
+  uid: number // 本地自增，仅用于 v-for 的稳定 key（拖拽排序时避免 DOM 复用错乱）
+  label: string
+  content: string
+  isCorrect: boolean
+}
+
+// 本地自增序号 + 统一构造，保证每个选项 uid 唯一
+let optUid = 0
+const newOpt = (label: string, content: string, isCorrect: boolean): OptItem => ({
+  uid: ++optUid, label, content, isCorrect
+})
+
+// 按下标生成选项名：A、B、C…（> 26 时回落字母 + 数字）
+const genOptLabel = (idx: number): string =>
+    idx < 26
+        ? String.fromCharCode(65 + idx)
+        : `${String.fromCharCode(65 + (idx % 26))}${Math.floor(idx / 26)}`
+
+// 顺序变化后按新位置重排 A/B/C 标签，保证「标签 = 展示顺序」
+const relabelOpts = () => {
+  optList.value.forEach((opt, idx) => {
+    opt.label = genOptLabel(idx)
+  })
+}
+
+const optList = ref<OptItem[]>([
+  newOpt("A", "", false),
+  newOpt("B", "", false)
 ])
+
+const buildOptPayload = (): ExamQuestOpt[] =>
+    optList.value.map(opt => ({
+      optId: 0,
+      questId: questData.value.questId,
+      optCont: opt.content,
+      haveImg: false,
+      imgName: "",
+      isCorrect: opt.isCorrect
+    }))
 
 // 添加选项：用共用编辑弹窗输入内容，新增项的标签按现有数量顺序生成（A/B/C…）
 const addOpt = () => {
@@ -219,10 +280,125 @@ const editOpt = (idx: number) => {
   openEditDialog(`选项 ${opt.label}`, opt.content || ocrRes.value, 'optionEdit', idx)
 }
 
-// 删除选项
+// 删除选项：删完按新位置重排标签，避免出现 A、C、D 这类断号与重号
 const delOpt = (idx: number) => {
-  const [removed] = optList.value.splice(idx, 1)
-  tesTus("suc", `已删除选项 ${removed.label}`)
+  optList.value.splice(idx, 1)
+  relabelOpts()
+}
+
+/**
+ * ===================================[选项拖拽排序]============================================
+ */
+const dragIdx = ref<number>(-1) // 正在拖拽的选项下标
+const overIdx = ref<number>(-1) // 落点线贴在哪个选项上（-1 表示当前不画线）
+const lineSide = ref<'before' | 'after'>('after') // 落点线贴在目标选项的上方还是下方
+const dropIdx = ref<number>(-1) // 落点：插到第 dropIdx 项之前（取值 0..optList.length）
+
+// uid → 卡片元素。用函数式 ref 收集，不再走「容器 ref + querySelectorAll」：
+// 查询式取元素一旦容器 ref 没绑上（热更新残留的旧实例等）就会抛错或静默失效
+const cardEls = new Map<number, HTMLElement>()
+const setCardRef = (el: unknown, uid: number) => {
+  if (el instanceof HTMLElement) cardEls.set(uid, el)
+  else cardEls.delete(uid)
+}
+
+let dragStartY = 0 // 按下时的指针纵坐标，用于区分「拖动」与「只按了一下」
+let dragMoved = false // 本次是否真的拖动过
+
+// 按住手柄开始拖拽
+const onHandleDown = (idx: number, e: PointerEvent) => {
+  dragIdx.value = idx
+  // 按下时指针还在本项上（等于没换位），先不画线，等拖到别的选项上再显示落点线
+  overIdx.value = -1
+  dropIdx.value = -1
+  dragStartY = e.clientY
+  dragMoved = false
+  try {
+    // 捕获指针：在窗口外松手、或触屏移出手柄后，事件仍会回到手柄，不会卡在拖拽态
+    ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
+  } catch (err) {
+    // 少数环境不支持指针捕获，忽略即可：window 上的监听仍能兜住
+  }
+  // 拖拽期间整页保持“抓取中”光标（cursor 可继承，改 body 即可），并禁止选中文字
+  document.body.style.cursor = 'grabbing'
+  document.body.style.userSelect = 'none'
+  window.addEventListener('pointermove', onDragMove)
+  window.addEventListener('pointerup', onDragUp)
+  window.addEventListener('pointercancel', onDragUp)
+}
+
+// 先按指针纵向位置找到「指针所在的选项」，再按拖动方向决定落点线贴在它的哪一侧：
+//   往下拖（目标在自身之后）→ 线贴在目标下方，表示松手后插到它后面
+//   往上拖（目标在自身之前）→ 线贴在目标上方，表示松手后插到它前面
+// 指针回到自身所在项上则视为原地不动，不画线
+const onDragMove = (e: PointerEvent) => {
+  if (dragIdx.value < 0) return
+  // 轻微抖动不算拖动，避免只按一下就闪出落点线
+  if (!dragMoved) {
+    if (Math.abs(e.clientY - dragStartY) < 4) return
+    dragMoved = true
+  }
+
+  const items = optList.value
+  const from = dragIdx.value
+  // 第一个「底边在指针下方」的选项就是指针所在项；落在选项之间的间隙里时算作它下面那一项
+  let hover = -1
+  for (let i = 0; i < items.length; i++) {
+    const el = cardEls.get(items[i].uid)
+    if (!el) continue
+    if (e.clientY <= el.getBoundingClientRect().bottom) {
+      hover = i
+      break
+    }
+  }
+  // 指针拖到列表下方：算作最后一项
+  if (hover < 0) hover = items.length - 1
+
+  if (hover === from) {
+    // 拖回自己身上：不放线，松手也不换位
+    overIdx.value = -1
+    dropIdx.value = -1
+    return
+  }
+
+  overIdx.value = hover
+  if (hover > from) {
+    // 往下拖：线在目标下方，落点是「目标之后」
+    lineSide.value = 'after'
+    dropIdx.value = hover + 1
+  } else {
+    // 往上拖：线在目标上方，落点是「目标之前」
+    lineSide.value = 'before'
+    dropIdx.value = hover
+  }
+}
+
+// 松手：把拖拽项插到落点位置并重排标签
+// 换位的位移动画不在这里做——由 TransitionGroup 在 DOM 顺序变化后自动补间（下面选项上移、上面选项下移）
+const onDragUp = () => {
+  window.removeEventListener('pointermove', onDragMove)
+  window.removeEventListener('pointerup', onDragUp)
+  window.removeEventListener('pointercancel', onDragUp)
+  document.body.style.cursor = ''
+  document.body.style.userSelect = ''
+
+  const from = dragIdx.value
+  let to = dropIdx.value
+  if (!dragMoved) {
+    // 只是按了一下没拖动，给出一次操作提示
+    tesTus("suc", "按住排序按钮上下拖动即可调整选项顺序")
+  } else if (from > -1 && to > -1 && to !== from && to !== from + 1) {
+    const [moved] = optList.value.splice(from, 1)
+    // 取出拖拽项后，原本排在其后的插入点整体前移一位
+    if (to > from) to--
+    optList.value.splice(to, 0, moved)
+    relabelOpts()
+  }
+
+  dragMoved = false
+  dragIdx.value = -1
+  overIdx.value = -1
+  dropIdx.value = -1
 }
 
 /**
@@ -264,18 +440,11 @@ const saveEditContent = () => {
     case 'optionEdit':
       optList.value[editOptIdx.value].content = val
       optList.value[editOptIdx.value].isCorrect = editOptCorrect.value
-      tesTus("suc", "选项已更新");
       return
-    case 'optionNew': {
-      // 标签按当前选项数量生成：A、B、C…（> 26 时回落字母 + 数字）
-      const len = optList.value.length
-      const label = len < 26
-          ? String.fromCharCode(65 + len)
-          : `${String.fromCharCode(65 + (len % 26))}${Math.floor(len / 26)}`
-      optList.value.push({label, content: val, isCorrect: editOptCorrect.value})
-      tesTus("suc", `已添加选项 ${label}`);
+    case 'optionNew':
+      // 标签按当前选项数量顺序生成（A/B/C…）
+      optList.value.push(newOpt(genOptLabel(optList.value.length), val, editOptCorrect.value))
       return
-    }
     case 'main':
       questMain.value = val
       questData.value.questContent = val
@@ -285,15 +454,6 @@ const saveEditContent = () => {
       questData.value.questAnalysis = val
       break
   }
-
-  // 题目主干 / 解析需要实时同步到后端
-  reqUpdQuest(questData.value).then(resp => {
-    if (resp.code === 1) {
-      tesTus("suc", "保存成功");
-    } else {
-      tesTus("err", resp.msg || "保存失败");
-    }
-  })
 }
 
 /**
@@ -312,6 +472,13 @@ const setRouteData = (): void => {
       questData.value = resp.examQuest
       questMain.value = resp.examQuest.questContent || ""
       questAnaly.value = resp.examQuest.questAnalysis || ""
+      // 回填已有选项；后端无选项时保留页面默认的两项占位
+      // 字母按返回顺序（后端已按 opt_no 升序）就地生成，不再读库里的 opt_name，
+      // 这样即使历史数据的 opt_name 与位置不一致，页面也不会显示错字母
+      const opts = resp.examQuestOpts
+      if (opts && opts.length > 0) {
+        optList.value = opts.map((opt, idx) => newOpt(genOptLabel(idx), opt.optCont, opt.isCorrect))
+      }
     })
   }
   reqCateImg(questId).then(resp => {
@@ -327,12 +494,15 @@ const toBack = () => {
 /**
  * ===================================[底部保存 / 取消]============================================
  */
-// 保存：题目主干 / 解析已经在每次编辑时实时同步过 questData，这里做一次整体兜底提交
+// 保存：把题目主干 / 解析 / 选项一次性提交到后端（选项为全量覆盖）
 const onSave = () => {
   // 兜底：把当前页面状态写回 questData（防止用户走别的路径跳过编辑弹窗）
   questData.value.questContent = questMain.value
   questData.value.questAnalysis = questAnaly.value
-  reqUpdQuest(questData.value).then(resp => {
+  reqSaveQuestAll({
+    examQuest: questData.value,
+    examQuestOpts: buildOptPayload()
+  }).then(resp => {
     if (resp.code === 1) {
       tesTus('suc', '保存成功')
     } else {
@@ -341,7 +511,7 @@ const onSave = () => {
   })
 }
 
-// 取消：返回上级（选项修改保留在本地，不自动提交）
+// 取消：返回上级（页面上的修改均为本地状态，未保存即丢弃）
 const onCancel = () => {
   router.back()
 }
@@ -436,6 +606,54 @@ $shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06
         border-radius: 8px
         margin-bottom: 12px
         border: #909399 dashed 2px
+        // 只过渡淡化效果，避免拖动过程出现多余位移动画
+        transition: opacity 0.2s
+
+        // ========================[拖拽排序状态]============================
+        // 正在被拖拽的项：淡化，表示已被拿起
+        &.is-dragging
+          opacity: 0.45
+
+          // 拖动时鼠标会移开卡片，这里保持操作按钮可见，免得手柄中途消失
+          .hover-actions
+            opacity: 1
+            visibility: visible
+
+        // 落点线：画在目标选项与相邻选项之间的 12px 间隙正中
+        // 偏移 9.5px = 间隙一半 6px + 线一半 1.5px + 卡片边框 2px
+        // left/right 用 -2px 抵消卡片边框，让线正好和卡片外沿等宽
+        &.is-drop-before::before,
+        &.is-drop-after::after
+          content: ''
+          position: absolute
+          left: -2px
+          right: -2px
+          height: 3px
+          border-radius: 2px
+          background-color: #409eff
+          box-shadow: 0 0 6px rgba(64, 158, 255, 0.6)
+          // 仅作视觉提示，不接收鼠标事件
+          pointer-events: none
+
+        // 往上拖（目标在自身之前）：线贴在目标上方
+        &.is-drop-before::before
+          top: -9.5px
+
+        // 往下拖（目标在自身之后）：线贴在目标下方
+        &.is-drop-after::after
+          bottom: -9.5px
+
+      // 换位动画：TransitionGroup 在元素位置变化后给它挂上 -move 类
+      // 于是向下拖时下方选项上移、向上拖时上方选项下移，都是平滑滑动而不是瞬间跳位
+      .opt-move
+        transition: transform 0.25s ease
+
+      // 删除时淡出（不写的话 Vue 会按默认过渡时长等待，卡片会先顿一下再消失）
+      .opt-leave-active
+        transition: opacity 0.18s ease
+
+      .opt-leave-to
+        opacity: 0
 
       // ========================[悬停浮出操作按钮]============================
       // pre（题目主干 / 解析）与 opt 通用：鼠标移入时右上角浮现按钮
@@ -484,6 +702,16 @@ $shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06
           width: 16px
           height: 16px
           display: block
+          // 图标不允许被浏览器单独拖拽，按住手柄时拖动的才是整张选项卡片
+          -webkit-user-drag: none
+          user-select: none
+
+      // 排序手柄：按住即可拖动选项
+      .icon-btn.sort-btn
+        cursor: grab
+
+        &:active
+          cursor: grabbing
 
     // 底部固定长条：右侧放保存 / 取消
     .content-footer
